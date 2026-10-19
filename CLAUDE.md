@@ -196,7 +196,7 @@ node .tools/setup-memory.js        # 每台机器一次；--check 只查看，--
 设备B ──→ git pull ──→ 会话自动读到最新记忆（无需任何额外动作）
 ```
 
-**追加记忆后**：提交 git 并推送，另一台 pull 即获得，无复制步骤。
+**追加记忆后**：提交 git 并推送，另一台 pull 即获得，无复制步骤。远端拓扑、双推方式与防误推措施见 [`REPO-MAINTENANCE.md`](REPO-MAINTENANCE.md)。
 
 ### 已知边界
 

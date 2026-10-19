@@ -44,6 +44,7 @@
 | 理解方法论核心（五层结构、核心规则、六步法 + 四种设计模式） | [`00-generalspec/01-generalspec-sysdev.md`](00-generalspec/01-generalspec-sysdev.md) |
 | 理解三个产品的关系和构造链 | [`CLAUDE.md`](CLAUDE.md) §「三层产品构造链」 |
 | 了解仓库完整目录结构 | [`CLAUDE.md`](CLAUDE.md) §「实际目录结构」 |
+| 进行仓库维护、双远端推送与新设备接入 | [`REPO-MAINTENANCE.md`](REPO-MAINTENANCE.md) |
 | 获得项目全貌（AI 工作指引） | [`CLAUDE.md`](CLAUDE.md) |
 
 ---
