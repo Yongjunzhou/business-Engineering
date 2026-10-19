@@ -1,27 +1,27 @@
-# CLAUDE.md（_topic-research · 杂项选题区）
+# CLAUDE.md（_candidate-businesses · 候选业务池）
 
-本目录是 AOS 项目集内的**杂项选题区**——不是一个项目，而是**未定形选题的暂存与孵化处**。2026-09-20 自仓库顶层 `100-topic-research/` 迁入并更名。
+本目录是 AOS 项目集内的**候选业务池**——不是一个项目，而是**尚未立项为业务工程化项目的候选业务域**。2026-09-20 自仓库顶层 `100-topic-research/` 迁入并更名。
 
 ## 何时独立成项目
 
-**判据：该话题是否需要继续深入研究。**
+**判据：该业务是否需要继续深入研究。**
 
-- **需要** → 移出本区，独立为 `NN-<名>/` 项目，并按 AOS 根 CLAUDE.md §九 配齐三件配件（项目 CLAUDE.md、`claude-memory/`、项目清单一行）。
+- **需要** → 移出本区，独立为 `NN-<业务>工程化/` 项目，并按 AOS 根 CLAUDE.md §九 配齐三件配件（项目 CLAUDE.md、`claude-memory/`、项目清单一行）。
 - **不需要** → 留在此处，不配项目配件。
 
-移动是单向的：本区是入口，不是回收站——已成项目的话题不再退回本区。
+移动是单向的：本区是入口，不是回收站——已成项目的业务不再退回本区。
 
 ## 记忆隔离协议
 
 本区的记忆**独立存放**，与 AOS 根记忆（`.claude/memory/`，auto-memory 即此目录）**互不干扰**：
 
-- 本区的记忆位于 [`claude-memory/`](claude-memory/)：`claude-memory/MEMORY.md`（索引）+ `claude-memory/杂项选题区项目.md`（主记忆）。
+- 本区的记忆位于 [`claude-memory/`](claude-memory/)：`claude-memory/MEMORY.md`（索引）+ `claude-memory/候选业务池项目.md`（主记忆）。
 - **编写/研究本区内容时**：先读 `claude-memory/MEMORY.md` 与相关记忆文件，写入 `claude-memory/` 目录。
 - **禁止**把本区内容写入 AOS 根 `.claude/memory/` 或 auto-memory。
 
 ## 边界
 
-- 在 §九 项目清单中性质为「杂项」，不占「项目」的位置。
+- 在 §九 项目清单中性质为「候选业务」，不占「项目」的位置。
 - **处理本区内容**：工作目录 = 本目录，读本文件。
 - **处理其他项目 / AOS 主线工程**：工作目录 = 对应目录——**不擅自改动其内容**，除非明确要求。
 

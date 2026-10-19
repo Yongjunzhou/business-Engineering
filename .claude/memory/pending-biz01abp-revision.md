@@ -322,7 +322,7 @@ metadata:
 
 ## 95 号定位（2026-09-22 人类定）
 
-**只是学习材料，不作项目依据**；已落进 94／20 号的结论才有效力。两份（md ＋ pdf）已迁 `_topic-research/`。详见 [[95-product-data-itemization-tree-allocation-report]]。
+**只是学习材料，不作项目依据**；已落进 94／20 号的结论才有效力。两份（md ＋ pdf）已迁 `_candidate-businesses/`。详见 [[95-product-data-itemization-tree-allocation-report]]。
 
 ## 待裁 / 挂账（七条）
 
