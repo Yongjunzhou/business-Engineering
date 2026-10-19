@@ -26,7 +26,7 @@ metadata:
 
 ## 二 · 23 号资产取消（核心已落，外围待重写）
 
-`20-pl4eos/80-pl4eos-2-eosdata/23-eos-output-architecture.md`（v3.2、520 行、242 行表）**已删**。照 **26 号 2026-08-22 的先例**：删文件 ＋ README 去行 ＋ 引用处给替代家。
+`10-eos-engineering/20-pl4eos/80-pl4eos-2-eosdata/23-eos-output-architecture.md`（v3.2、520 行、242 行表）**已删**。照 **26 号 2026-08-22 的先例**：删文件 ＋ README 去行 ＋ 引用处给替代家。
 
 **已落**
 

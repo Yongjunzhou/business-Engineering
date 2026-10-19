@@ -32,8 +32,8 @@ metadata:
 ## 已完成修订
 
 ### 术语表与规范
-- `30-eos/00-eos-product-spec/06-eos-glossary.md` v2.1→v2.2：新增"引擎与业务"术语组12条，废弃"配置定义"
-- `20-pl4eos/00-pl4eos-spec/01-pl4eos-spec-sysdev.md` v1.0→v1.1：§2.5 概念定义/四级层次/编排关系/选配模型全量重写，§2.5.1~§2.5.8 术语替换
+- `10-eos-engineering/30-eos/00-eos-product-spec/06-eos-glossary.md` v2.1→v2.2：新增"引擎与业务"术语组12条，废弃"配置定义"
+- `10-eos-engineering/20-pl4eos/00-pl4eos-spec/01-pl4eos-spec-sysdev.md` v1.0→v1.1：§2.5 概念定义/四级层次/编排关系/选配模型全量重写，§2.5.1~§2.5.8 术语替换
 
 ### 资产文件
 - `25-eos-engine-models.md` v1.2：四能力类型→四级五引擎；@engine-form 移至 L3 单元级；新增 @engine-scene/@engine-menu/@engine-flow/@engine-entity 骨架

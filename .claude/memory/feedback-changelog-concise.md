@@ -47,7 +47,7 @@ metadata:
 **How to apply**：
 - 规范类文档改动只改版本行（版本 +1、修订日期改当日），不写记录。
 - 自查法：**这一段删掉，读者会缺什么？** 缺的若是"本文讲到哪了"，说明它该由正文各处的【待回填】标记自己说，不必由头注再汇总一遍。
-- **连带改口**：[[feedback-avoid-content-parentheses]] 的边界条「删历史…先补入变更记录再删正文」在规范类文档上不再适用（无变更记录可补）；[00-doc-conventions](../../00-generalspec/00-doc-conventions.md) §8.10 同条待改口。
+- **连带改口**：[[feedback-avoid-content-parentheses]] 的边界条「删历史…先补入变更记录再删正文」在规范类文档上不再适用（无变更记录可补）；[00-doc-conventions](../../10-eos-engineering/00-generalspec/00-doc-conventions.md) §8.10 同条待改口。
 
 ---
 

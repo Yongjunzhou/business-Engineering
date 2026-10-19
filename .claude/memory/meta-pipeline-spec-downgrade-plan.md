@@ -17,7 +17,7 @@ metadata:
 
 ## 方案
 
-将 `10-pl4pleos/00-pl4pleos-spec/01-pl4pleos-spec-sysdev.md` 从"完整系统设计规范"
+将 `10-eos-engineering/10-pl4pleos/00-pl4pleos-spec/01-pl4pleos-spec-sysdev.md` 从"完整系统设计规范"
 降级为一份简短的方法论说明 + 工程导航文档，包含：
 
 1. 元流水线概念解释（三层构造链顶层）

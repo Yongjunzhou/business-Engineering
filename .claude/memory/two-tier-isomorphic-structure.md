@@ -1,6 +1,6 @@
 ---
 name: two-tier-isomorphic-structure
-description: 10-pl4pleos/ 和 20-pl4eos/ 目录结构同构，均含 00-spec/10-subpd-sysdev/20-subpd-comdev/30-subpd-sysint/40-subpd-sysops/80-X-2-Ydata
+description: 10-eos-engineering/10-pl4pleos/ 和 10-eos-engineering/20-pl4eos/ 目录结构同构，均含 00-spec/10-subpd-sysdev/20-subpd-comdev/30-subpd-sysint/40-subpd-sysops/80-X-2-Ydata
 metadata:
   type: project
 ---
@@ -12,7 +12,7 @@ metadata:
 ## 结构
 
 ```
-10-pl4pleos/（元流水线, A1）        20-pl4eos/（EOS 流水线, A2）
+10-eos-engineering/10-pl4pleos/（元流水线, A1）        10-eos-engineering/20-pl4eos/（EOS 流水线, A2）
 00-pl4pleos-spec/                  00-pl4eos-spec/
 10-pl4pleos-subpd-sysdev/          10-pl4eos-subpd-sysdev/
 20-pl4pleos-subpd-comdev/          20-pl4eos-subpd-comdev/
@@ -31,8 +31,8 @@ metadata:
 
 ## 清理操作
 
-- 移除了 `10-pl4pleos/10-pl4eos-sysdev/`（内容重复，移入 90-hold/）
-- 移除了 `20-pl4eos/10-eos-sysdev/`（内容重复，移入 90-hold/）
+- 移除了 `10-eos-engineering/10-pl4pleos/10-pl4eos-sysdev/`（内容重复，移入 90-hold/）
+- 移除了 `10-eos-engineering/20-pl4eos/10-eos-sysdev/`（内容重复，移入 90-hold/）
 - 统一命名：`pl4eos`/`pl4pleos` 前缀对齐
 
 ## 产品链关系

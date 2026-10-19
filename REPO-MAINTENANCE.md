@@ -171,7 +171,7 @@ git push --dry-run
 新仓克隆在原路径时无需动作；换了路径则执行：
 
 ```bash
-node .tools/setup-memory.js
+node .ai-agent/tools/setup-memory.js
 ```
 
 随后重启会话。
@@ -187,7 +187,7 @@ node .tools/setup-memory.js
 | `90-hold/` | 旧仓 `AOS-system-design` |
 | `80-sessions/` | 旧仓 `AOS-system-design` |
 | 两个"旧版归档"目录 | 旧仓 `AOS-system-design` |
-| `.tools/md2pdf/node_modules/` | 不跟踪，由 `npm install` 重建 |
+| `.ai-agent/tools/md2pdf/node_modules/` | 不跟踪，由 `npm install` 重建 |
 | 评审技能 `temp/` 临时产物 | 不跟踪，见 [`.gitignore`](.gitignore) |
 
 旧仓是旧版本的权威档案，私有且冻结。执行仓库拆分的机器上另存有一份移出内容，路径为 `E:\mywork\AOS-移出仓外-20261019\`；该目录只属于那台设备，不作为项目依据。
@@ -202,7 +202,7 @@ node .tools/setup-memory.js
 | `non-fast-forward` 被拒绝 | 先 `git pull --rebase origin master`，再 `git push`；不要 force push |
 | 提示 unrelated histories | 新仓与旧仓是独立历史，不要互拉；旧仓只作档案 |
 | 钩子拒绝推送 | 检查目标 URL 与分支名；指向旧仓或旧历史引用时钩子按设计拦截 |
-| 会话加载的记忆是旧副本 | 运行 `node .tools/setup-memory.js` 并重启会话 |
+| 会话加载的记忆是旧副本 | 运行 `node .ai-agent/tools/setup-memory.js` 并重启会话 |
 
 ---
 

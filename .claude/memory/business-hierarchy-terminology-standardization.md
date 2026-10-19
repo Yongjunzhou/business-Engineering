@@ -78,7 +78,7 @@ metadata:
   - 场景部件两种产生方式（引擎直产 / 人工外设）
   - 实体引擎约束子业务 TAB——实体关系图谱是表单引擎配置子业务 TAB 的约束范围
   - 引擎分工总图确立（实体引擎→部件级引擎→场景引擎→菜单引擎）
-  - 产出文件：`.claude/memory/eos-ui-model-business-engine-mapping.md`（完整记忆）、`30-eos/00-eos-product-spec/10-eos-architecture.md` v2.0（产品架构重写）
+  - 产出文件：`.claude/memory/eos-ui-model-business-engine-mapping.md`（完整记忆）、`10-eos-engineering/30-eos/00-eos-product-spec/10-eos-architecture.md` v2.0（产品架构重写）
 
 ### 下一步
 - 基于本次澄清重写 wft01-biz §3.1/§3.2
@@ -89,7 +89,7 @@ metadata:
 - wft02-biz 也需要联动修订
 
 ### 仓库状态
-- 本次会话：`.claude/memory/eos-ui-model-business-engine-mapping.md`（新增）、`30-eos/00-eos-product-spec/10-eos-architecture.md` v2.0（重写）
+- 本次会话：`.claude/memory/eos-ui-model-business-engine-mapping.md`（新增）、`10-eos-engineering/30-eos/00-eos-product-spec/10-eos-architecture.md` v2.0（重写）
 - 尚未 commit
 
 ### 关键文件版本

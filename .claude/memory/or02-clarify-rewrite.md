@@ -35,7 +35,7 @@ metadata:
 
 ## 落地文件
 
-- `20-pl4eos/10-pl4eos-subpl-sysdev/00-presysdev-4-eos/eos-or02-clarify.md`（第 2 版，五章；成稿时名 `eos-or02-x2vv.md`）＋ `eos-or02-clarify/SKILL.md`。
+- `10-eos-engineering/20-pl4eos/10-pl4eos-subpd-sysdev/00-presysdev-4-eos/eos-or02-clarify.md`（第 2 版，五章；成稿时名 `eos-or02-x2vv.md`）＋ `eos-or02-clarify/SKILL.md`。
 - 状态文档表 B：**摘 `iteration_count`**（护栏去掉后无消费者）、`unresolved_count` 说明改"澄清问题清单条数"、生命周期表两行改"清单不空／复核后清单空"；`last_size` 留待 or03 重写时一并定。
 - 指针改名与 README／§15.7 语义更新见本轮前一版（提交 `66abc365`）。
 

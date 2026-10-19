@@ -5,7 +5,7 @@ metadata:
   type: project
 ---
 
-2026-07-28 以 91 规范第十一章（§11.1~§11.12）审查并修复 [23-eos-output-architecture.md](20-pl4eos/80-pl4eos-2-eosdata/23-eos-output-architecture.md)，版本 v2.0→v2.1（commit 351bd4a + 06a7daa）。
+2026-07-28 以 91 规范第十一章（§11.1~§11.12）审查并修复 [23-eos-output-architecture.md](10-eos-engineering/20-pl4eos/80-pl4eos-2-eosdata/23-eos-output-architecture.md)，版本 v2.0→v2.1（commit 351bd4a + 06a7daa）。
 
 **关键设计决策**：
 

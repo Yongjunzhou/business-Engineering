@@ -11,7 +11,7 @@ metadata:
 SetNamedSecurityInfoW failed (Win32 5): grantWrite(E:\mywork\AOS)
 ```
 
-**故障特征**（四条探测结论）：与命令内容无关；与命令的工作目录无关（授权根恒取会话工作区）；每次新建进程都重新失败，不是缓存；**普通文件读写完全正常**（同期用文件工具写入 `.claude/memory/` 与 `.tools/` 均成功）。因此坏点唯一：给工作区根目录改 DACL 这一步被拒。
+**故障特征**（四条探测结论）：与命令内容无关；与命令的工作目录无关（授权根恒取会话工作区）；每次新建进程都重新失败，不是缓存；**普通文件读写完全正常**（同期用文件工具写入 `.claude/memory/` 与 `.ai-agent/tools/` 均成功）。因此坏点唯一：给工作区根目录改 DACL 这一步被拒。
 
 **根因**：`E:\mywork\AOS` 与 `E:\mywork` 的**属主是 `BUILTIN\Administrators`**，且目录上全部 ACE 都是继承来的（`(I)`），没有一条属于本用户。本用户 `HUAWEI-CHOW\HUAWEI` 虽在管理员组内（`net localgroup Administrators` 可见），但 UAC 拆分令牌使非提权进程的令牌里没有管理员组（`is in Admins: False`），于是它**既不是属主、也没有显式 `WRITE_DAC`**，改 DACL 被 Win32 5 拒。这与 `@deepseek-ai/dsh-sandbox-windows-acl` 的既有约束一致：「Granted directories must be caller-owned」，且 `AclWriteGrant` fail-closed，授权失败即不启动子进程。
 
@@ -49,6 +49,6 @@ fatal: the remote end hung up unexpectedly
 
 **判据**：与包大小无关（推 1 笔小提交同样断）；与凭据、链路无关（沙箱内 `ssh -T git@github.com` 认证成功，`~/.ssh/config` 走 `ssh.github.com:443`；`git ls-remote` 在沙箱内外都取不到输出）；**放行后同一条 `git push` 立刻成功**（2026-09-24 六笔、origin 与 gitee 同批推成）。故推送、抓取这类长连接命令按环境故障处置，**别在沙箱内反复重试**——两次重试＝白等四分钟。
 
-**故障期间的影响**：`git log`／`git status`／`node .tools/*.js`／md2pdf 全部不可用，只能用文件工具读写；记忆机制那条线里"用提交号对账"因此停摆。
+**故障期间的影响**：`git log`／`git status`／`node .ai-agent/tools/*.js`／md2pdf 全部不可用，只能用文件工具读写；记忆机制那条线里"用提交号对账"因此停摆。
 
-**同轮留下的工具**：`.tools/repair-sandbox-acl.ps1`（自提权版一键修复，推荐复用）、`.tools/fix-dsh-sandbox-acl.ps1`（早期非自提权版，保留作参考）。
+**同轮留下的工具**：`.ai-agent/tools/repair-sandbox-acl.ps1`（自提权版一键修复，推荐复用）、`.ai-agent/tools/fix-dsh-sandbox-acl.ps1`（早期非自提权版，保留作参考）。

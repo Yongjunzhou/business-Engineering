@@ -1,18 +1,32 @@
 # AGENTS.md
 
-为 Codex 提供本仓库的项目上下文和关键文件导航。系统设计方法论完整定义见[通用设计规范 v1.0](00-generalspec/01-generalspec-sysdev.md)。
+为 Codex 提供本仓库的项目上下文和关键文件导航。系统设计方法论完整定义见[通用设计规范 v1.0](10-eos-engineering/00-generalspec/01-generalspec-sysdev.md)。
 
 ---
 
 ## 一、项目概览
 
-### 三个产品
+### 项目集
+
+AOS 是一个**业务工程化项目集**：为各类业务建立基于 AI 的流水线，后续按流水线开展业务。顶层每个编号目录是一个独立项目，各自自包含（项目 `CLAUDE.md` + `claude-memory/`）；主线工程是这套方法的第一次完整展开。
+
+| 项目 | 位置 | 说明 |
+|------|------|------|
+| 系统工程研究 | `00-系统工程研究/` | 系统工程方法论 → 研究报告、培训教材、教材书 |
+| AI 部署研究 | `01-AI部署研究/` | 企业私域大模型推理平台选型与建设方案 |
+| 健康研究报告 | `02-健康研究报告/` | 健康主题书稿讲读摘录 |
+| 现代思维工具研究 | `03-现代思维工具研究/` | 思维工具研究（激励相容） |
+| 投资工程研究 | `04-投资工程研究/` | 投资工程——材料准备期 |
+| EOS 主线工程 | `10-eos-engineering/` | 元流水线 → EOS 流水线 → EOS 本体的工程化设计与实现 |
+| 杂项选题 | `_topic-research/` | 未定形选题的暂存与孵化，不是项目 |
+
+### 主线工程的三个产品
 
 | 产品 | 说明 | 开发空间 |
 |------|------|---------|
-| **企业运营体系（EOS）** | 被构建和运维的目标系统——企业运营体系的**信息化形态**（流水线类产品），覆盖市场、研发、生产、售后和管理等业务。当前实现形态为可配置平台 | `20-pl4eos/`（设计），`30-eos/`（产品本体） |
-| **EOS 流水线** | 服务于 EOS 全生命周期的流水线，由**设计线**（系统设计）、**开发线**（组件开发）、**集成线**（集成交付）、**运维线**（系统运维）四子线组成。当前仅设计线已完成 | `20-pl4eos/`（流水线构件） |
-| **元流水线** | 用于设计 EOS 流水线的流水线。按四阶段开发：系统设计（已完成）、构件开发/集成交付/系统运维（待扩展） | `10-pl4pleos/` |
+| **企业运营体系（EOS）** | 被构建和运维的目标系统——企业运营体系的**信息化形态**（流水线类产品），覆盖市场、研发、生产、售后和管理等业务。当前实现形态为可配置平台 | `10-eos-engineering/20-pl4eos/`（设计），`10-eos-engineering/30-eos/`（产品本体） |
+| **EOS 流水线** | 服务于 EOS 全生命周期的流水线，由**设计线**（系统设计）、**开发线**（组件开发）、**集成线**（集成交付）、**运维线**（系统运维）四子线组成。当前仅设计线已完成 | `10-eos-engineering/20-pl4eos/`（流水线构件） |
+| **元流水线** | 用于设计 EOS 流水线的流水线。按四阶段开发：系统设计（已完成）、构件开发/集成交付/系统运维（待扩展） | `10-eos-engineering/10-pl4pleos/` |
 
 ### 三层构造链
 
@@ -23,83 +37,49 @@
 
 | 层 | 内容 | 产出位置 |
 |----|------|---------|
-| **第1层** | 元流水线构建：构建元流水线自身 + 用其设计 EOS 流水线 | `10-pl4pleos/` |
-| **第2层** | EOS 流水线构建：展开为各子线的操作规程（准则/指南/AI 辅助/任务定义） | `20-pl4eos/10-pl4eos-subpd-sysdev/` |
-| **第3层** | EOS 构建与运维：使用 EOS 流水线做系统设计（当前）、开发、集成、运维 | `20-pl4eos/` |
+| **第1层** | 元流水线构建：构建元流水线自身 + 用其设计 EOS 流水线 | `10-eos-engineering/10-pl4pleos/` |
+| **第2层** | EOS 流水线构建：展开为各子线的操作规程（准则/指南/AI 辅助/任务定义） | `10-eos-engineering/20-pl4eos/10-pl4eos-subpd-sysdev/` |
+| **第3层** | EOS 构建与运维：使用 EOS 流水线做系统设计（当前）、开发、集成、运维 | `10-eos-engineering/20-pl4eos/` |
 
 ### 目录结构
 
 ```
-00-generalspec/                                     # 通用方法论（独立于三个产品）
-├── 00-doc-conventions.md          # 文档编写约定
-├── 01-generalspec-sysdev.md    # 通用设计规范 v1.0（方法论核心 + 四种设计模式，合并版）
-├── 02-generalspec-comdev.md    # 构件开发通用规范（待编写）
-├── 03-generalspec-sysint.md     # 集成交付通用规范（待编写）
-├── 04-generalspec-sysops.md     # 系统运维通用规范（待编写）
-├── 06-generalspec-glossary.md           # 通用术语对照 v2.3
-└── README.md                                    # 目录说明
+00-系统工程研究/                      # 项目：系统工程方法论 → 研究报告/培训/教材
+├── 00-系统工程相关研究报告/
+├── 01-流程工程师培训课件/
+├── 02-架构工程师培训材料/
+├── 03-架构师是个怎样的物种/          #   教材书
+├── assets/
+├── CLAUDE.md
+└── claude-memory/
 
-10-pl4pleos/                                        # 元流水线——产出 EOS 流水线的流水线
-├── 00-pl4pleos-spec/                   # 设计描述文档
-│   ├── 01-pl4pleos-spec-sysdev.md     #   系统设计规范
-│   ├── 02-pl4pleos-spec-comdev.md     #   构件开发规范（待编写）
-│   ├── 03-pl4pleos-spec-sysint.md     #   集成交付规范（待编写）
-│   ├── 04-pl4pleos-spec-sysops.md     #   系统运维规范（待编写）
-│   ├── 06-pl4pleos-glossary.md        #   术语对照
-│   └── README.md                      #   目录说明
-├── 10-pl4pleos-subpd-sysdev/           # 系统设计子线
-│   ├── 00-presysdev-4-pl4eos/         #   对 EOS 流水线的 OR 预处理
-│   ├── 10-wfsysdev-4-pl4eos/          #   对 EOS 流水线的瀑布式系统设计（6 任务）
-│   ├── 20-resysdev-4-pl4eos/          #   对 EOS 流水线的逆向工程（8 任务）
-│   ├── 30-agsysdev-4-pl4eos/          #   对 EOS 流水线的敏捷系统设计（8 任务）
-│   ├── 40-opsysdev-4-pl4eos/          #   对 EOS 流水线的 DevOps（4 任务）
-│   └── README.md
-├── 20-pl4pleos-subpd-comdev/           # 构件开发子线（待扩展）
-├── 30-pl4pleos-subpd-sysint/           # 集成交付子线（待扩展）
-├── 40-pl4pleos-subpd-sysops/           # 系统运维子线（待扩展）
-└── 80-pl4pleos-2-pl4eosdata/           # 运行数据—元流水线到 pl4eos 的产品数据
+01-AI部署研究/                        # 项目：企业私域大模型推理平台选型
+02-健康研究报告/                      # 项目：健康主题书稿讲读摘录
+03-现代思维工具研究/                  # 项目：思维工具（激励相容）
+04-投资工程研究/                      # 项目：投资工程——材料准备期
 
-20-pl4eos/                                          # EOS 流水线——产出 EOS 的流水线
-├── 00-pl4eos-spec/                     # 设计描述文档
-│   ├── 01-pl4eos-spec-sysdev.md       #   系统设计规范
-│   ├── 02-pl4eos-spec-comdev.md       #   构件开发规范（待编写）
-│   ├── 03-pl4eos-spec-sysint.md       #   集成交付规范（待编写）
-│   ├── 04-pl4eos-spec-sysops.md       #   系统运维规范（待编写）
-│   ├── 06-pl4eos-glossary.md          #   术语对照
-│   └── README.md                      #   目录说明
-├── 10-pl4eos-subpd-sysdev/             # 系统设计子线
-│   ├── 00-presysdev-4-eos/         #   对 EOS 的 OR 预处理（两子步骤）
-│   ├── 10-wfsysdev-4-eos/             #   对 EOS 的瀑布式系统设计（6 任务）
-│   ├── 20-resysdev-4-eos/             #   对 EOS 的逆向工程（8 任务）
-│   ├── 30-agsysdev-4-eos/             #   对 EOS 的敏捷系统设计（8 任务）
-│   ├── 40-opsysdev-4-eos/             #   对 EOS 的 DevOps（4 任务）
-│   └── README.md
-├── 20-pl4eos-subpd-comdev/             # 构件开发子线（待扩展）
-├── 30-pl4eos-subpd-sysint/             # 集成交付子线（待扩展）
-├── 40-pl4eos-subpd-sysops/             # 系统运维子线（待扩展）
-├── 50-pl4eos-subpd-bizcfg/             # 业务配置子线（待扩展）
-└── 80-pl4eos-2-eosdata/                # 运行数据—EOS 流水线到 EOS 的产品数据
+10-eos-engineering/                   # 项目：EOS 主线工程
+├── 00-generalspec/                   #   通用方法论
+├── 10-pl4pleos/                      #   元流水线
+├── 20-pl4eos/                        #   EOS 流水线
+├── 30-eos/                           #   EOS 产品本体
+└── 40-review/                        #   审查与评审
 
-30-eos/                   # EOS 产品本体（四条流水线的运行结果）
-│   ├── 00-eos-product-spec/        # 产品规格（设计线产出）
-│   ├── 10-eos-engines/             # 引擎实现（开发线产出）
-│   ├── 20-eos-configs/             # 配置定义（开发线产出）
-│   ├── 30-eos-deployment/          # 部署交付（集成线产出）
-│   └── 40-eos-operation/           # 运维数据（运维线产出）
-40-review/                          # 审查与评审
-100-subprojects/                    # 子项目区（AOS 项目集中的子项目）
+_topic-research/                      # 杂项选题区（不是项目）
+.ai-agent/                            # AI 助手工具与本地工作现场
+.claude/                              # Claude Code 发现点（设置/技能/记忆）
 ```
 
 ---
 
 ## 二、关键设计文件
 
-- [通用设计规范 v1.0](00-generalspec/01-generalspec-sysdev.md) — 第一部分（§一~§十 + 附录A~B）：术语体系、四条工程化设计原则、文档结对设计（两阶段工作法）、各层架构末级节点识别方法、业务流程设计（两种 BP 开发方法）、产品架构设计（三独立原则）、系统设计过程（六步工作法）、验收标准、设计检查清单、常见错误与FAQ；第二部分（§十一~§十四 + 附录C~D）：四种设计模式（PACE 维度、选择框架、切换规则）、三种核心设计活动的跨模式差异、质量门禁矩阵、通用指南与产品指南的关系
-- [通用术语对照表 v2.4](00-generalspec/06-generalspec-glossary.md) — 核心术语英中对照
-- [EOS系统设计规范 v1.0](20-pl4eos/00-pl4eos-spec/01-pl4eos-spec-sysdev.md) — EOS 产品特有设计规则（平台链/业务链、三层工作层面、端到端业务框架）+ 四种设计模式
-- [元流水线设计规范 v1.0](10-pl4pleos/00-pl4pleos-spec/01-pl4pleos-spec-sysdev.md)
+- [通用设计规范 v1.0](10-eos-engineering/00-generalspec/01-generalspec-sysdev.md) — 第一部分（§一~§十 + 附录A~B）：术语体系、四条工程化设计原则、文档结对设计（两阶段工作法）、各层架构末级节点识别方法、业务流程设计（两种 BP 开发方法）、产品架构设计（三独立原则）、系统设计过程（六步工作法）、验收标准、设计检查清单、常见错误与FAQ；第二部分（§十一~§十四 + 附录C~D）：四种设计模式（PACE 维度、选择框架、切换规则）、三种核心设计活动的跨模式差异、质量门禁矩阵、通用指南与产品指南的关系
+- [通用术语对照表 v2.4](10-eos-engineering/00-generalspec/06-generalspec-glossary.md) — 核心术语英中对照
+- [EOS系统设计规范 v1.0](10-eos-engineering/20-pl4eos/00-pl4eos-spec/01-pl4eos-spec-sysdev.md) — EOS 产品特有设计规则（平台链/业务链、三层工作层面、端到端业务框架）+ 四种设计模式
+- [元流水线设计规范 v1.0](10-eos-engineering/10-pl4pleos/00-pl4pleos-spec/01-pl4pleos-spec-sysdev.md)
 
-元流水线的操作规程（任务定义）位于 `10-pl4pleos/10-pl4pleos-subpd-sysdev/` 各 Skill 目录下；EOS 流水线的任务定义位于 `20-pl4eos/10-pl4eos-subpd-sysdev/` 各 Skill 目录下。
+元流水线的操作规程（任务定义）位于 `10-eos-engineering/10-pl4pleos/10-pl4pleos-subpd-sysdev/` 各 Skill 目录下；EOS 流水线的任务定义位于 `10-eos-engineering/20-pl4eos/10-pl4eos-subpd-sysdev/` 各 Skill 目录下。
 
 ---
 
@@ -200,7 +180,7 @@
 
 ### 读写时机
 
-**开工先读。** 在本仓库做任何事之前，先读 `.claude/memory/MEMORY.md` 索引，再按索引指向展开与本次范围相关的记忆；子项目任务改读该项目目录下 `claude-memory/MEMORY.md`。这一步不依赖工具是否自动加载：自动加载有，算省一次读取；没有，就必须显式读。只读索引不读正文，等于没读——在办的挂账、既有定案与工作方式指示都在正文里。
+**开工先读。** 在本仓库做任何事之前，先读 `.claude/memory/MEMORY.md` 索引，再按索引指向展开与本次范围相关的记忆；项目任务改读该项目目录下 `claude-memory/MEMORY.md`。这一步不依赖工具是否自动加载：自动加载有，算省一次读取；没有，就必须显式读。只读索引不读正文，等于没读——在办的挂账、既有定案与工作方式指示都在正文里。
 
 **收尾写回，四条触发。** 只要本轮出现下列任一情况，就必须在收尾前写回记忆，不等催促：人类做出裁决或定案；出现新的挂账或未决项；完成一轮可交付的修订（含已提交的改动）；会话即将结束。四条都写成可自查的问句："本轮有没有出现新的人为决断？有，就落一条。"
 

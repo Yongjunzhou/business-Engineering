@@ -24,7 +24,7 @@ metadata:
 
 ## 三、prose 昵称 `ortNN` 全链统一为 `orNN`
 
-人类裁「**全部改**」，清偿 [[pending-or01-chain-followups]] 第 7 项。落在 25 个现行文件（`01-pl4eos-spec` §2.6/§15、`91`、`00-doc-conventions` §12、wft 各 Skill、数据文件 21/22/25、`.scripts/ai-commit.sh` 等）；ASCII 图（§2.6.2／§2.6.4、§15.6、22 号资产图）按新名重对齐。裸 `ort`（无数字，如「ort 预处理链」）一并改 `or`；11 份 `ort*` 记忆文件名／slug 一并改 `or*`，正文同扫（唯「旧名→新名」的沿革句保留原名，以免自相矛盾）。
+人类裁「**全部改**」，清偿 [[pending-or01-chain-followups]] 第 7 项。落在 25 个现行文件（`01-pl4eos-spec` §2.6/§15、`91`、`00-doc-conventions` §12、wft 各 Skill、数据文件 21/22/25、`.ai-agent/scripts/ai-commit.sh` 等）；ASCII 图（§2.6.2／§2.6.4、§15.6、22 号资产图）按新名重对齐。裸 `ort`（无数字，如「ort 预处理链」）一并改 `or`；11 份 `ort*` 记忆文件名／slug 一并改 `or*`，正文同扫（唯「旧名→新名」的沿革句保留原名，以免自相矛盾）。
 
 ## 四、连带的旧口径
 
