@@ -86,6 +86,8 @@
 │   ├── 20-eos-configs/             # 配置定义（开发线产出）
 │   ├── 30-eos-deployment/          # 部署交付（集成线产出）
 │   └── 40-eos-operation/           # 运维数据（运维线产出）
+40-review/                          # 审查与评审
+100-subprojects/                    # 子项目区（AOS 项目集中的子项目）
 ```
 
 ---

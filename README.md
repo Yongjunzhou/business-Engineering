@@ -29,6 +29,8 @@
 30-eos/20-eos-configs/               配置定义（开发线产出）
 30-eos/30-eos-deployment/           部署交付（集成线产出）
 30-eos/40-eos-operation/            运维数据（运维线产出）
+40-review/                  审查与评审材料
+100-subprojects/            子项目区（AOS 项目集中的子项目）
 ```
 
 每条流水线的工作空间按子线组织：`10-*-subpd-sysdev/`（系统设计子线）、`20-*-subpd-comdev/`（构件开发子线，待扩展）、`30-*-subpd-sysint/`（集成交付子线，待扩展）。此外，`30-eos/` 为 EOS 产品本体，按四条流水线的产出组织为五个子目录。
@@ -45,6 +47,7 @@
 | 理解三个产品的关系和构造链 | [`CLAUDE.md`](CLAUDE.md) §「三层产品构造链」 |
 | 了解仓库完整目录结构 | [`CLAUDE.md`](CLAUDE.md) §「实际目录结构」 |
 | 进行仓库维护、双远端推送与新设备接入 | [`REPO-MAINTENANCE.md`](REPO-MAINTENANCE.md) |
+| 了解子项目区与各子项目 | [`100-subprojects/README.md`](100-subprojects/README.md) |
 | 获得项目全貌（AI 工作指引） | [`CLAUDE.md`](CLAUDE.md) |
 
 ---
