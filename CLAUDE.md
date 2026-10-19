@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-为 Claude Code 提供本仓库的项目上下文和关键文件导航。仓库是 **AOS 业务工程化项目集**——主线工程与各独立项目并列为顶层项目。系统设计方法论完整定义见[通用设计规范 v1.0](20-eos-engineering/00-generalspec/01-generalspec-sysdev.md)。
+为 Claude Code 提供本仓库的项目上下文和关键文件导航。仓库是 **AOS 业务工程化项目集**——主线工程与各独立项目并列为顶层项目。系统设计方法论完整定义见[通用设计规范 v1.0](20-eos-engineering/00-generalspec/01-generalspec-sysdev.md)；常用命令见[§十一](#十一常用命令)。
 
 ---
 
@@ -68,6 +68,7 @@ AOS 是一个**业务工程化项目集**：为各类业务建立基于 AI 的�
 │   ├── 03-generalspec-sysint.md
 │   ├── 04-generalspec-sysops.md
 │   ├── 06-generalspec-glossary.md
+│   ├── 07-generalspec-architecture-fundamentals.pdf
 │   └── README.md
 ├── 10-pl4pleos/                      #   元流水线——产出 EOS 流水线的流水线
 │   ├── 00-pl4pleos-spec/
@@ -100,10 +101,10 @@ AOS 是一个**业务工程化项目集**：为各类业务建立基于 AI 的�
 │   ├── 20-eos-configs/
 │   ├── 30-eos-deployment/
 │   └── 40-eos-operation/
-└── 40-review/                        #   审查与评审（待补充）
+└── 40-review/                        #   审查与评审（需求开发/管理程序、概念精讲）
 
 .ai-agent/                            # AI 助手工具与本地工作现场
-├── tools/                            #   md2pdf、new-project、check-projects、next-chapter 等
+├── tools/                            #   md2pdf、podcast2md、new-project、check-projects、next-chapter、setup-memory 等
 ├── scripts/                          #   ai-commit、md2pdf.py
 └── work/                             #   本地工作现场（不入库）
 .claude/                              # Claude Code 发现点（设置/技能/记忆）
@@ -113,8 +114,9 @@ AOS 是一个**业务工程化项目集**：为各类业务建立基于 AI 的�
 
 ## 二、关键设计文件
 
-- [通用设计规范 v1.0](20-eos-engineering/00-generalspec/01-generalspec-sysdev.md) — 第一部分（§一~§十 + 附录A~B）：术语体系、四条工程化设计原则、文档结对设计（两阶段工作法）、各层架构末级节点识别方法、业务流程设计（两种 BP 开发方法）、产品架构设计（三独立原则）、系统设计过程（六步工作法）、验收标准、设计检查清单、常见错误与FAQ；第二部分（§十一~§十四 + 附录C~D）：四种设计模式（PACE 维度、选择框架、切换规则）、三种核心设计活动的跨模式差异、质量门禁矩阵、通用指南与产品指南的关系
+- [通用设计规范 v1.0](20-eos-engineering/00-generalspec/01-generalspec-sysdev.md) — 第一部分（§一~§十 + 附录A~B）：术语体系、四条工程化设计原则、文档结对设计（两阶段工作法）、各层架构末级节点识别方法、业务流程设计（两种 BP 开发方法）、产品架构设计（三独立原则）、系统设计过程（六步工作法）、验收标准、设计检查清单、常见错误与FAQ；第二部分（§十一~§十四 + 附录C~D）：四种设计模式（PACE 维度、选择框架、切换规则）、三种核心设计活动的跨模式差异、通用约束与质量指标、通用指南与产品指南的关系
 - [通用术语对照表 v2.4](20-eos-engineering/00-generalspec/06-generalspec-glossary.md) — 核心术语英中对照
+- [架构基础概念与方法 v3.0](20-eos-engineering/00-generalspec/07-generalspec-architecture-fundamentals.pdf) — 八章+两附录：系统/架构/架构决策/架构视图的定义与原理、设计链四层决策全景、业务架构实践
 - [EOS系统设计规范 v1.0](20-eos-engineering/20-pl4eos/00-pl4eos-spec/01-pl4eos-spec-sysdev.md) — EOS 产品特有设计规则（平台链/业务链、三层工作层面、端到端业务框架）+ 四种设计模式
 - [元流水线设计规范 v1.0](20-eos-engineering/10-pl4pleos/00-pl4pleos-spec/01-pl4pleos-spec-sysdev.md)
 
@@ -136,19 +138,26 @@ AOS 是一个**业务工程化项目集**：为各类业务建立基于 AI 的�
 
 ## 四、输出产品的数据文件
 
-数据文件描述流水线**输出产品**的规格——即流水线上承载/跑的数据。元流水线的输出产品是 EOS 流水线（pl4eos），EOS 流水线的输出产品是 EOS 本体。两者遵循相同结构（模板见 `00-doc-conventions.md`）：
+数据文件描述流水线**输出产品**的规格——即流水线上承载/跑的数据。元流水线的输出产品是 EOS 流水线（pl4eos），EOS 流水线的输出产品是 EOS 本体。两侧都按 01~09 的槽位组织，但目录、文件前缀与个别槽位名称不同：
 
-| 文件 | 内容 |
-|------|------|
-| `01-specified-requirements.md` | 规范化的相关方需求 |
-| `02-business-summary-architecture.md` | 业务流程框架架构定义 |
-| `03-business-summary-detailed.md` | 业务流程框架详细定义 |
-| `04-business-detailed.md` | 业务流程概要 |
-| `05-function-summary-architecture.md` | 系统功能框架架构定义 |
-| `06-function-detailed.md` | 系统功能方案 |
-| `07-product-summary.md` | 产品框架 |
-| `08-traceability-matrix.md` | 追溯矩阵 |
-| `09-verification-report.md` | 验证报告 |
+| 输出产品 | 数据目录 | 文件命名 |
+|---------|---------|---------|
+| EOS 流水线（pl4eos） | `20-eos-engineering/10-pl4pleos/80-pl4pleos-2-pl4eosdata/` | `01-pl4eos-original-requirements.md` … `09-pl4eos-sysdev-verification-report.md` |
+| EOS 本体 | `20-eos-engineering/20-pl4eos/80-pl4eos-2-eosdata/` | `01-eos-specified-requirements.md` … `09-eos-sysdev-verification-report.md`；另有 21~28 跨层资产文档 |
+
+| 槽位 | EOS 流水线侧 | EOS 本体侧 |
+|------|-------------|-----------|
+| 01 | 原始需求 | 规范化的相关方需求 |
+| 02 | 相关方需求架构定义 | 业务流程框架架构定义；另有职责视角业务流程（R 树）分册 |
+| 03 | 相关方需求详细定义 | 业务流程框架详细定义；另有产品视角业务流程（P 树）分册 |
+| 04 | 业务流程定义 | 业务流程概要 |
+| 05 | 系统需求架构定义 | 系统需求框架架构定义 |
+| 06 | 系统需求详细定义 | 系统需求概要 |
+| 07 | 产品架构定义 | 平台产品架构 |
+| 08 | 追溯矩阵 | 追溯矩阵 |
+| 09 | 验证报告 | 验证报告 |
+
+各目录的现行文件清单、版本与状态以目录内 `README.md` 为准。
 
 ---
 
@@ -189,7 +198,7 @@ AOS 是一个**业务工程化项目集**：为各类业务建立基于 AI 的�
 
 记忆**只有一份**：项目根目录下的 `.claude/memory/`，纳入 Git 版本管理。读写都在此处，无副本。
 
-Claude Code 的加载点由**本机用户级设置** `autoMemoryDirectory` 直接指向该目录（2026-09-19 起）：它读的就是仓库这份，写的也是仓库这份。**不存在镜像，也不需要复制。**
+Claude Code 的加载点由**本机用户级设置** `autoMemoryDirectory` 指向该目录：设置生效时它读的就是仓库这份，写的也是仓库这份，**不存在镜像，也不需要复制**。是否已设置用 `node .ai-agent/tools/setup-memory.js --check` 核对；未设置时按下一节写入。
 
 ### 每台设备的一次性配置
 
@@ -225,19 +234,21 @@ node .ai-agent/tools/setup-memory.js        # 每台机器一次；--check 只�
 | 主线工程 | `.claude/memory/` |
 | 独立项目与候选业务池 | `<NN-名>/claude-memory/`、`00-candidate-businesses/claude-memory/` |
 
-两处结构**完全相同**，只有事实记忆的**份数**不同：
+两处的索引与事实记忆结构相同，主记忆的落法不同：
 
 ```
 <记忆根>/
 ├── MEMORY.md            # 索引——固定名
-├── <项目名>项目.md        # 主记忆——每处一份
+├── <项目名>项目.md        # 主记忆——独立项目每处一份
 └── <主题>.md             # 事实记忆——0~N
 ```
+
+主线工程根记忆不另设 `<项目名>项目.md`，`MEMORY.md` 即其唯一入口；独立项目与候选业务池均须有主记忆，由 `check-projects.js` 校验。
 
 ### 命名规则
 
 1. **索引固定 `MEMORY.md`**——协议入口，根与各子 CLAUDE.md 都指向它，改名即断链。
-2. **主记忆 `<项目名>项目.md`，每处一份**——项目名取该库所属项目的自称；独立项目取其项目 CLAUDE.md 标题里的自称。
+2. **主记忆 `<项目名>项目.md`，独立项目每处一份**——项目名取该库所属项目的自称；独立项目取其项目 CLAUDE.md 标题里的自称；主线工程根记忆不设此项（见上）。
 3. **事实记忆用主题名，前缀表封闭**——只允许 `feedback-`（用户给的工作方式指示）、`pending-`（挂账与未决）与 `progress-<对象>`（进行中的工作状态）；其余用主题名本身，不自造前缀。三类各自的记法与读写触发见 [`AGENTS.md` §八](AGENTS.md)。
 4. **文件名不带日期**——日期由索引行的标题承载。
 5. **语言随性质**——**内容型**（主记忆、事实记忆）随所在区：主线工程区用英文 kebab-case，独立项目区用中文自然名；**设施型**（记忆根目录名、`feedback-`／`pending-`／`progress-` 前缀项）用英文。
@@ -300,3 +311,21 @@ AOS 整体是一个**业务工程化项目集**——为各类业务建立基于
 ## 十、工作风格
 
 - **禁止选项式交互**：讨论/确认事项时一律自由散文陈述（背景 + 问题 + 建议 + 理由），不用选项卡片/选项卡界面让用户做多选题；用户自由回答"改/不改/怎么改"，再据其指示执行（2026-08-25 用户定）。教材项目侧同步记录于 [`10-系统工程研究/claude-memory/feedback-no-option-interaction.md`](10-系统工程研究/claude-memory/feedback-no-option-interaction.md) 及 [`10-系统工程研究/CLAUDE.md`](10-系统工程研究/CLAUDE.md) 工作风格节。
+
+---
+
+## 十一、常用命令
+
+本仓库是文档与工程方法论仓库，没有根 `package.json`、构建、lint 与自动化测试；验证由下列脚本和技能承担。
+
+| 用途 | 命令 |
+|------|------|
+| 校验各独立项目记忆是否配齐 | `node .ai-agent/tools/check-projects.js`（有缺口退出码 1；`--quiet` 只报缺口） |
+| 新建独立项目 | `node .ai-agent/tools/new-project.js <名>`（`--dry-run` 只显示；编号自动顺延，`PROJECTS.md` 的一行需人工补） |
+| 核对／设置记忆加载点 | `node .ai-agent/tools/setup-memory.js --check`；写入用 `node .ai-agent/tools/setup-memory.js`，改后重启会话 |
+| 教材逐章修订开工 | `node .ai-agent/tools/next-chapter.js [--chapter N] [--check]`，或技能 `/next-chapter` |
+| Markdown → PDF | `node .ai-agent/tools/md2pdf/md2pdf.js <md路径> [输出.pdf]`；首次使用先在 `.ai-agent/tools/md2pdf/` 下 `npm install` |
+| 播客／访谈转写 | 在 `.ai-agent/tools/podcast2md/` 下 `pip install -r requirements.txt`，再 `python podcast2md.py "<链接或本地音频>" -o <输出目录>` |
+| AI 标识提交 | `.ai-agent/scripts/ai-commit.sh "<message>"` |
+| 需求／规则符合性审查 | 技能 `/requirements-conformance-review`、`/rule-conformance-review`；机械检查脚本在各自 `scripts/` 下 |
+| 双远端推送与防误推 | 见 [`REPO-MAINTENANCE.md`](REPO-MAINTENANCE.md) |
