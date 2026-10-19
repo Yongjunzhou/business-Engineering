@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "defaultMode": "bypassPermissions",
+    "allow": [
+      "Bash",
+      "Read(//e/e/mywork/AOS/_current/**)",
+      "Write(e:\\mywork\\AOS\\**)",
+      "Edit(e:\\mywork\\AOS\\**)",
+      "WebSearch",
+      "WebFetch"
+    ]
+  }
+}

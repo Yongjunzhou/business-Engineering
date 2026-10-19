@@ -1,0 +1,22 @@
+# macOS 目录元数据
+.DS_Store
+
+# Claude Code 运行现场：worktree 与子项目工作目录
+# （子项目运行现场常含模型与虚拟环境，体积会超出 GitHub 单文件上限）
+.claude/worktrees/
+.work-*/
+
+# Python 缓存与虚拟环境
+__pycache__/
+.venv/
+
+# Node 依赖：由 npm install 重建
+node_modules/
+
+# 评审技能临时产物
+.agents/skills/conformance-review/temp/
+.claude/skills/conformance-review/temp/
+.tools/md2pdf/temp/
+
+# 成书构建：本机浏览器探测出的 puppeteer 配置（随机器而异，不进库）
+100-subprojects/01-系统工程研究/03-架构师是个怎样的物种/成书/build/.puppeteer.local.json

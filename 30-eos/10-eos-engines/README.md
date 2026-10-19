@@ -1,0 +1,57 @@
+# 引擎实现
+
+本目录存放 EOS 所有引擎的**软件实现**，由 EOS 流水线**组件开发线**运行产出。
+
+## 引擎清单
+
+| # | 引擎目录 | 说明 | 状态 |
+|---|---------|------|------|
+| 1 | `form-engine/` | 表单引擎 | 待开发 |
+| 2 | `tab-engine/` | 标签页引擎 | 待开发 |
+| 3 | `menu-engine/` | 菜单引擎 | 待开发 |
+| 4 | `ledger-engine/` | 台账引擎 | 待开发 |
+| 5 | `dictionary-engine/` | 字典引擎 | 待开发 |
+| 6 | `master-data-engine/` | 主数据引擎 | 待开发 |
+| 7 | `relation-engine/` | 关系引擎 | 待开发 |
+| 8 | `process-engine/` | 流程引擎 | 待开发 |
+| 9 | `ticket-engine/` | 工单引擎 | 待开发 |
+| 10 | `progress-engine/` | 进展引擎 | 待开发 |
+| 11 | `project-engine/` | 项目引擎 | 待开发 |
+| 12 | `wbs-engine/` | WBS 引擎 | 待开发 |
+| 13 | `plan-engine/` | 计划引擎 | 待开发 |
+| 14 | `kanban-engine/` | 看板引擎 | 待开发 |
+| 16 | `xbom-engine/` | xBOM 引擎 | 待开发 |
+| 17 | `version-engine/` | 版本管理引擎 | 待开发 |
+| 18 | `mrp-engine/` | MRP 运算引擎 | 待开发 |
+| 19 | `mro-engine/` | MRO 算法引擎 | 待开发 |
+| 20 | `trace-engine/` | 追踪引擎 | 待开发 |
+| 21 | `cax-engine/` | CAX 桥接引擎 | 待开发 |
+
+## 每个引擎目录的典型结构
+
+```
+form-engine/
+├── src/                    # 源码
+├── tests/                  # 测试
+├── docs/                   # 引擎专有文档
+├── build.gradle/pom.xml    # 构建配置
+└── README.md               # 引擎说明
+```
+
+## 说明
+
+- 引擎清单与 `00-eos-product-spec/01-eos-engine-catalog.md` 一致
+- 各引擎的规格定义见产品规格说明，实现在此目录按构件展开
+- 本目录阶段1（系统设计）为空，阶段2（构件开发）启动后逐步填充
+
+## 当前文档
+
+| # | 文档 | 说明 |
+|---|------|------|
+| 00 | `00-eos-engine-form.md` | 表单引擎规格（模板） |
+| 01 | `01-eos-engine-process.md` | 流程引擎规格（模板） |
+| 02 | `02-eos-engine-ledger.md` | 台账引擎规格（模板） |
+| 03 | `03-eos-engine-project.md` | 项目引擎规格（模板） |
+| 04 | `04-eos-engine-cax.md` | CAX 桥接引擎规格（模板） |
+
+（其余引擎的文档随阶段2开发启动后逐步补充。AI 引擎的设计方案见 `00-eos-product-spec/15-eos-ai-capability.md`，待阶段2启动后在此按模板展开实现规格。）
