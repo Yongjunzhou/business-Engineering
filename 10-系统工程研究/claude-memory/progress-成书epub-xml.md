@@ -29,8 +29,9 @@ metadata:
 4. **新增 `build/check-epub.py` ＋ `build.sh` 第 7 步**：出书后逐个 xhtml／opf／ncx 走 XML 解析，并查 mimetype 是否首件且未压缩；不过即 `exit 1`。表格转图版若在库则顺带体检，报红只提示不拦（build.sh 不重建它）。
 5. **PDF 未动**：`table-inline.html` 只喂 EPUB 那条 pandoc 命令，typst 侧不读它。
 
-## 四 教训与仍挂的事
+## 四 教训与表图版管道
 
 - **教训**：EPUB 属于 XML 文档，**能过 HTML 解析器不等于能过 XML 解析器**。凡"往 EPUB 里注 HTML／CSS"，注释里也不许出现裸 `<`。
-- **仍挂（未改）**：`build/make-table-images.mjs` 里 `PANDOC`／`TYPST` 写死 Windows 路径（`C:\Users\HUAWEI\…`），**macOS 上跑不了**——重出表格转图版前须改成 `env → PATH` 解析。本轮表图未变，故未动该脚本。
+- **表图版管道已跨平台化（2026-10-19 同日办）**：`build/make-table-images.mjs` 原先 `PANDOC`／`TYPST` 写死 Windows 路径（`C:\Users\HUAWEI\…`），换机即废。现改为 **环境变量（`PANDOC_PATH`／`TYPST_PATH`）→ PATH → 各平台常见位置** 依次解析；字体候选由 `Noto Serif SC／SimSun` 扩为再加 `Songti SC／STSong／Noto Serif CJK SC／Source Han Serif SC` 等（typst 取第一个装了的）。**实测**：单跑第1章（11 张表）2.5 秒出图，883×171 级 PNG、三列表框线与中文宋体正常；按其速率全书 168 张约 40 秒。
+- **表图未重渲**：本轮只修补产物（表图仍是 Windows 那批），故两份 EPUB 的表图一致；日后要重出表图版，直接 `node build/make-table-images.mjs .. build build-tblimg` 再 pandoc 即可，无需再改脚本。
 - 本条只关管道，**源 `.md` 零改动**；书稿内容与 PDF 均不受影响。
