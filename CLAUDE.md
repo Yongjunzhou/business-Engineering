@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-为 Claude Code 提供本仓库的项目上下文和关键文件导航。仓库是 **AOS 业务工程化项目集**——主线工程与各独立项目并列为顶层项目。系统设计方法论完整定义见[通用设计规范 v1.0](20-eos-engineering/00-generalspec/01-generalspec-sysdev.md)；常用命令见[§十一](#十一常用命令)。
+为 Claude Code 提供本仓库的项目上下文和关键文件导航。仓库是 **AOS 业务工程化项目集**——主线工程与各独立项目并列为顶层项目。系统设计方法论完整定义见[通用系统设计规范 v2.5](20-eos-engineering/00-generalspec/01-generalspec-sysdev.md)；仓库定位与阅读路径见 [README.md](README.md)；常用命令见[§十一](#十一常用命令)。
 
 ---
 
@@ -10,15 +10,7 @@
 
 AOS 是一个**业务工程化项目集**：为各类业务建立基于 AI 的流水线，后续按流水线开展业务。顶层每个编号目录是一个工作单元：`10`~`14` 是独立项目，`00` 是候选业务池，`20` 是主线工程。各独立项目自包含（项目 `CLAUDE.md` + `claude-memory/`）。
 
-| 项目 | 位置 | 说明 |
-|------|------|------|
-| 候选业务 | `00-candidate-businesses/` | 尚未立项的业务候选域，不是项目 |
-| 系统工程研究 | `10-系统工程研究/` | 系统工程方法论 → 研究报告、培训教材、教材书 |
-| AI 部署研究 | `11-AI部署研究/` | 企业私域大模型推理平台选型与建设方案 |
-| 健康研究报告 | `12-健康研究报告/` | 健康主题书稿讲读摘录 |
-| 现代思维工具研究 | `13-现代思维工具研究/` | 思维工具研究（激励相容） |
-| 投资工程研究 | `14-投资工程研究/` | 投资工程——材料准备期 |
-| EOS 主线工程 | `20-eos-engineering/` | 元流水线 → EOS 流水线 → EOS 本体的工程化设计与实现 |
+项目清单（含位置、性质、独立记忆与说明）统一见[§九 项目清单](#九项目集)，此处不重复。
 
 ### 主线工程的三个产品
 
@@ -114,11 +106,11 @@ AOS 是一个**业务工程化项目集**：为各类业务建立基于 AI 的�
 
 ## 二、关键设计文件
 
-- [通用设计规范 v1.0](20-eos-engineering/00-generalspec/01-generalspec-sysdev.md) — 第一部分（§一~§十 + 附录A~B）：术语体系、四条工程化设计原则、文档结对设计（两阶段工作法）、各层架构末级节点识别方法、业务流程设计（两种 BP 开发方法）、产品架构设计（三独立原则）、系统设计过程（六步工作法）、验收标准、设计检查清单、常见错误与FAQ；第二部分（§十一~§十四 + 附录C~D）：四种设计模式（PACE 维度、选择框架、切换规则）、三种核心设计活动的跨模式差异、通用约束与质量指标、通用指南与产品指南的关系
-- [通用术语对照表 v2.4](20-eos-engineering/00-generalspec/06-generalspec-glossary.md) — 核心术语英中对照
+- [通用系统设计规范 v2.5](20-eos-engineering/00-generalspec/01-generalspec-sysdev.md) — 第一部分（§一~§十 + 附录A~B）：术语体系、四条工程化设计原则、文档结对设计（两阶段工作法）、各层架构末级节点识别方法、业务流程设计（两种 BP 开发方法）、产品架构设计（三独立原则）、系统设计过程（六步工作法）、验收标准、设计检查清单、常见错误与FAQ；第二部分（§十一~§十四 + 附录C~D）：四种设计模式（PACE 维度、选择框架、切换规则）、三种核心设计活动的跨模式差异、通用约束与质量指标、通用指南与产品指南的关系
+- [通用术语对照表 v2.5](20-eos-engineering/00-generalspec/06-generalspec-glossary.md) — 核心术语英中对照
 - [架构基础概念与方法 v3.0](20-eos-engineering/00-generalspec/07-generalspec-architecture-fundamentals.pdf) — 八章+两附录：系统/架构/架构决策/架构视图的定义与原理、设计链四层决策全景、业务架构实践
-- [EOS系统设计规范 v1.0](20-eos-engineering/20-pl4eos/00-pl4eos-spec/01-pl4eos-spec-sysdev.md) — EOS 产品特有设计规则（平台链/业务链、三层工作层面、端到端业务框架）+ 四种设计模式
-- [元流水线设计规范 v1.0](20-eos-engineering/10-pl4pleos/00-pl4pleos-spec/01-pl4pleos-spec-sysdev.md)
+- [EOS 流水线系统设计规范 v2.5](20-eos-engineering/20-pl4eos/00-pl4eos-spec/01-pl4eos-spec-sysdev.md) — EOS 产品特有设计规则（平台链/业务链、三层工作层面、端到端业务框架）+ 四种设计模式
+- [元流水线系统设计规范 v1.0（精简版）](20-eos-engineering/10-pl4pleos/00-pl4pleos-spec/01-pl4pleos-spec-sysdev.md)
 
 元流水线的操作规程（任务定义）位于 `20-eos-engineering/10-pl4pleos/10-pl4pleos-subpd-sysdev/` 各 Skill 目录下；EOS 流水线的任务定义位于 `20-eos-engineering/20-pl4eos/10-pl4eos-subpd-sysdev/` 各 Skill 目录下。
 
@@ -143,7 +135,7 @@ AOS 是一个**业务工程化项目集**：为各类业务建立基于 AI 的�
 | 输出产品 | 数据目录 | 文件命名 |
 |---------|---------|---------|
 | EOS 流水线（pl4eos） | `20-eos-engineering/10-pl4pleos/80-pl4pleos-2-pl4eosdata/` | `01-pl4eos-original-requirements.md` … `09-pl4eos-sysdev-verification-report.md` |
-| EOS 本体 | `20-eos-engineering/20-pl4eos/80-pl4eos-2-eosdata/` | `01-eos-specified-requirements.md` … `09-eos-sysdev-verification-report.md`；另有 21~28 跨层资产文档 |
+| EOS 本体 | `20-eos-engineering/20-pl4eos/80-pl4eos-2-eosdata/` | `01-eos-specified-requirements.md` … `09-eos-sysdev-verification-report.md`；另有 21、22、24、25、27 五份跨层资产文档（23、26 已取消） |
 
 | 槽位 | EOS 流水线侧 | EOS 本体侧 |
 |------|-------------|-----------|
@@ -163,12 +155,7 @@ AOS 是一个**业务工程化项目集**：为各类业务建立基于 AI 的�
 
 ## 五、四种设计场景
 
-| 场景 | 适用情况 | 周期 | 操作指引 |
-|------|---------|------|---------|
-| 瀑布式 | 全新系统，需求明确 | 30-48天 | — |
-| 敏捷式 | 迭代开发，需求渐进 | 13-21天 | — |
-| 逆向工程 | 已有系统补文档 | 16-26天 | — |
-| DevOps | 小变更快速交付 | 几小时-3天 | — |
+四种设计场景（瀑布式、敏捷式、逆向工程、DevOps）的适用情况、周期、PACE 维度与六步法覆盖差异，见[通用系统设计规范 §十一 四种设计模式](20-eos-engineering/00-generalspec/01-generalspec-sysdev.md#十一四种设计模式)。本节不重复展开。
 
 ---
 
@@ -200,6 +187,13 @@ AOS 是一个**业务工程化项目集**：为各类业务建立基于 AI 的�
 
 Claude Code 的加载点由**本机用户级设置** `autoMemoryDirectory` 指向该目录：设置生效时它读的就是仓库这份，写的也是仓库这份，**不存在镜像，也不需要复制**。是否已设置用 `node .ai-agent/tools/setup-memory.js --check` 核对；未设置时按下一节写入。
 
+### 读写时机
+
+- **开工先读**：先读 `.claude/memory/MEMORY.md`，再按索引展开与本次范围相关的正文；只读索引不读正文等于没读。独立项目任务改读该项目目录下的 `claude-memory/MEMORY.md`。
+- **收尾写回，四条触发**：本轮出现人类裁决或定案、出现新挂账或未决项、完成一轮可交付修订、会话即将结束，任一成立就在收尾前写回。
+- **每条同步索引**：新增或更新记忆文件后，在 `MEMORY.md` 加一行或改对应行；索引与文件脱节，下一个人就找不到。
+- 三类的记法与触发细节见 [`AGENTS.md` §八](AGENTS.md)。
+
 ### 每台设备的一次性配置
 
 ```bash
@@ -225,7 +219,7 @@ node .ai-agent/tools/setup-memory.js        # 每台机器一次；--check 只�
 - **独立项目分不到自己的自动记忆**：加载点锚在 **git 根**，不在工作目录。各项目目录（见 §九）内开工的会话，记忆仍落本目录。项目的记忆隔离只能靠 §九 的目录内自建记忆与项目 CLAUDE.md 协议维持。
 - **三种锚点互不统一**——以项目目录为工作目录开会话时：**记忆**锚 git 根，用本目录这份，项目自建记忆不自动加载；**指令文件**锚祖先链，项目与根两层 CLAUDE.md 同时进上下文；**会话记录**锚工作目录，另起一份历史，`--continue` 不跨目录。
 - **项目目录会话读得到本目录**：记忆内容由系统直接注入，不受工作区边界限制；改动其中文件则属工具调用，须该路径落在可达范围内（`permissions.additionalDirectories` 或 allow 规则）。故项目目录会话对根记忆是**上级视角**，反向只看到 §九 项目清单的一行指针。
-- **记忆进 Git 即会被推送**：写进 `.claude/memory/` 的内容会进入版本历史，对外分享或公开仓库前须过一遍。
+- **本仓库是公开仓库**：写进 `.claude/memory/` 或各项目 `claude-memory/` 的内容会进入版本历史并随 Git 公开；敏感信息、凭据与私人材料不得入库。
 
 ### 目录结构
 
@@ -264,7 +258,7 @@ node .ai-agent/tools/setup-memory.js        # 每台机器一次；--check 只�
 
 ## 九、项目集
 
-### 项目集
+### 项目集定位
 
 AOS 整体是一个**业务工程化项目集**——为各类业务建立基于 AI 的流水线，后续按流水线开展业务。顶层每个编号目录是一个独立项目；主线工程（元流水线 → EOS 流水线 → EOS 本体）是这套方法最系统的一次展开，其余项目是它在其他专业领域上的展开，也是通用工程化方法的产出源。
 

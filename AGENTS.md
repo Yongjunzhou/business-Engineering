@@ -1,6 +1,6 @@
 # AGENTS.md
 
-为 Codex 提供本仓库的项目上下文和关键文件导航。系统设计方法论完整定义见[通用设计规范 v1.0](20-eos-engineering/00-generalspec/01-generalspec-sysdev.md)。
+为 Codex 提供本仓库的项目上下文和关键文件导航。系统设计方法论完整定义见[通用系统设计规范 v2.5](20-eos-engineering/00-generalspec/01-generalspec-sysdev.md)；仓库定位与阅读路径见 [README.md](README.md)。
 
 ---
 
@@ -75,10 +75,10 @@ AOS 是一个**业务工程化项目集**：为各类业务建立基于 AI 的�
 
 ## 二、关键设计文件
 
-- [通用设计规范 v1.0](20-eos-engineering/00-generalspec/01-generalspec-sysdev.md) — 第一部分（§一~§十 + 附录A~B）：术语体系、四条工程化设计原则、文档结对设计（两阶段工作法）、各层架构末级节点识别方法、业务流程设计（两种 BP 开发方法）、产品架构设计（三独立原则）、系统设计过程（六步工作法）、验收标准、设计检查清单、常见错误与FAQ；第二部分（§十一~§十四 + 附录C~D）：四种设计模式（PACE 维度、选择框架、切换规则）、三种核心设计活动的跨模式差异、质量门禁矩阵、通用指南与产品指南的关系
-- [通用术语对照表 v2.4](20-eos-engineering/00-generalspec/06-generalspec-glossary.md) — 核心术语英中对照
-- [EOS系统设计规范 v1.0](20-eos-engineering/20-pl4eos/00-pl4eos-spec/01-pl4eos-spec-sysdev.md) — EOS 产品特有设计规则（平台链/业务链、三层工作层面、端到端业务框架）+ 四种设计模式
-- [元流水线设计规范 v1.0](20-eos-engineering/10-pl4pleos/00-pl4pleos-spec/01-pl4pleos-spec-sysdev.md)
+- [通用系统设计规范 v2.5](20-eos-engineering/00-generalspec/01-generalspec-sysdev.md) — 第一部分（§一~§十 + 附录A~B）：术语体系、四条工程化设计原则、文档结对设计（两阶段工作法）、各层架构末级节点识别方法、业务流程设计（两种 BP 开发方法）、产品架构设计（三独立原则）、系统设计过程（六步工作法）、验收标准、设计检查清单、常见错误与FAQ；第二部分（§十一~§十四 + 附录C~D）：四种设计模式（PACE 维度、选择框架、切换规则）、三种核心设计活动的跨模式差异、质量门禁矩阵、通用指南与产品指南的关系
+- [通用术语对照表 v2.5](20-eos-engineering/00-generalspec/06-generalspec-glossary.md) — 核心术语英中对照
+- [EOS 流水线系统设计规范 v2.5](20-eos-engineering/20-pl4eos/00-pl4eos-spec/01-pl4eos-spec-sysdev.md) — EOS 产品特有设计规则（平台链/业务链、三层工作层面、端到端业务框架）+ 四种设计模式
+- [元流水线系统设计规范 v1.0（精简版）](20-eos-engineering/10-pl4pleos/00-pl4pleos-spec/01-pl4pleos-spec-sysdev.md)
 
 元流水线的操作规程（任务定义）位于 `20-eos-engineering/10-pl4pleos/10-pl4pleos-subpd-sysdev/` 各 Skill 目录下；EOS 流水线的任务定义位于 `20-eos-engineering/20-pl4eos/10-pl4eos-subpd-sysdev/` 各 Skill 目录下。
 
@@ -147,7 +147,7 @@ AOS 是一个**业务工程化项目集**：为各类业务建立基于 AI 的�
 
 ### 记忆存储位置
 
-本仓库的记忆文件位于项目根目录下的 `.claude/memory/`，纳入 Git 版本管理。这是记忆的**权威存储**，跨设备共享。
+本仓库的记忆文件位于项目根目录下的 `.claude/memory/`，纳入 Git 版本管理。这是记忆的**权威存储**，跨设备共享。**本仓库是公开仓库**：记忆与各项目 `claude-memory/` 随 Git 公开，敏感信息、凭据与私人材料不得入库。
 
 各 Agent 工具自带的记忆机制是另一回事（例如 Codex 写在 `~/.codex/memories/` 下、按用户与机器各存一份，DSH 没有记忆机制），它们与本仓库的记忆**互不相通**。故本仓库**不设镜像、不做复制**：`.claude/memory/` 是唯一存储，任何 Agent 都读写这一处，不另建副本。工具自动加载能力的有无，见「跨 Agent 使用约定」。
 
