@@ -854,7 +854,7 @@
 **对象**：[eos-or01-chunk.md](../../10-pl4eos-subpd-sysdev/00-presysdev-4-eos/eos-or01-chunk.md)（人类方案 v0.34）+ [SKILL.md](../../10-pl4eos-subpd-sysdev/00-presysdev-4-eos/eos-or01-chunk/SKILL.md)（v2.17）
 **参照系**：91 规范 §1.4/A.3.2/A.5/A.7、or00/or02/or03、`01-eos-sysdev-status.md`
 **结论**：发现 F1~F10；反馈回路重设计为 **git 基线协议**并已实施（人类方案 v0.35 / SKILL v2.18 / 91 v5.14 / `.scripts/ai-commit.sh` 新建）
-**评审方案存档**：[40-review/万辉-20260815-01-or01反馈回路git基线协议-方案.md](../../../40-review/万辉-20260815-01-or01反馈回路git基线协议-方案.md)
+**评审方案存档**：[40-review/不具名-20260815-01-or01反馈回路git基线协议-方案.md](../../../40-review/不具名-20260815-01-or01反馈回路git基线协议-方案.md)
 
 **发现清单**：
 
@@ -890,7 +890,7 @@
 - `eos-or01-chunk/SKILL.md`：v2.17 → v2.18（同步）
 - `91-eos-biz-eng-spec.md`：v5.13 → v5.14（§A.5 补预处理链特化声明，试点 or01）
 - `.scripts/ai-commit.sh`：新建（AI 标识提交 + 基线 hash 输出）
-- `40-review/万辉-20260815-01-or01反馈回路git基线协议-方案.md`：评审方案存档
+- `40-review/不具名-20260815-01-or01反馈回路git基线协议-方案.md`：评审方案存档
 
 **待办**：
 
