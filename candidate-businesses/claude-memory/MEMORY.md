@@ -1,6 +1,6 @@
 # 候选业务池记忆索引（独立于 AOS 项目记忆）
 
-> 本目录是 **_candidate-businesses 候选业务池** 的**独立记忆**，与 AOS 项目根记忆（`.claude/memory/`）**互不干扰**。
+> 本目录是 **candidate-businesses 候选业务池** 的**独立记忆**，与 AOS 项目根记忆（`.claude/memory/`）**互不干扰**。
 > 处理本区内容时：先读本索引 → 读对应记忆文件 → 写入本目录；**不要**写入 AOS 根 `.claude/memory/` 或项目 auto-memory。
 > 本记忆随仓库版本管理（位于子项目区内），可跨设备共享（机制见 AOS 根 CLAUDE.md §八）。
 

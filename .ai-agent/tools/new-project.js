@@ -14,7 +14,7 @@
  *
  * 【建的什么】
  *   NN 自动取项目集内现有最大号 +1（`10-eos-engineering` 是主线工程块，
- *   不参与编号；`_candidate-businesses` 不是项目，也不参与）
+ *   不参与编号；`candidate-businesses` 不是项目，也不参与）
  *   NN-<名>/
  *   ├── CLAUDE.md                 项目 CLAUDE.md（隔离协议与边界齐备，定位留待填）
  *   └── claude-memory/
@@ -29,7 +29,6 @@ const path = require('path');
 
 const REPO_ROOT = path.resolve(__dirname, '../..');
 const MAINLINE = '10-eos-engineering';
-const TOPIC = '_candidate-businesses';
 
 const argv = process.argv.slice(2);
 const DRY_RUN = argv.includes('--dry-run');

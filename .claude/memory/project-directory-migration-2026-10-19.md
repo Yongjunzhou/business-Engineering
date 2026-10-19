@@ -16,7 +16,7 @@ metadata:
 03-现代思维工具研究/   ← 原 04
 04-投资工程研究/       ← 原 05
 10-eos-engineering/    ← 原顶层 00-generalspec/10-pl4pleos/20-pl4eos/30-eos/40-review
-_candidate-businesses/       ← 原 100-subprojects/00；不占项目编号
+candidate-businesses/       ← 原 100-subprojects/00；不占项目编号
 .ai-agent/             ← tools/（原 .tools）、scripts/（原 .scripts）、work/（原 .work-ch8）
 .claude/               ← 保留：Claude Code 的固定发现点（设置/技能/记忆）
 ```

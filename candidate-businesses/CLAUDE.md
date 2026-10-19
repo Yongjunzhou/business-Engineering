@@ -1,4 +1,4 @@
-# CLAUDE.md（_candidate-businesses · 候选业务池）
+# CLAUDE.md（candidate-businesses · 候选业务池）
 
 本目录是 AOS 项目集内的**候选业务池**——不是一个项目，而是**尚未立项为业务工程化项目的候选业务域**。2026-09-20 自仓库顶层 `100-topic-research/` 迁入并更名。
 
