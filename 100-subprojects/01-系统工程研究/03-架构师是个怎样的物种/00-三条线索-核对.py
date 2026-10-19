@@ -20,10 +20,10 @@ if hasattr(sys.stdout, 'reconfigure'):
 BOOK = os.path.dirname(os.path.abspath(__file__))
 HAN = re.compile(r'[\u4e00-\u9fff]')
 SKIP = ['参考文献', '版本变更记录']
-MEMBERS = [('冰链', '水恒'), ('冰链', '文征'), ('冰链', '永岳'), ('冰链', '董勋'),
+MEMBERS = [('冰链', '石军'), ('冰链', '林涛'), ('冰链', '赵刚'), ('冰链', '吴浩'),
            ('冰链', '季昭'), ('冰链', '小张'), ('冰链', '小周'),
-           ('恒信', '万晖'), ('恒信', '徐澄'), ('恒信', '满涛'),
-           ('恒信', '王默'), ('恒信', '小白'), ('恒信', '黄秋')]
+           ('恒信', '罗建'), ('恒信', '顾言'), ('恒信', '曹峰'),
+           ('恒信', '王默'), ('恒信', '苏婷'), ('恒信', '郑亮')]
 # 主案例章（该线成员应全员在场）
 MAIN_ICE = [3, 5, 7, 10, 11, 15]   # 2026-10-14 章级重排改正：ch13 恒信主、ch15 冰链主
 MAIN_HX = [2, 4, 6, 8, 12, 13, 14, 16]
@@ -123,7 +123,7 @@ for line_name, chs in (('冰链', MAIN_ICE), ('恒信', MAIN_HX)):
         lack = [m for m in names if not d['members'][m]]
         mark = '全员在场' if not lack else '缺：' + '、'.join(lack)
         print('  {} ch{:>2}  {}'.format(line_name, c, mark))
-duo_miss = {d['ch']: [m for m in ('满涛', '永岳') if not d['members'][m]] for d in data}
+duo_miss = {d['ch']: [m for m in ('曹峰', '赵刚') if not d['members'][m]] for d in data}
 print('双线章（ch1/9/17/18）缺场：', {k: v for k, v in duo_miss.items() if v and k in ('01', '09', '17', '18')})
 
 print()
