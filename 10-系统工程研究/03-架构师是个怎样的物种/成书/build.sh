@@ -18,10 +18,10 @@ fi
 OUT=build
 mkdir -p "$OUT/.mmd" "$OUT/figs" "$OUT/assets"
 
-echo "[1/6] 预处理（剔版本记录 / mermaid 提取 / .unlisted 归一化）"
+echo "[1/7] 预处理（剔版本记录 / mermaid 提取 / .unlisted 归一化）"
 node "$OUT/preprocess.mjs" .. "$OUT"
 
-echo "[2/6] mermaid → PNG"
+echo "[2/7] mermaid → PNG"
 # 浏览器可执行文件：按平台探测，写一份本机配置（不进 git）；探不到则用库内那份（Windows 机上的路径）
 PCFG="$OUT/puppeteer.json"
 if [ -z "${CHROME_PATH:-}" ]; then
@@ -48,30 +48,30 @@ else
   echo "  图已存在（重渲请加 --rerender）"
 fi
 
-echo "[2.5/6] 图1-5 蛇形渲染（mermaid 子图方向失效 → 手绘 SVG 直渲）"
+echo "[2.5/7] 图1-5 蛇形渲染（mermaid 子图方向失效 → 手绘 SVG 直渲）"
 if [ "${1:-}" = "--rerender" ] || [ ! -f "$OUT/figs/ch01-fig05.png" ]; then
   node "$OUT/render-fig05-snake.cjs"
 else
   echo "  图1-5 蛇形 PNG 已存在"
 fi
 
-echo "[3/6] 封面裁剪（书脊 60px → 前封 800×1132）"
+echo "[3/7] 封面裁剪（书脊 60px → 前封 800×1132）"
 if [ ! -f "$OUT/assets/cover-800x1132.png" ]; then
   powershell -ExecutionPolicy Bypass -File "$OUT/crop-cover.ps1" "../封面/封面-前封书脊.png" "$OUT/assets/cover-800x1132.png"
 fi
 
-echo "[4/6] 逐章 pandoc → typst + fix-typ（剥 label / 注入图宽）"
+echo "[4/7] 逐章 pandoc → typst + fix-typ（剥 label / 注入图宽）"
 while IFS= read -r base; do
   pandoc -f markdown-smart -t typst "$OUT/$base.book.md" -o "$OUT/$base.typ"
 done < "$OUT/manifest.txt"
 node "$OUT/fix-typ.mjs" "$OUT"
 
-echo "[5/6] typst compile → PDF"
+echo "[5/7] typst compile → PDF"
 typst compile main.typ 架构师-打印版.pdf
 
-echo "[6/6] pandoc → EPUB"
+echo "[6/7] pandoc → EPUB"
 args=(); while IFS= read -r base; do args+=("$OUT/$base.book.md"); done < "$OUT/manifest.txt"
-# ★ 2026-10-19：--include-in-header 把表格样式内嵌进每个 xhtml 的 <head>——
+# ★ 2026-10-19：--include-in-header 把表格样式内嵌进每个 xhtml 的 head——
 # 有些阅读器不加载外链 CSS，表格会退化成"只有文字没有框"（用户报）
 pandoc -f markdown-smart -t epub3 "${args[@]}" \
   --metadata-file="$OUT/metadata.yaml" \
@@ -81,6 +81,23 @@ pandoc -f markdown-smart -t epub3 "${args[@]}" \
   --include-in-header="$OUT/table-inline.html" \
   --resource-path="$OUT" \
   -o 架构师-电子版.epub
+
+echo "[7/7] EPUB 出厂体检（每个 xhtml 能否被 XML 解析）"
+# 这一步是 Apple Books 那笔账换来的：XHTML 按 XML 解析，table-inline.html 注释里
+# 一个裸尖括号就让全书 26 个文件崩、而浏览器毫无反应。故每次出书都拿解析器过一遍。
+if command -v python3 >/dev/null 2>&1; then
+  python3 "$OUT/check-epub.py" 架构师-电子版.epub || {
+    echo "  ✗ EPUB 体检不过：优先查 build/table-inline.html 里有没有裸尖括号"
+    exit 1
+  }
+  # 表格转图版是支线产物（make-table-images.mjs + 另一次 pandoc），本脚本不重建它；
+  # 在库则顺带体检，报红只提示不拦（它可能只是还没跟上本次改动）。
+  if [ -f 架构师-电子版-表格转图.epub ]; then
+    python3 "$OUT/check-epub.py" 架构师-电子版-表格转图.epub || echo "  ⚠ 表格转图版体检不过，需按 make-table-images.mjs 流程重出"
+  fi
+else
+  echo "  跳过：本机无 python3；若 Apple Books 报 XML 错误，先用 python3 跑 $OUT/check-epub.py"
+fi
 
 echo "════════ 完成 ════════"
 ls -la 架构师-打印版.pdf 架构师-电子版.epub

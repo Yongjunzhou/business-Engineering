@@ -1,7 +1,11 @@
 <style>
-/* 表格行内样式（2026-10-19 立）：随每个 xhtml 的 <head> 内嵌一份，
+/* 表格行内样式（2026-10-19 立）：随每个 xhtml 的 head 内嵌一份，
    防"阅读器不加载外链 CSS"时表格退化成无框文字（用户报「只有文字没有表格」）。
-   与 assets/book.css 的表格段保持同值；改一处须同改另一处。 */
+   与 assets/book.css 的表格段保持同值；改一处须同改另一处。
+   ※ 本文件被 pandoc 原样塞进 XHTML 的 style 元素，而 XHTML 按 XML 解析：
+     注释里写尖括号头标签会让整本书 XML 崩（Apple Books 报
+     "Opening and ending tag mismatch: head line 12 and style"）。
+     此处严禁裸尖括号，非写不可请用实体写法。 */
 table {
   width: 100%;
   max-width: 100%;

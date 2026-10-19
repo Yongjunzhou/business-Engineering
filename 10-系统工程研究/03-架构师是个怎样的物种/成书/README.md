@@ -39,6 +39,7 @@
 > ④ **EPUB 同步**——`assets/book.css` 删去 `h1+p, h2+p, h3+p, h4+p { text-indent: 0 }`（标题后首段照样缩两字）；标题下边距加大（h2 `1.6em 0 .8em`、h3 `1.3em 0 .7em`、h4 `1em 0 .6em`）。
 > **复核方式与读数**：`typst compile 测试件 → PNG` 单页直看（章题下首段、节题下首段均缩两字，节题与首段之间空约一行；表／引用／列表不缩进；两位署名右对齐）。**页数 910 → 931**（+21 页，来自标题留白与缩进），打印版 **10,281,448 B**、电子版 **3,878,429 B**。
 
+> **★ 2026-10-19 Apple Books 全页报 XML 错（`mismatched tag`）已修，管道加一道出厂体检**：iPhone／iPad 的「图书」打开两个 EPUB 都是满屏红框——`error on line 36 at column 11: Opening and ending tag mismatch: head line 12 and style`，26 个 xhtml **无一幸免**。**根因**：`build/table-inline.html` 的 CSS 注释里写了 `<head>` 字面（正是第 12 行）。pandoc 把它原样塞进每个 xhtml 的 `<style>`，而 **XHTML 按 XML 解析**（不按 HTML）：注释里的 `<head>` 被当成起始标签，于是 `style` 尚未闭合就撞上 `head` → 整本书解析失败。浏览器把 `<style>` 当原始文本，所以**此前所有"浏览器／WPS 能看"的验证都查不出它**；旧自检也只数文件与表数，从不解析 XML。**修法**：该注释改写为不含尖括号的措辞（并在文件里立下"此处严禁裸尖括号"的规矩）；**标准版重出**（3,885,212 B／26 xhtml／168 表／26 图，`xml.etree` 逐个解析 **26／26 通过**）；**表格转图版**（支线产物，表图未变）按同一处注释就地补字重打包（17,576,801 B／194 图，同样 26／26 通过、mimetype 仍为首件且不压缩）。**新增 `build/check-epub.py` 与 build.sh 第 7 步**：出书后逐个 xhtml／opf／ncx 走一遍 XML 解析，不过即 `exit 1`（本机无 python3 则跳过并提示）。**教训：能通过 HTML 解析器不等于能通过 XML 解析器——EPUB 属于后者。**
 > **★ 2026-10-19 图字号与表跨页（用户报「图1-1的字号好大」）**：
 > ① **图宽改为"渲染自然尺寸"封顶**——`mmdc -s 3` 出的是 3 倍设备像素，纸上自然宽＝`px宽×0.75÷3`；宽度取「版心宽／高度封顶／自然宽」三者最小，即**只许缩、不许放大到自然尺寸之外**。图 1-1 曾撑到 **294.9pt**、图内字 ≈17pt（正文 10.5pt），现 **207pt**、约 12pt；26 图里只有两张被这条线压住（`ch01-fig01` 294.9→207、`ch08-fig02` 267→205.5）。曾试"宽高比<1 的一律压 200pt"，**误伤** `ch08-fig01`（2352×2817，本就满版 311.8pt，压到 200pt 后图内字缩到 4pt 级），故弃。
 > ② **图题关自动编号**——md 里图题已自带章号（`![图 1-1](figs/…)`），typst 的 figure 又在题前自动加「图＋计数器」，PDF 印成「**图 1　图 1-1**」；`fix-typ.mjs` 给"纯图号题注"注入 `numbering: none`，**26 处全中**。EPUB 侧本就无自动编号，复核双重图号 0 处。
@@ -80,6 +81,9 @@ bash build.sh --rerender   # 强制重渲全部 19 个 mermaid 图
     fix-typ.mjs        # 修补 pandoc→typst：剥重复 label / 按图尺寸注入适配宽度
     crop-cover.ps1     # 封面裁书脊（60px）→ 前封 800×1132
     metadata.yaml      # EPUB 元数据（书名/作者/语言）
+    table-inline.html  # 内嵌进每个 xhtml 的表样式（★ 严禁裸尖括号，见 2026-10-19 条）
+    check-epub.py      # EPUB 出厂体检：逐个 xhtml/opf/ncx 走 XML 解析（build.sh 第 7 步）
+    make-table-images.mjs  # 支线：表格转图版 EPUB 的素材（表块 → PNG）
     assets/book.css    # EPUB 版式
     assets/ch01-fig05-snake.svg  # 图1-5 蛇形源（改版式改此文件 + --rerender）
     puppeteer.json     # mmdc 复用本机 Chrome（免下载 Chromium）

@@ -13,15 +13,56 @@
  * 用法：node build/make-table-images.mjs <bookDir> <buildDir> <outDir>
  */
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { join, resolve, delimiter } from 'node:path';
 import { execFileSync } from 'node:child_process';
 
 const SRC = resolve(process.argv[2] || '..');
 const BUILD = resolve(process.argv[3] || 'build');
 const OUT = resolve(process.argv[4] || 'build-tblimg');
 
-const PANDOC = 'C:\\Users\\HUAWEI\\AppData\\Local\\Pandoc\\pandoc.exe';
-const TYPST = 'C:\\Users\\HUAWEI\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Typst.Typst_Microsoft.Winget.Source_8wekyb3d8bbwe\\typst-x86_64-pc-windows-msvc\\typst.exe';
+/**
+ * 取工具路径：环境变量 → PATH → 各平台常见安装位置。
+ * 2026-10-19：原先 pandoc／typst 写死 Windows 路径，换了机器（macOS）就跑不起来；
+ * 与 build.sh 的 Chrome 探测同一思路——先问环境、再问 PATH、最后试常见位置。
+ */
+function resolveTool(envVar, names, fallbacks) {
+  const fromEnv = process.env[envVar];
+  if (fromEnv && existsSync(fromEnv)) return fromEnv;
+  const dirs = (process.env.PATH || '').split(delimiter).filter(Boolean);
+  const exts = process.platform === 'win32' ? ['.exe', ''] : [''];
+  for (const name of names) {
+    for (const dir of dirs) {
+      for (const ext of exts) {
+        const p = join(dir, name + ext);
+        if (existsSync(p)) return p;
+      }
+    }
+  }
+  for (const p of fallbacks) if (existsSync(p)) return p;
+  throw new Error(`找不到 ${names[0]}：请设 ${envVar} 或把它放进 PATH`);
+}
+
+const PANDOC = resolveTool('PANDOC_PATH', ['pandoc'], [
+  'C:\\Users\\HUAWEI\\AppData\\Local\\Pandoc\\pandoc.exe',
+  '/opt/homebrew/bin/pandoc',
+  '/usr/local/bin/pandoc',
+  '/usr/bin/pandoc',
+]);
+const TYPST = resolveTool('TYPST_PATH', ['typst'], [
+  'C:\\Users\\HUAWEI\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Typst.Typst_Microsoft.Winget.Source_8wekyb3d8bbwe\\typst-x86_64-pc-windows-msvc\\typst.exe',
+  '/opt/homebrew/bin/typst',
+  '/usr/local/bin/typst',
+  '/usr/bin/typst',
+]);
+
+// 字体按平台给候选：先给 Windows 的字面（与既有表图同源），再补 macOS／Linux 常见名。
+// typst 取候选里第一个装了的；全无则走默认字体（中文仍出，但字形未必是宋体）。
+const SERIF_FONTS = [
+  'Noto Serif SC', 'SimSun',
+  'Songti SC', 'STSong', 'Noto Serif CJK SC', 'Source Han Serif SC',
+  'Noto Serif', 'serif',
+];
+const FONT_LIST = SERIF_FONTS.map((f) => `"${f}"`).join(', ');
 
 const IMGDIR = join(OUT, 'tbl-images');
 rmSync(OUT, { recursive: true, force: true });
@@ -39,7 +80,7 @@ function renderTable(mdLines, id) {
   const body = readFileSync(typPath, 'utf8');
   const doc = [
     '#set page(width: 118mm, height: auto, margin: 2pt)',
-    '#set text(font: ("Noto Serif SC", "SimSun"), size: 8.5pt, lang: "zh", region: "cn")',
+    '#set text(font: (' + FONT_LIST + '), size: 8.5pt, lang: "zh", region: "cn")',
     '#set par(justify: true, leading: 0.9em, spacing: 0.5em, first-line-indent: 0em)',
     '#show table: set text(size: 8.5pt)',
     '#set table(stroke: 0.6pt + rgb("#7d7264"), inset: (x: 4pt, y: 3pt))',
