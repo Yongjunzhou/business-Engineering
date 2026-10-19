@@ -10,13 +10,13 @@ metadata:
 ## 新顶层
 
 ```
-00-系统工程研究/       ← 原 100-subprojects/01
-01-AI部署研究/         ← 原 100-subprojects/02
-02-健康研究报告/       ← 原 03
-03-现代思维工具研究/   ← 原 04
-04-投资工程研究/       ← 原 05
+00-candidate-businesses/       ← 原 100-subprojects/00；占 00 号，性质不是项目
+01-系统工程研究/       ← 原 100-subprojects/01
+02-AI部署研究/         ← 原 01-AI部署研究
+03-健康研究报告/       ← 原 02-健康研究报告
+04-现代思维工具研究/   ← 原 03-现代思维工具研究
+05-投资工程研究/       ← 原 04-投资工程研究
 10-eos-engineering/    ← 原顶层 00-generalspec/10-pl4pleos/20-pl4eos/30-eos/40-review
-candidate-businesses/       ← 原 100-subprojects/00；不占项目编号
 .ai-agent/             ← tools/（原 .tools）、scripts/（原 .scripts）、work/（原 .work-ch8）
 .claude/               ← 保留：Claude Code 的固定发现点（设置/技能/记忆）
 ```

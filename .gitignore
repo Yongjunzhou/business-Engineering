@@ -21,8 +21,8 @@ node_modules/
 .ai-agent/work/
 
 # 成书构建：本机浏览器探测出的 puppeteer 配置（随机器而异，不进库）
-00-系统工程研究/03-架构师是个怎样的物种/成书/build/.puppeteer.local.json
+01-系统工程研究/03-架构师是个怎样的物种/成书/build/.puppeteer.local.json
 
 # 成书构建：表格转图版的中间产物（168 张表图，约 15 MB）
 # 由 build/make-table-images.mjs + typst 本地重生成（秒级、无需浏览器），不进库
-00-系统工程研究/03-架构师是个怎样的物种/成书/build-tblimg/
+01-系统工程研究/03-架构师是个怎样的物种/成书/build-tblimg/

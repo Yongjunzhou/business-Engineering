@@ -14,7 +14,8 @@
  *
  * 【建的什么】
  *   NN 自动取项目集内现有最大号 +1（`10-eos-engineering` 是主线工程块，
- *   不参与编号；`candidate-businesses` 不是项目，也不参与）
+ *   不参与编号；`00-candidate-businesses` 是候选业务池，占 00 号，
+ *   也不参与新项目顺号——新项目从 06 起）
  *   NN-<名>/
  *   ├── CLAUDE.md                 项目 CLAUDE.md（隔离协议与边界齐备，定位留待填）
  *   └── claude-memory/
@@ -46,7 +47,7 @@ const used = fs.readdirSync(REPO_ROOT, { withFileTypes: true })
   .map((e) => /^(\d{2})-/.exec(e.name))
   .filter(Boolean)
   .map((m) => parseInt(m[1], 10))
-  .filter((n) => n < 10);
+  .filter((n) => n > 0 && n < 10);
 const nn = String((used.length ? Math.max(...used) : 0) + 1).padStart(2, '0');
 
 const DIR = path.join(REPO_ROOT, nn + '-' + name);
