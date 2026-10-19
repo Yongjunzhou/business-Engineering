@@ -39,6 +39,6 @@ EOS 设计子线（10 wft 主文档 + 10 SKILL + 91 规范 + wft06-trace + 16 ag
 
 ## 版本
 
-主文档 +1 + 变更记录补行（SKILL 附「AI 执行规则语义不变」，10-eos-engineering/00-generalspec/01 为列表式升序另插），修订日期统一 2026-08-28。数据文件/README/glossary 等无变更记录节的仅版本 +1。
+主文档 +1 + 变更记录补行（SKILL 附「AI 执行规则语义不变」，20-eos-engineering/00-generalspec/01 为列表式升序另插），修订日期统一 2026-08-28。数据文件/README/glossary 等无变更记录节的仅版本 +1。
 
 关联：[[chain-term-cleaning-spr-fullname]]（同类型链级清扫）、[[wft02-eng-align-to-biz-structure]]（DP1 状态名来源）、[[biz-chain-summary-detail-framework]]（框架/详细分工定案）。

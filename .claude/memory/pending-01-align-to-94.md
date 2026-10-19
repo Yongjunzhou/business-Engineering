@@ -5,7 +5,7 @@ metadata:
   type: project
 ---
 
-**待办（人类定 2026-09-17：「后续要调整相关方需求中的功能需求部分，以符合当前的定义」）**——`10-eos-engineering/20-pl4eos/80-pl4eos-2-eosdata/01-eos-specified-requirements.md` 需按 [94 §2.1.1](../../10-eos-engineering/20-pl4eos/10-pl4eos-subpd-sysdev/10-wfsysdev-4-eos/94-eos-sys-dev-dbs.md) 重建。**启动须人类点头。**
+**待办（人类定 2026-09-17：「后续要调整相关方需求中的功能需求部分，以符合当前的定义」）**——`20-eos-engineering/20-pl4eos/80-pl4eos-2-eosdata/01-eos-specified-requirements.md` 需按 [94 §2.1.1](../../20-eos-engineering/20-pl4eos/10-pl4eos-subpd-sysdev/10-wfsysdev-4-eos/94-eos-sys-dev-dbs.md) 重建。**启动须人类点头。**
 
 ## 现行与目标的落差
 

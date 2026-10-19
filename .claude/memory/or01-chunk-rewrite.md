@@ -26,7 +26,7 @@ metadata:
 
 ## 落地文件
 
-- 新建 `10-eos-engineering/20-pl4eos/10-pl4eos-subpd-sysdev/00-presysdev-4-eos/eos-or01-chunk.md`（第 1 版，五章；成稿时名 `eos-or01-x2docbiz.md`）；SKILL 目录更名 `eos-ort01-chunk/` → `eos-or01-x2docbiz/` 并重排；删旧 `eos-ort01-chunk.md`。
+- 新建 `20-eos-engineering/20-pl4eos/10-pl4eos-subpd-sysdev/00-presysdev-4-eos/eos-or01-chunk.md`（第 1 版，五章；成稿时名 `eos-or01-x2docbiz.md`）；SKILL 目录更名 `eos-ort01-chunk/` → `eos-or01-x2docbiz/` 并重排；删旧 `eos-ort01-chunk.md`。
 - 94 §2.0.1 产出表与 §2.0.2 树／表／注；or00 文档与 SKILL 的 ① 名称与说明（① 由「业务对象闭环」改「需求文档」）。
 - 91 §A.5；presysdev `README.md` 整篇重写（旧「共享四步循环」模型已不适用）；`01-pl4eos-spec` 五处陈旧引用（§970 的旧链名、§1927、各步对照表、§15.7 适用范围、§15.8）；状态文档用途行。
 - 术语 `切分文件` → `需求文档` 只在 or00 文档／SKILL 与状态文档改了（共 5 处）。

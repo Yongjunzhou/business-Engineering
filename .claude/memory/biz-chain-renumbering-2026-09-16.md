@@ -24,6 +24,6 @@ metadata:
 
 **重编号把链带回了旧链的格局**：旧 `wft01-biz`（框架）/ `wft02-biz`（框架→方案）/ `wft03-biz`（系统需求）↔ 新 01a+01b / 02 / 03。
 
-**`eos-biz01cr-rbpl2rbpd.md` 正文已重写**（2026-09-16，第 1 版）——见 [[eos-design-landing-spec-93-refactor]] 第四会话节。**一处须知的改名事故**：上轮 `git mv` 把**旧 biz03**（`bpd2srb`）的正文搬到了本文件路径、把**旧 biz01cr**（`bpl2bpd`）删了，即改名配错了对；本次重写把内容整篇换掉，旧 biz03 正文自此只活在 Git（`git show 489e5b60:10-eos-engineering/20-pl4eos/.../eos-biz01cr-rbpl2rbpd.md`），将来建新 biz03 时从那里取。
+**`eos-biz01cr-rbpl2rbpd.md` 正文已重写**（2026-09-16，第 1 版）——见 [[eos-design-landing-spec-93-refactor]] 第四会话节。**一处须知的改名事故**：上轮 `git mv` 把**旧 biz03**（`bpd2srb`）的正文搬到了本文件路径、把**旧 biz01cr**（`bpl2bpd`）删了，即改名配错了对；本次重写把内容整篇换掉，旧 biz03 正文自此只活在 Git（`git show 489e5b60:20-eos-engineering/20-pl4eos/.../eos-biz01cr-rbpl2rbpd.md`），将来建新 biz03 时从那里取。
 
 关联 [[page-ui-four-levels]]、[[94-eos-sys-dev-dbs-tree-authority]]、[[eos-design-landing-spec-93-refactor]]、[[eos-wft-retirement-biz-pilots-canonical]]。

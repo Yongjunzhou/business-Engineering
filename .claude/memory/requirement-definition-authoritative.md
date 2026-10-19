@@ -5,7 +5,7 @@ metadata:
   type: reference
 ---
 
-**需求权威定义**（[通用设计规范 §1.2](../../10-eos-engineering/00-generalspec/01-generalspec-sysdev.md#12-需求详解)，2026-08-18 链级对齐锚）：
+**需求权威定义**（[通用设计规范 §1.2](../../20-eos-engineering/00-generalspec/01-generalspec-sysdev.md#12-需求详解)，2026-08-18 链级对齐锚）：
 
 - **需求 = 需求描述 + 性能指标**，两部分构成不可分割；**不可衡量则不成为需求**
 - **需求描述** = 功能或非功能需求的定性说明

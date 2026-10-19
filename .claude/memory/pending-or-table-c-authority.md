@@ -13,9 +13,9 @@ metadata:
 ## 问题
 
 「表C — 规范化的相关方需求基线条目处理进度」现落在状态文档
-`10-eos-engineering/20-pl4eos/80-pl4eos-2-eosdata/00-origin-requirement-materials/01-eos-sysdev-status.md`。
+`20-eos-engineering/20-pl4eos/80-pl4eos-2-eosdata/00-origin-requirement-materials/01-eos-sysdev-status.md`。
 待决的是：是否反转为由需求文档
-`10-eos-engineering/20-pl4eos/80-pl4eos-2-eosdata/01-eos-specified-requirements.md` 内嵌承载，
+`20-eos-engineering/20-pl4eos/80-pl4eos-2-eosdata/01-eos-specified-requirements.md` 内嵌承载，
 状态文档只留汇总视图。
 
 ## 支持反转的理由
@@ -29,7 +29,7 @@ metadata:
 
 ## 迁入核校结论
 
-原记引用的 `10-eos-engineering/20-pl4eos/80-pl4eos-2-eosdata/01-eos-original-requirements.md` 已更名为
+原记引用的 `20-eos-engineering/20-pl4eos/80-pl4eos-2-eosdata/01-eos-original-requirements.md` 已更名为
 `01-eos-specified-requirements.md`（v3.2），且其中**并无表C**——原记「需求文档中的表C为派生视图」
 的前提已不成立。启动前须重新判定该问题是否仍然存在。
 

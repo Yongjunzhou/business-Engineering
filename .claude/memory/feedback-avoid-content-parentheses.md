@@ -54,4 +54,4 @@ metadata:
 
 ## 已入规范（2026-09-15）
 
-三条规则已写进 **[00-doc-conventions.md](../../10-eos-engineering/00-generalspec/00-doc-conventions.md) v2.10**：**§8.9 括号与交叉引用：读者不必跳出当前句**、**§8.10 正文的时态：只写"现在是什么"**，两节均写明适用"本项目**所有文档**"；§十二 文档自检清单同步补三条检查项；[CLAUDE.md](../../CLAUDE.md) §七 文档规范挂指针（每会话加载，全仓生效）。此后写任何文档按 00-doc-conventions §8.9~§8.10 执行。
+三条规则已写进 **[00-doc-conventions.md](../../20-eos-engineering/00-generalspec/00-doc-conventions.md) v2.10**：**§8.9 括号与交叉引用：读者不必跳出当前句**、**§8.10 正文的时态：只写"现在是什么"**，两节均写明适用"本项目**所有文档**"；§十二 文档自检清单同步补三条检查项；[CLAUDE.md](../../CLAUDE.md) §七 文档规范挂指针（每会话加载，全仓生效）。此后写任何文档按 00-doc-conventions §8.9~§8.10 执行。

@@ -16,7 +16,7 @@ const path = require('path');
 const cp = require('child_process');
 
 const ROOT = path.resolve(__dirname, '../..');
-const SUB = path.join(ROOT, '01-系统工程研究');
+const SUB = path.join(ROOT, '10-系统工程研究');
 const MEM = path.join(SUB, 'claude-memory');
 const BOOK = path.join(SUB, '03-架构师是个怎样的物种');
 const WORKSTYLE = path.join(SUB, '.work-style');

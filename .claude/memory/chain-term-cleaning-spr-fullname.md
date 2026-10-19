@@ -10,7 +10,7 @@ metadata:
 **范围 55 文件**（EOS 设计子线 + 资产 + EOS 规格 + 通用规范 + CLAUDE.md）：
 - EOS 设计子线 `10-pl4eos-subpd-sysdev/` 33 文件：or00~03（主 v0.36/v0.63/v0.40/v0.67）+ wft01~06 三链主文档+SKILL（biz v3.34/v1.30、eng v10.15/v1.24、nfr v6.2/v1.11、wft02-biz v9.14、wft02-eng v10.13、wft03-biz v10.13、wft04-nfr v5.14、wft05-eng v10.15、wft06 v3.8）+ 91 规范 v5.49 + agile/reverse 任务定义
 - 资产 `80-pl4eos-2-eosdata/` 14 文件：01 v3.2/02 v2.5/08 v2.3/09 v2.2/10 v1.2/21 v1.2/22 v1.7/25 v2.7 + 状态表/材料/README
-- EOS 规格 `00-pl4eos-spec/` 2 文件（v1.8/v2.2）+ 通用规范 `10-eos-engineering/00-generalspec/` 3 文件（v2.4/v2.5/v2.9）+ CLAUDE.md
+- EOS 规格 `00-pl4eos-spec/` 2 文件（v1.8/v2.2）+ 通用规范 `20-eos-engineering/00-generalspec/` 3 文件（v2.4/v2.5/v2.9）+ CLAUDE.md
 
 **关键决策**：
 - **spr 缩写/节点 ID/文件名/脚本协议零迁移**——`spr`=Specified Stakeholder Requirements，缩写天然兼容；`spr-XXX` 节点 ID、`01-eos-specified-requirements.md` 文件名、read-node.sh 协议全部不动，只动中文术语

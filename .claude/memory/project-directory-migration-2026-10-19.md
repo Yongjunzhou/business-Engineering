@@ -1,6 +1,6 @@
 ---
 name: project-directory-migration-2026-10-19
-description: 目录重排——项目提升到顶层、主线降为 10-eos-engineering、AI 工具收进 .ai-agent（2026-10-19）
+description: 目录重排——项目提升到顶层、主线降为 20-eos-engineering、AI 工具收进 .ai-agent（2026-10-19）
 metadata:
   type: project
 ---
@@ -10,15 +10,15 @@ metadata:
 ## 新顶层
 
 ```
-00-candidate-businesses/       ← 原 100-subprojects/00；占 00 号，性质不是项目
-01-系统工程研究/       ← 原 100-subprojects/01
-02-AI部署研究/         ← 原 01-AI部署研究
-03-健康研究报告/       ← 原 02-健康研究报告
-04-现代思维工具研究/   ← 原 03-现代思维工具研究
-05-投资工程研究/       ← 原 04-投资工程研究
-10-eos-engineering/    ← 原顶层 00-generalspec/10-pl4pleos/20-pl4eos/30-eos/40-review
-.ai-agent/             ← tools/（原 .tools）、scripts/（原 .scripts）、work/（原 .work-ch8）
-.claude/               ← 保留：Claude Code 的固定发现点（设置/技能/记忆）
+00-candidate-businesses/  ← 原 100-subprojects/00；占 00 号，性质不是项目
+10-系统工程研究/          ← 原 100-subprojects/01
+11-AI部署研究/            ← 原 100-subprojects/02
+12-健康研究报告/          ← 原 100-subprojects/03
+13-现代思维工具研究/      ← 原 100-subprojects/04
+14-投资工程研究/          ← 原 100-subprojects/05
+20-eos-engineering/       ← 原顶层 00-generalspec/10-pl4pleos/20-pl4eos/30-eos/40-review
+.ai-agent/                ← tools/（原 .tools）、scripts/（原 .scripts）、work/（原 .work-ch8）
+.claude/                  ← 保留：Claude Code 的固定发现点（设置/技能/记忆）
 ```
 
 ## 关键约定

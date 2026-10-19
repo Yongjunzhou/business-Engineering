@@ -15,7 +15,7 @@
  * 【扫描范围】
  * - 仓库根下 `NN-<名>/` 的独立项目；
  * - `00-candidate-businesses/`（候选业务池，不是项目，但同样要求独立记忆）；
- * - 跳过 `10-eos-engineering/`——主线工程块使用仓库根 `.claude/memory/`。
+ * - 跳过 `20-eos-engineering/`——主线工程块使用仓库根 `.claude/memory/`。
  *
  * 【退出码】有缺口 → 1；全齐 → 0
  */
@@ -27,7 +27,7 @@ const path = require('path');
 
 const REPO_ROOT = path.resolve(__dirname, '../..');
 const QUIET = process.argv.includes('--quiet');
-const MAINLINE = '10-eos-engineering';
+const MAINLINE = '20-eos-engineering';
 const CANDIDATES = '00-candidate-businesses';
 
 // 一个条目合规 = claude-memory/ 存在 ＋ MEMORY.md 存在 ＋ 至少一份主记忆

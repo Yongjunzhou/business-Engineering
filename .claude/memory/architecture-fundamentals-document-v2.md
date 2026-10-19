@@ -5,7 +5,7 @@ metadata:
   type: project
 ---
 
-[07-generalspec-architecture-fundamentals.md](10-eos-engineering/00-generalspec/07-generalspec-architecture-fundamentals.md)，v4.0。
+[07-generalspec-architecture-fundamentals.md](20-eos-engineering/00-generalspec/07-generalspec-architecture-fundamentals.md)，v4.0。
 
 **十章结构**：
 - 第一章 基本术语（十节）：概念/术语/符号学 §1.1（Frege 三元：符号→涵义→指称）→ 系统 §1.2（四要素 + 系统类型 + 工程系统vs技术系统）→ 工程 §1.3（四要素定义/三对立面/系统工程=元工程/IPD 六阶段）→ 架构 §1.4（Fundamental 三判定 + 设计/演进双原则 = 免疫系统）→ 架构描述 §1.5（Frege 对应：架构描述/架构/系统）→ 架构决策 §1.6 → 相关方与关注点 §1.7（关注点天然冲突→权衡）→ 需求 §1.8（ISO 9000 定义/需要·期望/三形态/规定需求/需求方案相对）→ 术语关系 §1.9 → 设计链缩写 §1.10
@@ -23,4 +23,4 @@ metadata:
 
 **Why**: 从「概念是什么、工程是什么」出发，推至架构决策的不可逆性、视图完备性推导、质量把关（评审/验证/确认）、变与不变的治理（配置/基线/变更）。
 
-**How to apply**: 作为 `01-generalspec-sysdev.md` §1.1「架构」词条的扩展阅读。十章按角色选读：建立认知→§1~§3，决策方法→§4+§5，视图→§6，EA 4A→§7，BA 实践→§8，质量把关→§9，配置与变更→§10。v4.0 扩充来源见文档附录A（`10-eos-engineering/40-review/` 四份概念研习笔记）。
+**How to apply**: 作为 `01-generalspec-sysdev.md` §1.1「架构」词条的扩展阅读。十章按角色选读：建立认知→§1~§3，决策方法→§4+§5，视图→§6，EA 4A→§7，BA 实践→§8，质量把关→§9，配置与变更→§10。v4.0 扩充来源见文档附录A（`20-eos-engineering/40-review/` 四份概念研习笔记）。
