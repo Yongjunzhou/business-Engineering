@@ -83,6 +83,10 @@ metadata:
 
 **已知遗留（与本次改动无关）**：模板字体回退——`template/book.typ` 写死的 `SimSun／SimHei／Microsoft YaHei` 在 macOS 缺失，`typst` 每次编译都报 unknown font family；中文正常出字，但非印刷级字形。属既有待办，本轮未动。
 
+## 四之二 落库与推送（2026-10-19）
+
+本轮全部改动一次提交：**`fe86e46`「教材：致谢增设家人段并收口表达，成书重建」**，11 件（教材三件、build 中间件两件、成书产物三件、记忆三件含新增的本文件）。**双推已核**：GitHub `origin/master` 与 Gitee `gitee/master` 均为 `fe86e46`，本地同 hash，工作树干净。推送时远端跟踪 ref 因沙箱锁写入失败过一次，事后 `git fetch` 已补回（`gitee/master` 由 `e4df95b` 追平）。
+
 ## 五 校验记录
 
 - `preprocess.mjs` 重生成后 diff：`.book.md` 仅 `00-前言.book.md` 变动；`00-前言.typ` 只多该段（无 pandoc 版本 churn）。
