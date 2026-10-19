@@ -38,7 +38,7 @@ function findFile(prefix) {
   return hit;
 }
 const chapters = Array.from({ length: 18 }, (_, i) => `${String(i + 1).padStart(2, '0')}-第${i + 1}章`);
-const MANIFEST = ['00-序言', '00-前言', ...chapters, '00-后记', '19-附录'].map(prefix => [findFile(prefix), prefix]);
+const MANIFEST = ['00-序言', '00-前言', '00-书中产品与人物', ...chapters, '00-后记', '19-附录'].map(prefix => [findFile(prefix), prefix]);
 
 // ---------- 变换 ----------
 function stripVersionRecord(text) {
@@ -48,12 +48,12 @@ function stripVersionRecord(text) {
 }
 
 /**
- * 剔除首标题后的元信息引用块（仅序言/前言）——写作契约保留在源文件，不入书。
+ * 剔除首标题后的元信息引用块（仅序言/前言/后记/卷前速查）——写作契约保留在源文件，不入书。
  * 与「版本变更记录」同属写作元数据；章首导语（第4章/附录等给读者看）不受影响。
  * 结构：`# 标题` + 空行 + `> 元信息` + 空行 + `---`；替换后剩 `# 标题` + 空行 + `---`
  */
 function stripLeadingMetaQuote(text, base) {
-  if (base !== '00-序言' && base !== '00-前言' && base !== '00-后记') return text;
+  if (!['00-序言', '00-前言', '00-后记', '00-书中产品与人物'].includes(base)) return text;
   return text.replace(/^(# .*?)\n\n>.*?\n\n(?=---)/ms, '$1\n\n');
 }
 
@@ -149,7 +149,23 @@ function fitTableDashes(text) {
     }
     // 长列封顶 + 0.75 次幂软化，最少 3 条横线
     const ww = w.map(v => Math.pow(Math.min(Math.max(v, 4), 48), 0.75));
-    lines[i] = '|' + ww.map(v => '-'.repeat(Math.max(3, Math.round(v)))).join('|') + '|';
+    // ★ 2026-10-19 修（EPUB 表格没列宽）：pandoc 只在「表格总宽 > --columns（默认 72）」时才
+    // 按分隔行比例写出 <colgroup><col style="width:N%">；短表一律不给列宽，EPUB 里就只剩浏览器自动布局。
+    // 故把整行横线等比放大到 ≥ 80 列（比例不变、最少 3 条），让每一张表都带上列宽。
+    let dashes = ww.map(v => Math.max(3, Math.round(v)));
+    const MIN_WIDTH = 80;
+    const widthOf = d => d.reduce((a, b) => a + b, 0) + cellCount + 1;
+    if (widthOf(dashes) < MIN_WIDTH) {
+      const k = (MIN_WIDTH - cellCount - 1) / dashes.reduce((a, b) => a + b, 0);
+      dashes = dashes.map(v => Math.max(3, Math.round(v * k)));
+      // 取整后可能还差几列：补到最宽那一列，保证过 pandoc 的 72 列门槛
+      const gap = MIN_WIDTH - widthOf(dashes);
+      if (gap > 0) {
+        const w = dashes.indexOf(Math.max(...dashes));
+        dashes[w] += gap;
+      }
+    }
+    lines[i] = '|' + dashes.map(v => '-'.repeat(v)).join('|') + '|';
     n++;
   }
   if (n) console.log(`  表格列宽：按内容重写分隔行 ${n} 处`);

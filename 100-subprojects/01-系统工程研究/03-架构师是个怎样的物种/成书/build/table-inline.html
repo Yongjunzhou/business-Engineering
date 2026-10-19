@@ -1,0 +1,26 @@
+<style>
+/* 表格行内样式（2026-10-19 立）：随每个 xhtml 的 <head> 内嵌一份，
+   防"阅读器不加载外链 CSS"时表格退化成无框文字（用户报「只有文字没有表格」）。
+   与 assets/book.css 的表格段保持同值；改一处须同改另一处。 */
+table {
+  width: 100%;
+  max-width: 100%;
+  table-layout: auto;
+  font-size: .85em;
+  border-collapse: collapse;
+  border: 1px solid #7d7264;
+  margin: .6em 0;
+}
+thead { display: table-header-group; }
+tr { break-inside: avoid; page-break-inside: avoid; }
+th, td {
+  border: 1px solid #7d7264;
+  padding: 4px 6px;
+  vertical-align: top;
+}
+th {
+  background: #ece2cf;
+  font-weight: bold;
+  border-bottom: 2px solid #7d7264;
+}
+</style>

@@ -35,8 +35,9 @@
 
   // 中文正文：思源宋体、五号（10.5pt）、两端对齐、1.6 倍行距、段首两字缩进、段间留白
   // 行距 1.0em / 段间距 1.2em：段间必须明显松于段内行距。原为 leading 1.6em（偏松）、spacing 0.3em（比行距还紧、段落粘连）——2026-10-19 用户裁「段间要比段内松」「段内行距再小一些」后改定
+  // ★ 2026-10-19 用户裁「每一节的第一段的首行没有缩进」：typst 的 first-line-indent 默认只管"块内第二个及以后的段落"，标题后的首段不缩进；改 all: true，标题后首段同缩两字
   set text(font: SERIF, size: 10.5pt, lang: "zh", region: "cn")
-  set par(justify: true, leading: 1.0em, spacing: 1.2em, first-line-indent: 2em)
+  set par(justify: true, leading: 1.0em, spacing: 1.2em, first-line-indent: (amount: 2em, all: true))
   set heading(numbering: none)                     // 编号已内嵌在标题文本（范式丙）
   show list: set par(first-line-indent: 0em)       // 列表段不缩进
   show enum: set par(first-line-indent: 0em)       // 有序列表段不缩进
@@ -51,6 +52,13 @@
   show heading.where(level: 3): set text(font: SANS, size: 12pt, weight: 700)
   show heading.where(level: 4): set text(font: SANS, size: 10.5pt, weight: 700)
 
+  // ★ 2026-10-19 用户裁「节标题行与其首段首行间距过小」：标题上松下紧——上方留出与上文的分界、下方留足与首段的一口气
+  // （typst 默认 heading 间距约 0.6em/0.4em，A5 上节题与正文贴得太近）
+  show heading.where(level: 1): set block(above: 0em, below: 1.2em)
+  show heading.where(level: 2): set block(above: 1.9em, below: 1.0em)
+  show heading.where(level: 3): set block(above: 1.6em, below: 1.0em)
+  show heading.where(level: 4): set block(above: 1.2em, below: .8em)
+
   // 引用块（章首导语 + 概念卡）：朱红左竖线
   show quote: it => block(
     width: 100%,
@@ -60,7 +68,11 @@
   )
 
   // 表格：9pt 小字防溢出；列宽/对齐沿用 pandoc 默认（auto），整体居中由 figure 负责
-  show table: set text(size: 9pt)
+  // ★ 2026-10-19：表内开英文断字（附录 A 术语表、附录 D 文献表的英文术语列要靠它——
+  // 一行 "requirements engineering" 不断词就得吃掉 20% 版心）。正文仍按中文排，不受影响。
+  show table: set text(size: 9pt, hyphenate: true, lang: "en")
+  show table: set par(first-line-indent: 0em, justify: true, linebreaks: "simple")
+  show table: set par(first-line-indent: 0em)   // 表内不缩进（first-line-indent all:true 会带进来）
   show table.header: set text(weight: 700)
   show table.cell: set block(inset: (x: 2pt, y: 1.5pt))
 

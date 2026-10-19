@@ -71,11 +71,14 @@ typst compile main.typ 架构师-打印版.pdf
 
 echo "[6/6] pandoc → EPUB"
 args=(); while IFS= read -r base; do args+=("$OUT/$base.book.md"); done < "$OUT/manifest.txt"
+# ★ 2026-10-19：--include-in-header 把表格样式内嵌进每个 xhtml 的 <head>——
+# 有些阅读器不加载外链 CSS，表格会退化成"只有文字没有框"（用户报）
 pandoc -f markdown-smart -t epub3 "${args[@]}" \
   --metadata-file="$OUT/metadata.yaml" \
   --toc --toc-depth=3 --split-level=1 \
   --epub-cover-image="$OUT/assets/cover-800x1132.png" \
   --css="$OUT/assets/book.css" \
+  --include-in-header="$OUT/table-inline.html" \
   --resource-path="$OUT" \
   -o 架构师-电子版.epub
 

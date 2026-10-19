@@ -14,14 +14,14 @@ h1, h2, h3, h4 {
 h1 { page-break-before: always; font-size: 1.6em; margin: 1.2em 0 .8em; }
 /* 序二/序三 各自独立起页：heading 挂 .pagebreak → pandoc 传播到 section（真实元素级分页，EPUB 阅读器普遍支持） */
 section.pagebreak { break-before: page; page-break-before: always; }
-h2 { font-size: 1.3em; margin: 1.2em 0 .6em; }
-h3 { font-size: 1.1em; margin: 1em 0 .5em; }
-h4 { font-size: 1em; margin: .8em 0 .4em; }
+h2 { font-size: 1.3em; margin: 1.6em 0 .8em; }
+h3 { font-size: 1.1em; margin: 1.3em 0 .7em; }
+h4 { font-size: 1em; margin: 1em 0 .6em; }
 
 /* 正文：段首两字缩进 */
 p { text-indent: 2em; margin: .35em 0; }
-/* 块元素不缩进 */
-h1+p, h2+p, h3+p, h4+p, blockquote, li, pre, table, figure, figcaption, ul, ol {
+/* 块元素不缩进（★ 2026-10-19：标题后的首段不在此列——中文版式里节标题下首段照样缩两字，与 PDF 侧 first-line-indent all:true 同步） */
+blockquote, li, pre, table, figure, figcaption, ul, ol {
   text-indent: 0;
 }
 
@@ -34,19 +34,25 @@ blockquote {
 }
 blockquote table { width: 100%; }
 
-/* 表格：防溢出 + 细线 */
+/* 表格：防溢出 + 细线（★ 2026-10-19 加深：原 #d8d0c4 太浅，用户报「只有文字没有表格」；与 build/table-inline.html 同值） */
 table {
+  width: 100%;
   max-width: 100%;
+  table-layout: auto;
   font-size: .85em;
   border-collapse: collapse;
+  border: 1px solid #7d7264;
   margin: .6em 0;
 }
+/* 行不跨页断开（部分阅读器支持），表头在分页处尽量重复 */
+tr { break-inside: avoid; page-break-inside: avoid; }
+thead { display: table-header-group; }
 th, td {
-  border: 1px solid #d8d0c4;
-  padding: 3px 5px;
+  border: 1px solid #7d7264;
+  padding: 4px 6px;
   vertical-align: top;
 }
-th { background: #f5efe4; font-weight: bold; }
+th { background: #ece2cf; font-weight: bold; border-bottom: 2px solid #7d7264; }
 
 /* ASCII 概念档案盒：等宽 + 横向滚动 */
 pre {
