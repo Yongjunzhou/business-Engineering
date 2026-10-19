@@ -120,6 +120,8 @@ chmod +x .git/hooks/pre-push
 
 ## 四、新设备接入
 
+> 本节的可拷贝操作版本见 [`REPO-ONBOARDING.md`](REPO-ONBOARDING.md)；本节保留拓扑与验证要点。
+
 ### 4.1 检查旧克隆
 
 ```bash
