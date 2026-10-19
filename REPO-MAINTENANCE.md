@@ -10,7 +10,7 @@
 
 | 远端名 | 地址 | 用途 |
 |--------|------|------|
-| `origin` | `git@github.com:Yongjunzhou/business-engineering.git` | 新仓 GitHub，同时承担 fetch |
+| `origin` | `git@github.com:Yongjunzhou/business-Engineering.git` | 新仓 GitHub，同时承担 fetch |
 | `origin` 的第二个推送地址 | `git@gitee.com:mickeychow/business-engineering.git` | 新仓 Gitee，随 `origin` 一起推送 |
 | `gitee` | `git@gitee.com:mickeychow/business-engineering.git` | 新仓 Gitee，供 fetch 与状态核对 |
 | `archive-github` | `git@github.com:Yongjunzhou/AOS-system-design.git` | 旧仓 GitHub，私有档案 |
@@ -18,7 +18,7 @@
 
 ```mermaid
 flowchart LR
-  master["master<br/>当前版本"] -->|git push| gh["GitHub<br/>business-engineering"]
+  master["master<br/>当前版本"] -->|git push| gh["GitHub<br/>business-Engineering"]
   master -->|git push| gt["Gitee<br/>business-engineering"]
   archive["archive-master<br/>完整旧历史"] -.->|只读核对| oldgh["GitHub<br/>AOS-system-design · 私有"]
   archive -.->|只读核对| oldgt["Gitee<br/>AOS-system-design · 私有"]
@@ -64,7 +64,7 @@ git ls-remote gitee master
 ### 3.1 识别目标
 
 - 远端名含 `archive-` 的是旧仓，只读；
-- 推送输出里的仓库名不是 `business-engineering` 就立即停止；
+- 推送输出里的仓库名不是 `business-Engineering`（Gitee 侧为 `business-engineering`）就立即停止；
 - `git remote -v` 可随时核对完整映射。
 
 ### 3.2 禁止使用的命令
@@ -97,7 +97,7 @@ case "$url" in
 esac
 
 case "$url" in
-  *business-engineering*)
+  *business-[Ee]ngineering*)
     while read -r local_ref local_sha remote_ref remote_sha; do
       case "$local_ref" in
         refs/heads/archive-master|refs/tags/pre-skill-revision)
@@ -135,7 +135,7 @@ git log --oneline -3
 ```bash
 cd ..
 mv AOS AOS-旧仓档案-20261019
-git clone git@github.com:Yongjunzhou/business-engineering.git AOS
+git clone git@github.com:Yongjunzhou/business-Engineering.git AOS
 cd AOS
 ```
 
@@ -144,7 +144,7 @@ cd AOS
 ### 4.3 配置双推
 
 ```bash
-git remote set-url --add --push origin git@github.com:Yongjunzhou/business-engineering.git
+git remote set-url --add --push origin git@github.com:Yongjunzhou/business-Engineering.git
 git remote set-url --add --push origin git@gitee.com:mickeychow/business-engineering.git
 git branch -u origin/master master
 
