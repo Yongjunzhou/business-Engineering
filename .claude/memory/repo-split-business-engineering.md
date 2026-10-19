@@ -13,3 +13,7 @@ metadata:
 本地 `E:\mywork\AOS`：`master` = 新仓基线；`archive-master` = 旧仓 `f79cbb37`；远端 `origin`／`gitee` 指向新仓，`archive-github`／`archive-gitee` 指向旧仓。
 
 移出仓库的内容留在 `E:\mywork\AOS-移出仓外-20261019\`；`.tools/md2pdf/node_modules` 不再跟踪，由 `npm install` 重建。治理文档中指向 `90-hold/` 的三处归档说明已改指历史仓；`CLAUDE.md`／`AGENTS.md`／`README.md` 的目录树已删去 `90-hold/`、`80-sessions/` 两行。
+
+**2026-10-19 开工核验**：`git ls-remote` 四端与本地一致——新仓 GitHub 与 Gitee 均为 `a66d7585`，旧仓 GitHub 与 Gitee 均为 `f79cbb37`（＝本地 `archive-master`）；`.git/config` 的远端映射、双推送地址、`master` 上游与 `pre-push` 钩子均与 `REPO-MAINTENANCE.md` 相符。新仓当前 3 个提交、1241 个文件；旧仓快照 5989 个文件，差出的 4750 个全在既定排除范围（`90-hold/`、`80-sessions/`、两个"旧版归档"、技能 `temp/`、`node_modules/`），未丢其他内容。本地 `gitee/master` 跟踪 ref 曾停在 `ac81fc85`（`origin` 双推送只刷新 `origin/master`），`git fetch gitee` 后与 `a66d7585` 齐平——此后核对 Gitee 状态须先 fetch 再比。
+
+**待改（不越界）**：教材子项目记忆 `100-subprojects/01-系统工程研究/claude-memory/pending-出版前姓名合规与去标识化.md` 仍把"远端两个"记作旧仓 `AOS-system-design`，该条是现行状况表，已因拆分失真；改它须在该子项目内办。
