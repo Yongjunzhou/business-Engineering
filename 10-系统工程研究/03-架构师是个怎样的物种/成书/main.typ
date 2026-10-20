@@ -1,5 +1,5 @@
 // main.typ — 《架构师是个怎样的物种？》PDF 入口（位于 成书/ 根，路径相对根解析）
-// 组装：封面 → 版权页 → 序言 → 前言 → 卷前速查 → 目录 → 第1~18章 → 后记 → 附录 → 封底占位
+// 组装：封面 → 版权页 → 序言（可关：--input front=0）→ 前言 → 卷前速查 → 目录 → 第1~18章 → 后记 → 附录 → 封底占位
 #import "template/book.typ": book, SANS
 
 #show: book.with(book-title: "架构师是个怎样的物种？——从工程师到架构师")
@@ -28,7 +28,12 @@
 #pagebreak(weak: true)
 
 // ── 序言 / 前言 ──
-#include "build/00-序言.typ"
+// ★ 2026-10-20：序言可关——赠阅版编译时加 `--input front=0`（build.sh --no-front），
+// 序一~序三连同署名一并不进书；不传该参数即全书，行为与从前一致。
+#let withFront = sys.inputs.at("front", default: "1")
+#if withFront == "1" [
+  #include "build/00-序言.typ"
+]
 #include "build/00-前言.typ"
 
 // ── 卷前速查（2026-10-19 立：书中产品与人物；前言之后、目录之前）──

@@ -16,6 +16,14 @@ import sys
 import zipfile
 import xml.etree.ElementTree as ET
 
+# ★ 2026-10-20：Windows 控制台默认 GBK，脚本里的「✓」与中文路径会撞 UnicodeEncodeError，
+# 于是"体检全过"被误报成"体检不过"（build.sh 第 8 步据此 return 1）。故先强制 UTF-8 输出。
+for _s in (sys.stdout, sys.stderr):
+    try:
+        _s.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:  # noqa: BLE001 — 老 Python／被重定向时不支持 reconfigure，忽略即可
+        pass
+
 
 def check(path):
     problems = []

@@ -10,6 +10,11 @@
  *   4. 非编号/含「章首」的 ##/### 标题追加 {.unlisted}（附录除外）——双轨目录排除
  *   5. 输出 build/*.book.md + build/manifest.txt（顺序清单）
  *
+ * 版次（★ 2026-10-20 增）：
+ *   BOOK_EDITION=full（默认）  全书——序言／前言／卷前速查／18 章／后记／附录
+ *   BOOK_EDITION=colleague     赠阅版——去掉《序言》（序一~序三）与《前言》末的「致谢」节。
+ *                              源 .md 一字不动，仍在构建期剔除；两份产物共用一条管道。
+ *
  * 用法：node preprocess.mjs <SRC目录> <OUT目录>
  */
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, rmSync, statSync } from 'node:fs';
@@ -17,6 +22,12 @@ import { join, resolve } from 'node:path';
 
 const SRC = resolve(process.argv[2] || '..');   // 教材书/ 源目录
 const OUT = resolve(process.argv[3] || 'build'); // 输出目录
+
+// ★ 2026-10-20：版次。colleague＝赠阅版（去序言、去致谢），其余一律按全书出。
+const EDITION = (process.env.BOOK_EDITION || 'full').trim().toLowerCase();
+const COLLEAGUE = EDITION === 'colleague';
+if (COLLEAGUE) console.log('  版次：赠阅版（去《序言》与《致谢》）');
+
 
 for (const d of ['', '.mmd', 'figs', 'assets']) mkdirSync(join(OUT, d), { recursive: true });
 // 清空上次构建的 .mmd 与 .book.md（figs 保留已渲染图可复用）
@@ -38,12 +49,28 @@ function findFile(prefix) {
   return hit;
 }
 const chapters = Array.from({ length: 18 }, (_, i) => `${String(i + 1).padStart(2, '0')}-第${i + 1}章`);
-const MANIFEST = ['00-序言', '00-前言', '00-书中产品与人物', ...chapters, '00-后记', '19-附录'].map(prefix => [findFile(prefix), prefix]);
+// ★ 2026-10-20：赠阅版不装《序言》——三位外部的序（序一~序三）连同署名一并不进书。
+const PREFIXES = ['00-序言', '00-前言', '00-书中产品与人物', ...chapters, '00-后记', '19-附录']
+  .filter(p => !(COLLEAGUE && p === '00-序言'));
+const MANIFEST = PREFIXES.map(prefix => [findFile(prefix), prefix]);
 
 // ---------- 变换 ----------
 function stripVersionRecord(text) {
   const i = text.search(/^##\s*版本变更记录\s*$/m);
   if (i === -1) return text;
+  return text.slice(0, i).replace(/\n---\s*\n?$/, '').replace(/\s+$/, '\n');
+}
+
+/**
+ * ★ 2026-10-20（赠阅版）：去掉《前言》末尾的「## 致谢」节。
+ * 致谢是全书最后一段自述、点名谢了 17 位真人——同事传阅不必带；
+ * 且它挂在 00-前言.md 里（不是独立文件），故按标题切到文末，并收掉切剩下的分隔线。
+ * 全书只有 00-前言.md 有这一节，其余文件无匹配、原样返回。
+ */
+function stripAcknowledgments(text) {
+  const i = text.search(/^##\s*致谢\s*$/m);
+  if (i === -1) return text;
+  console.log('  赠阅版：剔除「## 致谢」节');
   return text.slice(0, i).replace(/\n---\s*\n?$/, '').replace(/\s+$/, '\n');
 }
 
@@ -177,6 +204,7 @@ const manifestRows = [];
 for (const [srcName, base] of MANIFEST) {
   let text = readFileSync(join(SRC, srcName), 'utf8');
   text = stripVersionRecord(text);
+  if (COLLEAGUE) text = stripAcknowledgments(text);
   text = stripLeadingMetaQuote(text, base);
   const chap = base.match(/^(\d+)/)?.[1] ?? '00';
   text = extractMermaid(text, chap);
