@@ -22,7 +22,7 @@ A1（元流水线）和 A2（EOS 流水线）规范全面从"四类构件"框架
 
 ## 涉及文件
 
-- `20-eos-engineering/10-pl4pleos/00-pl4pleos-spec/01-pl4pleos-spec-sysdev.md`（A1 规范）
+- `20-eos-engineering/10-pl4pl/00-pl4pl-spec/01-pl4pl-spec-sysdev.md`（A1 规范）
 - `20-eos-engineering/20-pl4eos/00-pl4eos-spec/01-pl4eos-spec-sysdev.md`（A2 规范）
 
 ## 涉及章节

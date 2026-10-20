@@ -4,7 +4,7 @@
 
 ## 📚 本目录文档
 
-### 01-pl4pleos-spec-sysdev.md
+### 01-pl4pl-spec-sysdev.md
 **元流水线系统设计规范**（合并版）
 
 **第一部分（§零~§六）**：继承原设计准则
@@ -22,22 +22,22 @@
 
 > **合并说明**：原 `01-eos-pipeline-sysdev-standards.md`（设计准则）和 `02-eos-pipeline-sysdev-4modes-guide.md`（4模式指南）已合并为本文件。旧文档归档于历史仓 `AOS-system-design` 的 `90-hold/00-archived-spec-docs/pl4eos/`。
 
-### 02-pl4pleos-spec-comdev.md
+### 02-pl4pl-spec-comdev.md
 **构件开发规范**
 
 待编写。
 
-### 03-pl4pleos-spec-sysint.md
+### 03-pl4pl-spec-sysint.md
 **集成交付规范**
 
 待编写。
 
-### 04-pl4pleos-spec-sysops.md
+### 04-pl4pl-spec-sysops.md
 **系统运维规范**
 
 待编写。
 
-### 06-pl4pleos-glossary.md
+### 06-pl4pl-glossary.md
 **系统设计英文术语对照表**
 
 - 核心术语对照（文档类型、5层结构、需求类型等）
@@ -64,12 +64,12 @@
 - 各层条目格式和编号规则 → 通用设计规范 §五（系统设计过程）对应步骤
 - 常见错误和 FAQ → §六
 - 检查清单 → 通用设计规范 §七 + 本文 §十四
-- 术语对照 → 06-pl4pleos-glossary.md
+- 术语对照 → 06-pl4pl-glossary.md
 
 ## 🔗 相关文档
 
 - [通用设计规范](../../00-generalspec/01-generalspec-sysdev.md)
-- [流水线运行数据](../../10-pl4pleos/80-pl4pleos-2-pl4eosdata/README.md)
+- [流水线运行数据](../../10-pl4pl/80-pl4pl-2-pl4eosdata/README.md)
 
 ---
 

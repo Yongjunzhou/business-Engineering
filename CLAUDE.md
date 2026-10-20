@@ -18,7 +18,7 @@ AOS 是一个**业务工程化项目集**：为各类业务建立基于 AI 的�
 |------|------|---------|
 | **企业运营体系（EOS）** | 被构建和运维的目标系统——企业运营体系的**信息化形态**（流水线类产品），覆盖市场、研发、生产、售后和管理等业务。当前实现形态为可配置平台 | `20-eos-engineering/20-pl4eos/`（设计），`20-eos-engineering/30-eos/`（产品本体） |
 | **EOS 流水线** | 服务于 EOS 全生命周期的流水线，由**设计线**（系统设计）、**开发线**（组件开发）、**集成线**（集成交付）、**运维线**（系统运维）四子线组成。当前仅设计线已完成 | `20-eos-engineering/20-pl4eos/`（流水线构件） |
-| **元流水线** | 用于设计 EOS 流水线的流水线。按四阶段开发：系统设计（已完成）、构件开发/集成交付/系统运维（待扩展） | `20-eos-engineering/10-pl4pleos/` |
+| **元流水线** | 开发流水线的流水线；当前输出产品为 EOS 流水线。按四阶段开发：系统设计（已完成）、构件开发/集成交付/系统运维（待扩展） | `20-eos-engineering/10-pl4pl/` |
 
 ### 三层构造链
 
@@ -29,7 +29,7 @@ AOS 是一个**业务工程化项目集**：为各类业务建立基于 AI 的�
 
 | 层 | 内容 | 产出位置 |
 |----|------|---------|
-| **第1层** | 元流水线构建：构建元流水线自身 + 用其设计 EOS 流水线 | `20-eos-engineering/10-pl4pleos/` |
+| **第1层** | 元流水线构建：构建元流水线自身 + 用其设计 EOS 流水线 | `20-eos-engineering/10-pl4pl/` |
 | **第2层** | EOS 流水线构建：展开为各子线的操作规程（准则/指南/AI 辅助/任务定义） | `20-eos-engineering/20-pl4eos/10-pl4eos-subpd-sysdev/` |
 | **第3层** | EOS 构建与运维：使用 EOS 流水线做系统设计（当前）、开发、集成、运维 | `20-eos-engineering/20-pl4eos/` |
 
@@ -62,18 +62,18 @@ AOS 是一个**业务工程化项目集**：为各类业务建立基于 AI 的�
 │   ├── 06-generalspec-glossary.md
 │   ├── 07-generalspec-architecture-fundamentals.pdf
 │   └── README.md
-├── 10-pl4pleos/                      #   元流水线——产出 EOS 流水线的流水线
-│   ├── 00-pl4pleos-spec/
-│   ├── 10-pl4pleos-subpd-sysdev/
+├── 10-pl4pl/                          #   元流水线——产出 EOS 流水线的流水线
+│   ├── 00-pl4pl-spec/
+│   ├── 10-pl4pl-subpd-sysdev/
 │   │   ├── 00-presysdev-4-pl4eos/
 │   │   ├── 10-wfsysdev-4-pl4eos/
 │   │   ├── 20-resysdev-4-pl4eos/
 │   │   ├── 30-agsysdev-4-pl4eos/
 │   │   └── 40-opsysdev-4-pl4eos/
-│   ├── 20-pl4pleos-subpd-comdev/     #   构件开发子线（待扩展）
-│   ├── 30-pl4pleos-subpd-sysint/     #   集成交付子线（待扩展）
-│   ├── 40-pl4pleos-subpd-sysops/     #   系统运维子线（待扩展）
-│   └── 80-pl4pleos-2-pl4eosdata/
+│   ├── 20-pl4pl-subpd-comdev/         #   构件开发子线（待扩展）
+│   ├── 30-pl4pl-subpd-sysint/         #   集成交付子线（待扩展）
+│   ├── 40-pl4pl-subpd-sysops/         #   系统运维子线（待扩展）
+│   └── 80-pl4pl-2-pl4eosdata/
 ├── 20-pl4eos/                        #   EOS 流水线——产出 EOS 的流水线
 │   ├── 00-pl4eos-spec/
 │   ├── 10-pl4eos-subpd-sysdev/
@@ -109,9 +109,9 @@ AOS 是一个**业务工程化项目集**：为各类业务建立基于 AI 的�
 - [通用术语对照表 v2.5](20-eos-engineering/00-generalspec/06-generalspec-glossary.md) — 核心术语英中对照
 - [架构基础概念与方法 v3.0](20-eos-engineering/00-generalspec/07-generalspec-architecture-fundamentals.pdf) — 八章+两附录：系统/架构/架构决策/架构视图的定义与原理、设计链四层决策全景、业务架构实践
 - [EOS 流水线系统设计规范 v2.5](20-eos-engineering/20-pl4eos/00-pl4eos-spec/01-pl4eos-spec-sysdev.md) — EOS 产品特有设计规则（平台链/业务链、三层工作层面、端到端业务框架）+ 四种设计模式
-- [元流水线系统设计规范 v1.0（精简版）](20-eos-engineering/10-pl4pleos/00-pl4pleos-spec/01-pl4pleos-spec-sysdev.md)
+- [元流水线系统设计规范 v1.0（精简版）](20-eos-engineering/10-pl4pl/00-pl4pl-spec/01-pl4pl-spec-sysdev.md)
 
-元流水线的操作规程（任务定义）位于 `20-eos-engineering/10-pl4pleos/10-pl4pleos-subpd-sysdev/` 各 Skill 目录下；EOS 流水线的任务定义位于 `20-eos-engineering/20-pl4eos/10-pl4eos-subpd-sysdev/` 各 Skill 目录下。
+元流水线的操作规程（任务定义）位于 `20-eos-engineering/10-pl4pl/10-pl4pl-subpd-sysdev/` 各 Skill 目录下；EOS 流水线的任务定义位于 `20-eos-engineering/20-pl4eos/10-pl4eos-subpd-sysdev/` 各 Skill 目录下。
 
 ---
 
@@ -133,7 +133,7 @@ AOS 是一个**业务工程化项目集**：为各类业务建立基于 AI 的�
 
 | 输出产品 | 数据目录 | 文件命名 |
 |---------|---------|---------|
-| EOS 流水线（pl4eos） | `20-eos-engineering/10-pl4pleos/80-pl4pleos-2-pl4eosdata/` | `01-pl4eos-original-requirements.md` … `09-pl4eos-sysdev-verification-report.md` |
+| EOS 流水线（pl4eos） | `20-eos-engineering/10-pl4pl/80-pl4pl-2-pl4eosdata/` | `01-pl4eos-original-requirements.md` … `09-pl4eos-sysdev-verification-report.md` |
 | EOS 本体 | `20-eos-engineering/20-pl4eos/80-pl4eos-2-eosdata/` | `01-eos-specified-requirements.md` … `09-eos-sysdev-verification-report.md`；另有 21、22、24、25、27 五份跨层资产文档（23、26 已取消） |
 
 | 槽位 | EOS 流水线侧 | EOS 本体侧 |
