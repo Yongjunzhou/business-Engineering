@@ -9,10 +9,29 @@
   随机选组 · 六面骰
   用途：流程工程师培训课堂随机选组工具。
   规则：单击骰子开始摇，再单击立即停止；正面点数（0~5）即结果，
-        0 = 空白（无组，重摇）。
-  传统六面体骰子，白色骰面 + 黑点（1~5 按标准骰布局，0 为空白面）。
-  结果面始终转正对观众（正面的点数）。画面只有骰子；隐藏快捷键：M = 静音。
+        0 = 空白（无组，重摇），5 为最大点数。
+  画面只有骰子；隐藏快捷键：M = 静音。
   单文件、零依赖，双击即用，可投屏。
+
+  【图形为什么这么建】
+  旧版是 6 张带圆角（border-radius:16px）的贴片拼成一个方盒，每张面在四个角上
+  都被切掉一块，于是 8 个顶点处三个面同时缺角 —— 从那里能看到背景，就是"缝"；
+  虚线框/光晕只能盖住，不能消除。
+
+  新版把骰子建成一个真正的「倒角立方体」：
+      6 个面  ×  向内收进 BEV（得到 8 个顶点处的净空间）
+    + 12 条棱的倒角面（恰好填满两个面之间）
+    + 8 个顶点的三角面（恰好填满三条棱倒角之间）
+  这 26 块的顶点坐标全部由同一套参数（H / BEV / A）推导，边界逐点共享，
+  所以是闭合曲面：任何角度都不存在能被看穿的缝隙。
+
+  在此之上做三件事让它"丝滑"：
+  1) 倒角面宽度方向各探出 DELTA，塞到相邻面下面 —— 干掉逐块光栅化留下的透底细线；
+  2) 顶点块的轮廓放大 KG 倍，由它自己压住与三条倒角之间的亚像素缝；
+  3) 顶点块用 conic 扇形渐变：扇区朝三条棱、分界朝三个角，颜色绕顶点连续过渡，
+     于是棱上的高光会"绕着顶点转过去"，顶点读起来是圆的，而不是一块小平板。
+  倒角面上再铺一道沿棱方向的高光渐变，模拟真实骰子的圆边受光。
+  可调旋钮：BEV（棱越宽越软）、DELTA（叠压量）、KG（顶点块大小）。
 -->
 <style>
   *{ box-sizing:border-box; margin:0; padding:0; }
@@ -46,17 +65,6 @@
   }
   .stage.rolling .shadow{ transform:translateX(-50%) scale(1.22); opacity:.55; }
 
-  /* 环境光晕：把面与面在顶点交汇的小缝隙融成柔和光影，而不是露出深色裂纹 */
-  .halo{
-    position:absolute; inset:0; margin:auto;
-    width:175%; height:175%;
-    border-radius:50%;
-    background:radial-gradient(closest-side, rgba(241,233,219,.34), transparent 68%);
-    filter:blur(8px);
-    z-index:0;
-    pointer-events:none;
-  }
-
   .scene{
     position:absolute; inset:0;
     perspective:950px;
@@ -65,16 +73,18 @@
   }
   .stage.landing .scene{ animation:landpop .32s ease-out; }
 
-  /* ============ 3D 六面骰 ============ */
+  /* ============ 3D 倒角骰 ============ */
   .cube{
     position:relative; width:0; height:0;
     transform-style:preserve-3d;
   }
-  .face{
-    position:absolute; width:150px; height:150px; left:-75px; top:-75px;
-    border-radius:16px;
+  /* 26 块共用：位置与尺寸由 JS 依据同一套几何参数写入 */
+  .face, .bevel, .corner{
+    position:absolute;
     backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
   }
+
   .pips{
     position:absolute; inset:0;
     display:grid;
@@ -82,25 +92,40 @@
       "tl tc tr"
       "ml mc mr"
       "bl bc br";
-    padding:14%;
+    /* 12.5% 留边 → 每格正好 25% 面宽 → 点中心落在 25%/50%/75%，
+       这是标准骰子的点位；点的直径再取格子的 64%（≈ 面宽的 16%） */
+    padding:12.5%;
   }
-  .face[data-value="1"]{ --dc1:#ff7a6b; --dc2:#d63031; }
-  .face[data-value="2"]{ --dc1:#4be093; --dc2:#159457; }
-  .face[data-value="3"]{ --dc1:#ffc04f; --dc2:#f0740f; }
-  .face[data-value="4"]{ --dc1:#5eb1ff; --dc2:#2a5fd0; }
-  .face[data-value="5"]{ --dc1:#b06bff; --dc2:#6c35c9; }
+  .face[data-value="1"]{ --dc1:#ff8a76; --dc2:#d63031; }
+  .face[data-value="2"]{ --dc1:#62e79d; --dc2:#159457; }
+  .face[data-value="3"]{ --dc1:#ffc659; --dc2:#ef7408; }
+  .face[data-value="4"]{ --dc1:#6bb8ff; --dc2:#2a5fd0; }
+  .face[data-value="5"]{ --dc1:#bb7bff; --dc2:#6c35c9; }
+  /* 点与面的结合部：外落影 + 内高光，点看起来是"嵌进"骰面而不是贴纸 */
   .dot{
-    width:40%; aspect-ratio:1;
+    width:64%; aspect-ratio:1;
     align-self:center; justify-self:center;
     border-radius:50%;
-    background:radial-gradient(circle at 35% 30%, var(--dc1, #4a5160), var(--dc2, #141823) 72%);
-    box-shadow:0 1px 2px rgba(255,255,255,.3) inset;
+    background:
+      radial-gradient(circle at 32% 26%, rgba(255,255,255,.55), rgba(255,255,255,0) 42%),
+      radial-gradient(circle at 36% 30%, var(--dc1, #4a5160), var(--dc2, #141823) 74%);
+    box-shadow:
+      0 1px 2px rgba(74,60,40,.30),
+      0 -1px 1px rgba(255,255,255,.35) inset,
+      0 1px 2px rgba(0,0,0,.16) inset;
   }
   .smile{
     position:absolute; inset:0; margin:auto;
     width:62%; height:62%;
   }
-  .face.hit{ animation:faceGlow 1.15s ease-out; }
+  /* 命中高光：独立覆盖层，避免改动面的几何（不再用 face 上的 box-shadow） */
+  .glow{
+    position:absolute; inset:7%;
+    border-radius:18px;
+    opacity:0;
+    pointer-events:none;
+  }
+  .face.hit .glow{ animation:faceGlow 1.15s ease-out; }
 
   @keyframes landpop{
     0%   { transform:scale(1.15); }
@@ -108,14 +133,14 @@
     100% { transform:scale(1); }
   }
   @keyframes faceGlow{
-    0%   { box-shadow:0 0 0 0 rgba(255,205,110,0); }
-    25%  { box-shadow:0 0 0 14px rgba(255,205,110,.35), 0 0 34px 10px rgba(255,205,110,.25); }
-    100% { box-shadow:0 0 0 0 rgba(255,205,110,0); }
+    0%   { opacity:0; box-shadow:0 0 0 0 rgba(255,205,110,0); }
+    22%  { opacity:1; box-shadow:0 0 26px 10px rgba(255,205,110,.40), inset 0 0 46px 10px rgba(255,238,190,.55); }
+    100% { opacity:0; box-shadow:0 0 10px 2px rgba(255,205,110,0), inset 0 0 40px 8px rgba(255,238,190,0); }
   }
 
   @media (prefers-reduced-motion: reduce){
     .shadow, .stage.rolling .shadow{ transition:none; }
-    .stage.landing .scene, .face.hit{ animation:none; }
+    .stage.landing .scene, .face.hit .glow{ animation:none; }
   }
 </style>
 </head>
@@ -124,7 +149,6 @@
 <div class="stage" id="stage">
   <div class="fit" id="fit">
     <div class="shadow" id="shadow"></div>
-    <div class="halo"></div>
     <div class="scene">
       <div class="cube" id="cube"></div>
     </div>
@@ -139,40 +163,91 @@
   const fitEl = document.getElementById('fit');
   const cube  = document.getElementById('cube');
 
-  // ---------- 六面几何：点数 0~5（相对面相加 = 5） ----------
-  // 落定姿态：静止俯视 tilt = rotateX(-10) rotateY(-16)，再转 bring 使结果面正对观众
-  // 经 3D 数学验证：六面朝前时点数全部正立、不镜像，无需预转。
-  const L = 150;   // 边长（px）
-  // 各面按位置平面着色（顶受光最亮 → 前 → 侧 → 底最暗），边缘由明暗过渡定义
-  const FACES = [
-    { value:0, t:'rotateY(0deg)    translateZ(75px)', bg:'linear-gradient(180deg,#f7f2e7,#ebe5d8)' },
-    { value:5, t:'rotateY(180deg)  translateZ(75px)', bg:'linear-gradient(180deg,#f1ebde,#e3dccd)' },
-    { value:1, t:'rotateX(90deg)   translateZ(75px)', bg:'linear-gradient(180deg,#faf6ec,#efe9d9)' },
-    { value:4, t:'rotateX(-90deg)  translateZ(75px)', bg:'linear-gradient(180deg,#e2dbcb,#d4cdbc)' },
-    { value:2, t:'rotateY(90deg)   translateZ(75px)', bg:'linear-gradient(180deg,#ece6d8,#ded7c7)' },
-    { value:3, t:'rotateY(-90deg)  translateZ(75px)', bg:'linear-gradient(180deg,#ece6d8,#ded7c7)' },
+  /* ===================== 几何参数 ===================== */
+  const H   = 75;                    // 骰子半边长：整体大小不变
+  const BEV = 7;                     // 倒角宽度（每面沿轴向收进量）
+  const A   = H - BEV;               // 面的半边长
+  const FACE= A * 2;                 // 面的边长
+  const BW  = BEV * Math.SQRT2;      // 倒角面自身的宽度
+  // 光栅化叠压量：倒角面在宽度方向各探出 DELTA，塞进相邻的面下面；
+  // 面、棱各自独立光栅化，共享边上原本会留一道透底的抗锯齿细线。
+  const DELTA = 1.3;
+  // 顶点块的轮廓放大倍数：内切半径≈2.9px，放大 1.28 ≈ 外扩 0.8px，
+  // 由它自己盖住与三条倒角之间的亚像素缝。
+  const KG    = 1.28;
+  /* 光照方向：左上前方（CSS 坐标 y 向下，故「上」= -y） */
+  const LIGHT = vnorm(v3(-0.30, -0.86, 0.42));
+  const DARK  = [201,193,175];       // 背光色
+  const LITE  = [253,250,244];       // 迎光色
+  const AX    = [v3(1,0,0), v3(0,1,0), v3(0,0,1)];
+
+  /* ===================== 三维小工具 ===================== */
+  function v3(x,y,z){ return {x:x,y:y,z:z}; }
+  function vadd(a,b){ return v3(a.x+b.x, a.y+b.y, a.z+b.z); }
+  function vmul(a,s){ return v3(a.x*s, a.y*s, a.z*s); }
+  function vdot(a,b){ return a.x*b.x + a.y*b.y + a.z*b.z; }
+  function vcross(a,b){ return v3(a.y*b.z-a.z*b.y, a.z*b.x-a.x*b.z, a.x*b.y-a.y*b.x); }
+  function vnorm(a){ const l = Math.sqrt(vdot(a,a)) || 1; return v3(a.x/l, a.y/l, a.z/l); }
+  function vavg(a,b,c,d){ return v3((a.x+b.x+c.x+d.x)/4,(a.y+b.y+c.y+d.y)/4,(a.z+b.z+c.z+d.z)/4); }
+  function comp(v,i){ return i === 0 ? v.x : (i === 1 ? v.y : v.z); }
+  /* 按轴下标填坐标，便于"以某轴为法向"地构造顶点 */
+  function vaxis(iA,vA,iB,vB,iC,vC){ const c=[0,0,0]; c[iA]=vA; c[iB]=vB; c[iC]=vC; return v3(c[0],c[1],c[2]); }
+
+  function clampf(x,a,b){ return x < a ? a : (x > b ? b : x); }
+  function mixc(a,b,t){ t = clampf(t,0,1); return [
+    Math.round(a[0]+(b[0]-a[0])*t),
+    Math.round(a[1]+(b[1]-a[1])*t),
+    Math.round(a[2]+(b[2]-a[2])*t)
+  ]; }
+  function rgb(c){ return 'rgb('+c[0]+','+c[1]+','+c[2]+')'; }
+  function shade(t){ return mixc(DARK, LITE, t); }          // 明暗系数 → 奶油白
+  function toneOf(n){ return clampf(0.58 + 0.45 * vdot(n, LIGHT), 0.06, 1); }
+  function litOf(n){ return clampf(vdot(n, LIGHT), 0, 1); }
+
+  const f4 = function(n){ return Math.round(n * 1e4) / 1e4; };
+  /* 把「局部坐标系的 x/y/z 轴 + 中心点」写成 matrix3d */
+  function frameMatrix(center, ex, ey, ez){
+    return 'matrix3d(' + [
+      f4(ex.x), f4(ex.y), f4(ex.z), 0,
+      f4(ey.x), f4(ey.y), f4(ey.z), 0,
+      f4(ez.x), f4(ez.y), f4(ez.z), 0,
+      f4(center.x), f4(center.y), f4(center.z), 1
+    ].join(',') + ')';
+  }
+
+  /* ===================== 六面定义 ===================== */
+  // 面的贴图朝向沿用原实现（保证点数正立、不镜像）；
+  // 只有面的尺寸改成 2A，并由同一个 translateZ(H) 定位。
+  const FACES_DEF = [
+    { value:0, ax:2, s:+1, t:'rotateY(0deg)   translateZ('+H+'px)' },
+    { value:5, ax:2, s:-1, t:'rotateY(180deg) translateZ('+H+'px)' },
+    { value:1, ax:1, s:-1, t:'rotateX(90deg)  translateZ('+H+'px)' },
+    { value:4, ax:1, s:+1, t:'rotateX(-90deg) translateZ('+H+'px)' },
+    { value:2, ax:0, s:+1, t:'rotateY(90deg)  translateZ('+H+'px)' },
+    { value:3, ax:0, s:-1, t:'rotateY(-90deg) translateZ('+H+'px)' }
   ];
+  // 落定姿态（与旧版一致，仍能保证结果面正对观众）
   const REST = {
     0: 'rotateX(-10deg) rotateY(-16deg)',
     5: 'rotateX(-10deg) rotateY(-16deg) rotateY(180deg)',
     1: 'rotateX(-10deg) rotateY(-16deg) rotateX(-90deg)',
     4: 'rotateX(-10deg) rotateY(-16deg) rotateX(90deg)',
     2: 'rotateX(-10deg) rotateY(-16deg) rotateY(-90deg)',
-    3: 'rotateX(-10deg) rotateY(-16deg) rotateY(90deg)',
+    3: 'rotateX(-10deg) rotateY(-16deg) rotateY(90deg)'
   };
   // 标准骰点数布局（3×3 网格：tl tc tr / ml mc mr / bl bc br）
   const PIPS = {
     0: [],
     1: ['mc'],
-    2: ['tl', 'br'],
-    3: ['tl', 'mc', 'br'],
-    4: ['tl', 'tr', 'bl', 'br'],
-    5: ['tl', 'tr', 'mc', 'bl', 'br'],
+    2: ['tl','br'],
+    3: ['tl','mc','br'],
+    4: ['tl','tr','bl','br'],
+    5: ['tl','tr','mc','bl','br']
   };
 
   const facesByValue = {};
 
-  // 无点的面（0）：微笑脸
+  // 0 面：微笑脸
   const SMILE = '<svg class="smile" viewBox="0 0 100 100" aria-hidden="true">' +
     '<defs><radialGradient id="smileGrad" cx="0.35" cy="0.3" r="0.9">' +
     '<stop offset="0" stop-color="#ffe05a"/><stop offset="1" stop-color="#f5b400"/>' +
@@ -183,18 +258,65 @@
     '<path d="M28 54 Q50 76 72 54" fill="none" stroke="#3a3f4b" stroke-width="6" stroke-linecap="round"/>' +
     '</svg>';
 
+  /* ===================== 明暗贴图 ===================== */
+  function faceBg(t){
+    const hi = shade(clampf(t + 0.06, 0, 1));
+    const lo = shade(clampf(t - 0.10, 0, 1));
+    return 'radial-gradient(140% 140% at 26% 14%, rgba(255,255,255,.30), rgba(255,255,255,0) 62%),' +
+           'linear-gradient(178deg,'+rgb(hi)+','+rgb(lo)+')';
+  }
+  // t0 = 局部 -y 侧相邻面的明暗，t1 = 局部 +y 侧；中间一道高光 = 圆边受光
+  function bevelBg(t0, t1, lit){
+    const e0  = shade(clampf(t0 - 0.020, 0, 1));
+    const e1  = shade(clampf(t1 - 0.020, 0, 1));
+    const mid = shade(clampf((t0 + t1) / 2 + 0.02 + 0.04 * lit, 0, 1));
+    const spec= shade(clampf(Math.max(t0, t1) + 0.12 + 0.40 * lit, 0, 1));
+    return 'linear-gradient(180deg,'+rgb(e0)+' 0%,'+rgb(mid)+' 40%,'+
+           rgb(spec)+' 50%,'+rgb(mid)+' 60%,'+rgb(e1)+' 100%)';
+  }
+  // 顶点：把三条倒角的高光「接」过去 —— 绕顶点做扇形过渡（conic），
+  // 扇区朝三条倒角、分界朝三个角，颜色绕一圈连续，读起来就是圆角受光。
+  // stops: [[角度, 明暗], ...]；cx/cy = 顶点重心在元素内的百分比位置
+  function cornerBg(stops, cx, cy, hi){
+    stops.sort(function(a, b){ return a[0] - b[0]; });
+    const parts = stops.map(function(s){
+      return rgb(shade(clampf(s[1], 0, 1))) + ' ' + s[0].toFixed(1) + 'deg';
+    });
+    parts.push(rgb(shade(clampf(stops[0][1], 0, 1))) + ' ' + (stops[0][0] + 360).toFixed(1) + 'deg');
+    return 'radial-gradient(circle at ' + cx.toFixed(1) + '% ' + cy.toFixed(1) + '%,' +
+             ' rgba(255,255,255,' + hi.toFixed(3) + '), rgba(255,255,255,0) 62%),' +
+           'conic-gradient(from 0deg at ' + cx.toFixed(1) + '% ' + cy.toFixed(1) + '%,' +
+             parts.join(',') + ')';
+  }
+
+  /* ===================== 建骰子 ===================== */
+  function el(tag, w, h){
+    const d = document.createElement(tag);
+    d.style.position = 'absolute';
+    d.style.width  = f4(w) + 'px';
+    d.style.height = f4(h) + 'px';
+    d.style.left   = f4(-w/2) + 'px';
+    d.style.top    = f4(-h/2) + 'px';
+    return d;
+  }
+
   function buildCube(){
-    FACES.forEach(function(f){
-      const face = document.createElement('div');
+    const frag = document.createDocumentFragment();
+
+    /* ---------- 1) 6 个面 ---------- */
+    FACES_DEF.forEach(function(f){
+      const n = v3(AX[f.ax].x*f.s, AX[f.ax].y*f.s, AX[f.ax].z*f.s);
+      const t = toneOf(n);
+
+      const face = el('div', FACE, FACE);
       face.className = 'face';
       face.setAttribute('data-value', f.value);
-      face.style.width = face.style.height = L + 'px';
-      face.style.left = face.style.top = (-L / 2) + 'px';
       face.style.transform = f.t;
-      face.style.background = f.bg;
+      face.style.background = faceBg(t);
+
       if(f.value === 0){
-        face.innerHTML = SMILE;   // 0 面：微笑脸（= 无组，重摇）
-      } else {
+        face.innerHTML = SMILE;
+      }else{
         const pips = document.createElement('div');
         pips.className = 'pips';
         PIPS[f.value].forEach(function(area){
@@ -205,12 +327,126 @@
         });
         face.appendChild(pips);
       }
+      const glow = document.createElement('div');
+      glow.className = 'glow';
+      face.appendChild(glow);
+
       facesByValue[f.value] = face;
-      cube.appendChild(face);
+      frag.appendChild(face);
     });
+
+    /* ---------- 2) 12 条棱的倒角面 ---------- */
+    // 相邻两个面（iA/sA 与 iB/sB）之间的倒角：把 A 面的边连到 B 面的边
+    for(let iA = 0; iA < 3; iA++){
+      for(let iB = iA + 1; iB < 3; iB++){
+        const iC = 3 - iA - iB;
+        [1,-1].forEach(function(sA){
+          [1,-1].forEach(function(sB){
+            const p1 = vaxis(iA, sA*H,  iB, sB*A, iC, -A);
+            const p2 = vaxis(iA, sA*H,  iB, sB*A, iC,  A);
+            const p3 = vaxis(iA, sA*A,  iB, sB*H, iC,  A);
+            const p4 = vaxis(iA, sA*A,  iB, sB*H, iC, -A);
+
+            const nA = vmul(AX[iA], sA);
+            const nB = vmul(AX[iB], sB);
+            const n  = vnorm(vadd(nA, nB));        // 倒角面法向：两面法向的中分线
+
+            const u  = AX[iC];                     // 局部 x：沿棱方向
+            const ey = vcross(n, u);               // 局部 y：跨过棱的方向
+            const c  = vavg(p1, p2, p3, p4);
+
+            const tA = toneOf(nA), tB = toneOf(nB);
+
+            // 判断局部 +y 端贴在哪个面，保证渐变从 A 面过渡到 B 面
+            const plus = vadd(c, vmul(ey, BW/2));
+            const plusIsA = (sA * comp(plus, iA)) > (sB * comp(plus, iB));
+
+            // 宽度方向各探出 DELTA：塞进相邻的两个面下面，
+            // 棱与面之间那道透底的细缝就被压在实色上了
+            const bev = el('div', FACE, BW + DELTA * 2);
+            bev.className = 'bevel';
+            bev.style.transform = frameMatrix(c, u, ey, n);
+            bev.style.background = bevelBg(plusIsA ? tB : tA, plusIsA ? tA : tB, litOf(n));
+            frag.appendChild(bev);
+          });
+        });
+      }
+    }
+
+    /* ---------- 3) 8 个顶点的三角面 ---------- */
+    // 三面交汇处三条倒角之间的那块三角形，正是旧版露出缝隙的地方
+    [1,-1].forEach(function(sx){
+      [1,-1].forEach(function(sy){
+        [1,-1].forEach(function(sz){
+          const Q1 = v3(sx*A, sy*A, sz*H);   // 落在 z 面上
+          const Q2 = v3(sx*A, sy*H, sz*A);   // 落在 y 面上
+          const Q3 = v3(sx*H, sy*A, sz*A);   // 落在 x 面上
+
+          const n = vnorm(v3(sx, sy, sz));   // 顶点法向
+          const G = v3((Q1.x+Q2.x+Q3.x)/3, (Q1.y+Q2.y+Q3.y)/3, (Q1.z+Q2.z+Q3.z)/3);
+
+          const ex = vnorm(v3(Q2.x-Q3.x, Q2.y-Q3.y, Q2.z-Q3.z));
+          const ey = vcross(n, ex);
+
+          // 三个角投到顶点所在的平面上（局部坐标，重心为原点）；
+          // 轮廓略放大一点（KG 倍，约 0.8px），让顶点块自己盖住它与三条倒角
+          // 之间那道亚像素缝 —— 否则三块边缘正好重合，抗锯齿凑不满会透出背景
+          const local = [Q1, Q2, Q3].map(function(Q){
+            const d = v3(Q.x-G.x, Q.y-G.y, Q.z-G.z);
+            return [vdot(d, ex) * KG, vdot(d, ey) * KG];
+          });
+          let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+          local.forEach(function(p){
+            if(p[0] < minX) minX = p[0];
+            if(p[0] > maxX) maxX = p[0];
+            if(p[1] < minY) minY = p[1];
+            if(p[1] > maxY) maxY = p[1];
+          });
+          const w = Math.max(maxX - minX, 0.01);
+          const h = Math.max(maxY - minY, 0.01);
+          const center = vadd(G, vadd(vmul(ex, (minX + maxX) / 2), vmul(ey, (minY + maxY) / 2)));
+
+          const clip = 'polygon(' + local.map(function(p){
+            const px = ((p[0] - minX) / w * 100).toFixed(3);
+            const py = ((p[1] - minY) / h * 100).toFixed(3);
+            return px + '% ' + py + '%';
+          }).join(',') + ')';
+
+          const cor = el('div', w, h);
+          cor.className = 'corner';
+          cor.style.transform = frameMatrix(center, ex, ey, n);
+          cor.style.clipPath = clip;
+          cor.style.webkitClipPath = clip;
+
+          // 三个面 / 三条倒角在顶点附近的明暗：扇区朝倒角，分界朝角，绕一圈连续
+          const tX = toneOf(v3(sx,0,0)), tY = toneOf(v3(0,sy,0)), tZ = toneOf(v3(0,0,sz));
+          const bXY = (tX + tY) / 2 - 0.02;   // 棱 x-y
+          const bYZ = (tY + tZ) / 2 - 0.02;   // 棱 y-z
+          const bZX = (tZ + tX) / 2 - 0.02;   // 棱 z-x
+          // 局部坐标 (x, y 向下) → conic 角度（0deg 朝上，顺时针）
+          function ang(p){ return (Math.atan2(p[0], -p[1]) * 180 / Math.PI + 360) % 360; }
+          const mid = function(i, j){
+            return [(local[i][0] + local[j][0]) / 2, (local[i][1] + local[j][1]) / 2];
+          };
+          const stops = [
+            [ang(local[0]), (bYZ + bZX) / 2],   // 角 Q1（贴 z 面）
+            [ang(mid(0,1)), bYZ],
+            [ang(local[1]), (bYZ + bXY) / 2],   // 角 Q2
+            [ang(mid(1,2)), bXY],
+            [ang(local[2]), (bXY + bZX) / 2],   // 角 Q3
+            [ang(mid(2,0)), bZX]
+          ];
+          cor.style.background = cornerBg(stops, (-minX) / w * 100, (-minY) / h * 100,
+                                          0.10 + 0.26 * litOf(n));
+          frag.appendChild(cor);
+        });
+      });
+    });
+
+    cube.appendChild(frag);
   }
 
-  // ---------- 公平随机 0~5 ----------
+  /* ===================== 公平随机 0~5 ===================== */
   function rnd(){
     if (window.crypto && crypto.getRandomValues){
       const a = new Uint32Array(1);
@@ -221,7 +457,7 @@
   }
   function pick(){ return Math.floor(rnd() * 6); }
 
-  // ---------- 音效（Web Audio 合成，隐藏快捷键 M 静音） ----------
+  /* ===================== 音效（Web Audio 合成，M 静音） ===================== */
   let audioCtx = null;
   let muted = false;
   function ensureCtx(){
@@ -258,7 +494,7 @@
   }
   function toggleMute(){ muted = !muted; }
 
-  // ---------- 摇骰状态机 ----------
+  /* ===================== 摇骰状态机 ===================== */
   const reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let rolling = false;
@@ -275,8 +511,8 @@
   function frame(now){
     const dt = lastT ? now - lastT : 16;
     lastT = now;
-    rotX = (rotX + dt * 0.00175 * 360) % 360;  // ≈ 1.75 转/秒（原 3.5 的一半）
-    rotY = (rotY + dt * 0.00225 * 360) % 360;  // ≈ 2.25 转/秒（原 4.5 的一半，双轴翻滚）
+    rotX = (rotX + dt * 0.00175 * 360) % 360;  // ≈ 1.75 转/秒
+    rotY = (rotY + dt * 0.00225 * 360) % 360;  // ≈ 2.25 转/秒（双轴翻滚）
     cube.style.transform = 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg)';
     rafId = requestAnimationFrame(frame);
   }
@@ -333,14 +569,14 @@
 
   function toggle(){ rolling ? stopRoll() : startRoll(); }
 
-  // ---------- 交互：整个画面即骰子 ----------
+  /* ===================== 交互：整个画面即骰子 ===================== */
   stage.addEventListener('click', toggle);
   document.addEventListener('keydown', function(e){
     if(e.key === ' '){ e.preventDefault(); toggle(); }
     else if(e.key === 'm' || e.key === 'M'){ toggleMute(); }
   });
 
-  // ---------- 随窗口缩放 ----------
+  /* ===================== 随窗口缩放 ===================== */
   function fit(){
     const vw = document.documentElement.clientWidth;
     const vh = document.documentElement.clientHeight;
@@ -350,7 +586,7 @@
   window.addEventListener('resize', fit);
   window.addEventListener('orientationchange', fit);
 
-  // ---------- 初始化（正面 = 0，空白，即「无结果」） ----------
+  /* ===================== 初始化（正面 = 0，空白，即「无结果」） ===================== */
   buildCube();
   cube.style.transform = REST[0];
   fit();
