@@ -64,8 +64,7 @@ AOS 是一个**业务工程化项目集**：为各类业务建立基于 AI 的�
 ├── 00-generalspec/                   #   通用方法论
 ├── 10-pl4pleos/                      #   元流水线
 ├── 20-pl4eos/                        #   EOS 流水线
-├── 30-eos/                           #   EOS 产品本体
-└── 40-review/                        #   审查与评审
+└── 30-eos/                           #   EOS 产品本体
 
 .ai-agent/                            # AI 助手工具与本地工作现场
 .claude/                              # Claude Code 发现点（设置/技能/记忆）

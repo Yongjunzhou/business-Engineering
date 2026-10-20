@@ -93,7 +93,6 @@ AOS 是一个**业务工程化项目集**：为各类业务建立基于 AI 的�
 │   ├── 20-eos-configs/
 │   ├── 30-eos-deployment/
 │   └── 40-eos-operation/
-└── 40-review/                        #   审查与评审（需求开发/管理程序、概念精讲）
 
 .ai-agent/                            # AI 助手工具与本地工作现场
 ├── tools/                            #   md2pdf、podcast2md、new-project、check-projects、next-chapter、setup-memory 等

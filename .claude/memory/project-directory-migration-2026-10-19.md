@@ -1,6 +1,6 @@
 ---
 name: project-directory-migration-2026-10-19
-description: 目录重排——项目提升到顶层、主线降为 20-eos-engineering、AI 工具收进 .ai-agent（2026-10-19）
+description: 目录重排——项目提升到顶层、主线降为 20-eos-engineering、AI 工具收进 .ai-agent（2026-10-19）；2026-10-20 收尾删除 20-eos-engineering/40-review
 metadata:
   type: project
 ---
@@ -34,6 +34,14 @@ metadata:
 - 相对链接回归检查：迁移前基线 283 处断链，迁移后仍 283 处，**新增 0 处**（15 处断链已按旧→新映射自动修复）。
 - `node .ai-agent/tools/check-projects.js`：6 个条目全齐。
 - `node .ai-agent/tools/next-chapter.js`：章状态与工作目录正常。
+
+## 2026-10-20 收尾：删除 `20-eos-engineering/40-review/`
+
+用户令「都不要了」，整目录 `git rm`，共 17 个文件：三份概念笔记的旧载体（`工程概念精讲笔记.html`／`评审概念体系精讲-从Review定义到需求管理.html`／`需求工程概念精讲笔记.pdf`）、`figures/` 九张 SVG 源、`需求开发程序` 与 `需求管理程序`（md＋pdf）、初建时的占位 README。
+
+- **内容不丢**：三份笔记的现行维护版都在 `10-系统工程研究/00-系统工程相关研究报告/`——工程概念＝05 号、评审概念＝03 号、需求工程＝02 号。两份程序文件仓库内无副本（用户裁决一并删除，不迁移）。
+- **引用同步**：根 `CLAUDE.md`、`README.md`、`AGENTS.md`、`20-eos-engineering/CLAUDE.md` 四处目录树删行；06 号报告附录 A 的两条 html 链接改指 05／03 号；本记忆 [[architecture-fundamentals-document-v2]] 的来源指针改指四份研究报告。
+- **未动**：`02-eos-sysdev-review.md` 两处 `40-review/不具名-20260815-…` 存档路径（迁移前即已断链，属历史归档记录）；各记忆的历史日志保留旧称。
 
 ## 未做（下一步候选）
 
