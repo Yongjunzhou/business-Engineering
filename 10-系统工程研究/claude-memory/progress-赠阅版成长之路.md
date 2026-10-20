@@ -51,9 +51,9 @@ metadata:
 
 ## 六 提交与双推
 
-- 提交：**`69a4d550`「成书：出赠阅版《架构师成长之路》（去序言与致谢），管道加版次开关」**，10 件（管道源码四件＋README＋三件产物＋本记忆＋项目 `MEMORY.md` 索引行）。
-- 分支 `master`；双推＝`origin`（push URL 含 GitHub 与 Gitee 各一条）＋`gitee` 远端。推送结果：`f99de0d3..69a4d550` 两条均成功，`gitee` 端 `Everything up-to-date`（已被 origin 那条覆盖）。
-- **三处 ref 一致＝`69a4d550`**（`ls-remote origin/gitee` 与本地 `rev-parse` 同 hash），工作树干净。
+- 提交：主提交 **`69a4d550`「成书：出赠阅版《架构师成长之路》（去序言与致谢），管道加版次开关」**（10 件：管道源码四件＋README＋三件产物＋本记忆＋项目 `MEMORY.md` 索引行）；随后一笔记忆补记 **`9ae937a4`**（即本文件 §六／§七 的修订）。
+- 分支 `master`；双推＝`origin`（push URL 含 GitHub 与 Gitee 各一条）＋`gitee` 远端。两笔均 `master -> master` 成功，`gitee` 端第二次报 `Everything up-to-date`（已被 origin 那条覆盖）。
+- 核对口径（随时可复核）：`git ls-remote origin master`、`git ls-remote gitee master` 与本地 `git rev-parse master` **同 hash**，工作树干净。
 
 ## 七 遗留挂账
 
