@@ -18,8 +18,8 @@
   <rect x="92" y="36" width="736" height="1060" fill="none" stroke="#211A13" stroke-opacity="0.45" stroke-width="1"/>
 
   <!-- 顶部题词：全书使命 -->
-  <text x="460" y="86" fill="#6E5F4C" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="15" letter-spacing="3" text-anchor="middle">「大部分人在不准确的地基上盖房子」</text>
-  <line x1="330" y1="104" x2="590" y2="104" stroke="#211A13" stroke-opacity="0.3" stroke-width="0.8"/>
+  <text x="460" y="86" fill="#6E5F4C" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="15" letter-spacing="3" text-anchor="middle">「掌握不了一门专业，多半原因是概念不清」</text>
+  <line x1="315" y1="104" x2="605" y2="104" stroke="#211A13" stroke-opacity="0.3" stroke-width="0.8"/>
 
   <!-- 书名（左齐堆叠，？朱红） -->
   <text x="132" y="250" fill="#211A13" font-family="'Noto Serif SC','Source Han Serif SC','SimSun','Songti SC',serif" font-size="80" font-weight="700" letter-spacing="10">架构师是</text>
