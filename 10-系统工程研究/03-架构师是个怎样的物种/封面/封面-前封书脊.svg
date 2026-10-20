@@ -82,10 +82,10 @@
   <!-- ══════════ 底部 ══════════ -->
   <!-- 朱文印：把话说准 -->
   <rect x="132" y="980" width="62" height="62" fill="#A63D2F" rx="3"/>
-  <text x="137" y="1004" fill="#F7F1E6" font-family="'Noto Serif SC','Source Han Serif SC','SimSun','Songti SC',serif" font-size="21" font-weight="700" text-anchor="middle">把</text>
-  <text x="185" y="1004" fill="#F7F1E6" font-family="'Noto Serif SC','Source Han Serif SC','SimSun','Songti SC',serif" font-size="21" font-weight="700" text-anchor="middle">话</text>
-  <text x="137" y="1026" fill="#F7F1E6" font-family="'Noto Serif SC','Source Han Serif SC','SimSun','Songti SC',serif" font-size="21" font-weight="700" text-anchor="middle">说</text>
-  <text x="185" y="1026" fill="#F7F1E6" font-family="'Noto Serif SC','Source Han Serif SC','SimSun','Songti SC',serif" font-size="21" font-weight="700" text-anchor="middle">准</text>
+  <text x="147.5" y="1004" fill="#F7F1E6" font-family="'Noto Serif SC','Source Han Serif SC','SimSun','Songti SC',serif" font-size="22" font-weight="700" text-anchor="middle">把</text>
+  <text x="178.5" y="1004" fill="#F7F1E6" font-family="'Noto Serif SC','Source Han Serif SC','SimSun','Songti SC',serif" font-size="22" font-weight="700" text-anchor="middle">话</text>
+  <text x="147.5" y="1035" fill="#F7F1E6" font-family="'Noto Serif SC','Source Han Serif SC','SimSun','Songti SC',serif" font-size="22" font-weight="700" text-anchor="middle">说</text>
+  <text x="178.5" y="1035" fill="#F7F1E6" font-family="'Noto Serif SC','Source Han Serif SC','SimSun','Songti SC',serif" font-size="22" font-weight="700" text-anchor="middle">准</text>
 
   <!-- 作者/出版占位 -->
   <text x="788" y="1006" fill="#6E5F4C" font-family="'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="15" text-anchor="end" letter-spacing="2">周拥军 著</text>
