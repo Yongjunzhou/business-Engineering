@@ -23,6 +23,7 @@
   #text(size: 9pt, fill: luma(140))[系统工程出版社 · EPUB / A5 打印稿] \
   #text(size: 9pt, fill: luma(140))[ISBN：—（待定）] \
   #v(.5cm)
+  #v(.5cm)
   #text(size: 9pt, fill: luma(140))[书中两个团队与其中每一个人物，姓名均为化名；情节经合成，不指涉任何真实个人与机构。]
 ]
 #pagebreak(weak: true)
