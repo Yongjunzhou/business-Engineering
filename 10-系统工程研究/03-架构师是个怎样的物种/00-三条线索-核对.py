@@ -38,18 +38,40 @@ def chapters():
     return out
 
 
+LEAD = re.compile(r'^\*\*([^*]{1,40})\*\*')   # 段首小标（2026-10-21 半长化后，章内改用 `**小标。**正文`）
+
+
 def blocks(path):
-    """按任意级标题切块，返回 [(标题, 正文)]，并剔除参考文献与版本记录。"""
-    out, cur_h, cur = [], None, []
-    for ln in open(path, encoding='utf-8').read().split('\n'):
+    """按任意级标题切块，返回 [(标题, 正文)]，并剔除参考文献与版本记录。
+
+    **2026-10-21 增「段首小标」也作块边界**（与 `00-风格参考-量尺.py` 同一口径）：
+    半长化后「本章的能力级」「认知反转」「小结」改为段首小标，不认它就查不到收束句。
+    过渡期开关同量尺：章内出现 `**误解现场。**` 的章才认小标。
+    """
+    txt = open(path, encoding='utf-8').read()
+    inline_mode = '**误解现场。**' in txt
+    out, cur_h, cur, in_skip = [], None, [], False
+
+    def flush():
+        if cur_h is not None:
+            out.append((cur_h, '\n'.join(cur)))
+
+    for ln in txt.split('\n'):
         if re.match(r'^#{2,3} ', ln):
-            if cur_h is not None:
-                out.append((cur_h, '\n'.join(cur)))
+            flush()
             cur_h, cur = re.sub(r'^#+\s*', '', ln).strip(), []
-        else:
-            cur.append(ln)
-    if cur_h is not None:
-        out.append((cur_h, '\n'.join(cur)))
+            in_skip = '参考文献' in cur_h
+            continue
+        m = LEAD.match(ln) if inline_mode else None
+        if m and not in_skip:
+            flush()
+            cur_h = m.group(1).strip().rstrip('。｜ ')
+            rest = ln[m.end():].lstrip('。｜ ').strip()
+            cur = [rest] if rest else []
+            in_skip = '参考文献' in cur_h
+            continue
+        cur.append(ln)
+    flush()
     return [(h, b) for h, b in out if not any(k in h for k in SKIP)]
 
 

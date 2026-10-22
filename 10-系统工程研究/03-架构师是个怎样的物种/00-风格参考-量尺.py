@@ -68,18 +68,44 @@ def chapters(root):
             yield n[:2], f
 
 
+LEAD = re.compile(r'^\*\*([^*]{1,40})\*\*')   # 段首小标：`**小标。**正文`／独立行 `**A 概念总图**`
+
+
 def blocks(path):
-    """按任意级标题切块，返回 [(标题, 正文)]。"""
-    out, cur_h, cur = [], None, []
-    for ln in open(path, encoding='utf-8').read().split('\n'):
+    """按任意级标题切块，返回 [(标题, 正文)]。
+
+    **2026-10-21 增「段首小标」也作块边界**（半长化改定：章内三级标题压到 1/3，改用
+    `**小标。**正文` 承接）；不认它，章首「误解现场」与「案例进展」就统计不到，
+    配比口径会整体失真（当日 ch10 首测即误报 论证 94.7%）。
+    **跳过态**：进了「参考文献」块之后，块内的粗体小标（标准／经典文献）不再切块——
+    否则参考文献会被拆成一堆 argue 块、混进分母（首测全书各章虚高 200~500 汉字）。
+    """
+    out, cur_h, cur, in_skip = [], None, [], False
+    txt = open(path, encoding='utf-8').read()
+    # 过渡期开关（2026-10-21）：章内已改用「段首小标」的章才认小标为块边界；
+    # 尚未迁移的章仍按标题切块——保证同一把尺在迁移前后对**未改的章**读数一字不变。
+    inline_mode = '**误解现场。**' in txt
+
+    def flush():
+        if cur_h is not None:
+            out.append((cur_h, '\n'.join(cur)))
+
+    for ln in txt.split('\n'):
         if re.match(r'^#{2,3} ', ln):
-            if cur_h is not None:
-                out.append((cur_h, '\n'.join(cur)))
+            flush()
             cur_h, cur = re.sub(r'^#+\s*', '', ln).strip(), []
-        else:
-            cur.append(ln)
-    if cur_h is not None:
-        out.append((cur_h, '\n'.join(cur)))
+            in_skip = '参考文献' in cur_h
+            continue
+        m = LEAD.match(ln) if inline_mode else None
+        if m and not in_skip:
+            flush()
+            cur_h = m.group(1).strip().rstrip('。｜ ')
+            rest = ln[m.end():].lstrip('。｜ ').strip()
+            cur = [rest] if rest else []
+            in_skip = '参考文献' in cur_h
+            continue
+        cur.append(ln)
+    flush()
     return out
 
 
@@ -101,7 +127,8 @@ for ch, path in chapters(BOOK):
         if k == 'case' and v > 700:
             big.append(v)
     rows.append(dict(ch=ch, tot=sum(a.values()), big=big, case_n=len(case_sizes),
-                     case_max=max(case_sizes) if case_sizes else 0, **a))
+                     case_max=max(case_sizes) if case_sizes else 0,
+                     half='**误解现场。**' in open(path, encoding='utf-8').read(), **a))
 
 print('=== ① 逐章语体配比（口径 v3） ===')
 print('章   总汉字  章首%  案例%  叙事%  论证%  核心尾%  可压件%(B)  认知反转  案例块>700')
@@ -145,17 +172,24 @@ print('口径C 超 22%：', '、'.join(over_c) if over_c else '无')
 
 print()
 print('=== ③ 红线自查（超线项汇总） ===')
-print('章首 >4%：', '、'.join('ch%s %.1f%%' % (r['ch'], pc(r['open'], r['tot'])) for r in rows
-                             if pc(r['open'], r['tot']) > 4) or '无（ch1 5.3% 为方法论章例外，已登记）')
-print('案例合计 >12%：', '、'.join('ch%s %.1f%%' % (r['ch'], pc(r['case'], r['tot'])) for r in rows
-                               if pc(r['case'], r['tot']) > 12) or '无')
-print('论证 <60%：', '、'.join('ch%s %.1f%%' % (r['ch'], pc(r['argue'], r['tot'])) for r in rows
-                             if pc(r['argue'], r['tot']) < 60) or '无')
-print('可压件 >22%（口径B）：', '、'.join(over_b) if over_b else '无')
-print('认知反转 >1000（硬线）：', '、'.join('ch%s %d' % (r['ch'], r['reversal']) for r in rows
-                                   if r['reversal'] > 1000) or '无')
-print('认知反转 >800（提示线）：', '、'.join('ch%s %d' % (r['ch'], r['reversal']) for r in rows
-                                   if r['reversal'] > 800) or '无')
+print('口径：未半长化章按 v3（章首 4／案例 12／论证 60／可压件 22／反转 800·1000）；'
+      '已半长化章（每章 9,300 汉字级）按 v4（章首 8／案例 15／论证 55／可压件 25／反转 500·600）'
+      '——**占比线必须随章长缩放**：同一段 600 字的开场，在 1.8 万的章里是 3.3%、在 9,300 的章里是 6.5%，'
+      '不缩放就会把“成书后的正常章”误报成退步（2026-10-21 半长化改定，见 00-风格参考.md §6.1）')
+th = lambda r: (8, 15, 55, 25, 500, 600) if r.get('half') else (4, 12, 60, 22, 800, 1000)
+print('章首 >口径：', '、'.join('ch%s %.1f%%（线 %d）' % (r['ch'], pc(r['open'], r['tot']), th(r)[0])
+                            for r in rows if pc(r['open'], r['tot']) > th(r)[0]) or '无')
+print('案例合计 >口径：', '、'.join('ch%s %.1f%%（线 %d）' % (r['ch'], pc(r['case'], r['tot']), th(r)[1])
+                              for r in rows if pc(r['case'], r['tot']) > th(r)[1]) or '无')
+print('论证 <口径：', '、'.join('ch%s %.1f%%（线 %d）' % (r['ch'], pc(r['argue'], r['tot']), th(r)[2])
+                            for r in rows if pc(r['argue'], r['tot']) < th(r)[2]) or '无')
+press = lambda r: pc(r['map'] + r['reversal'] + r['selfcheck'] + r['exercise'] + r['summary'], r['tot'])
+print('可压件 >口径（口径B）：', '、'.join('ch%s %.1f%%（线 %d）' % (r['ch'], press(r), th(r)[3])
+                                     for r in rows if press(r) > th(r)[3]) or '无')
+print('认知反转 >硬线：', '、'.join('ch%s %d（线 %d）' % (r['ch'], r['reversal'], th(r)[5]) for r in rows
+                              if r['reversal'] > th(r)[5]) or '无')
+print('认知反转 >提示线：', '、'.join('ch%s %d（线 %d）' % (r['ch'], r['reversal'], th(r)[4]) for r in rows
+                               if r['reversal'] > th(r)[4]) or '无')
 print('案例单块 >700：', '、'.join('ch%s %s' % (r['ch'], '／'.join(str(v) for v in r['big']))
                               for r in rows if r['big']) or '无')
 print()
