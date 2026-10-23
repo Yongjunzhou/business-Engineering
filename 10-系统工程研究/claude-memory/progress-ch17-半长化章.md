@@ -5,6 +5,8 @@ metadata:
   type: progress
 ---
 
+> **★ 2026-10-23：本件只作留痕，不作开工依据**——第17章本轮入口＝[`pending-ch17-rewrite.md`](pending-ch17-rewrite.md)。
+
 # 第17章 半长化重写 · 进度（2026-10-21）
 
 ## 一、到哪一步了
