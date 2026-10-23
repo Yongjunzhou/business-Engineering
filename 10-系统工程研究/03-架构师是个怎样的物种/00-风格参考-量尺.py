@@ -128,10 +128,14 @@ for ch, path in chapters(BOOK):
             case_sizes.append(v)
         if k == 'case' and v > 700:
             big.append(v)
-    txt_half = open(path, encoding='utf-8').read()
-    rows.append(dict(ch=ch, tot=sum(a.values()), big=big, case_n=len(case_sizes),
+    # 2026-10-23 改：半长化判定按**章长**，不再认「段首小标」锚点。
+    # 起因＝第1章重排把 `**误解现场。**` 改成 `### 1.1.1 误解现场`，锚点判否 → 被当成 v3 章
+    # （章首线 4%）而误报红线；第3章同日改法，早已同此病。口径见 00-风格参考.md §6.1
+    # 「占比线必须随章长缩放」——半长化章 8,370~10,230 汉字，其余章 ≥14,598，阈值 11,000 分得干净。
+    tot = sum(a.values())
+    rows.append(dict(ch=ch, tot=tot, big=big, case_n=len(case_sizes),
                      case_max=max(case_sizes) if case_sizes else 0,
-                     half=('**误解现场。**' in txt_half) or ('**误解现场**。' in txt_half), **a))
+                     half=(tot <= 11000), **a))
 
 print('=== ① 逐章语体配比（口径 v3） ===')
 print('章   总汉字  章首%  案例%  叙事%  论证%  核心尾%  可压件%(B)  认知反转  案例块>700')

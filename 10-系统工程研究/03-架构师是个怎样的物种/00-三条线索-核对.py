@@ -106,7 +106,7 @@ for ch, path in chapters():
     data.append(dict(
         ch=ch, body=body, rev=rev, summ=summ,
         line=('才算拥有' in line_src) or ('才算真正拥有' in line_src),
-        layer=('§1.4.4' in body) or ('§1.3.5' in body),   # 2026-09-27：第1章重写后能力四级节由 §1.3.5 变为 §1.4.4（旧号兼容保留）
+        layer=('§1.4.3' in body) or ('§1.4.4' in body) or ('§1.3.5' in body),   # 2026-10-23 第1章重排后能力四级节为 §1.4.3（§1.4.4／§1.3.5 旧号兼容保留）
         members={m: body.count(m) for _, m in MEMBERS},
     ))
 
