@@ -128,9 +128,10 @@ for ch, path in chapters(BOOK):
             case_sizes.append(v)
         if k == 'case' and v > 700:
             big.append(v)
+    txt_half = open(path, encoding='utf-8').read()
     rows.append(dict(ch=ch, tot=sum(a.values()), big=big, case_n=len(case_sizes),
                      case_max=max(case_sizes) if case_sizes else 0,
-                     half='**误解现场。**' in open(path, encoding='utf-8').read(), **a))
+                     half=('**误解现场。**' in txt_half) or ('**误解现场**。' in txt_half), **a))
 
 print('=== ① 逐章语体配比（口径 v3） ===')
 print('章   总汉字  章首%  案例%  叙事%  论证%  核心尾%  可压件%(B)  认知反转  案例块>700')
