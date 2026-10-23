@@ -393,3 +393,11 @@ metadata:
 ---
 
 **请确认阶段七·八（或指出要改的地方），确认后我落台账（框架／主线支撑／三条线索／案例设定／19-附录／第6章／第1章分析件／章纲九处）并提交＋双推。**
+
+---
+
+## 十五 收工（2026-10-23）
+
+**提交 `cc504b9`；双推 origin（GitHub＋Gitee 两条 pushurl）与 gitee，三处 ref 一致。**本节之后本件作历史入口留痕，**下一轮不再作开工依据**；现行状态见 [`progress-ch10-2026-10-23-restructure.md`](progress-ch10-2026-10-23-restructure.md)。
+
+**三章重排至此全部收口**（第1、2、10 章）。**下一章**＝[`pending-ch4-rewrite.md`](pending-ch4-rewrite.md)，话术「**开工第4章**」。
