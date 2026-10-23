@@ -206,3 +206,7 @@ metadata:
 **未做（交接）**：训侧单元一未动（章题未变）；成书未重建（18 章齐后一次出）；`成书/build*` 内仍是旧稿，不作为正文依据。
 
 **下一台机器**：`git pull`（分支 `master`）→ 读 `claude-memory/MEMORY.md` → 第2章从 [`pending-ch2-halfpass.md`](pending-ch2-halfpass.md) 起，话术「开工第2章」（先出章纲，步 1 与步 3 停等裁）。
+
+## 十三 又回第1章（2026-10-23）
+
+用户令「继续思考第一章，怎么修改能对读者更有吸引力，让读者读起来更流畅、更容易理解」——量尺已全过，本轮转**读者体验**视角。诊断 22 条与五条待裁见 [`pending-ch1-reader-pass.md`](pending-ch1-reader-pass.md)，**正文未动**，第2章计划不变。

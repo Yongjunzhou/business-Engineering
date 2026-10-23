@@ -207,3 +207,87 @@ for r in rows:
         r['ch'], r['tot'], pc(r['open'], r['tot']), pc(r['case'], r['tot']),
         pc(r['open'] + r['case'], r['tot']), pc(r['argue'], r['tot']), pc(core, r['tot']),
         pc(tail, r['tot']), r['case_n'], r['case_max'] or '—'))
+
+# ─────────────────────────────────────────────────────────────────────
+# ⑤ 酣畅三查（断点代理；2026-10-23 立，判据见 00-风格参考.md §6.17）
+#    性质＝只报不判——断点是读者的事，脚本只把"可能停下来的地方"点出来。
+# ─────────────────────────────────────────────────────────────────────
+
+
+def prose_paras(body):
+    """把块正文切成散文段：剔代码块／表格／引用块／列表项（与量尺其余各项同口径）。"""
+    out, buf, infence = [], [], False
+    for ln in body.split('\n'):
+        s = ln.strip()
+        if s.startswith('```'):
+            infence = not infence
+            if buf:
+                out.append(' '.join(buf))
+                buf = []
+            continue
+        if infence:
+            continue
+        head = (not s or s.startswith('|') or s.startswith('>') or s.startswith('- ')
+                or s.startswith('* ') or re.match(r'^\d+[.、] ', s))
+        if head:
+            if buf:
+                out.append(' '.join(buf))
+                buf = []
+            continue
+        buf.append(s)
+    if buf:
+        out.append(' '.join(buf))
+    return out
+
+
+def sentences(p):
+    return [x for x in re.split(r'(?<=[。！？])', p) if han(x)]
+
+
+print()
+print('=== ⑤ 酣畅三查（断点代理；只报不判，判据见 00-风格参考.md §6.17） ===')
+print('章  跨块重复句  最长长段连排(>100汉字)  短段%(≤20汉字)')
+dup_detail = []
+for ch, path in chapters(BOOK):
+    blks = [(h, prose_paras(b)) for h, b in blocks(path)]
+    seen, dups = {}, []
+    for bi, (h, ps) in enumerate(blks):
+        for p in ps:
+            for s in sentences(p):
+                key = re.sub(r'[^\u4e00-\u9fff]', '', s)
+                if len(key) < 8:
+                    continue
+                if key in seen and seen[key][0] != bi:
+                    dups.append((key, seen[key][1], h))
+                seen.setdefault(key, (bi, h))
+    cnt = {}
+    for key, _, _ in dups:
+        cnt[key] = cnt.get(key, 0) + 1
+    # 只留"恰好两次"的：出现三次及以上，多是清单里逐条重复的同一问句（结构性，不属重读）
+    dups = [d for d in dups if cnt[d[0]] == 1]
+    lens = [han(p) for _, ps in blks for p in ps]
+    run = best = 0
+    for v in lens:
+        run = run + 1 if v > 100 else 0
+        best = max(best, run)
+    short = pc(sum(1 for v in lens if v <= 20), len(lens))
+    print('{}  {:>10}  {:>18}  {:>14.1f}'.format(ch, len(dups), best, short))
+    dup_detail.append((ch, dups))
+
+print()
+print('跨块重复句（同一句 ≥8 汉字、恰好出现两次、分属两块）——改法＝删一处，或让它升级为递进：')
+found = False
+for ch, dups in dup_detail:
+    if not dups:
+        continue
+    found = True
+    print('  ch{}'.format(ch))
+    for key, a, b in dups[:6]:
+        print('    「{}」  {} ↔ {}'.format(key[:28], a[:24], b[:24]))
+    if len(dups) > 6:
+        print('    ……另有 {} 条'.format(len(dups) - 6))
+if not found:
+    print('  无')
+print()
+print('注：长段连排与短段占比只报不判（各章语体不同）；断点五型的诊断与处方见 §6.17，')
+print('    本脚本只覆盖其中两型（重读的跨块重复、断线的节奏）。')
