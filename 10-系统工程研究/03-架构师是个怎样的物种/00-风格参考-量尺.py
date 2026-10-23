@@ -84,7 +84,9 @@ def blocks(path):
     txt = open(path, encoding='utf-8').read()
     # 过渡期开关（2026-10-21）：章内已改用「段首小标」的章才认小标为块边界；
     # 尚未迁移的章仍按标题切块——保证同一把尺在迁移前后对**未改的章**读数一字不变。
-    inline_mode = '**误解现场。**' in txt
+    # 2026-10-23 补：加粗收尾规则改后（句读移出加粗），小标写作 `**误解现场**。`
+    # 两种形态都认，否则 inline_mode 判否、整章退化成"论证 100%"。判例 4：锚点一动，全库脚本同批改。
+    inline_mode = ('**误解现场。**' in txt) or ('**误解现场**。' in txt)
 
     def flush():
         if cur_h is not None:

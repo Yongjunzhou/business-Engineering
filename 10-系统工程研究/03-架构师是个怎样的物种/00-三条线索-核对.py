@@ -49,7 +49,9 @@ def blocks(path):
     过渡期开关同量尺：章内出现 `**误解现场。**` 的章才认小标。
     """
     txt = open(path, encoding='utf-8').read()
-    inline_mode = '**误解现场。**' in txt
+    # 2026-10-23 补：加粗收尾规则改后，小标写作 `**误解现场**。`；两种形态都认。
+    # 只认旧形态则 inline_mode 判否、收束句与刻度行整章查不到（判例 4：锚点一动，全库脚本同批改）。
+    inline_mode = ('**误解现场。**' in txt) or ('**误解现场**。' in txt)
     out, cur_h, cur, in_skip = [], None, [], False
 
     def flush():
