@@ -58,4 +58,7 @@ metadata:
 
 ## 七 提交与双推
 
-（待提交后补记提交号与三处 ref。）
+**提交 `19df526`**（`[AI] 教材·第5章重写：八阶段走满（6 块 20 节／10,136 汉字／红线全过），连带六件＋第6章开工单`）——10 文件改动＋3 件新增（`00-ch5-概念一致性审视清单.md`／`pending-ch6-rewrite.md`／本件）。
+**双推三处 ref 一致**：`HEAD＝origin/master＝gitee/master＝19df526`。
+
+**下一台机器**：`git pull`（`master`）后从 [`pending-ch6-rewrite.md`](pending-ch6-rewrite.md) 起，话术「**开工第6章**」（阶段一先出目的·目标·主线·内容概要＋气脉一页，停等裁）。
