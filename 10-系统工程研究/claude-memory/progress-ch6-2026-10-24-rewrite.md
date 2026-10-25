@@ -58,6 +58,6 @@ metadata:
 ## 七 提交与双推
 
 **提交 `50daf30`**（`[AI] 教材·第6章重写：八阶段走满（6 块 21 节／10,807 汉字／红线全过），正文零标准号＋42 号 A-2 落库，连带九件＋标题≤12 旧口径作废＋第7章开工单`）——13 文件（正文＋连带六件＋手册两处＋概念清单新件＋记忆三件）。
-**双推三处 ref 一致**：`HEAD＝origin/master（GitHub）＝origin/master（Gitee pushurl）＝gitee/master＝50daf30`，`ls-remote` 两条远端各自核到同一哈希。
+**双推**：主提交 `50daf30` 一次推到 GitHub 与 Gitee 两条 pushurl；其后收工记忆以 `6aa4c7c` 提交。**终态三处 ref 一致＝`6aa4c7c`**（`HEAD＝origin/master＝gitee/master`，另以 `git ls-remote` 直连 GitHub 核到同一哈希），工作区干净。
 
 **下一台机器**：`git pull`（`master`）后从 [`pending-ch7-rewrite.md`](pending-ch7-rewrite.md) 起，话术「**开工第7章**」。
