@@ -119,8 +119,8 @@ for d in data:
         (lv.group(0)[:26].replace('\n', ' ') if lv else '—')))
 miss_line = [d['ch'] for d in data if not d['line']]
 miss_layer = [d['ch'] for d in data if not d['layer']]
-print('收束句缺章：', '、'.join(miss_line) if miss_line else '无（18/18）')
-print('刻度行缺章：', '、'.join(miss_layer) if miss_layer else '无（ch2~ch18 共 17/17；ch1 为源章不计）')
+print('收束句缺章：', '、'.join(miss_line) if miss_line else '无（19/19）')
+print('刻度行缺章：', '、'.join(miss_layer) if miss_layer else '无（ch2~ch19 共 18/18；ch1 为源章不计）')
 
 print()
 print('=== ② 暗线核对（脚本只导出候选位：各章「小结」末两段，供人工判"有没有让一份产品数据动一下"） ===')
