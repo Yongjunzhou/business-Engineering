@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""《架构师是个怎样的物种？》冗余量尺（口径 **v3**，段级；v1 立尺 → v2 修正八 → v3 窗到前两段）
+"""《架构师是个怎样的物种？》冗余量尺（口径 **v4**，段级；v1 立尺 → v2 修正八 → v3 窗到前两段 → v4 小结同章不算账）
 
 用途：表达优化轮**第二病（段落冗余·对本章目的目标的支撑度）**的单一量尺。
      与既有两把尺的分工：
@@ -405,6 +405,18 @@ def exempt(kind_, head):
     return False
 
 
+def summary_same_chapter(ta, ha, tb, hb):
+    """口径 v4（2026-10-28 用户裁「小结与本章正文的重复不算账」）。
+
+    **小结的功能就是把人已经在正文读过的判词再收一遍**——把它当账，等于要求小结不复述，
+    那是另一本书的体例。窗口只放到**同章**：小结与**别的章**之间的重复仍入账（那属跨章回收，
+    由裁定 3 的声明规则管）。
+    """
+    if ta != tb:
+        return False
+    return ('小结' in (ha or '')) or ('小结' in (hb or ''))
+
+
 # ③ 每章 6-gram 与段内 df
 for tag, d in data.items():
     g6, df6 = [], defaultdict(int)
@@ -480,6 +492,8 @@ def dup_pairs():
         pa_txt, pb_txt = data[ta]['paras'][pa][0], data[tb]['paras'][pb][0]
         body_ex = (exempt(data[ta]['paras'][pa][1], data[ta]['paras'][pa][2])
                    or exempt(data[tb]['paras'][pb][1], data[tb]['paras'][pb][2])
+                   or summary_same_chapter(ta, data[ta]['paras'][pa][2],
+                                           tb, data[tb]['paras'][pb][2])
                    or recall(pa_txt) or recall(pb_txt))
         head_ex = (not body_ex) and (declared(ta, pa, tb) or declared(tb, pb, ta))
         if head_ex and (best_txt.startswith(HEAD_FALSE.get((ta, tb), '\0'))
