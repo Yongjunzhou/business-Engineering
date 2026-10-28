@@ -298,3 +298,63 @@ if not found:
 print()
 print('注：长段连排与短段占比只报不判（各章语体不同）；断点五型的诊断与处方见 §6.17，')
 print('    本脚本只覆盖其中两型（重读的跨块重复、断线的节奏）。')
+
+# ─────────────────────────────────────────────────────────────────────
+# ⑥ 指代三查（只报不判；2026-10-28 立，判据见 00-风格参考.md §6.19）
+#    A 一句里"它／其"≥2（两个候选）｜B 段首句以"它／这／那／该／此"起头（疑跨段承指、无先行）
+#    C 同一段里"这／那＋量词"出现两种以上量词（疑一物多量）
+#    三查全是候选：A 有可能是并列陈述，B 有可能紧接上一句，C 有可能是两组不同的东西。
+# ─────────────────────────────────────────────────────────────────────
+
+PRON = re.compile(r'[它其]')
+# B 只认"它／其"与"这·那＋本书固定量词"起头；"这天／这一章／这种人"这类时间与处所指称不算
+HEAD_PRON = re.compile(r'^(它|其|该|此)|^[这那][份件条张处套]')
+# C 只数本书固定量词（件份条张处套）；"这个／那种／这组"是通量词，不承重，不计
+MEAS = re.compile(r'[这那][份件条张处套]')
+
+print()
+print('=== ⑥ 指代三查（只报不判，判据见 00-风格参考.md §6.19） ===')
+print('章   A一句两候选  B段首承指  C段内两种量词')
+pron_detail = []
+for ch, path in chapters(BOOK):
+    a_cnt = b_cnt = 0
+    a_samp, b_samp, c_samp = [], [], []
+    for _h, body in blocks(path):
+        for p in prose_paras(body):
+            ms = set(MEAS.findall(p))
+            if len(ms) >= 2:
+                c_samp.append((len(ms), ''.join(sorted(ms)), p))
+            for s in sentences(p):
+                t = s.strip()
+                if len(PRON.findall(t)) >= 2:
+                    a_cnt += 1
+                    if len(a_samp) < 4:
+                        a_samp.append(t)
+                if HEAD_PRON.match(t):
+                    b_cnt += 1
+                    if len(b_samp) < 4:
+                        b_samp.append(t)
+    print('{}  {:>12}  {:>12}  {:>16}'.format(ch, a_cnt, b_cnt, len(c_samp)))
+    pron_detail.append((ch, a_samp, b_samp, c_samp))
+
+print()
+print('候选逐条（每型每章最多 4 条；C 型最多 3 条）——改法＝代回名字、按量词表归一、断成两句：')
+any_hit = False
+for ch, a_samp, b_samp, c_samp in pron_detail:
+    if not (a_samp or b_samp or c_samp):
+        continue
+    any_hit = True
+    print('  ch{}'.format(ch))
+    for s in a_samp:
+        print('    A 两个候选：「{}」'.format(s[:44]))
+    for s in b_samp:
+        print('    B 段首承指：「{}」'.format(s[:44]))
+    for n, ms, p in c_samp[:3]:
+        print('    C 段内 {} 种量词（{}）：「{}」'.format(n, ms, p[:40]))
+if not any_hit:
+    print('  无')
+print()
+print('注：三查只把"可能让读者停下来算这是哪一个"的地方点出来，判不判在人；')
+print('    四型、固定量词表与三条判法（回指法／换量词法／数词检验）见 §6.19。')
+print('    B 型最宽（段首以"它／其／这·那＋量词"起头的句子都算候选）——逐条过时只问一句：')
+print('    只读这一段第一句，读者知不知道"它"是什么；知道就过，不知道才改。')
