@@ -84,7 +84,7 @@ if (arg) {
   const files = fs
     .readdirSync(HERE)
     .filter((f) => /^(00-.*|\d\d-第\d+章.*)\.md$/.test(f) && !f.includes('从教材到'))
-    .concat(['19-附录.md']);
+    .concat(['21-附录.md']);
   let total = 0;
   for (const f of files) {
     const n = report(fs.readFileSync(path.join(HERE, f), 'utf8')).hits.length;
