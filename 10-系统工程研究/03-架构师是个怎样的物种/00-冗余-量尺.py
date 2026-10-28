@@ -27,6 +27,9 @@
      共享 2-gram ≥6、单向包含率 ≥0.30。**这是"同一判断换一种说法再说一遍"的可算形态**：
      ④ 只抓得住"抄一遍"（12 字逐字／Jaccard 0.40），换过说法的抓不住（ch10 的承重测试四处即例）。
      已扣除在册体例件、有声明回指与**排比示范**（两句首 3~4 汉字相同＝同一句式换内容）。
+- **声明回指（修正八，2026-10-28 用户裁）**：不只认"本段内"点了第N章／上一章，也认**本段所在节的第一段**点了
+  （取该节第一段散文段）。实测 ch19 两个回收块的声明都在同节首段，段内声明扣不到，六对被当成账；
+  本修正只豁免**本节**，不放宽"同一判断一节内最多两遍"。`HEAD_FALSE` 拦下"节首段点了源章、可点的是另一件事"的假豁免。
 - **量不了的**（口径已勘明，见台账 §二）：**"对本章目的·目标的支撑度"做不成读数**——它是判法
   （删段检验：整段拿掉，本章目的那句还立不立得住／下一段接不接得上／`00-主线与各章支撑.md` 里
   本章目标那几条它撑着哪一条）。本尺只把四条可复算的读数当筛子。
@@ -281,6 +284,52 @@ for tag, d in data.items():
     d['gained'] = gained
 
 
+# ── 修正八（2026-10-28 用户裁）：声明回指也认"本节第一段" ───────────────────────
+# 修正四只认段内点了"第N章／上一章"。实测 ch19 两个回收块（19.3.2 点第 12 章、19.4.1 点第 15 章）
+# 声明都在同节第一段，段内声明扣不到，六对被当成账。本节边界与 paragraphs() 同一套切法。
+# **声明只豁免本节**，不放宽台账 §八 的"同一判断一节内最多两遍"。
+# HEAD_FALSE：节首段虽点了源章，可点的是另一件事——人工一瞥拦下，不豁免。
+HEAD_FALSE = {
+    ('03', '04'): '目的展开成目标',   # ch04 §4.3.1 节首段点第3章说的是需求三形态，重复的是"目标→需求"转化
+}
+
+
+def head_first(paras):
+    """每节的第一段散文段（paragraphs() 只收散文，表格／引文／清单天然不在内）。"""
+    m, cur = {}, None
+    for p, _k, h in paras:
+        if h != cur:
+            cur = h
+        if h not in m:
+            m[h] = p
+    return m
+
+
+HEAD = {tag: head_first(d['paras']) for tag, d in data.items()}
+
+
+def _points_to(text, tag, other):
+    """text 里的声明是不是指向 other 那一章（数字章号，或相邻章的"上一章／前一章"）。"""
+    if other.isdigit():
+        for m in re.finditer(r'第\s*(\d+)\s*章', text):
+            if m.group(1).zfill(2) == other:
+                return True
+    if tag.isdigit() and other.isdigit():
+        return (int(other) == int(tag) - 1) and bool(re.search(r'上一章|前一章', text))
+    return False
+
+
+def declared(tag, pi, other):
+    """声明回指（修正八）：本段点了，或本段所在节的第一段点了——但点的必须是**对面那一章**。"""
+    p, _k, h = data[tag]['paras'][pi]
+    if recall(p):
+        return True
+    hp = HEAD[tag].get(h)
+    if not hp or hp == p:
+        return False
+    return _points_to(hp, tag, other)
+
+
 def stat_long(d):
     lens = [han(p[0]) for p in d['paras']]
     narr = [han(p[0]) for p in d['paras'] if p[1] in ('open', 'case')]
@@ -405,9 +454,14 @@ def dup_pairs():
         if lo is not None and hi - lo > best_len:
             best_txt, best_len = c[lo:hi], hi - lo
         pa_txt, pb_txt = data[ta]['paras'][pa][0], data[tb]['paras'][pb][0]
-        ex = (exempt(data[ta]['paras'][pa][1], data[ta]['paras'][pa][2])
-              or exempt(data[tb]['paras'][pb][1], data[tb]['paras'][pb][2])
-              or recall(pa_txt) or recall(pb_txt))
+        body_ex = (exempt(data[ta]['paras'][pa][1], data[ta]['paras'][pa][2])
+                   or exempt(data[tb]['paras'][pb][1], data[tb]['paras'][pb][2])
+                   or recall(pa_txt) or recall(pb_txt))
+        head_ex = (not body_ex) and (declared(ta, pa, tb) or declared(tb, pb, ta))
+        if head_ex and (best_txt.startswith(HEAD_FALSE.get((ta, tb), '\0'))
+                        or best_txt.startswith(HEAD_FALSE.get((tb, ta), '\0'))):
+            head_ex = False          # 人工一瞥：假豁免，仍算账
+        ex = '†' if body_ex else ('‡' if head_ex else '')
         res.append((ta, pa, tb, pb, n, best_txt, ex))
     return sorted(res, key=lambda x: -x[4])
 
@@ -502,19 +556,19 @@ if '--kw' in sys.argv:
     sys.exit(0)
 
 if '--dup' in sys.argv:
-    print('=== ④a 逐字重复片段（≥{} 汉字，跨不同段；标†者为在册体例件） ==='.format(FRAG))
+    print('=== ④a 逐字重复片段（≥{} 汉字，跨不同段；†＝在册体例件或段内声明，‡＝节首声明） ==='.format(FRAG))
     ps = dup_pairs()
     for ta, pa, tb, pb, n, txt, ex in ps:
         mark = '跨章' if ta != tb else '同章'
         print('  {} {} 字｜ch{}〔{}〕↔ ch{}〔{}〕：「{}」'.format(
-            '†' if ex else ' ', n, ta, data[ta]['paras'][pa][2][:12] or '—',
+            ex or ' ', n, ta, data[ta]['paras'][pa][2][:12] or '—',
             tb, data[tb]['paras'][pb][2][:12] or '—', txt[:36]))
     print()
     print('=== ④b 近义重说对（2-gram Jaccard ≥0.40；非逐字，须逐条判；†＝在册体例件） ===')
     for j, t1, p1, s1, t2, p2, s2 in near:
         ex = (exempt(data[t1]['paras'][p1][1], data[t1]['paras'][p1][2])
               or exempt(data[t2]['paras'][p2][1], data[t2]['paras'][p2][2])
-              or recall(data[t1]['paras'][p1][0]) or recall(data[t2]['paras'][p2][0]))
+              or declared(t1, p1, t2) or declared(t2, p2, t1))
         print('  {} {:.2f} ch{}〔{}〕「{}」↔ ch{}〔{}〕「{}」'.format(
             '†' if ex else ' ', j, t1, data[t1]['paras'][p1][2][:10] or '—', clean(s1)[:22],
             t2, data[t2]['paras'][p2][2][:10] or '—', clean(s2)[:22]))
@@ -532,7 +586,7 @@ for ta, pa, tb, pb, n, txt, ex in PS:
 for j, t1, p1, s1, t2, p2, s2 in near:
     if (exempt(data[t1]['paras'][p1][1], data[t1]['paras'][p1][2])
             or exempt(data[t2]['paras'][p2][1], data[t2]['paras'][p2][2])
-            or recall(data[t1]['paras'][p1][0]) or recall(data[t2]['paras'][p2][0])):
+            or declared(t1, p1, t2) or declared(t2, p2, t1)):
         continue
     inv_b.add((t1, p1))
     inv_b.add((t2, p2))
