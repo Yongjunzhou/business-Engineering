@@ -1,5 +1,5 @@
-// main.typ — 《架构师是个怎样的物种？》PDF 入口（位于 成书/ 根，路径相对根解析）
-// 组装：封面 → 版权页 → 序言（可关：--input front=0）→ 前言 → 卷前速查 → 目录 → 第1~18章 → 后记 → 附录 → 封底占位
+﻿// main.typ — 《架构师是个怎样的物种？》PDF 入口（位于 成书/ 根，路径相对根解析）
+// 组装：封面 → 版权页 → 序言（可关：--input front=0）→ 前言 → 卷前速查 → 目录 → 第1~19章 → 后记 → 附录 → 封底占位
 #import "template/book.typ": book, SANS
 
 #show: book.with(book-title: "架构师是个怎样的物种？——从工程师到架构师")
@@ -64,10 +64,11 @@
 #include "build/16-第16章.typ"
 #include "build/17-第17章.typ"
 #include "build/18-第18章.typ"
+#include "build/19-第19章.typ"
 // ★ 2026-10-19 补：后记（2026-10-17 重写落库）此前从未被 PDF 收入——EPUB 有、PDF 没有；
 // 另 preprocess 的前缀匹配曾把同目录《00-后记-概念一致性审视清单.md》顶进来（已排除工作件）
-#include "build/00-后记.typ"
-#include "build/19-附录.typ"
+#include "build/20-后记.typ"
+#include "build/21-附录.typ"
 
 // ── 封底占位 ──
 #pagebreak(weak: true)

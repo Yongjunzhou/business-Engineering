@@ -1,9 +1,9 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 /**
  * preprocess.mjs — 教材书 → .book.md 清洗脚本
  *
  * 职责（不动源文件，输出到 build/）：
- *   1. 按 MANIFEST 顺序组装（序言/前言/01~18 章/19 附录）
+ *   1. 按 MANIFEST 顺序组装（序言/前言/01~19 章/20 后记/21 附录）
  *   2. 剔除每文件末尾「## 版本变更记录」表（写作元数据）
  *   3. 提取 mermaid 块 → build/.mmd/chNN-figKK.mmd 源，替换为 ![](figs/chNN-figKK.svg)
  *      图号「图 N-K」按章内序号；修复 ch9 裸 `&` 转义
@@ -11,7 +11,7 @@
  *   5. 输出 build/*.book.md + build/manifest.txt（顺序清单）
  *
  * 版次（★ 2026-10-20 增）：
- *   BOOK_EDITION=full（默认）  全书——序言／前言／卷前速查／18 章／后记／附录
+ *   BOOK_EDITION=full（默认）  全书——序言／前言／卷前速查／19 章／后记／附录
  *   BOOK_EDITION=colleague     赠阅版——去掉《序言》（序一~序三）与《前言》末的「致谢」节。
  *                              源 .md 一字不动，仍在构建期剔除；两份产物共用一条管道。
  *
@@ -48,9 +48,9 @@ function findFile(prefix) {
   if (!hit) throw new Error(`preprocess: 未找到源文件 ${prefix}*（实际：${files.slice(0, 8).join(', ')}…）`);
   return hit;
 }
-const chapters = Array.from({ length: 18 }, (_, i) => `${String(i + 1).padStart(2, '0')}-第${i + 1}章`);
+const chapters = Array.from({ length: 19 }, (_, i) => `${String(i + 1).padStart(2, '0')}-第${i + 1}章`);
 // ★ 2026-10-20：赠阅版不装《序言》——三位外部的序（序一~序三）连同署名一并不进书。
-const PREFIXES = ['00-序言', '00-前言', '00-书中产品与人物', ...chapters, '00-后记', '19-附录']
+const PREFIXES = ['00-序言', '00-前言', '00-书中产品与人物', ...chapters, '20-后记', '21-附录']
   .filter(p => !(COLLEAGUE && p === '00-序言'));
 const MANIFEST = PREFIXES.map(prefix => [findFile(prefix), prefix]);
 
@@ -80,7 +80,7 @@ function stripAcknowledgments(text) {
  * 结构：`# 标题` + 空行 + `> 元信息` + 空行 + `---`；替换后剩 `# 标题` + 空行 + `---`
  */
 function stripLeadingMetaQuote(text, base) {
-  if (!['00-序言', '00-前言', '00-后记', '00-书中产品与人物'].includes(base)) return text;
+  if (!['00-序言', '00-前言', '20-后记', '00-书中产品与人物'].includes(base)) return text;
   return text.replace(/^(# .*?)\n\n>.*?\n\n(?=---)/ms, '$1\n\n');
 }
 
@@ -210,7 +210,7 @@ for (const [srcName, base] of MANIFEST) {
   text = extractMermaid(text, chap);
   text = fixCjkQuotes(text);
   text = fitTableDashes(text);
-  text = markUnlisted(text, base === '19-附录');
+  text = markUnlisted(text, base === '21-附录');
   writeFileSync(join(OUT, base + '.book.md'), text);
   manifestRows.push(base);
   console.log(`✓ ${srcName} → ${base}.book.md（${(text.length / 1024).toFixed(0)} KB）`);
