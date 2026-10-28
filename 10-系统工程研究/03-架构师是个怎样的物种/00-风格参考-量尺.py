@@ -307,8 +307,17 @@ print('    本脚本只覆盖其中两型（重读的跨块重复、断线的节
 # ─────────────────────────────────────────────────────────────────────
 
 PRON = re.compile(r'[它其]')
-# B 只认"它／其"与"这·那＋本书固定量词"起头；"这天／这一章／这种人"这类时间与处所指称不算
-HEAD_PRON = re.compile(r'^(它|其|该|此)|^[这那][份件条张处套]')
+# ★ 2026-10-28 补丁（表达优化轮第一步·指代）：计数前先剔"其"作复合词素的九词——
+#   其他／其余／其中／其实／其次／尤其／与其／及其／极其。它们不是代词，算进去会把 A 型虚高
+#   （实测全书 A 203→183 左右，章内最大落差 ch08 6→3）。口径变更留痕见 `00-风格参考.md` §6.19。
+PRON_STRIP = re.compile(r'(其他|其余|其中|其实|其次|尤其|与其|及其|极其)')
+# B 只认"它／其／该"与"这·那＋本书固定量词"起头；"这天／这一章／这种人"这类时间与处所指称不算
+#   口径 v3（2026-10-28）：① 去掉"此"字支——"此消彼长／此外／此时"里"此"是词语的一半，不是代词；
+#   ② "这·那＋量词"只在**量词后不接名词**时才算（"这一份"是承指，"这份数据模型""这件事""那张单子"
+#   中心词都在，是正常指示语）。ch12 实测：11 条里 6 条是这两类假警报。
+#   口径 v4（2026-10-28）：补上**数词**——"这三处／那两条／这两种"里数词夹在指示词与量词之间，
+#   旧码只认"这+量词"紧挨，全书漏报一大类（ch16 的"这三处还解释一个常见现象"即漏网）。
+HEAD_PRON = re.compile(r'^(它|其|该)|^[这那][一二三四五六七八九十百千几两0-9]?[份件条张处套](?=[的了。，；：、？！是也不才就还只行做说给算是有无])')
 # C 只数本书固定量词（件份条张处套）；"这个／那种／这组"是通量词，不承重，不计
 MEAS = re.compile(r'[这那][份件条张处套]')
 
@@ -324,16 +333,19 @@ for ch, path in chapters(BOOK):
             ms = set(MEAS.findall(p))
             if len(ms) >= 2:
                 c_samp.append((len(ms), ''.join(sorted(ms)), p))
-            for s in sentences(p):
-                t = s.strip()
+            for si, s in enumerate(sentences(p)):
+                t0 = s.strip()
+                t = PRON_STRIP.sub('', t0)      # 剔复合词素后再数，见 PRON_STRIP 注释
                 if len(PRON.findall(t)) >= 2:
                     a_cnt += 1
                     if len(a_samp) < 4:
-                        a_samp.append(t)
-                if HEAD_PRON.match(t):
+                        a_samp.append(t0)
+                # ★ 2026-10-28 口径 v2：B 只查**段首句**（判法原话即"只读这一段第一句"）。
+                #   旧码对每句都查，段中间的"它"本有前件，全成假警报（全书 294→约百句）。
+                if si == 0 and HEAD_PRON.match(t):
                     b_cnt += 1
                     if len(b_samp) < 4:
-                        b_samp.append(t)
+                        b_samp.append(t0)
     print('{}  {:>12}  {:>12}  {:>16}'.format(ch, a_cnt, b_cnt, len(c_samp)))
     pron_detail.append((ch, a_samp, b_samp, c_samp))
 
@@ -358,3 +370,49 @@ print('注：三查只把"可能让读者停下来算这是哪一个"的地方�
 print('    四型、固定量词表与三条判法（回指法／换量词法／数词检验）见 §6.19。')
 print('    B 型最宽（段首以"它／其／这·那＋量词"起头的句子都算候选）——逐条过时只问一句：')
 print('    只读这一段第一句，读者知不知道"它"是什么；知道就过，不知道才改。')
+
+# ─────────────────────────────────────────────────────────────────────
+# ⑥-detail 逐条清单（2026-10-28 加，供表达优化轮第一步施工）
+#   用法：`python 00-风格参考-量尺.py --pron 10`
+#   与 ⑥ 同一套正则、同一套散文段口径；差别只是**不截断**：按节列全，带节题。
+#   清单仍是"候选"——判不判在人，判法见 §6.19 三条。
+# ─────────────────────────────────────────────────────────────────────
+if '--pron' in sys.argv:
+    i = sys.argv.index('--pron')
+    want = sys.argv[i + 1].strip() if len(sys.argv) > i + 1 else ''
+    target = None
+    for _ch, _path in chapters(BOOK):
+        if _ch == want.zfill(2):
+            target = (_ch, _path)
+    print()
+    if not target:
+        print('--pron 用法：--pron 10（两位章号）；未找到该章，候选清单未出。')
+    else:
+        _ch, _path = target
+        n_a = n_b = n_c = 0
+        print('=== ⑥-detail ch{} 指代候选逐条（按节；A 一句两候选／B 段首承指／C 段内两种量词） ==='.format(_ch))
+        for _title, _body in blocks(_path):
+            _hits = []
+            for _p in prose_paras(_body):
+                _ms = set(MEAS.findall(_p))
+                if len(_ms) >= 2:
+                    n_c += 1
+                    _hits.append(('C', ''.join(sorted(_ms)), _p))
+                for _si, _s in enumerate(sentences(_p)):
+                    _t0 = _s.strip()
+                    _t = PRON_STRIP.sub('', _t0)
+                    if len(PRON.findall(_t)) >= 2:
+                        n_a += 1
+                        _hits.append(('A', '', _t0))
+                    if _si == 0 and HEAD_PRON.match(_t):
+                        n_b += 1
+                        _hits.append(('B', '', _t0))
+            if _hits:
+                print()
+                print('【{}】'.format(_title.strip() or '（无题）'))
+                for _typ, _ms, _s in _hits:
+                    _tag = '[{}]'.format(_typ) + ('（{}）'.format(_ms) if _ms else '')
+                    print('  {} {}'.format(_tag, _s[:150]))
+        print()
+        print('ch{} 合计：A {} 句｜B {} 句｜C {} 段（与 ⑥ 同口径，未截断）'.format(_ch, n_a, n_b, n_c))
+
