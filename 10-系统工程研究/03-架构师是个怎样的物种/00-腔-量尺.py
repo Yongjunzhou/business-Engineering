@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""《架构师是个怎样的物种？》腔量尺（口径 **v1**，第四病·表达 AI 化）
+"""《架构师是个怎样的物种？》腔量尺（口径 **v1.1**，第四病·表达 AI 化）
 
 判据户口＝`00-风格参考.md` §6.21（总判＋R-腔 1~4）；施工＝`00-逐章表达优化手册.md` §四 F 桶。
 本尺**只报不判**：读数只作筛子（找嫌疑人），判决回到总判——
@@ -29,6 +29,10 @@
     python 00-腔-量尺.py --ch 19       # 单章明细：逐处成串嫌疑（带段号与首句）
     python 00-腔-量尺.py --ref         # 三份范本同尺读数（目标值的来处）
     python 00-腔-量尺.py --susp        # 全书成串嫌疑总表（不截断）
+
+口径 v1.1（2026-10-29，批二开工前）：① `—` 进 RE_NEAT3 的排除字符（旧口径把"以破折号引入的三项并列"
+  整类漏掉，ch07 改完三连反升 1.97→2.36 即此）；② 新增 R-腔 5 元叙述/千 ＋ 同段 ≥2 段数；
+  ③ 新增统称代名/千（§6.19 第五型，只报不判）。**判据一字未改，只改量法；旧三连读数作废。**
 
 口径变更必须先改本文件，并在 `00-腔优化台账.md` §一 留痕。
 """
@@ -79,10 +83,14 @@ META = ['首先', '其次', '再次', '再者', '总之', '综上', '总而言�
         '我们知道', '我们发现', '我们可以看到', '让我们', '我们将', '我们会', '你会发现',
         '更重要的是', '进一步说', '更进一步', '反过来看', '另一方面', '一方面']
 
-RE_NEAT3 = re.compile(r'([^，。；：！？、“”]{1,10})、([^，。；：！？、“”]{1,10})、([^，。；：！？、“”]{1,10})')
+RE_NEAT3 = re.compile(r'([^，。；：！？、“”—]{1,10})、([^，。；：！？、“”—]{1,10})、([^，。；：！？、“”—]{1,10})')
 RE_DASH = re.compile(r'——')
 RE_JUDGE = re.compile(r'(才是|就是在|不是[^。！？]{1,20}?，?而是|不是[^。！？]{1,20}?，是)')
 RE_ABST = re.compile(r'(这件事|这一点|这一层|这一步|这一处|这一条|那件事|这一问|那一问)')
+# R-腔 5 元叙述（v1.1）：作者交代"本章／这一章要做什么、不做什么"
+RE_MNARR = re.compile(r'(本章|这一章|本节|这一节|这一段|这块|这一块)(?=.{0,3}?(只|不|要|是|问|讲|做|说|答|给|把))')
+# 统称代名（v1.1，§6.19 第五型）：只报不判，判法是人读
+RE_GENERIC = re.compile(r'(东西|这些|那些|这一套|这一类|这类|几件|几样|各地|各种|若干|同一样)')
 
 # ── 章级配比线（R-腔 4：配比病不是有无病；上限照范本量级，不设零线） ────────
 # 范本实测（--ref）：数学之美 SD 18.7／ADJ 22.4／段首短 16.7／三连 0.00／破折 0.00
@@ -131,6 +139,9 @@ def chapter(path):
         abst=per1k(len(RE_ABST.findall(body))),
         meta=per1k(sum(body.count(w) for w in META)),
         meta_n=sum(body.count(w) for w in META),
+        mnarr=per1k(len(RE_MNARR.findall(body))),
+        mnarr_multi=sum(1 for p in paras if len(RE_MNARR.findall(p[1])) >= 2),
+        generic=per1k(len(RE_GENERIC.findall(body))),
     )
 
     # ── R-腔 1 成串（单发无罪、连发即病） ────────────────────────────────
@@ -200,9 +211,9 @@ def rows():
 
 
 def show_all():
-    print('=== ① 章级五型（正文；剔章末附录；段号同 --sec） ===')
-    print('章   散文汉字  段  句  句中位  句长SD  邻句长差 │ 段首短%  三连/千  破折/千  判断式  抽象指 │ 成串')
-    print('-' * 104)
+    print('=== ① 章级五型＋两项体检（正文；剔章末附录；段号同 --sec） ===')
+    print('章   散文汉字  段  句  句中位  句长SD  邻句长差 │ 段首短%  三连/千  破折/千  判断式  抽象指 │ 元叙述/千 同段≥2 统称/千 │ 成串')
+    print('-' * 132)
     allst, allsusp = [], []
     for lbl, path in rows():
         st, _, susp = chapter(path)
@@ -210,14 +221,15 @@ def show_all():
         allsusp.append((lbl, susp))
         print(f'{lbl:<5}{st["han"]:>7}{st["paras"]:>5}{st["sents"]:>4}{st["smed"]:>7.0f}{st["sd"]:>7.1f}{st["adj"]:>9.1f} │'
               f'{st["head_short"]:>7.1f}{st["neat3"]:>8.2f}{st["dash"]:>8.2f}{st["judge"]:>7.2f}{st["abst"]:>7.2f} │'
-              f'{len(susp):>5}')
+              f'{st["mnarr"]:>9.2f}{st["mnarr_multi"]:>7}{st["generic"]:>7.2f} │{len(susp):>5}')
     med = lambda k: statistics.median([s[k] for _, s in allst])
     tot = sum(s['han'] for _, s in allst)
-    print('-' * 104)
+    print('-' * 132)
     print(f'合计 散文 {tot:,}｜段 {sum(s["paras"] for _, s in allst)}｜句 {sum(s["sents"] for _, s in allst)}'
           f'｜**中位** 句中位 {med("smed"):.0f}／SD {med("sd"):.1f}／邻差 {med("adj"):.1f}'
           f'／段首短 {med("head_short"):.1f}%／三连 {med("neat3"):.2f}／破折 {med("dash"):.2f}'
-          f'／判断式 {med("judge"):.2f}／抽象指 {med("abst"):.2f}｜成串 {sum(len(s) for _, s in allsusp)} 处')
+          f'／判断式 {med("judge"):.2f}／抽象指 {med("abst"):.2f}／元叙述 {med("mnarr"):.2f}／统称 {med("generic"):.2f}'
+          f'｜同段元叙述≥2 共 {sum(s["mnarr_multi"] for _, s in allst)} 段｜成串 {sum(len(s) for _, s in allsusp)} 处')
 
     print('\n=== ② 章级配比线（R-腔 4；目标线，超线只立案、不作逐句刀） ===')
     hit = 0
@@ -282,7 +294,8 @@ def show_ch(arg):
     print(f'=== ch{lbl} 腔量尺明细 ===')
     print(f'散文 {st["han"]}｜段 {st["paras"]}｜句 {st["sents"]}｜句中位 {st["smed"]:.0f}｜SD {st["sd"]:.1f}'
           f'｜邻差 {st["adj"]:.1f}｜段首短 {st["head_short"]:.1f}%｜三连 {st["neat3"]:.2f}｜破折 {st["dash"]:.2f}'
-          f'｜判断式 {st["judge"]:.2f}｜抽象指 {st["abst"]:.2f}｜成串 {len(susp)} 处')
+          f'｜判断式 {st["judge"]:.2f}｜抽象指 {st["abst"]:.2f}｜元叙述 {st["mnarr"]:.2f}/千（同段≥2 {st["mnarr_multi"]} 段）'
+          f'｜统称 {st["generic"]:.2f}/千｜成串 {len(susp)} 处')
     print('\n成串嫌疑（R-腔 1；段号＝--sec 同源段号）')
     for no, typ, why, head in sorted(susp):
         print(f'  段{no:<4}{typ:<8}{why:<16}{head}')
