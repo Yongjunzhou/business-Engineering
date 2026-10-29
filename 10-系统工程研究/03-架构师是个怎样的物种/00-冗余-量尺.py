@@ -125,6 +125,14 @@ def items():
     return out
 
 
+def norm_chapter(arg):
+    """章号归一：'后'／'后记'／'20' 都指向后记（标签 '后'）；其余按两位章号补齐。"""
+    a = (arg or '').strip()
+    if a in ('后', '后记', '20'):
+        return '后'
+    return a.zfill(2)
+
+
 def is_prose(t):
     t = t.strip()
     if not t:
@@ -655,7 +663,7 @@ for tag, d in data.items():
 
 if '--blind' in sys.argv:
     i = sys.argv.index('--blind')
-    want = sys.argv[i + 1].strip().zfill(2) if len(sys.argv) > i + 1 else '10'
+    want = norm_chapter(sys.argv[i + 1]) if len(sys.argv) > i + 1 else '10'
     path = path_of.get(want)
     d = data.get(want)
     if not d or not path:
@@ -736,7 +744,7 @@ if '--blind' in sys.argv:
 
 if '--sec' in sys.argv:
     i = sys.argv.index('--sec')
-    want = sys.argv[i + 1].strip().zfill(2) if len(sys.argv) > i + 1 else '10'
+    want = norm_chapter(sys.argv[i + 1]) if len(sys.argv) > i + 1 else '10'
     d = data.get(want)
     if not d:
         print('--sec 用法：--sec 10（两位章号）；未找到该章。')
@@ -779,7 +787,7 @@ if '--sec' in sys.argv:
 
 if '--show' in sys.argv:
     i = sys.argv.index('--show')
-    want = sys.argv[i + 1].strip().zfill(2) if len(sys.argv) > i + 1 else '10'
+    want = norm_chapter(sys.argv[i + 1]) if len(sys.argv) > i + 1 else '10'
     d = data.get(want)
     if not d:
         print('--show 用法：--show 10（两位章号）；未找到该章。')
