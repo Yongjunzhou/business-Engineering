@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""《架构师是个怎样的物种？》腔量尺（口径 **v1.1**，第四病·表达 AI 化）
+"""《架构师是个怎样的物种？》腔量尺（口径 **v1.2**，第四病·表达 AI 化）
 
 判据户口＝`00-风格参考.md` §6.21（总判＋R-腔 1~4）；施工＝`00-逐章表达优化手册.md` §四 F 桶。
 本尺**只报不判**：读数只作筛子（找嫌疑人），判决回到总判——
@@ -13,6 +13,14 @@
   理由＝实测：附录 C 误解清单是 `"……"——错。` 八条连排，把它算进来破折号与等长三连
   各虚高一倍（ch08 破折 9.30→5.89‰、ch01 7.56→3.67‰）。与第三病"裸短段%混体例件"
   同型：分子里混体例件，不扣就误判。段号仍按原序编号（附录段只跳过、不重排）。
+
+★ 口径 v1.2（2026-10-29 批五开工落）：上面那条决定 **v1.1 只落了一半**——它按
+  `paragraphs()` 返回的 `heading`（最近一个二／三级标题）判，而附录小节名叫
+  「A 本章概念总图」「B 本章的能力级」「C 自查」，**不含"附录"二字**，故附录下的散文段
+  一直留在池里（实测全书 74 段＝2.4%／3,069 汉字／17 记破折）。**v1.2 改按"块"判**
+  （`## 附录` 整块剔），切法借用 `00-腔-附录核查.py` 的 `parse()`，并**每次跑都自校验**
+  与 `paragraphs()` 的段数／段文本逐段相同（池漂了就报错，不许静默）。判据一字未改。
+  §二／§二·补 两张底账按旧口径留痕（与前三病同池可比），**v1.2 读数见台账 §二·补2**。
 
 读数八项（① 章级五型＋② 成串）
   ① 节奏：句长标准差 SD｜邻句长差 ADJ          ——越低越平（机器相）
@@ -52,6 +60,7 @@ if hasattr(sys.stdout, 'reconfigure'):
 BOOK = os.path.dirname(os.path.abspath(__file__))
 SAMPLE = os.path.join(BOOK, '00-风格参考-样本.md')
 BASE = os.path.join(BOOK, '00-冗余-量尺.py')
+APX = os.path.join(BOOK, '00-腔-附录核查.py')
 
 # ── 段池：直接复用冗余量尺（R7 统一） ─────────────────────────────────────
 _spec = importlib.util.spec_from_file_location('redund_ruler', BASE)
@@ -61,6 +70,22 @@ with contextlib.redirect_stdout(io.StringIO()):      # 复用其 paragraphs()，
 paragraphs = _R.paragraphs
 items = _R.items
 norm_chapter = _R.norm_chapter
+
+# ── 块级切法（口径 v1.2）：附录核查脚本自带与 paragraphs() 的逐段自校验 ──────
+_spec2 = importlib.util.spec_from_file_location('appendix_ruler', APX)
+_A = importlib.util.module_from_spec(_spec2)
+with contextlib.redirect_stdout(io.StringIO()):
+    _spec2.loader.exec_module(_A)
+
+
+def pool(path):
+    """口径 v1.2 段池：按 `## ` 块剔章末附录整块；段号沿用 paragraphs() 原序（跳过不重排）。
+
+    每跑一次都与 `paragraphs()` 比段数、逐段比段文本——池漂了立刻报错，不许静默降级。
+    """
+    ps = _A.parse(path)
+    _A.verify(path, ps)
+    return [(p['no'], p['text'], p['kind'], p['block']) for p in ps if '附录' not in p['block']]
 
 HAN = re.compile(r'[\u4e00-\u9fff]')
 han = lambda s: len(HAN.findall(s))
@@ -109,12 +134,7 @@ def neat3_count(text):
 
 def chapter(path):
     """返回 (指标 dict, 段表 list, 成串 list)。段号沿用 paragraphs() 的原 1 起序号。"""
-    paras, no = [], 0
-    for text, kind, heading in paragraphs(path):
-        no += 1
-        if '附录' in heading:          # 口径 v1：章末附录不入段池（段号只跳过不重排）
-            continue
-        paras.append((no, text, kind, heading))
+    paras = pool(path)                     # 口径 v1.2：附录按块整块剔
     body = '\n'.join(p[1] for p in paras)
     sents = []
     per_para = []
@@ -211,7 +231,7 @@ def rows():
 
 
 def show_all():
-    print('=== ① 章级五型＋两项体检（正文；剔章末附录；段号同 --sec） ===')
+    print('=== ① 章级五型＋两项体检（正文；口径 v1.2 按块剔章末附录；段号同 --sec） ===')
     print('章   散文汉字  段  句  句中位  句长SD  邻句长差 │ 段首短%  三连/千  破折/千  判断式  抽象指 │ 元叙述/千 同段≥2 统称/千 │ 成串')
     print('-' * 132)
     allst, allsusp = [], []
@@ -277,7 +297,7 @@ def show_all():
     print('\n=== ④ 元话语体检（只报不判；实测低于两范本，不列刀口） ===')
     mc = Counter()
     for lbl, path in rows():
-        t = '\n'.join(p[0] for p in paragraphs(path))
+        t = '\n'.join(p[1] for p in pool(path))
         for w in META:
             mc[w] += t.count(w)
     nz = {k: v for k, v in mc.items() if v}

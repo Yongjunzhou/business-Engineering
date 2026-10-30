@@ -16,7 +16,7 @@
     python 00-腔-判留抽样.py --seed 7        # 换一组抽样
     python 00-腔-判留抽样.py --ch 14 18      # 只在指定章里抽
 
-产出（都在本目录 `.work-p4/` 下，不入库）：
+产出（都在本目录 `.work-p5/` 下，不入库）：
     audit-items.md   题面——只有原句与标的，交给复核者
     audit-key.tsv    底稿——编号／章／段号／族／词／原判，父代理核一致率用
 
@@ -35,7 +35,7 @@ if hasattr(sys.stdout, 'reconfigure'):
 
 BOOK = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.join(BOOK, '00-冗余-量尺.py')
-OUT = os.path.join(BOOK, '.work-p4')
+OUT = os.path.join(BOOK, '.work-p5')
 
 _spec = importlib.util.spec_from_file_location('redund_ruler', BASE)
 R = importlib.util.module_from_spec(_spec)
@@ -123,7 +123,12 @@ def main():
     if '--seed' in a:
         seed = int(a[a.index('--seed') + 1])
     if '--ch' in a:
-        chapters = set(x.zfill(2) for x in a[a.index('--ch') + 1:])
+        tail = []
+        for x in a[a.index('--ch') + 1:]:
+            if x.startswith('--'):
+                break
+            tail.append(x)
+        chapters = set(x.zfill(2) for x in tail)
 
     dash, gen = pools(chapters)
     print(f'池子：破折 {len(dash)} 记｜统称 {len(gen)} 记（附录块已剔）')
@@ -148,7 +153,7 @@ def main():
 
     open(os.path.join(OUT, 'audit-items.md'), 'w', encoding='utf-8', newline='').write('\n'.join(lines))
     open(os.path.join(OUT, 'audit-key.tsv'), 'w', encoding='utf-8', newline='').write('\n'.join(key))
-    print('题面 → .work-p4/audit-items.md｜底稿 → .work-p4/audit-key.tsv')
+    print('题面 → .work-p5/audit-items.md｜底稿 → .work-p5/audit-key.tsv')
 
 
 if __name__ == '__main__':
