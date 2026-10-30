@@ -40,6 +40,13 @@
   一句话记法：**①管词义／②管漏报／③管"段"的两义／④管"条＋中心词"**。
   v1.2 读数见台账 §二·补2，v1.3 读数见 §二·补3（两栏并列）。
 
+★ 口径 v1.4（2026-10-30，用户裁「同意你的建议」后落，**只改破折这一条线的适用范围与性质**，
+  其余六项读数与成串阈值一字不动）：
+  **破折线由"全书单一线（章级 ≤1.80‰）"改为"分语体线"**——论证块（argue）≤1.80 立案，
+  案例／章首／小结／认知反转四类 ≤2.20 只作提示；**章级破折‰ 仍报、不再是超线判据**。
+  **线的性质写死：配比提示、不是刀口**（本轮不再压文）。
+  取证与"为什么不把超线洗白"的看法见 LINE 上方注释与台账 §14.5；逐章读数落 §14.5 表。
+
 读数八项（① 章级五型＋② 成串）
   ① 节奏：句长标准差 SD｜邻句长差 ADJ          ——越低越平（机器相）
   ② 段首短断言%（段首句 ≤10 汉字）              ——越高越像模板起手
@@ -148,7 +155,18 @@ RE_GENERIC = re.compile(r'(东西|这些(?!年|天|日子)|那些(?!年|天|日�
 # ── 章级配比线（R-腔 4：配比病不是有无病；上限照范本量级，不设零线） ────────
 # 范本实测（--ref）：数学之美 SD 18.7／ADJ 22.4／段首短 16.7／三连 0.00／破折 0.00
 #                   DDIA     SD 17.9／ADJ 18.4／段首短  7.7／三连 0.83／破折 0.83
-LINE = dict(sd=16.0, adj=17.0, head_short=16.0, neat3=0.80, dash=1.80)
+#
+# ★ 口径 v1.4（2026-10-30，用户裁「同意你的建议」后落）：**破折线由"全书单一线"改为"分语体线"，
+#   并把这条线的性质写死为"配比提示、不是刀口"**。
+#   来由＝收口批取证（台账 §14.5）：**全书论证块合计 1.80‰ 恰在线上**（218 记／121,192 汉字），
+#   而章级超线的 11 章里超出的部分主要落在章首 2.70／认知反转 2.81／小结 2.61／案例 1.93；
+#   ch10~13 四章零记（同一作者换题材就没了）——**密度是题材的函数**。
+#   **但分语体并不把超线的章洗白**：逐章算论证块，仍有 **11／20 章**在 1.80 之上
+#   （ch14 4.66／ch19 4.61／ch08 3.25…）。所以这一改的落点**不是"改完就达标"**，
+#   而是把适用范围与性质写明：**论证块 ≤1.80 立案、其余四类 ≤2.20 提示；全部只作提示，本轮不再压文**
+#   （逐处审计与两轮盲判无一记判撤；反向抽样里撤破折那处，盲判反而选回了破折）。
+#   **章级破折‰ 仍报，但不再是超线判据**——跨轮对比要用它，所以留着。
+LINE = dict(sd=16.0, adj=17.0, head_short=16.0, neat3=0.80, dash=1.80, dash_other=2.20)
 
 
 def neat3_count(text):
@@ -194,6 +212,14 @@ def chapter(path):
     ab, abq = abst_split(body)                 # v1.3：抽象指／指量短语分栏
     mn = mnarr_count(body)                     # v1.3：章／节级、剔章首几问
     blk = len(RE_MNARR_BLK.findall(body))      # v1.3：段／块起手，只报不判
+    # 口径 v1.4：分语体破折（论证块的线才算线，见 LINE 上方注释）
+    byk = {}
+    for _, text, kind, _ in paras:
+        h0, n0 = byk.get(kind, (0, 0))
+        byk[kind] = (h0 + han(text), n0 + text.count('——'))
+    def kpm(k):
+        h0, n0 = byk.get(k, (0, 0))
+        return 1000.0 * n0 / h0 if h0 else 0.0
     stats = dict(
         han=total, paras=len(paras), sents=len(sents),
         smed=statistics.median(sl) if sl else 0,
@@ -211,6 +237,9 @@ def chapter(path):
         mnarr_multi=sum(1 for p in paras if mnarr_count(p[1]) >= 2),
         mnarr_blk=per1k(blk), mnarr_blk_n=blk,
         generic=per1k(len(RE_GENERIC.findall(body))), generic_n=len(RE_GENERIC.findall(body)),
+        dash_argue=kpm('argue'), dash_case=kpm('case'), dash_open=kpm('open'),
+        dash_sum=kpm('summary'), dash_rev=kpm('reversal'),
+        han_argue=byk.get('argue', (0, 0))[0], dash_n_argue=byk.get('argue', (0, 0))[1],
     )
 
     # ── R-腔 1 成串（单发无罪、连发即病） ────────────────────────────────
@@ -301,6 +330,7 @@ def show_all():
           f'｜同段元叙述≥2 共 {sum(s["mnarr_multi"] for _, s in allst)} 段｜成串 {sum(len(s) for _, s in allsusp)} 处')
 
     print('\n=== ② 章级配比线（R-腔 4；目标线，超线只立案、不作逐句刀） ===')
+    print('   ★ 口径 v1.4：破折这一行改判**论证块**（argue）≤1.80；章级破折‰ 仍报、不再是超线判据')
     hit = 0
     for lbl, st in allst:
         bad = []
@@ -312,29 +342,29 @@ def show_all():
             bad.append(f'段首短 {st["head_short"]:.1f}%>{LINE["head_short"]}%')
         if st['neat3'] > LINE['neat3']:
             bad.append(f'三连 {st["neat3"]:.2f}>{LINE["neat3"]}')
-        if st['dash'] > LINE['dash']:
-            bad.append(f'破折 {st["dash"]:.2f}>{LINE["dash"]}')
+        if st['dash_argue'] > LINE['dash']:
+            bad.append(f'论证块破折 {st["dash_argue"]:.2f}>{LINE["dash"]}（章级 {st["dash"]:.2f}）')
         if bad:
             hit += 1
             print(f'  ch{lbl:<3}{"｜".join(bad)}')
     print(f'  —— 离目标线 {hit}／{len(allst)} 件（目标线是全书终值，不是现行红线；排产看下表）')
 
-    # ── 排产：缺口分（五型对目标线的归一化缺口之和；破折与三连权重同，节奏两项各半） ──
+    # ── 排产：缺口分（五型对目标线的归一化缺口之和；破折按论证块算） ──
     def gap(st):
         g = 0.0
         g += max(0.0, (LINE['sd'] - st['sd']) / LINE['sd']) * 0.75
         g += max(0.0, (LINE['adj'] - st['adj']) / LINE['adj']) * 0.75
         g += max(0.0, (st['head_short'] - LINE['head_short']) / LINE['head_short'])
         g += max(0.0, (st['neat3'] - LINE['neat3']) / LINE['neat3'])
-        g += max(0.0, (st['dash'] - LINE['dash']) / LINE['dash'])
+        g += max(0.0, (st['dash_argue'] - LINE['dash']) / LINE['dash'])
         return g
-    print('\n=== ③ 排产次序（缺口分＝五型对目标线的归一化缺口之和） ===')
+    print('\n=== ③ 排产次序（缺口分＝五型对目标线的归一化缺口之和；破折用论证块） ===')
     rank = sorted(((gap(st), lbl, st) for lbl, st in allst), reverse=True)
     print('序  章   缺口分  主症')
     for i, (g, lbl, st) in enumerate(rank, 1):
         z = []
-        if st['dash'] > LINE['dash']:
-            z.append(f'破折 {st["dash"]:.2f}')
+        if st['dash_argue'] > LINE['dash']:
+            z.append(f'论证块破折 {st["dash_argue"]:.2f}')
         if st['neat3'] > LINE['neat3']:
             z.append(f'三连 {st["neat3"]:.2f}')
         if st['head_short'] > LINE['head_short']:
@@ -360,6 +390,22 @@ def show_all():
     print(f'  分子逐项（全书）：元叙述 {sum(s["mnarr_n"] for _, s in allst)}'
           f'｜抽象指 {sum(s["abst_n"] for _, s in allst)}｜统称 {sum(s["generic_n"] for _, s in allst)}')
 
+    print('\n=== ⑥ 破折分语体（口径 v1.4；论证块 ≤1.80 判线，其余四类 ≤2.20 只作提示） ===')
+    AGG = {}
+    for lbl, st in allst:
+        pass
+    for k, lab, line in (('dash_argue', '论证 argue', 1.80), ('dash_case', '案例 case', 2.20),
+                         ('dash_open', '章首 open', 2.20), ('dash_sum', '小结 summary', 2.20),
+                         ('dash_rev', '认知反转 reversal', 2.20)):
+        vals = [s[k] for _, s in allst]
+        over = [lbl for lbl, s in allst if s[k] > line]
+        print(f'  {lab:<18} 中位 {statistics.median(vals):.2f}‰｜最高 {max(vals):.2f}‰'
+              f'｜超 {line:.2f} 的 {len(over)}／{len(allst)} 章'
+              + (f'：{"／".join("ch" + x for x in over)}' if over else ''))
+    print('  全书：论证块 ' + '%.2f‰' % (1000.0 * sum(s['dash_n_argue'] for _, s in allst) / sum(s['han_argue'] for _, s in allst))
+          + '（' + str(sum(s['dash_n_argue'] for _, s in allst)) + ' 记／' + f'{sum(s["han_argue"] for _, s in allst):,} 汉字）'
+          + '；章级破折合计 ' + str(sum(int(round(s['dash'] * s['han'] / 1000)) for _, s in allst)) + ' 记（只报，不作超线判据）')
+
 
 def show_ch(arg):
     lbl = norm_chapter(arg)
@@ -373,6 +419,9 @@ def show_ch(arg):
           f'｜邻差 {st["adj"]:.1f}｜段首短 {st["head_short"]:.1f}%｜三连 {st["neat3"]:.2f}｜破折 {st["dash"]:.2f}'
           f'｜判断式 {st["judge"]:.2f}｜抽象指 {st["abst"]:.2f}｜元叙述 {st["mnarr"]:.2f}/千（同段≥2 {st["mnarr_multi"]} 段）'
           f'｜统称 {st["generic"]:.2f}/千｜成串 {len(susp)} 处')
+    print(f'破折分语体（口径 v1.4）：论证 {st["dash_argue"]:.2f}（线 1.80）｜案例 {st["dash_case"]:.2f}'
+          f'｜章首 {st["dash_open"]:.2f}｜小结 {st["dash_sum"]:.2f}｜认知反转 {st["dash_rev"]:.2f}'
+          f'（其余四类提示线 2.20、不作刀口）')
     print('\n成串嫌疑（R-腔 1；段号＝--sec 同源段号）')
     for no, typ, why, head in sorted(susp):
         print(f'  段{no:<4}{typ:<8}{why:<16}{head}')
