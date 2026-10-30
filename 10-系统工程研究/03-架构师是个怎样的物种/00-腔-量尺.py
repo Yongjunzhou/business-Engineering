@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""《架构师是个怎样的物种？》腔量尺（口径 **v1.2**，第四病·表达 AI 化）
+"""《架构师是个怎样的物种？》腔量尺（口径 **v1.3**，第四病·表达 AI 化）
 
 判据户口＝`00-风格参考.md` §6.21（总判＋R-腔 1~4）；施工＝`00-逐章表达优化手册.md` §四 F 桶。
 本尺**只报不判**：读数只作筛子（找嫌疑人），判决回到总判——
@@ -21,6 +21,24 @@
   （`## 附录` 整块剔），切法借用 `00-腔-附录核查.py` 的 `parse()`，并**每次跑都自校验**
   与 `paragraphs()` 的段数／段文本逐段相同（池漂了就报错，不许静默）。判据一字未改。
   §二／§二·补 两张底账按旧口径留痕（与前三病同池可比），**v1.2 读数见台账 §二·补2**。
+
+★ 口径 v1.3（2026-10-30 收口批开工落；批五三位主笔各报一笔，**误报与漏报同时存在**，
+  问题不在阈值在正则；判据一字未动，四笔全改在"谁算一记"上）：
+  ① `RE_GENERIC` 加负向排除：**"这些年／那些年／这些天"是时间词、不是统称代名**
+     （ch09 段11／段89 各误报一记）。
+  ② `RE_MNARR` 的 lookahead 由 3 字放宽到 6 字，动词集并入 **引／拿／追／画／推／用／叫／
+     办／交／磨／量／走／立／收**——旧口径漏"本章前面引过一次"（ch16 段84）这一类。
+  ③ `RE_MNARR` **只认章／节级标记**；"这一段／这块／这一块"另立 `RE_MNARR_BLK`
+     **单列体检（只报不判）**：本书"这一段"多为**过程的段**（ch04 段17"这一段是创造性的"
+     ＝流程阶段），不是"本章的段落"，旧口径在 ch04 误报约 45%，且按章差别极大。
+  ④ `RE_ABST` 拆两栏：标记后接**中心词**者归"**指量短语**"（只报，如 ch05 段99"这一层边界"、
+     ch16 段80"这一条机制"），其余才是**抽象指（独用回指）**。中心词起首表 `CENTER` 从实测取，
+     新增先加表并在台账 §一 留痕——不许凭感觉扩表。
+  ⑤ 一条体例豁免：**章首几问起句**（"本章，下面这几问，你应该答得出来。"，18 章各一记）
+     不进元叙述分子——它是体例装置、由 `00-章首几问-核对.py` 管，混进来会把分子顶高一成二。
+
+  一句话记法：**①管词义／②管漏报／③管"段"的两义／④管"条＋中心词"**。
+  v1.2 读数见台账 §二·补2，v1.3 读数见 §二·补3（两栏并列）。
 
 读数八项（① 章级五型＋② 成串）
   ① 节奏：句长标准差 SD｜邻句长差 ADJ          ——越低越平（机器相）
@@ -112,10 +130,20 @@ RE_NEAT3 = re.compile(r'([^，。；：！？、“”—]{1,10})、([^，。；
 RE_DASH = re.compile(r'——')
 RE_JUDGE = re.compile(r'(才是|就是在|不是[^。！？]{1,20}?，?而是|不是[^。！？]{1,20}?，是)')
 RE_ABST = re.compile(r'(这件事|这一点|这一层|这一步|这一处|这一条|那件事|这一问|那一问)')
-# R-腔 5 元叙述（v1.1）：作者交代"本章／这一章要做什么、不做什么"
-RE_MNARR = re.compile(r'(本章|这一章|本节|这一节|这一段|这块|这一块)(?=.{0,3}?(只|不|要|是|问|讲|做|说|答|给|把))')
+# ④ 指量短语：标记后接中心词（"这一条＋机制"＝指物，不是抽象回指）。表从实测取，新增先留痕。
+CENTER = set('线界边内备差变机规')
+# R-腔 5 元叙述（v1.1；v1.3 改）：作者交代"本章／这一章要做什么、不做什么"
+# ② 窗口 3→6，③ 只认章／节级
+RE_MNARR = re.compile(r'(本章|这一章|本节|这一节)'
+                      r'(?=.{0,6}?(只|不|要|是|问|讲|做|说|答|给|把|引|拿|追|画|推|用|叫|办|交|磨|量|走|立|收))')
+# ⑤ 体例豁免：章首几问起句（18 章各一记），算体例装置不算腔
+RE_MNARR_EXEMPT = re.compile(r'(本章|这一章)(?=，下面这几问)')
+# ③ 段／块起手：只报不判（分不清"过程的段"与"本章的段落"）
+RE_MNARR_BLK = re.compile(r'(这一段|这块|这一块)'
+                          r'(?=.{0,6}?(只|不|要|是|问|讲|做|说|答|给|把|引|拿|追|画|推|用|叫|办|交|磨|量|走|立|收))')
 # 统称代名（v1.1，§6.19 第五型）：只报不判，判法是人读
-RE_GENERIC = re.compile(r'(东西|这些|那些|这一套|这一类|这类|几件|几样|各地|各种|若干|同一样)')
+# ① v1.3 排除"这些年／那些年／这些天"（时间词，非统称）
+RE_GENERIC = re.compile(r'(东西|这些(?!年|天|日子)|那些(?!年|天|日子)|这一套|这一类|这类|几件|几样|各地|各种|若干|同一样)')
 
 # ── 章级配比线（R-腔 4：配比病不是有无病；上限照范本量级，不设零线） ────────
 # 范本实测（--ref）：数学之美 SD 18.7／ADJ 22.4／段首短 16.7／三连 0.00／破折 0.00
@@ -130,6 +158,22 @@ def neat3_count(text):
         if a >= 2 and max(a, b, c) - min(a, b, c) <= 1:
             n += 1
     return n
+
+
+def mnarr_count(text):
+    """R-腔 5 元叙述（口径 v1.3）：章／节级，剔章首几问起句。"""
+    return sum(1 for m in RE_MNARR.finditer(text) if not RE_MNARR_EXEMPT.match(text, m.start()))
+
+
+def abst_split(text):
+    """口径 v1.3：返回（抽象指·独用回指, 指量短语·标记后接中心词）。"""
+    a = q = 0
+    for m in RE_ABST.finditer(text):
+        if m.end() < len(text) and text[m.end()] in CENTER:
+            q += 1
+        else:
+            a += 1
+    return a, q
 
 
 def chapter(path):
@@ -147,6 +191,9 @@ def chapter(path):
     per1k = lambda n: 1000.0 * n / total if total else 0.0
     adj = [abs(sl[i] - sl[i - 1]) for i in range(1, len(sl))]
     head_short = sum(1 for ss in per_para if ss and han(ss[0]) <= SHORT_HEAD)
+    ab, abq = abst_split(body)                 # v1.3：抽象指／指量短语分栏
+    mn = mnarr_count(body)                     # v1.3：章／节级、剔章首几问
+    blk = len(RE_MNARR_BLK.findall(body))      # v1.3：段／块起手，只报不判
     stats = dict(
         han=total, paras=len(paras), sents=len(sents),
         smed=statistics.median(sl) if sl else 0,
@@ -156,12 +203,14 @@ def chapter(path):
         neat3=per1k(neat3_count(body)),
         dash=per1k(len(RE_DASH.findall(body))),
         judge=per1k(len(RE_JUDGE.findall(body))),
-        abst=per1k(len(RE_ABST.findall(body))),
+        abst=per1k(ab), abst_n=ab,
+        abstq=per1k(abq), abstq_n=abq,
         meta=per1k(sum(body.count(w) for w in META)),
         meta_n=sum(body.count(w) for w in META),
-        mnarr=per1k(len(RE_MNARR.findall(body))),
-        mnarr_multi=sum(1 for p in paras if len(RE_MNARR.findall(p[1])) >= 2),
-        generic=per1k(len(RE_GENERIC.findall(body))),
+        mnarr=per1k(mn), mnarr_n=mn,
+        mnarr_multi=sum(1 for p in paras if mnarr_count(p[1]) >= 2),
+        mnarr_blk=per1k(blk), mnarr_blk_n=blk,
+        generic=per1k(len(RE_GENERIC.findall(body))), generic_n=len(RE_GENERIC.findall(body)),
     )
 
     # ── R-腔 1 成串（单发无罪、连发即病） ────────────────────────────────
@@ -231,7 +280,7 @@ def rows():
 
 
 def show_all():
-    print('=== ① 章级五型＋两项体检（正文；口径 v1.2 按块剔章末附录；段号同 --sec） ===')
+    print('=== ① 章级五型＋两项体检（正文；段池 v1.2 按块剔章末附录、量法 v1.3；段号同 --sec） ===')
     print('章   散文汉字  段  句  句中位  句长SD  邻句长差 │ 段首短%  三连/千  破折/千  判断式  抽象指 │ 元叙述/千 同段≥2 统称/千 │ 成串')
     print('-' * 132)
     allst, allsusp = [], []
@@ -302,6 +351,14 @@ def show_all():
             mc[w] += t.count(w)
     nz = {k: v for k, v in mc.items() if v}
     print('  全书合计', sum(nz.values()), '处 →', dict(sorted(nz.items(), key=lambda x: -x[1])))
+
+    print('\n=== ⑤ 两项体检（口径 v1.3 新增，只报不判、不入任何分子） ===')
+    print(f'  段／块起手（这一段／这块／这一块）全书 {sum(s["mnarr_blk_n"] for _, s in allst)} 记')
+    print('    —— 分不清"过程的段"与"章节的段"，故从元叙述分子里拆出来（ch04 误报约 45%）')
+    print(f'  指量短语（标记＋中心词，CENTER={"".join(sorted(CENTER))}）全书 {sum(s["abstq_n"] for _, s in allst)} 记')
+    print('    —— 标记指一件具体物，不是抽象回指，故从抽象指分子里拆出来')
+    print(f'  分子逐项（全书）：元叙述 {sum(s["mnarr_n"] for _, s in allst)}'
+          f'｜抽象指 {sum(s["abst_n"] for _, s in allst)}｜统称 {sum(s["generic_n"] for _, s in allst)}')
 
 
 def show_ch(arg):

@@ -16,7 +16,7 @@
     python 00-腔-判留抽样.py --seed 7        # 换一组抽样
     python 00-腔-判留抽样.py --ch 14 18      # 只在指定章里抽
 
-产出（都在本目录 `.work-p5/` 下，不入库）：
+产出（都在本目录 `.work-p6/` 下，不入库）：
     audit-items.md   题面——只有原句与标的，交给复核者
     audit-key.tsv    底稿——编号／章／段号／族／词／原判，父代理核一致率用
 
@@ -35,14 +35,15 @@ if hasattr(sys.stdout, 'reconfigure'):
 
 BOOK = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.join(BOOK, '00-冗余-量尺.py')
-OUT = os.path.join(BOOK, '.work-p5')
+OUT = os.path.join(BOOK, '.work-p6')
 
 _spec = importlib.util.spec_from_file_location('redund_ruler', BASE)
 R = importlib.util.module_from_spec(_spec)
 with contextlib.redirect_stdout(io.StringIO()):      # 屏蔽被 import 模块的自跑输出
     _spec.loader.exec_module(R)
 
-GENERIC = re.compile(r'(东西|这些|那些|这一套|这一类|这类|几件|几样|各地|各种|若干|同一样)')
+# 与 00-腔-量尺.py 口径 v1.3 同一条正则（"这些年／那些年"不算统称；改口径两边一起改）
+GENERIC = re.compile(r'(东西|这些(?!年|天|日子)|那些(?!年|天|日子)|这一套|这一类|这类|几件|几样|各地|各种|若干|同一样)')
 
 
 def parse(path):
@@ -153,7 +154,7 @@ def main():
 
     open(os.path.join(OUT, 'audit-items.md'), 'w', encoding='utf-8', newline='').write('\n'.join(lines))
     open(os.path.join(OUT, 'audit-key.tsv'), 'w', encoding='utf-8', newline='').write('\n'.join(key))
-    print('题面 → .work-p5/audit-items.md｜底稿 → .work-p5/audit-key.tsv')
+    print('题面 → .work-p6/audit-items.md｜底稿 → .work-p6/audit-key.tsv')
 
 
 if __name__ == '__main__':
