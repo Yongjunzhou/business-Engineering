@@ -133,9 +133,9 @@ def main():
                     bad.append('%s 号：落点 ch%d 超出 %d 章' % (n, k, CH_NUM))
                 elif k not in chs:
                     bad.append('%s 号：落点 ch%d 在教材书里找不到那一章' % (n, k))
-            if '附录' in col03 and not os.path.exists(
-                    os.path.join(BOOK, '19-附录.md')):
-                bad.append('%s 号：落点写「附录」，但教材书里找不到 19-附录.md' % n)
+            if '附录' in col03 and not glob.glob(
+                    os.path.join(BOOK, '[0-9][0-9]-附录.md')):
+                bad.append('%s 号：落点写「附录」，但教材书里找不到 NN-附录.md' % n)
         for num in re.findall(r'单元(\d+)', col03):
             k = int(num)
             if not 1 <= k <= UNIT_NUM:
