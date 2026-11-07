@@ -8,6 +8,10 @@
 
 用法：`python 00-三条线索-核对.py`（在本目录下运行）。
 口径与台账见同目录 `00-三条线索.md`（线索的单一权威）。
+
+2026-11-06 批〇：架构篇由 10 章改为 12 章（全书 21 章），明线／暗线各 20 站
+（ch2~ch21）、在场矩阵 21 列。第12~21 章正文尚未重写——本脚本按磁盘上的正文文件统计，
+对**缺正文的章**单列一行如实报「待重写、本章不参与统计」：既不算作通过，也不因缺章报错退出。
 """
 import os
 import re
@@ -25,8 +29,11 @@ MEMBERS = [('冰链', '石军'), ('冰链', '林涛'), ('冰链', '赵刚'), ('�
            ('恒信', '罗建'), ('恒信', '顾言'), ('恒信', '曹峰'),
            ('恒信', '王默'), ('恒信', '苏婷'), ('恒信', '郑亮')]
 # 主案例章（该线成员应全员在场）
-MAIN_ICE = [3, 5, 7, 10, 11, 15]   # 2026-10-14 章级重排改正：ch13 恒信主、ch15 冰链主
-MAIN_HX = [2, 4, 6, 8, 12, 13, 14, 16]
+MAIN_ICE = [3, 5, 7, 10, 11, 12, 17]   # 2026-11-06 批〇 按新号重编：ch12 冰链主（新增·建模实体）、ch17 冰链主（旧15）
+MAIN_HX = [2, 4, 6, 8, 13, 14, 15, 16, 18]   # 2026-11-06 批〇 按新号重编：ch15 恒信主（新增·架构评估）、ch18 恒信主（旧16）
+# 2026-11-06 批〇：全书 21 章（架构篇 12 章），刻度行期望 20 章（ch2~ch21，ch1 为源章不计）。
+BOOK_TOTAL = 21
+LINE_TOTAL = 20
 
 
 def chapters():
@@ -119,8 +126,16 @@ for d in data:
         (lv.group(0)[:26].replace('\n', ' ') if lv else '—')))
 miss_line = [d['ch'] for d in data if not d['line']]
 miss_layer = [d['ch'] for d in data if not d['layer']]
-print('收束句缺章：', '、'.join(miss_line) if miss_line else '无（19/19）')
-print('刻度行缺章：', '、'.join(miss_layer) if miss_layer else '无（ch2~ch19 共 18/18；ch1 为源章不计）')
+on_disk = sorted(int(d['ch']) for d in data)
+absent = [n for n in range(1, BOOK_TOTAL + 1) if n not in on_disk]
+line_disk = sum(1 for n in on_disk if n >= 2)
+print('收束句缺章：', '、'.join(miss_line) if miss_line else
+      '无（{}/{}；分母＝已上盘章数）'.format(len(on_disk), len(on_disk)))
+print('刻度行缺章：', '、'.join(miss_layer) if miss_layer else
+      '无（ch2~ch{:02d} 共 {}/{}；ch1 为源章不计）'.format(on_disk[-1] if on_disk else 1, line_disk, line_disk))
+print('全书 {:d} 章／刻度行期望 {:d} 章：已上盘 {:d} 章（其中刻度行可核 {:d} 章）'.format(
+    BOOK_TOTAL, LINE_TOTAL, len(on_disk), line_disk))
+print('待重写、本章不参与统计：', '、'.join('ch{:02d}'.format(n) for n in absent) if absent else '无')
 
 print()
 print('=== ② 暗线核对（脚本只导出候选位：各章「小结」末两段，供人工判"有没有让一份产品数据动一下"） ===')
@@ -143,12 +158,15 @@ print('主案例章全员核对（该线成员是否都出现；冰链自 2026-1
 for line_name, chs in (('冰链', MAIN_ICE), ('恒信', MAIN_HX)):
     names = [m for ln, m in MEMBERS if ln == line_name]
     for c in chs:
-        d = next(x for x in data if int(x['ch']) == c)
+        d = next((x for x in data if int(x['ch']) == c), None)
+        if d is None:
+            print('  {} ch{:>2}  本章正文待重写，本项不参与统计'.format(line_name, c))
+            continue
         lack = [m for m in names if not d['members'][m]]
         mark = '全员在场' if not lack else '缺：' + '、'.join(lack)
         print('  {} ch{:>2}  {}'.format(line_name, c, mark))
 duo_miss = {d['ch']: [m for m in ('曹峰', '赵刚') if not d['members'][m]] for d in data}
-print('双线章（ch1/9/17/18）缺场：', {k: v for k, v in duo_miss.items() if v and k in ('01', '09', '17', '18')})
+print('双线章（ch1/9/19/20）缺场：', {k: v for k, v in duo_miss.items() if v and k in ('01', '09', '19', '20')})
 
 print()
 print('注：三条线的口径、台账与维护纪律见 00-三条线索.md；未决项见 claude-memory/pending-three-lines-integrity.md。')
