@@ -19,7 +19,7 @@
 
 1. **三个词的位置**：**功能架构／逻辑架构／物理架构**在 42010:2022 里**零命中**；把它们作为术语处理的是 42020:2019 §0.2（"架构"前冠的是**所关注的主题**）、§E.4.1.1 注（**主语是 Descriptions**，称"架构种类"）、§E.4.2.4~.6（三种**视图**的定义句），以及 42030:2019 的 architecture 词条 Note 5（它们是**关切**的例子，经视图与模型表达）。
 2. **结论一**：三者**不是三个架构**，是同一实体的三份描述／三张视图；标准把"架构种类清单"与"架构视图清单"分作两份，三者横跨两份。
-3. **结论二**：**"功能—逻辑—物理"不在同一根轴上**——functional 在 42010 里是**方面体**与**视角／视图**的名；logical、physical 是**方面体**与**利益相关方角度**的例；15288 附录 D.5 又把 conceptual／logical／technical／physical 当**模型的抽象程度**。
+3. **结论二**：**"功能—逻辑—物理"不在同一根轴上**——functional 在 42010 里是**方面体**与**视角／视图**的名；logical、physical 是**方面体**与**相关方角度**的例；15288 附录 D.5 又把 conceptual／logical／technical／physical 当**模型的抽象程度**。
 4. **要称其为"视图"的条件**：须有治理它的**视角规格**（42010 §3.8＋§8.1 a)~g)）；没有规格，产出的东西不构成架构视图。
 5. **物理视图里的"元素"是 system element，不是"物理对象"**：库内标准 "physical object" 零命中；15288 §3.47 的示例含硬件、软件、数据、人员、过程、规程、设施、材料、自然存在的实体——**"构成部件"只是其中一支**。元素以**建模实体**（被安排、被分配、对接口负责）出现，不是规格件（论证见 §4.1.1；建模实体在本号对象上的落点见 §4.2.1）。
 6. **物理视图与系统分解结构（SBS）两族不同、无上下位**：SBS 是 **15288 §6.3.1** 任务 4)＋注 4 的四项之一（WBS／FBS／SBS／OBS），Table B.1 把它列为**项目规划过程**的人工制品；"产品分解结构（PBS）"在库内标准**零命中**。**系统结构本身不必然是层级**（§5.2），SBS 是把它组织成层级的规划台账。
@@ -113,13 +113,13 @@ flowchart TD
   AD -->|包含| VP["架构视角（§3.8）"]
   AD -->|包含| VW["架构视图（§3.7）<br/>信息部件"]
   VP -->|frames 框定| CON["关切（§3.10）"]
-  STK["利益相关方（§3.17）"] -->|has 持有| CON
+  STK["相关方（§3.17）"] -->|has 持有| CON
   VP -->|governs 治理| VW
   VW -->|addresses 应对| CON
   VW -->|由一个或多个组成| VC["视图组件（§3.19）"]
   VC -->|受…支配| MK["模型种类（§3.15）或图例"]
   ASP["方面体（§3.9）"] -->|细化| CON
-  SP["利益相关方角度（§3.18）"] -->|关联| VP
+  SP["相关方角度（§3.18）"] -->|关联| VP
 ```
 
 ### 2.2 定义（正本逐字＋中译）
@@ -131,7 +131,7 @@ flowchart TD
 | **architecture view**（42010 §3.7） | *information part comprising portion of an architecture description* | 包含架构描述的一部分的**信息部件** |
 | **architecture viewpoint**（42010 §3.8） | *set of conventions for the creation, interpretation and use of an architecture view to **frame** one or more concerns* | 用于创建、解释和使用架构视图以**框定**一项或多项关切的**一组惯例** |
 | **aspect**（42010 §3.9） | *part of an entity's character or nature*（示例：functional, structural, informational） | 实体的特性或本质的组成部分 |
-| **concern**（42010 §3.10） | *matter of relevance or importance to a stakeholder* | 对利益相关方而言具有相关性或重要性的事项 |
+| **concern**（42010 §3.10） | *matter of relevance or importance to a stakeholder* | 对相关方而言具有相关性或重要性的事项 |
 | **information part**（42010 §3.14） | *separately identifiable body of information that is produced, stored, and delivered for **human and machine use*** | 为供**人和机器**使用而生成、存储、交付的可单独识别的**信息体** |
 | **model kind**（42010 §3.15） | *category of model distinguished by its key characteristics and **modelling conventions*** | 以其关键特性和**建模约定**相区分的模型类别 |
 | **view component**（42010 §3.19） | *separable portion of one or more architecture views that is governed by the applicable **model kind or legend*** | 受适用的**模型种类或图例**支配的可分离部分 |
@@ -157,7 +157,7 @@ flowchart TD
 | functional architecture、physical architecture | **42030:2019** architecture 词条 **Note 5**：*Architectures can address a wide range of **concerns** expressed, for example, through architecture **views** and models, as illustrated … security architecture, functional architecture, physical architecture, resilience architecture*（中译：架构能应对范围广泛的关切，这些关切例如通过架构视图与模型来表达，如下列与特定种类架构相关的示例所示：安全架构、功能架构、物理架构、韧性架构等。） | 它们是**关切**的例子，**经视图与模型表达** |
 | logical architecture、physical architecture | **42020 §E.4.1.1 注**：***Descriptions** expressing a viewpoint, an aspect, an abstraction level or a perspective are sometimes called **architecture kinds**. Examples are security architecture, logical architecture and physical architecture.*（中译：用于表达某个视角、某个方面体、某个抽象层级或某个角度的描述，有时称为架构种类。示例包括安全架构、逻辑架构与物理架构。） | 主语是**描述**；它们叫**架构种类**，是**一份描述的命名** |
 | 三者作为视图 | **42020 §E.4.2.4／.5／.6** 分别给出"架构的**功能视图**／**逻辑视图**／**物理视图**"定义句 | 在 E.4.2 这一节里它们是**视图** |
-| 三者在 42010:2022 | **零命中**。相近处：**§6.3** 利益相关方角度例（strategic, organizational, operational, **logical**, **physical**, technological）；**§5.2.5／附录 A.4.2** 方面体例（**logical connectivity and physical connectivity**（中译：逻辑连通性与物理连通性）；aircraft AD 的 spatial／structural／functional／connectivity／taxonomic／informational／roadmap）；**§6.7 EXAMPLE 1** *views … for a **functional viewpoint*** | 在描述标准里，logical／physical 是**角度与方面体**的例，functional 是**视角／视图**的名 |
+| 三者在 42010:2022 | **零命中**。相近处：**§6.3** 相关方角度例（strategic, organizational, operational, **logical**, **physical**, technological）；**§5.2.5／附录 A.4.2** 方面体例（**logical connectivity and physical connectivity**（中译：逻辑连通性与物理连通性）；aircraft AD 的 spatial／structural／functional／connectivity／taxonomic／informational／roadmap）；**§6.7 EXAMPLE 1** *views … for a **functional viewpoint*** | 在描述标准里，logical／physical 是**角度与方面体**的例，functional 是**视角／视图**的名 |
 
 ### 3.2 三条结论
 
@@ -181,7 +181,7 @@ flowchart TD
 
 **结论**："功能—逻辑—物理"不是一个坐标轴上的三段，而是**三根轴各取一点**拼出来的连读：方面体／角度一根、抽象层级一根、架构种类（描述命名）一根。
 
-**依据**：① 42010 §3.9（逐字·规范）：*aspect*＝*part of an entity's character or nature*（中译：实体性格或本质的一部分），示例 *functional, structural, informational*；② 42010 §6.3（逐字·规范）：*EXAMPLE Stakeholder perspectives include: strategic, organizational, operational, logical, physical and technological perspectives*（中译：利益相关方角度包括：战略、组织、运行、逻辑、物理与技术等角度）——**这是"角度"这根轴**；§3.18（逐字·规范）给该词定义：*way of thinking about an entity of interest, especially as it relates to concerns*（中译：关于所关注实体的一种思考方式，尤其当它与关切相关时）；③ 15288 附录 D.5（**举例性表述**）：*Different degrees of abstraction (conceptual, logical, technical, and physical models) and formalisation vary according to the intent of models*（中译：不同的抽象程度（概念、逻辑、技术与物理模型）与形式化程度随模型意图而变）——**同四个词在这里是抽象程度**；④ 42020 §E.4.2.5 注（**资料性**）：*What constitutes a logical or physical architecture is often somewhat subjective and a spectrum of such architectures can be so employed*（中译：构成逻辑架构或物理架构的内容往往带有一定主观性，因而可采用处于这一谱系上的各类此类架构）；⑤ 42020 §E.4.1.1 注（同 3.2.1 ②）：三词是**描述**的命名。
+**依据**：① 42010 §3.9（逐字·规范）：*aspect*＝*part of an entity's character or nature*（中译：实体性格或本质的一部分），示例 *functional, structural, informational*；② 42010 §6.3（逐字·规范）：*EXAMPLE Stakeholder perspectives include: strategic, organizational, operational, logical, physical and technological perspectives*（中译：相关方角度包括：战略、组织、运行、逻辑、物理与技术等角度）——**这是"角度"这根轴**；§3.18（逐字·规范）给该词定义：*way of thinking about an entity of interest, especially as it relates to concerns*（中译：关于所关注实体的一种思考方式，尤其当它与关切相关时）；③ 15288 附录 D.5（**举例性表述**）：*Different degrees of abstraction (conceptual, logical, technical, and physical models) and formalisation vary according to the intent of models*（中译：不同的抽象程度（概念、逻辑、技术与物理模型）与形式化程度随模型意图而变）——**同四个词在这里是抽象程度**；④ 42020 §E.4.2.5 注（**资料性**）：*What constitutes a logical or physical architecture is often somewhat subjective and a spectrum of such architectures can be so employed*（中译：构成逻辑架构或物理架构的内容往往带有一定主观性，因而可采用处于这一谱系上的各类此类架构）；⑤ 42020 §E.4.1.1 注（同 3.2.1 ②）：三词是**描述**的命名。
 
 **推理**：① **functional 落在方面体轴上**（§3.9 的示例词），**logical／physical 落在角度轴上**（42010 §3.18、§6.3 的示例词）——两根不同的轴，却常在中文里被写成并列三项；② 同一对 logical／physical 又出现在 15288 附录 D.5 的**抽象程度**一列，那是第三根轴；③ 于是"功能—逻辑—物理"三段式其实是把三根轴各取一点缝成一根，缝合处必然出现①说不通的地方：**"功能"没有对应的抽象程度，"概念"没有对应的方面体**——一处缺项，一处多项，正是不在同一根轴上的形态特征。
 
@@ -210,7 +210,7 @@ flowchart TD
 flowchart LR
   subgraph AX1["轴一·方面体与角度（谁在乎、看哪一面）"]
     A1["方面体 §3.9<br/>functional／structural／informational／behavioural"]
-    A2["利益相关方角度 §3.18<br/>strategic／organizational／operational／logical／physical／technological"]
+    A2["相关方角度 §3.18<br/>strategic／organizational／operational／logical／physical／technological"]
   end
   subgraph AX2["轴二·抽象层级（说得多细）"]
     B1["模型抽象程度（15288 附录 D.5）<br/>conceptual／logical／technical／physical"]
@@ -296,11 +296,11 @@ flowchart LR
 
 **第一层·文件层（42010 第 6 章，不满足即不构成架构视图）**
 
-- §6.6：AD 应包含或引用所用每个视角；每个视角规格应符合第 8 章；每个关切应由至少一个视角框定；每个利益相关方角度应与覆盖它的视角关联。
+- §6.6：AD 应包含或引用所用每个视角；每个视角规格应符合第 8 章；每个关切应由至少一个视角框定；每个相关方角度应与覆盖它的视角关联。
 - §6.7：**每个视图应遵循其管控视角的约定**；视图应含/引用 a) 标识与补充信息、b) **其管控视角的标识**、c) **一个或多个视图组件**（应对该视角所框定的**全部**关切，并就该视角覆盖实体的部分或全部）、d) **已知问题**的记录。
 - §6.8：视图应由一个或多个视图组件组成；组件**标明其管控模型种类**（如有）；**无模型种类时须给图例**。
 - §6.9：对应关系的记录。
-- §8.1：视角规格 **shall** 含 a) 利益相关方角度／b) 关切／c) 方面体／d) 典型利益相关方／e) **模型种类与图例**／f) **对应方法**／g) 信息来源。
+- §8.1：视角规格 **shall** 含 a) 相关方角度／b) 关切／c) 方面体／d) 典型相关方／e) **模型种类与图例**／f) **对应方法**／g) 信息来源。
 - §8.2：模型种类规格 **shall** 含 a) 语言·记法或建模技术的约定／b) 视图方法与对应方法／c) 版本标识／d) 信息来源。
 
 **第二层·内容产生层（42020 §10.4.4 a)~m)；15288 §6.4.4.3 d) 注 9 a)~f)）**
@@ -637,13 +637,13 @@ flowchart LR
 | AD 应包含或引用所用每个视角 | §6.6 | shall |
 | 每个视角的规格应符合第 8 章 | §6.6 | shall |
 | 每个已识别关切应由至少一个视角框定 | §6.6 | shall |
-| 每个利益相关方角度应与覆盖它的视角关联 | §6.6 | shall |
+| 每个相关方角度应与覆盖它的视角关联 | §6.6 | shall |
 | 视角规格写明 a)~g) 七项 | §8.1 | shall |
 | 模型种类规格写明 a)~d) 四项 | §8.2 | shall |
 
 **号形说明**：本表「出处」列各条款号均为 **42010:2022** 条款，故列内只写 `§x.y`。
 
-§6.6 **注 3**：*An architecture viewpoint can serve as a **contract** between architect and other stakeholders.*（中译：架构视角能充当架构师与其他利益相关方之间的契约。）
+§6.6 **注 3**：*An architecture viewpoint can serve as a **contract** between architect and other stakeholders.*（中译：架构视角能充当架构师与其他相关方之间的契约。）
 
 **视图侧（逐条对上）**
 
@@ -697,7 +697,7 @@ flowchart TD
   VW --> CP["视图组件 §6.8<br/>（标明模型种类／或给图例）"]
   VW --> IS["已知问题 §6.7 d)<br/>（未决·风险·例外·对模型种类的偏离）"]
   VW --> CO["对应关系 §6.9"]
-  SPEC -.->|合同| STK["利益相关方 §6.6 注 3"]
+  SPEC -.->|合同| STK["相关方 §6.6 注 3"]
 ```
 
 ---
@@ -725,7 +725,7 @@ flowchart TD
 
 ### 9.3 七类视图逐条详解
 
-> **共同前提（七类一律适用）**：每一类视图都须①由一个**视角**治理，该视角的规格写全 42010 §8.1 a)~g)（利益相关方角度／关切／方面体／典型利益相关方／**模型种类与图例**／**对应方法**／信息来源）；②视图**遵循其管控视角的约定**（§6.7）；③组件标明**模型种类**，无模型种类时随附**图例**（§6.8）。下面各条的"典型视图组件"均为**举例**——真正的清单由该视角规格写定。**七类只给"视图长什么样"；做全版样例见 44 号（HUD）与 45 号（EOS）。**
+> **共同前提（七类一律适用）**：每一类视图都须①由一个**视角**治理，该视角的规格写全 42010 §8.1 a)~g)（相关方角度／关切／方面体／典型相关方／**模型种类与图例**／**对应方法**／信息来源）；②视图**遵循其管控视角的约定**（§6.7）；③组件标明**模型种类**，无模型种类时随附**图例**（§6.8）。下面各条的"典型视图组件"均为**举例**——真正的清单由该视角规格写定。**七类只给"视图长什么样"；做全版样例见 44 号（HUD）与 45 号（EOS）。**
 
 #### 9.3.1 语境视图 contextual（§E.4.2.2）
 
@@ -842,11 +842,11 @@ flowchart TD
 
 **三路·ADF 与 ADL 家族（42010 §3.5、§3.6 EXAMPLE）**：GERAM、RM-ODP、UAF、NAF；AADL、ArchiMate、UML、SysML、UAF Profile。
 
-**四路·方面体与利益相关方角度（§5.2.5、§6.5、附录 A.4.2；§6.3）**：方面体例（功能／结构／信息／行为／程序性；连通性——"逻辑网络与物理网络"两种描述；飞机 AD 的空间／结构／功能／连通性／分类／信息／路线图）；角度例（战略／组织／运行／**逻辑／物理**／技术）。
+**四路·方面体与相关方角度（§5.2.5、§6.5、附录 A.4.2；§6.3）**：方面体例（功能／结构／信息／行为／程序性；连通性——"逻辑网络与物理网络"两种描述；飞机 AD 的空间／结构／功能／连通性／分类／信息／路线图）；角度例（战略／组织／运行／**逻辑／物理**／技术）。
 
 ### 9.5 项目那份清单靠"反推"产生（五步）
 
-1. 识别利益相关方与关切（§6.2、§6.4）；
+1. 识别相关方与关切（§6.2、§6.4）；
 2. **每个关切须被至少一个视角框定**（§6.6）；
 3. **每个视角须有至少一张视图**（§6.7）；某视角管多张视图时它们描述**同一个架构**（§6.7 注 1）；
 4. 每张视图须应对其视角所框定的**全部**关切，并记录**已知问题**（§6.7 c)、d)）；
@@ -1009,7 +1009,7 @@ flowchart LR
 
 **结论**：42010 的**对应关系（correspondence）只成立于 AD 元素之间**；把"物理视图元素 ↔ 系统构成件（构型项／设计元素）"的绑定说成对应关系，是跨层误用。跨过去要走 15288 的**映射与双向追溯**，再加构型管理的件号绑定。
 
-**依据**：① 42010 §3.11（逐字·规范）：*correspondence*＝*identified or named relationship between two or more **architecture description elements***（中译：对应关系：两个或多个**架构描述元素**之间经识别或命名的关系）；② 42010 §3.4（逐字·规范）注 1 列 AD 元素：相关方、关切、利益相关方角度、方面体、ADL／ADF、**对应关系**、视图、视图组件、视角、模型种类——**不含系统元素**；③ 42010 §6.9.2（逐字·规范）：*An AD shall include or reference a list of **AD element** correspondences*（中译：AD 应含或引用一份 AD 元素对应关系清单），且每条须标明**一个或多个参与其中的 AD 元素**；④ 15288 §6.4.5.3 b) 2)＋注 5（逐字·规范）：*Transform architectural entities and relationships into **design elements***（中译：把架构侧实体与关系转换为设计元素），注 5 要求每个架构侧实体**映射到适当的系统设计元素**；⑤ 15288 §6.4.5.3 注 19：设计特性与架构实体、已识别接口之间维护**双向追溯**；注 20：设计定义过程识别基线候选并交配置管理。
+**依据**：① 42010 §3.11（逐字·规范）：*correspondence*＝*identified or named relationship between two or more **architecture description elements***（中译：对应关系：两个或多个**架构描述元素**之间经识别或命名的关系）；② 42010 §3.4（逐字·规范）注 1 列 AD 元素：相关方、关切、相关方角度、方面体、ADL／ADF、**对应关系**、视图、视图组件、视角、模型种类——**不含系统元素**；③ 42010 §6.9.2（逐字·规范）：*An AD shall include or reference a list of **AD element** correspondences*（中译：AD 应含或引用一份 AD 元素对应关系清单），且每条须标明**一个或多个参与其中的 AD 元素**；④ 15288 §6.4.5.3 b) 2)＋注 5（逐字·规范）：*Transform architectural entities and relationships into **design elements***（中译：把架构侧实体与关系转换为设计元素），注 5 要求每个架构侧实体**映射到适当的系统设计元素**；⑤ 15288 §6.4.5.3 注 19：设计特性与架构实体、已识别接口之间维护**双向追溯**；注 20：设计定义过程识别基线候选并交配置管理。
 
 **推理**：① 两层的东西不是同一类对象：AD 元素是**描述层的零件**，系统元素是**实现层的离散部分**（15288 §3.47），而 15288 §5.9 逐字说二者*represent two different notions*（中译：代表两种不同的概念）；② 对应关系的定义句已经把参与方限死在 AD 元素，写"视图元素↔构型项"就把实现层对象塞进描述层的关系里，**条款上无处挂**；③ 跨层那一步标准另有安排：变换（b) 2)）、映射（注 5）、双向追溯（注 19）、配置管理绑定（注 20）——**四条各管一段**，不能拿一条顶四条。
 
@@ -1152,7 +1152,7 @@ flowchart LR
 
 ### 11.9 七个视角（按 §8.1 骨架）
 
-| 视角 | 框定的关切 | 方面体 | 模型种类与图例 | 典型利益相关方 |
+| 视角 | 框定的关切 | 方面体 | 模型种类与图例 | 典型相关方 |
 |---|---|---|---|---|
 | 语境 | C6／C7／C12 的外部条件 | 法规·经济·技术·环境·运行 | PESTEL 表；语境图；约束清单 | OEM、适航、运营人 |
 | 概念 | C1／C5／C9 的由来 | 运行·人因·光学 | 运行概念图；能力清单；任务线程 | 机组、OEM、适航 |
@@ -1288,14 +1288,14 @@ flowchart LR
 
 ### 11.15 走法表：视角规格 a)~g) 怎么填（以物理视角为例）
 
-视角要是"合同"，就得逐项写满（42010 §8.1 all shall；§6.6 注 3 把它称作架构师与其他利益相关方之间的**契约**）。下表以本节的**物理视角**为样，示范**怎么填**；取值本身仍是示意，**做全的样例见 44 号 §3**。
+视角要是"合同"，就得逐项写满（42010 §8.1 all shall；§6.6 注 3 把它称作架构师与其他相关方之间的**契约**）。下表以本节的**物理视角**为样，示范**怎么填**；取值本身仍是示意，**做全的样例见 44 号 §3**。
 
 | 项 | 本视角填什么 | 依据 |
 |---|---|---|
-| **a) 利益相关方角度** | **结构 · 连通性**——本视角看"装在什么上、和谁接口"，不看功能怎么分、也不看用哪种技术 | 42010 §8.1 a)；42020 §E.4.2.6 |
+| **a) 相关方角度** | **结构 · 连通性**——本视角看"装在什么上、和谁接口"，不看功能怎么分、也不看用哪种技术 | 42010 §8.1 a)；42020 §E.4.2.6 |
 | **b) 关切** | 本节 §11.4 的四条：C5 失效即失去能力／C7 安装与视野／C8 环境适应／C10 维修性 | 42010 §8.1 b)；§6.7 c) |
 | **c) 方面体** | **结构、连通性**——填到这一栏时不许顺手把"功能""技术门类"写进来 | 42010 §8.1 c)、§3.9 |
-| **d) 典型利益相关方** | OEM（系统集成与装机取证）／维修单位／光学子供应商／飞行员 | 42010 §8.1 d)；§11.3 |
+| **d) 典型相关方** | OEM（系统集成与装机取证）／维修单位／光学子供应商／飞行员 | 42010 §8.1 d)；§11.3 |
 | **e) 模型种类与图例** | 物理分解与安装图（模型种类）｜接口框图 N²（模型种类）｜定性布置示意（**无模型种类时给图例**，图例写成一条读图说明："眼位盒是约束区域，不是元素"） | 42010 §8.1 e)、§6.8、§3.19 注 1 |
 | **f) 对应方法** | 切分口径写死为"**按光路职责切、不按 LRU 切**"；对应关系三条：V5 元素 ↔ V4 的符号语义（按职责分配对上）｜V5 元素与接口 ↔ V6 的接口门类（按门类对上）｜V5 的失效影响 ↔ 安全视图（**未建，记已知缺口**） | 42010 §8.1 f)、§6.9 |
 | **g) 信息来源** | 型号批准基础（数值一律不代拟）／安装基准图／接口控制文件草案／眼位盒人因数据 | 42010 §8.1 g)、§8.2 d) |
@@ -1456,7 +1456,7 @@ flowchart LR
 
 ### 12.9 七个视角（按 §8.1 骨架）
 
-| 视角 | 框定的关切 | 方面体 | 模型种类与图例 | 典型利益相关方 |
+| 视角 | 框定的关切 | 方面体 | 模型种类与图例 | 典型相关方 |
 |---|---|---|---|---|
 | 语境 | C1／C7／C11／C12 的外部条件 | 法规·经济·技术·组织·互操作 | PESTEL 表；平台链图；约束清单 | 管理者、流水线开发者、集成方 |
 | 概念 | C1／C2／C9 的由来 | 运行·业务·人因 | 平台定位对比表；能力—配置双层图；三维度图 | 业务使用人员、配置者、管理者 |
@@ -1766,7 +1766,7 @@ flowchart TD
 
 ### 13.9 七个视角（按 §8.1 骨架）
 
-| 视角 | 框定的关切 | 方面体 | 模型种类与图例 | 典型利益相关方 |
+| 视角 | 框定的关切 | 方面体 | 模型种类与图例 | 典型相关方 |
 |---|---|---|---|---|
 | 语境 | C3／C12／C14 的外部条件 | 法规·经济·技术·环境·运行 | 法规与场景清单；运输场景图；约束清单 | 客户、监管、承运方 |
 | 概念 | C1／C4／C9 的由来 | 运行·人因·信息 | 运输场景图；三段式跨域图；能力清单 | 客户、产品开发经理、云端 |
@@ -2043,7 +2043,7 @@ V4（逻辑视图）里"断链＝超出 −20℃~8℃ 且持续超过 30 秒"是
 
 ### 14.9 七个视角（按 §8.1 骨架）
 
-| 视角 | 框定的关切 | 方面体 | 模型种类与图例 | 典型利益相关方 |
+| 视角 | 框定的关切 | 方面体 | 模型种类与图例 | 典型相关方 |
 |---|---|---|---|---|
 | 语境 | C7／C11／C12 的外部条件 | 法规·经济·组织·运行 | 法规与结账节奏表；外部实体现状图；约束清单 | 财务、审计、外部平台 |
 | 概念 | C1／C2／C5 的由来 | 业务·信息 | 合同生命周期概念图；事实源概念图；能力清单 | 财务、法务、产品负责人 |
@@ -2314,7 +2314,7 @@ flowchart LR
 | architecture view | 架构视图 | 信息部件 | 42010 §3.7 |
 | architecture viewpoint | 架构视角 | 约定集 | 42010 §3.8 |
 | aspect | 方面体 | 实体性格的一部分 | 42010 §3.9 |
-| concern | 关切 | 利益相关方在乎的事 | 42010 §3.10（译名两套并存，见下注） |
+| concern | 关切 | 相关方在乎的事 | 42010 §3.10（译名两套并存，见下注） |
 | view component | 视图组件 | 受模型种类或图例支配 | 42010 §3.19 |
 | model kind | 模型种类 | 建模约定 | 42010 §3.15 |
 | system element | 系统元素 | 实现层的离散部分 | 15288 §3.47 |
