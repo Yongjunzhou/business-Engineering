@@ -32,7 +32,10 @@ PICK = os.path.join(REPO, '04-可运行的运营体系开发方法', '00-取料�
 MEM = os.path.join(REPO, 'claude-memory')
 REG = os.path.join(HERE, '08-报告用途登记.md')
 
-CH_NUM = 19          # 教材书章数（2026-10-27 起：新第18章入册，《架构师》后移为第19章，全书十九章）
+CH_NUM = 21          # 教材书章数（2026-11-06 批〇 起：架构篇由 10 章改为 12 章，全书二十一章；后记第22单元、附录第23单元）
+PENDING_CH = set(range(12, 22))   # 2026-11-06 批〇：第12~21 章正文待重写（旧第12~19章已 git mv 到
+                                  # `03-架构师是个怎样的物种/旧版正文归档/`），缺正文不计缺口、只汇总提示；
+                                  # 各章落库后须同步收窄此集合，全部落库后置为 set()
 UNIT_NUM = 20        # 培训教材单元数（单元号＝章号，20＝附录；2026-10-27 同步 19→20，待训侧重派生落地）
 RANGE = (0, 50)      # 表内应覆盖的报告号区间（允许区间内留空，见 ① 提示）
 
@@ -116,6 +119,7 @@ def main():
 
     # ③ 词表与落点
     chs = chapters()
+    pending = set()
     for r in rows:
         n, col03, col04, col_eos = r[0], r[2], r[3], r[4]
         if not any(col03.startswith(s) for s in S03):
@@ -132,7 +136,10 @@ def main():
                 if not 1 <= k <= CH_NUM:
                     bad.append('%s 号：落点 ch%d 超出 %d 章' % (n, k, CH_NUM))
                 elif k not in chs:
-                    bad.append('%s 号：落点 ch%d 在教材书里找不到那一章' % (n, k))
+                    if k in PENDING_CH:
+                        pending.add(k)
+                    else:
+                        bad.append('%s 号：落点 ch%d 在教材书里找不到那一章' % (n, k))
             if '附录' in col03 and not glob.glob(
                     os.path.join(BOOK, '[0-9][0-9]-附录.md')):
                 bad.append('%s 号：落点写「附录」，但教材书里找不到 NN-附录.md' % n)
@@ -178,6 +185,9 @@ def main():
     for nm in ('03', '04', 'EOS'):
         seg = '／'.join('%s %d' % (k, v) for (a, k), v in sorted(stat.items()) if a == nm)
         print('  %-4s %s' % (nm, seg or '—'))
+    if pending:
+        print('\n待重写（2026-11-06 批〇：第12~21章正文未落，不计缺口，落库后收窄 PENDING_CH）：%s'
+              % '、'.join('ch%d' % k for k in sorted(pending)))
     if bad:
         print('\n缺口 %d 条：' % len(bad))
         for b in bad:
