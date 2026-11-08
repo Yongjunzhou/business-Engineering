@@ -33,7 +33,7 @@ MEM = os.path.join(REPO, 'claude-memory')
 REG = os.path.join(HERE, '08-报告用途登记.md')
 
 CH_NUM = 21          # 教材书章数（2026-11-06 批〇 起：架构篇由 10 章改为 12 章，全书二十一章；后记第22单元、附录第23单元）
-PENDING_CH = set(range(12, 22))   # 2026-11-06 批〇：第12~21 章正文待重写（旧第12~19章已 git mv 到
+PENDING_CH = {9} | set(range(14, 22))   # 2026-11-08 配置章前移：第9 章（配置，待重写）与第14~21 章正文待重写（旧第12~19章已 git mv 到
                                   # `03-架构师是个怎样的物种/旧版正文归档/`），缺正文不计缺口、只汇总提示；
                                   # 各章落库后须同步收窄此集合，全部落库后置为 set()
 UNIT_NUM = 20        # 培训教材单元数（单元号＝章号，20＝附录；2026-10-27 同步 19→20，待训侧重派生落地）
@@ -186,7 +186,7 @@ def main():
         seg = '／'.join('%s %d' % (k, v) for (a, k), v in sorted(stat.items()) if a == nm)
         print('  %-4s %s' % (nm, seg or '—'))
     if pending:
-        print('\n待重写（2026-11-06 批〇：第12~21章正文未落，不计缺口，落库后收窄 PENDING_CH）：%s'
+        print('\n待重写（2026-11-08 配置章前移：第9 章与第14~21章正文未落，不计缺口，落库后收窄 PENDING_CH）：%s'
               % '、'.join('ch%d' % k for k in sorted(pending)))
     if bad:
         print('\n缺口 %d 条：' % len(bad))
