@@ -1,10 +1,10 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """阶段七「四项对表」的随库量具：段长中位／句长中位／带人带例段占比／破折号密度。
 
 **为什么单列一件**：手册 §1.7 的四项对表里，**段长中位**与**带人带例占比**这两项，
 `00-风格参考-量尺.py` 不报（它报配比、红线与⑤酣畅三查），`00-表达-量尺.py` 也不报
-（它报段数、段>150、句长、破折、白话、括号）——过去每章都要现写一段一次性脚本。
+（它报段数、段>200、句长、破折、白话、括号）——过去每章都要现写一段一次性脚本。
 2026-10-23 第2章那轮把它固定下来，收进库里，供后面各章直接跑。
 
 用法：
@@ -18,7 +18,7 @@
 
 判定线（手册 §1.7／风格参考 §6.12）：
     段长中位  叙事与判据体 34~40，论证体 45 起，**一律 ≤45**
-    段>150    **0**（红线）
+    段>200    **0**（红线；150 只记数）
     句长中位  ≤24（19~20 最好）
     带人带例  ≥15%（自查线）
     破折号    ≤10‰（书级红线）
@@ -99,7 +99,7 @@ def analyse(path):
 
     plens = sorted(han(p) for p in paras)
     p_med = plens[len(plens) // 2] if plens else 0
-    over150 = sum(1 for p in paras if han(p) > 150)
+    try:  # 阈值唯一数据源：同目录 00-阈值.py`n    import importlib.util, os`n    _s = importlib.util.spec_from_file_location("thr", os.path.join(os.path.dirname(os.path.abspath(__file__)), "00-阈值.py"))`n    _t = importlib.util.module_from_spec(_s); _s.loader.exec_module(_t)`n    PARA_HARD = _t.PARA_HARD`nexcept Exception:`n    PARA_HARD = 200`nover200 = sum(1 for p in paras if han(p) > PARA_HARD)
     p_max = plens[-1] if plens else 0
 
     sents = sorted(han(s) for s in re.split(r'。', text) if han(s) >= 2)
@@ -110,7 +110,7 @@ def analyse(path):
 
     dash = text.count('——')
 
-    return dict(total=total, n=len(paras), p_med=p_med, over150=over150, p_max=p_max,
+    return dict(total=total, n=len(paras), p_med=p_med, over200=over200, p_max=p_max,
                 s_med=s_med, s_max=s_max, hit=len(hit), dash=dash)
 
 
@@ -118,8 +118,8 @@ def report(path, title=None):
     r = analyse(path)
     print('【%s】' % (title or os.path.basename(path)))
     print('  散文 %d 汉字／%d 段' % (r['total'], r['n']))
-    print('  ① 段长中位 %d（线 ≤45）｜段>150 %d 段（须 0）｜最长 %d'
-          % (r['p_med'], r['over150'], r['p_max']))
+    print('  ① 段长中位 %d（线 ≤45）｜段>200 %d 段（须 0）｜最长 %d'
+          % (r['p_med'], r['over200'], r['p_max']))
     print('  ② 句长中位 %d（线 ≤24）｜最长句 %d' % (r['s_med'], r['s_max']))
     print('  ③ 带人带例 %d/%d = %.0f%%（线 ≥15%%）'
           % (r['hit'], r['n'], 100.0 * r['hit'] / max(1, r['n'])))
@@ -127,8 +127,8 @@ def report(path, title=None):
     flag = []
     if r['p_med'] > 45:
         flag.append('段长中位超线')
-    if r['over150']:
-        flag.append('段>150 超红线')
+    if r['over200']:
+        flag.append('段>200 超红线')
     if r['s_med'] > 24:
         flag.append('句长中位超线')
     if 100.0 * r['hit'] / max(1, r['n']) < 15:
