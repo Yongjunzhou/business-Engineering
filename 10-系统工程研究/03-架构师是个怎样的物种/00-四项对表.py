@@ -99,7 +99,14 @@ def analyse(path):
 
     plens = sorted(han(p) for p in paras)
     p_med = plens[len(plens) // 2] if plens else 0
-    try:  # 阈值唯一数据源：同目录 00-阈值.py`n    import importlib.util, os`n    _s = importlib.util.spec_from_file_location("thr", os.path.join(os.path.dirname(os.path.abspath(__file__)), "00-阈值.py"))`n    _t = importlib.util.module_from_spec(_s); _s.loader.exec_module(_t)`n    PARA_HARD = _t.PARA_HARD`nexcept Exception:`n    PARA_HARD = 200`nover200 = sum(1 for p in paras if han(p) > PARA_HARD)
+    try:  # 阈值唯一数据源：同目录 00-阈值.py
+        import importlib.util, os
+        _s = importlib.util.spec_from_file_location("thr", os.path.join(os.path.dirname(os.path.abspath(__file__)), "00-阈值.py"))
+        _t = importlib.util.module_from_spec(_s); _s.loader.exec_module(_t)
+        PARA_HARD = _t.PARA_HARD
+    except Exception:
+        PARA_HARD = 200
+    over200 = sum(1 for p in paras if han(p) > PARA_HARD)
     p_max = plens[-1] if plens else 0
 
     sents = sorted(han(s) for s in re.split(r'。', text) if han(s) >= 2)
