@@ -920,7 +920,7 @@ The following architecture principles were developed to guide the SOSA technical
 
 ##### 3.2.1 Business-Oriented Architecture Principles
 
-#1 The SOSA business and technical architecture is vendor-agnostic.
+**#1 The SOSA business and technical architecture is vendor-agnostic.**
 
 **Statement** The modules and interfaces that make up the SOSA Technical Standard and Reference Architecture, and the processes and practices that make up the SOSA business/procurement architecture, are equally beneficial to all vendors, offering no inherent advantage or disadvantage to any one company or business sector.
 
@@ -930,7 +930,7 @@ technical architecture supports a "level playing field" to ensure business fairn
 
 **Implications** The business architecture of SOSA ensures that there are no barriers for stakeholder participation in the development or use of the SOSA Architecture. This includes making material available, eliminating financial barriers (or ensuring that they are minimal). The acquisition model is one that enables all qualified vendors to participate. The technical architecture incorporates standards that favor no vendor by ensuring that it incorporates widely-available standards for which all qualified vendors have equivalent opportunity.
 
-#2 SOSA Consortium products are provided royalty-free.
+**#2 SOSA Consortium products are provided royalty-free.**
 
 **Statement** There is no cost to obtaining SOSA Consortium materials required to develop, procure, or implement systems (or subsystems or modules) that are aligned to the SOSA Technical Standard.
 
@@ -938,13 +938,13 @@ technical architecture supports a "level playing field" to ensure business fairn
 
 **Implications** The means of publication of the SOSA Technical Standard is low-to-no cost, such as non-physical distribution via the World Wide Web, file servers, or other electronic means – subject to national security considerations (e.g., the need to authenticate that recipients are US persons who understand their responsibilities to safeguard the material). In addition, and by implication, tools (testing methodology, SDKs, etc.) required to develop and conformance verify hardware and software are widely available at no-to-little cost. Third-party products that are derived from SOSA Consortium products may be made commercially available (for additional cost).
 
-#3 SOSA products and processes protect the IP of vendors.
+**#3 SOSA products and processes protect the IP of vendors.**
 
 **Statement** Participation in the development and use of SOSA Consortium products does not jeopardize the IP of vendors. The SOSA Consortium respects IP and the SOSA Consortium products do not expose IP.
 
 <!-- 原书 p.11 ｜ PDF p.31 -->
 
-#3 SOSA products and processes protect the IP of vendors.
+**#3 SOSA products and processes protect the IP of vendors.**
 
 **Rationale** financially healthy ISR ecosystem is in the best interest of the nation. Businesses must be incentivized to invest itechnology and other innovative solutions. I protection is the cornerstone of that process that ensures that there is a return On the ivestment. Therefore, it is imperative that SOSA processes and products retain protections for I rights within the module boundary.
 
@@ -952,7 +952,7 @@ technical architecture supports a "level playing field" to ensure business fairn
 
 ##### 3.2.2 Technically-Oriented Architecture Principles
 
-#4 The SOSA Technical Standard is extensible an evolvable.
+**#4 The SOSA Technical Standard is extensible an evolvable.**
 
 **Statement** The SOSA Technical Standard, and associated Reference Architecture, is able to
 
@@ -962,7 +962,7 @@ continue to Iature beyond theexisting goals and expectations, to be able to inco
 
 **Implications** Architecture decisions, trades, etc. favor options that enable growth and don 't "lockOut'' expansion. Interfaces are defined to include growth paths (extra capacity, for example). Module definitions are not So narrow as to preclude additionalfunctionality. The architecture developers and maintainers are mindful that the current Version willnot necessarily be the last one.
 
-#5 The SOSA Architecture maximally leverageslincorporates existing industry and government standards.
+**#5 The SOSA Architecture maximally leverageslincorporates existing industry and government standards.**
 
 **Statement** The SOSA Architecture takes advantage Of existing industry and govermment standards and OSAs whenever possible and practical and consistent with achieving thegoalsOf the SOSA Consortium.
 
@@ -970,11 +970,11 @@ continue to Iature beyond theexisting goals and expectations, to be able to inco
 
 <!-- 原书 p.12 ｜ PDF p.32 -->
 
-#5 The SOSA Architecture maximally leverageslincorporates existing industry and government standards.
+**#5 The SOSA Architecture maximally leverageslincorporates existing industry and government standards.**
 
 **Implications** Systems that already are compliant or conformant with other OSAs are likely to require minimal (or no) modifications to achieve consistency with the SOSA Technical Standard. Adoption is more efficient for the SOSA team, helping to more rapidly develop and evolve the SOSA Technical Standard, though the team ensures that said adoption does not undermine the quality attributes, goals, or other guiding principles upon which the SOSA Architecture is based, and is consistent with the entirety of the SOSA Architecture.
 
-#6 Resilience (including cybersecurity) is enabled by the SOSA Architecture.
+**#6 Resilience (including cybersecurity) is enabled by the SOSA Architecture.**
 
 **Statement** Physical and logical aspects of SOSA Architectures are capable of maintaining a reasonable level of operation in situations where system degradation or attack is possible.
 
@@ -982,7 +982,7 @@ continue to Iature beyond theexisting goals and expectations, to be able to inco
 
 **Implications** The SOSA Architecture incorporates functions that permit monitoring for health and status, and facilitate the design of a system that incorporates safeguards, redundancy, and the ability to be upgraded in light of new threats. A SOSA conformant system is able to respond to physical or logical degradation or a localized failure. Maximizing the ability of a SOSA system to effectively manage these possibilities ensures operation at an acceptable level of performance in a variety of situations.
 
-#7 The SOSA Architecture is agnostic with respect to host platform.
+**#7 The SOSA Architecture is agnostic with respect to host platform.**
 
 **Statement** The SOSA Technical Standard, and associated Reference Architecture, applies to a wide range of host platforms (e.g., aircraft, ground vehicle, ship), and makes no assumption regarding the type of vehicle or installation it is resident in or upon.
 
@@ -992,7 +992,7 @@ continue to Iature beyond theexisting goals and expectations, to be able to inco
 
 <!-- 原书 p.13 ｜ PDF p.33 -->
 
-#8 The SOSA Architecture is agnostic with respect to processing environment.
+**#8 The SOSA Architecture is agnostic with respect to processing environment.**
 
 **Statement** SOSA modules and interfaces are not dependent upon the physical processing and operating system environments.
 
@@ -1000,7 +1000,7 @@ continue to Iature beyond theexisting goals and expectations, to be able to inco
 
 **Implications** The SOSA Technical Standard needs to take into account a wide range of processing environments as realized by the selection of processors (CPU, GPU, FPGA, and custom), operating systems, network protocols, backplanes, memory architectures, and communication circuits. This means that the interfaces are independent from the processing environment through abstraction.
 
-#9 Every SOSA module has defined logical interfaces.
+**#9 Every SOSA module has defined logical interfaces.**
 
 **Statement** All SOSA sensors have well-defined logical interfaces for each of their SOSA defined modules. Logical interfaces describe the information content or signaling between modules for the interchange of control and data. The logical interface is a point that encapsulates control and data along with the syntax/semantics as described by the SOSA Architecture. Information exchange, including transmission type, interchange protocols, and routing are part of the interface definition.
 
@@ -1008,7 +1008,7 @@ continue to Iature beyond theexisting goals and expectations, to be able to inco
 
 **Implications** The SOSA Technical Standard addresses a wide range of logical interfaces realized in SOSA environments. SOSA logical interfaces mandate that a set of interface standards is needed to span the types, protocols, addressing, service types, and operational environments.
 
-#10 Every SOSA hardware element has defined physical interfaces.
+**#10 Every SOSA hardware element has defined physical interfaces.**
 
 **Statement** All SOSA sensors have well-defined physical interfaces for each of their hardware modules. Physical interfaces describe the physical or mechanical connection between SOSA hardware modules, providing structural attachment, electrical/electronic connectors, backplanes, or other inter-module associations that are physically manifested.
 
@@ -1016,11 +1016,11 @@ continue to Iature beyond theexisting goals and expectations, to be able to inco
 
 <!-- 原书 p.14 ｜ PDF p.34 -->
 
-#10 Every SOSA hardware element has defined physical interfaces.
+**#10 Every SOSA hardware element has defined physical interfaces.**
 
 **Implications** The SOSA Technical Standard addresses a wide range of physical interfaces realized in SOSA environments. SOSA physical interfaces mandate that a set of interface standards is needed to span the types, physical sizes, connector types, electrical signaling (including Physical and Data Link layers), and operational environments.
 
-#11 The SOSA Architecture accommodates simple through complicated systems.
+**#11 The SOSA Architecture accommodates simple through complicated systems.**
 
 **Statement** The SOSA Architecture provides the building blocks for deriving multiple sensor types that scale within a design, increasing or decreasing complexity relative to processing and Size, Weight, and Power (SWaP) constraints for a system.
 
@@ -1028,7 +1028,7 @@ continue to Iature beyond theexisting goals and expectations, to be able to inco
 
 **Implications** SOSA systems accommodating a range of complexity require well-defined functional decomposition, use-cases, and interface definitions. The functional decomposition needs to create the right layer(s) of abstraction for a variety of hardware and software entities to coexist in different configurations. The use-cases need to cover all required system functionality, from specific mode processing to state/mode control to heartbeats. Integrating different software or hardware into a system should minimally affect the management functions of a SOSA derived system. The interface definitions need to be firm for system management, but flexible for a variety of sensor type processing. Patterns are used extensively to manage the complexity.
 
-#12 The SOSA Architecture accommodates small through large platforms.
+**#12 The SOSA Architecture accommodates small through large platforms.**
 
 **Statement** The SOSA Architecture is flexible enough so that designs derived from it can be tailored to large as well as small platforms, with the flexibility to be used to design simple, lightweight systems (suitable for a small UAS) as well as large complex systems (e.g., suitable for a wide-body jet, warship, or ground-based installation).
 
@@ -1036,11 +1036,11 @@ continue to Iature beyond theexisting goals and expectations, to be able to inco
 
 <!-- 原书 p.15 ｜ PDF p.35 -->
 
-#12 The SOSA Architecture accommodates small through large platforms.
+**#12 The SOSA Architecture accommodates small through large platforms.**
 
 **Implications** The SOSA Architecture is a superset architecture; complete in that it can be used to design a complex, fully-functional system, and at the same time not mandate/require the presence of all (or many/most) modules for systems with more modest SWaP resources. The SOSA Architecture incorporates hardware and physical standards that allow the use of small as well as large form factors.
 
-#13 Modularity is fundamental to the SOSA Architecture – physical and logical.
+**#13 Modularity is fundamental to the SOSA Architecture – physical and logical.**
 
 **Statement** The SOSA Architecture is an OSA, and as such is composed of physical and logical units ("building blocks") that have individually distinct boundaries that are well-defined interfaces. The units or elements that make up a SOSA Architecture (or resulting system) are known as modules.
 
@@ -1048,13 +1048,13 @@ continue to Iature beyond theexisting goals and expectations, to be able to inco
 
 **Implications** The SOSA Architecture is described in terms of modules (functions and behaviors) and interfaces (information or signals to be exchanged by these modules, and the means by which they are exchanged, such as protocols or electrical specs). The modules are defined in a way that ensures independence and low coupling (so that changes in one do not impact others). Criteria used: Severable (can be separated and used elsewhere) – based on business needs, timing requirements, or other drivers Has minimal complexity interfaces (minimum interdependencies) Can operate as stand-alone or be operated via function/process/system manger Is independently testable Does not expose IP Facilitates competitive procurement Encapsulates rapid change
 
-#14 Interchangeability is fundamental to the SOSA Architecture.
+**#14 Interchangeability is fundamental to the SOSA Architecture.**
 
 **Statement** Modules making up SOSA systems are able to be replaced by equivalent modules regardless of the source. Moreover, it would be possible to interchange one (entire) SOSA system with another SOSA system (provided it does not violate physical/environmental requirements).
 
 <!-- 原书 p.16 ｜ PDF p.36 -->
 
-#14 Interchangeability is fundamental to the SOSA Architecture.
+**#14 Interchangeability is fundamental to the SOSA Architecture.**
 
 **Rationale** The goals of the SOSA Consortium include openness (platform and vendor-agnostic)
 
@@ -1062,7 +1062,7 @@ and rapid response. The quality attributes include modularity and upgradability.
 
 **Implications** Interfaces are very well-defined and yet contain a high degree of flexibility. Moduleunique interface technologies should be avoided in favor of those that are broadlyapplicable. Interface definitions are superset definitions; they include all the functionality/capability that a SOSA module or system is anticipated to include. The architecture defines a default behavior for situations where all functions supported in the interface are not implemented.
 
-#15 Reuse is fundamental to the SOSA Architecture.
+**#15 Reuse is fundamental to the SOSA Architecture.**
 
 **Statement** SOSA systems and modules that are developed for one program, host vehicle, or environment will be employable, with minimal modification, for other programs, with other host vehicles and in other operational environments.
 

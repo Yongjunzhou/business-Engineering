@@ -8,7 +8,7 @@ Introduction
 
 Long lead times, cumbersome improvement processes, lack of reuse, platform-unique design, and extensive testing requirements characterize current Department of Defense (DoD) Command, Control, Communications, Computers, Intelligence, Surveillance, and Reconnaissance (C4ISR) capability. This results in higher costs and the inability to deliver capabilities to the war fighter in a timely manner. To counter these trends, the United States Air Force (USAF) Air Force Life Cycle Management Center (AFLCMC), Naval Air System Command (NAVAIR), Naval Sea Systems Command (NAVSEA), Communications-Electronics Research, Development, and Engineering Center (CERDEC), and Program Executive Office (PEO)-Aviation Program offices, enabled by the expertise and experience of the DoD's industrial base, are adopting a revolutionary approach. The Sensor Open Systems Architecture (SOSA) will enable rapid, affordable, cross-platform capability advancements based upon fundamentals of system, software, hardware, and electrical/mechanical engineering best practices and Modular Open Systems Approach (MOSA) principles with pragmatic, practical experience to develop a solution that addresses DoD needs for a cohesive unified set of C4ISR capabilities.
 
-冗长的交付周期、笨重的改进流程、复用不足、平台专用设计以及大量测试要求，构成了当前美国国防部（DoD）指挥、控制、通信、计算机、情报、监视与侦察（C4ISR）能力的特征。这导致成本更高，且无法及时把能力交付到作战人员手中。为扭转这些趋势，美国空军（USAF）空军生命周期管理中心（AFLCMC）、海军航空系统司令部（NAVAIR）、海军海上系统司令部（NAVSEA）、通信-电子研究、开发与工程中心（CERDEC）以及航空项目执行官办公室（PEO-Aviation），在国防部工业基础的专长与经验支撑下，正在采用一种革命性的做法。传感器开放系统架构（SOSA）将基于系统、软件、硬件与电气／机械工程最佳实践的基本原理，以及模块化开放系统方法（MOSA）原则，结合务实、实际的经验，使能力得以快速、可负担、跨平台地提升，并形成一套解决方案，回应国防部对内聚统一的 C4ISR 能力集合的需要。
+冗长的交付周期、笨重的改进流程、复用不足、平台专用设计以及大量测试需求，构成了当前美国国防部（DoD）指挥、控制、通信、计算机、情报、监视与侦察（C4ISR）能力的特征。这导致成本更高，且无法及时把能力交付到作战人员手中。为扭转这些趋势，美国空军（USAF）空军生命周期管理中心（AFLCMC）、海军航空系统司令部（NAVAIR）、海军海上系统司令部（NAVSEA）、通信-电子研究、开发与工程中心（CERDEC）以及航空项目执行官办公室（PEO-Aviation），在国防部工业基础的专长与经验支撑下，正在采用一种革命性的做法。传感器开放系统架构（SOSA）将基于系统、软件、硬件与电气／机械工程最佳实践的基本原理，以及模块化开放系统方法（MOSA）原则，结合务实、实际的经验，使能力得以快速、可负担、跨平台地提升，并形成一套解决方案，回应国防部对内聚统一的 C4ISR 能力集合的需要。
 
 The goal of The Open Group SOSA Consortium is to reduce development and integration costs and reduce time to field new C4ISR capabilities.
 
@@ -44,7 +44,7 @@ The goals are:
 
 - Open: vendor and platform-agnostic open modular reference architecture and business model Standardized: software component, hardware element, and electrical-mechanical interface standards Harmonized: leverage existing and emerging open standards scope Aligned: consistent with DoD acquisition policy guidance Cost-effective: affordable C4ISR systems including lifecycle costs Adaptable: rapidly responsive to changing user requirements
 
-- 开放：与厂商、平台无关的开放模块化参考架构与业务模式；标准化：软件组件、硬件元素与电气-机械接口标准；协调一致：利用现有与新兴的开放标准范围；对齐：与国防部采办政策指导保持一致；成本有效：可负担的 C4ISR 系统，含全生命周期成本；可适应：快速响应用户需求的变化
+- 开放：与厂商、平台无关的开放模块化参考架构与业务模式；标准化：软件组件、硬件元素与电气-机械接口标准；协调一致：沿用现有与新兴的开放标准；对齐：与国防部采办政策指导保持一致；成本有效：可负担的 C4ISR 系统，含全生命周期成本；可适应：快速响应用户需求的变化
 
 > **译注**：上段英文在原书为六条项目符号，转换时并成一段（成因见 `../99-转换说明与已知差异.md`）。英文照录不改，中文同构译成一段。
 
@@ -88,7 +88,7 @@ This document describes the SOSA Technical Architecture, including the SOSA modu
 
 The overview of alignment between technical and business focus areas for the SOSA Technical Standard and the SOSA Open Business Model is available through a companion document – the SOSA Business Guide (see Referenced Documents). A detailed presentation of the SOSA Open Business Model can be found in the SOSA Business Guide. Examples of SOSA Open Business Model incorporation into the acquisition process can be found in the SOSA Contracting Guide. Policies guiding the development and conduct of the SOSA Conformance Program may be found in the SOSA Conformance Policy.
 
-SOSA 技术标准与 SOSA 开放业务模式在技术与业务聚焦领域上的对齐概貌，见配套文件《SOSA 业务指南》（见"引用文件"）。SOSA 开放业务模式的详细阐述见《SOSA 业务指南》。SOSA 开放业务模式融入采办过程的示例，见《SOSA 合同指南》。指导 SOSA 符合性计划制定与实施的政策，见《SOSA 符合性政策》。
+SOSA 技术标准与 SOSA 开放业务模式在技术与业务聚焦领域上的对齐概貌，见配套文件《SOSA 业务指南》（见“引用文件”）。SOSA 开放业务模式的详细阐述见《SOSA 业务指南》。SOSA 开放业务模式融入采办过程的示例，见《SOSA 合同指南》。指导 SOSA 符合性计划制定与实施的政策，见《SOSA 符合性政策》。
 
 The SOSA Business Guide explains the objectives and organization of The Open Group SOSA Consortium, and describes the SOSA Technical Standard and SOSA Open Business Model. It is intended for use by all stakeholders in the development, acquisition, deployment, modernization, and sustainment of sensor systems that support a broad array of sensors, including C4ISR. The primary stakeholder groups are Government organizations, Aerospace and Defense contractors, and commercial businesses. Within each of these broad groups there are business and technical communities, acquisition and contracting communities, users, and operational communities. All of them have a stake in the SOSA ecosystem and should become familiar with the SOSA Business Guide.
 
@@ -118,7 +118,7 @@ Defining conformance processes and creating an effective, affordable method for 
 
 - Buyers may specify and successfully procure modular capability from vendors who provide solutions which conform to that open standard The SOSA Consortium is developing a SOSA Conformance Policy and will be developing an associated Conformance Program for the SOSA Technical Standard. The SOSA Conformance Program will provide the associated conformance criteria and processes necessary to assure that
 
-- 采购方可以规定模块化能力，并从提供符合该开放标准解决方案的厂商处成功采购　SOSA 联盟正在制定《SOSA 符合性政策》，并将为 SOSA 技术标准制定相应的符合性计划。SOSA 符合性计划将提供为确保以下事项所必需的相应符合性判据与过程
+- 采购方可以规定模块化能力，并从提供符合该开放标准解决方案的厂商处成功采购。SOSA 联盟正在制定《SOSA 符合性政策》，并将为 SOSA 技术标准制定相应的符合性计划。SOSA 符合性计划将提供为确保以下事项所必需的相应符合性判据与过程
 
 <!-- 原书 p.4 ｜ PDF p.24 -->
 
@@ -130,7 +130,7 @@ capabilities have been developed in adherence to the SOSA Technical Standard. Th
 
 SOSA Conformance Verification is the act of assessing the conformance of the implementation of a hardware element or software component (or a combination thereof) to the applicable SOSA Technical Standard requirements. SOSA verification processes will not be available for this Snapshot.
 
-SOSA 符合性验证，是评定硬件元素或软件组件（或其组合）的实现对适用 SOSA 技术标准要求的符合性的动作。本快照版不提供 SOSA 验证过程。
+SOSA 符合性验证，是评定硬件元素或软件组件（或其组合）的实现对适用 SOSA 技术标准需求的符合性的动作。本快照版不提供 SOSA 验证过程。
 
 SOSA Conformance Certification is the process of applying for SOSA Conformance Certification once Conformance Verification has been successfully completed. The SOSA Certification process will not be available for this Snapshot.
 
@@ -164,7 +164,7 @@ While the complete SOSA AV-2 Integrated Dictionary can be found in Appendix B, t
 
 > **译注**：上段英文在原书为五条项目符号，转换时并成一条。英文照录不改。`slot profile` 按术语策略存原词，首次出现括注中文。
 
-#### 1.5.2 System Requirements 系统要求
+#### 1.5.2 System Requirements 系统需求
 
 For the purposes of the SOSA Technical Standard, the following terminology definitions apply:
 
@@ -188,7 +188,7 @@ Should Describes a feature or behavior that is strongly recommended for an imple
 
 To avoid confusion and to make very clear what the requirements for conformance are, many of the paragraphs in this Technical Standard are labeled with keywords that indicate the type of information they contain. These keywords are listed below:
 
-为避免混淆、并清楚表明符合性要求为何，本技术标准中许多段落以关键字标注，以指示其内容属于哪一类信息。这些关键字列举如下：
+为避免混淆、并清楚表明符合性需求为何，本技术标准中许多段落以关键字标注，以指示其内容属于哪一类信息。这些关键字列举如下：
 
 Rule Recommendation Suggestion Permission Observation Any text not labeled with one of these keywords is to be interpreted as descriptive in nature. These will be written in either a descriptive or a narrative style.
 
@@ -208,7 +208,7 @@ Rule <section>-<number>
 
 Conformance with Rules is mandatory. Rules always include the term "shall". Rules are expressed in some combination of text, figures, tables, or drawings. All Rules will be followed to ensure compatibility between board and backplane designs. All Rules use the "shall" or "shall not" words to emphasize the importance of the Rule. The "shall" or "shall not" words are reserved exclusively for stating Rules in this document and are not used for any other purpose.
 
-符合规则是强制的。规则总是包含 "shall"（应）一词。规则以文字、图、表或附图的某种组合表达。所有规则都将被遵循，以确保板与背板设计之间的兼容性。所有规则都使用 "shall"（应）或 "shall not"（不应）字样，以强调规则的重要性。"shall"（应）或 "shall not"（不应）字样在本文件中专用于陈述规则，不用于任何其他目的。
+符合规则是强制的。规则总是包含 “shall”（应）一词。规则以文字、图、表或附图的某种组合表达。所有规则都将被遵循，以确保板与背板设计之间的兼容性。所有规则都使用 “shall”（应）或 “shall not”（不应）字样，以强调规则的重要性。“shall”（应）或 “shall not”（不应）字样在本文件中专用于陈述规则，不用于任何其他目的。
 
 Recommendation <section>-<number>
 
@@ -216,7 +216,7 @@ Recommendation <section>-<number>
 
 Conformance with Recommendations is optional. Recommendations always include the term "should". Recommendations are used to convey implementation advice based on the community's collective knowledge base. Wherever a Recommendation appears, designers would be wise to take the advice given. Doing otherwise might result in poor performance Or awkward problems. Recommendations found in this document are based on experience and are provided to designers to speed their traversal of the learning curve. All Recommendations use the "should" or "should not" words to emphasize the importance of the Recommendation. The "should" or "should not" words are reserved exclusively for stating Recommendations in this document and are not used for any other purpose.
 
-符合推荐是可选的。推荐总是包含 "should"（宜）一词。推荐用于传达基于群体集体知识基础的实现忠告。凡出现推荐之处，设计者采其忠告为宜。不采可能导致性能不佳或棘手问题。本文件中的推荐基于经验，提供给设计者以加快其走完学习曲线。所有推荐都使用 "should"（宜）或 "should not"（不宜）字样，以强调推荐的重要性。"should"（宜）或 "should not"（不宜）字样在本文件中专用于陈述推荐，不用于任何其他目的。
+符合推荐是可选的。推荐总是包含 “should”（宜）一词。推荐用于传达基于群体集体知识基础的实现忠告。凡出现推荐之处，设计者采其忠告为宜。不采可能导致性能不佳或棘手问题。本文件中的推荐基于经验，提供给设计者以加快其走完学习曲线。所有推荐都使用 “should”（宜）或 “should not”（不宜）字样，以强调推荐的重要性。“should”（宜）或 “should not”（不宜）字样在本文件中专用于陈述推荐，不用于任何其他目的。
 
 Suggestion <section>-<number>
 
@@ -238,7 +238,7 @@ Permission <section>-<number>
 
 Conformance with Permissions is optional. Permissions always include the term "may". In some cases, a Rule does not specifically prohibit a certain design approach, but the reader might be left wondering whether that approach might violate the spirit of the Rule or whether it might lead to some subtle problem. Permissions reassure the reader that a certain approach is acceptable and will cause no problems. All Permissions use the "may" words to emphasize the importance of the Permission. The lower-case "may" words are reserved exclusively for stating Permissions in this document and are not used for any other purpose.
 
-符合许可是可选的。许可总是包含 "may"（可）一词。某些情况下，某条规则并未专门禁止某种设计做法，但读者会疑惑：该做法是否违背规则的本意，或是否会导致某种隐蔽问题。许可向读者保证：某种做法可以接受，且不会引起问题。所有许可都使用 "may"（可）字样，以强调许可的重要性。小写 "may"（可）字样在本文件中专用于陈述许可，不用于任何其他目的。
+符合许可是可选的。许可总是包含 “may”（可）一词。某些情况下，某条规则并未专门禁止某种设计做法，但读者会疑惑：该做法是否违背规则的本意，或是否会导致某种隐蔽问题。许可向读者保证：某种做法可以接受，且不会引起问题。所有许可都使用 “may”（可）字样，以强调许可的重要性。小写 “may”（可）字样在本文件中专用于陈述许可，不用于任何其他目的。
 
 Observation <section>-<number>
 
