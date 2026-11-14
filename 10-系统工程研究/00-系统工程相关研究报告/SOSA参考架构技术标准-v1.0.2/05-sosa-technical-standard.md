@@ -745,21 +745,21 @@ Methodology: (TBD)
 
 SOSA plug-in cards shall conform to the requirements of the following standards, when applicable, in the given order of precedence: • Requirements of this SOSA Technical Standard
 
-  - Conformance Methodology: (I)
+Conformance Methodology: (I)
 
-Requirements of ANSI/VITA 65.1
-
-  - Conformance Methodology: (I)
-
-Requirements of ANSI/VITA 65.0
+- Requirements of ANSI/VITA 65.1
 
   - Conformance Methodology: (I)
 
-Requirements of ANSI/VITA 48.2
+- Requirements of ANSI/VITA 65.0
 
   - Conformance Methodology: (I)
 
-Requirements of ANSI/VITA 48.8
+- Requirements of ANSI/VITA 48.2
+
+  - Conformance Methodology: (I)
+
+- Requirements of ANSI/VITA 48.8
 
   - Conformance Methodology: (I)
 
@@ -767,21 +767,21 @@ Requirements of ANSI/VITA 48.8
 
 • Requirements of ANSI/VITA 47.3
 
-  - Conformance Methodology: (I)
+Conformance Methodology: (I)
 
-Requirements of ANSI/VITA 66.0 and applicable dot standards
-
-  - Conformance Methodology: (I)
-
-Requirements of ANSI/VITA 67.0 and applicable dot standards
+- Requirements of ANSI/VITA 66.0 and applicable dot standards
 
   - Conformance Methodology: (I)
 
-Requirements of ANSI/VITA 46.0
+- Requirements of ANSI/VITA 67.0 and applicable dot standards
 
   - Conformance Methodology: (I)
 
-Requirements of ANSI/VITA 62.0
+- Requirements of ANSI/VITA 46.0
+
+  - Conformance Methodology: (I)
+
+- Requirements of ANSI/VITA 62.0
 
   - Conformance Methodology: (I)
 
@@ -1041,9 +1041,9 @@ The Protocol Profile defines what type communication protocol can be used on eac
 
 SOSA plug-in card profiles that align with OpenVPX Profiles can be classified into one of three main categories: • SLT: a physical space on an OpenVPX backplane with a defined mechanical and electrical specification intended to accept a Plug-In module Pre-existing examples of slots that are applicable to OpenVPX include 3U and 6U. There are different slot types such as payload slots and switch slots.
 
-Backplane (BKP): a class of interconnect that consists of regularly aligned pattern of connectors that operate so that the corresponding pins on each connector have the same logical definition It is often used as a backbone to connect several modules together to allow for signal transmission and is usually housed in a chassis.
+- Backplane (BKP): a class of interconnect that consists of regularly aligned pattern of connectors that operate so that the corresponding pins on each connector have the same logical definition It is often used as a backbone to connect several modules together to allow for signal transmission and is usually housed in a chassis.
 
-Module (MOD): an element of a system that has individually distinct boundaries that are well-defined interfaces Reference ANSI/VITA 65.0 §1.3.3.1 for Slot Profile use and construction. Reference ANSI/VITA 65.0 §1.3.3.2 for Backplane Profile use and construction. Reference ANSI/VITA 65.0 §1.3.3.3 for Module Profile use and construction.
+- Module (MOD): an element of a system that has individually distinct boundaries that are well-defined interfaces Reference ANSI/VITA 65.0 §1.3.3.1 for Slot Profile use and construction. Reference ANSI/VITA 65.0 §1.3.3.2 for Backplane Profile use and construction. Reference ANSI/VITA 65.0 §1.3.3.3 for Module Profile use and construction.
 
 #### 5.2.15 Common 6U and 3U Plug-In Card Profile Specifications
 
@@ -1748,7 +1748,7 @@ SOSA 6U Legacy Switch Plug-In Cards shall conform to ANSI/VITA 65.0 slot profile
 
 SOSA 6U Legacy Switch Plug-In Cards shall conform to one of the following ANSI/VITA 65.1 module profiles per: MOD6-SWH-16F20U-12.4.2-3
 
-  - Conformance Methodology: (A)
+Conformance Methodology: (A)
 
 - MOD6-SWH-16F20U-12.4.2-5
 
@@ -1847,11 +1847,11 @@ PSM requirements shall be applied using the following order of precedence: Requi
 
 65.0)
 
-  - Conformance Methodology: (A)
+Conformance Methodology: (A)
 
 Requirements of ANSI/VITA 62.0
 
-  - Conformance Methodology: (A)
+Conformance Methodology: (A)
 
 **Observation 5.2.20-1**
 
@@ -2163,13 +2163,13 @@ Transport layer middleware for application (component) to application (component
 
 communications, unless defined by this standard for SOSA module communications Specific source code-level requirements, such as:
 
-  - Coding standards
+Coding standards
 
-  - Code development methods — Code architecture
+Code development methods — Code architecture
 
 <!-- 原书 p.129 ｜ PDF p.149 -->
 
-  - Configuration management or quality assurance processes except those defined for airworthiness — Language selection beyond those defined in the FACE Technical Standard plus
+Configuration management or quality assurance processes except those defined for airworthiness — Language selection beyond those defined in the FACE Technical Standard plus
 
 Python™
 
