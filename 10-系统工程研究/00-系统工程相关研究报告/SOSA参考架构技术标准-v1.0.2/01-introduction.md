@@ -8,7 +8,7 @@ Long lead times, cumbersome improvement processes, lack of reuse, platform-uniqu
 
 The goal of The Open Group SOSA Consortium is to reduce development and integration costs and reduce time to field new C4ISR capabilities.
 
-### 1.1 Objective
+1.1 Objective
 
 The subject of this Snapshot is the specification of the Technical Standard for Sensor Open Systems Architecture (SOSA) Reference Architecture, Edition 1.0.
 
@@ -26,7 +26,7 @@ The goals are:
 
 - Open: vendor and platform-agnostic open modular reference architecture and business model Standardized: software component, hardware element, and electrical-mechanical interface standards Harmonized: leverage existing and emerging open standards scope Aligned: consistent with DoD acquisition policy guidance Cost-effective: affordable C4ISR systems including lifecycle costs Adaptable: rapidly responsive to changing user requirements
 
-### 1.2 Overview
+1.2 Overview
 
 This Snapshot documents a proposal for a SOSA Technical Standard.
 
@@ -34,7 +34,7 @@ The SOSA Technical Standard defines a system, software, hardware and electrical/
 
 At a later date, The Open Group will provide this Technical Standard, and also a Conformance Guide that will contain the Product Standard that identifies what is to be tested for conformance certification.
 
-#### 1.2.1 SOSA Architecture Fundamentals
+1.2.1 SOSA Architecture Fundamentals
 
 SOSA specifications are based on convergence of domains of knowledge for: business logic (market and government-driven forces), and technical (software, hardware, and electrical/mechanical interfaces). To that end, a complete system based on the SOSA Technical Standard will require all of the above domains to be fully integrated in a unified architecture description. The SOSA Technical Standard provides a description of each SOSA module and its interfaces (physical and logical, as appropriate) which will be required to create SOSA sensor designs/implementations based on unique customer needs (see Figure 1).
 
@@ -52,7 +52,7 @@ This document describes the SOSA Technical Architecture, including the SOSA modu
 
 <!-- 原书 p.3 ｜ PDF p.23 -->
 
-#### 1.2.2 Business Alignment
+1.2.2 Business Alignment
 
 The overview of alignment between technical and business focus areas for the SOSA Technical Standard and the SOSA Open Business Model is available through a companion document – the SOSA Business Guide (see Referenced Documents). A detailed presentation of the SOSA Open Business Model can be found in the SOSA Business Guide. Examples of SOSA Open Business Model incorporation into the acquisition process can be found in the SOSA Contracting Guide. Policies guiding the development and conduct of the SOSA Conformance Program may be found in the SOSA Conformance Policy.
 
@@ -62,7 +62,7 @@ The SOSA Contracting Guide provides procurement language examples for organizati
 
 The SOSA Conformance Policy lays out high-level policies for the development and conduct of a set of SOSA conformance processes. These processes will include multiple conformance verification processes, a single conformance certification process, and a single SOSA certified conformant product registration process.
 
-### 1.3 Conformance
+1.3 Conformance
 
 This is a Snapshot, not an approved standard. Do not specify or claim conformance to it.
 
@@ -82,19 +82,19 @@ SOSA Registration is the process of listing SOSA certified modules and SOSA plug
 
 Successful completion of the SOSA Conformance Program leads to a SOSA Conformance Certificate and the right to use the SOSA Conformance Certification Trademark in marketing.
 
-### 1.4 Normative References
+1.4 Normative References
 
 None.
 
-### 1.5 Terminology
+1.5 Terminology
 
-#### 1.5.1 SOSA Architecture
+1.5.1 SOSA Architecture
 
 While the complete SOSA AV-2 Integrated Dictionary can be found in Appendix B, there are certain key terms that must be understood in order to correctly interpret this Technical Standard.
 
 - Hardware Element: an all-encompassing term for hardware that is incorporated into a SOSA sensor Plug-In Card: any hardware element that is a circuit card that plugs into a backplane SOSA Plug-In Card: a circuit card assembly that also conforms to a SOSA slot profile Software Component: a unit of software that is incorporated into a SOSA sensor SOSA Module: an architectural entity that aggregates and contains the functions the SOSA sensor performs (consistent with DoD MOSA language), may be instantiated using hardware elements and/or software components, and conforms to the complete definition of a SOSA module as defined in the SOSA Technical Standard
 
-#### 1.5.2 System Requirements
+1.5.2 System Requirements
 
 For the purposes of the SOSA Technical Standard, the following terminology definitions apply:
 
@@ -106,7 +106,7 @@ Shall Describes a feature or behavior that is mandatory for an implementation th
 
 Should Describes a feature or behavior that is strongly recommended for an implementation that conforms to this document. A hardware element or software component cannot rely on the existence of the feature or behavior.
 
-#### 1.5.3 Hardware Specification Keywords
+1.5.3 Hardware Specification Keywords
 
 To avoid confusion and to make very clear what the requirements for conformance are, many of the paragraphs in this Technical Standard are labeled with keywords that indicate the type of information they contain. These keywords are listed below:
 
@@ -138,7 +138,7 @@ Observation <section>-<number>
 
 Observations do not offer any specific advice. They usually follow naturally from what has just been discussed. They spell out the implications of certain Rules and bring attention to things that might otherwise be overlooked. They also give the rationale behind certain Rules so that the reader understands why the Rule must be followed.
 
-### 1.6 Future Directions
+1.6 Future Directions
 
 The SOSA Hardware Working Group (HWG) will initiate an effort to develop a Space version of the SOSA standard. This will leverage existing SOSA efforts as much as possible with a look towards existing Space OSAs. The HWG will also extend its development efforts to smaller Sensor platforms, such as Unmanned Aerial Vehicles (UAVs); Unmanned Underwater Vehicles (UUVs), etc.
 

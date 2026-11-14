@@ -4,19 +4,19 @@
 
 ## D DIV-2 and Data Dictionary
 
-### D.1 SOSA Sensor RF Control (Distribution A)
+D.1 SOSA Sensor RF Control (Distribution A)
 
 See the sheet named “DIV-2” in the following Microsoft® Excel® document: SOSA_Sensor_RF_Control_DIV2_DIV3_20180806_Distro_A.xlsx located here (available to members only): https://www.opengroup.us/sosa/documents.php?action=show&dcat=&gdid=19642
 
-### D.2 MORA Signal Layer
+D.2 MORA Signal Layer
 
 See the sheets named “DIV-2 VICTORY Mgmt Dist-C”, “DIV-2 MORA Mgmt Dist-A”, and “DIV-2 MORA MDMs Dist-A” in the following Microsoft Excel document: SOSA_Signal_Layer_DIV-2_DIV-3_20180628_Distro_C.xlsx located here (available to members only): https://www.opengroup.us/SOSA/distro/d/protected/documents.php?action=show&dcat=&gdid=
 
-### D.3 AMTI SAA Multi-Sensor Fusion Tracker
+D.3 AMTI SAA Multi-Sensor Fusion Tracker
 
 See the sheets named “Tracker DIV-2” and “Object Definitions” in the following Microsoft Excel document: SOSA_DIV2_Tracker_Module_20180622_ITAR.xlsx located here (available to members only): https://www.opengroup.us/sosa/documents.php?action=show&dcat=&gdid=19643 Note: This file is currently marked “Possibly ITAR”, which requires resolution.
 
-### D.4 Common System Management Data Elements
+D.4 Common System Management Data Elements
 
 See the sheets named “DIV-2 Common Sys Mgmt Dist-A” and “DIV-2 VICTORY Mgmt Dist-C” in the following Microsoft Excel document: SOSA_SystemManagement_DIV-2_20180622_Dist-C.xlsx
 

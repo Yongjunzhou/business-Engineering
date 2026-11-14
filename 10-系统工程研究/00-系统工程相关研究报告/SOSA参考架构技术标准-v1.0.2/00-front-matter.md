@@ -62,9 +62,9 @@ Authored by The Open Group SOSA™ Consortium. Published by The Open Group, Janu
 
 3.2 SOSA Architecture Principles 10
 
-#### 3.2.1 Business-Oriented Architecture Principles 11
+3.2.1 Business-Oriented Architecture Principles 11
 
-#### 3.2.2 Technically-Oriented Architecture Principles 12
+3.2.2 Technically-Oriented Architecture Principles 12
 
 3.3 SOSA Quality Attributes 17
 
@@ -90,7 +90,7 @@ Authored by The Open Group SOSA™ Consortium. Published by The Open Group, Janu
 
 3.9 SvcV-1: Services Context Description 24
 
-### 3.10 SOSA Inter-Module Interactions 29
+3.10 SOSA Inter-Module Interactions 29
 
 3.10.1 SOSA Sensor Interconnections 30
 
@@ -108,9 +108,9 @@ Authored by The Open Group SOSA™ Consortium. Published by The Open Group, Janu
 
 4.1 Service Views 43
 
-#### 4.1.1 SvcV-4: Services Functionality Description 43
+4.1.1 SvcV-4: Services Functionality Description 43
 
-#### 4.1.2 SvcV-2: Services Resource Flow Description 66
+4.1.2 SvcV-2: Services Resource Flow Description 66
 
 <!-- 原书 p.iii ｜ PDF p.3 -->
 
@@ -130,7 +130,7 @@ Authored by The Open Group SOSA™ Consortium. Published by The Open Group, Janu
 
 4.4 System Architecture 70
 
-#### 4.4.1 SV-2: Systems Resource Flow Description 70
+4.4.1 SV-2: Systems Resource Flow Description 70
 
 4.4.2 SV-3: Systems-Systems Matrix 70
 
@@ -178,27 +178,27 @@ Specifications 95 5.2.14 Hardware Platform SOSA Plug-In Card Profiles 101
 
 Specifications 102
 
-#### 5.2.16 SOSA 3U Plug-IN Card Profile Specifications 102
+5.2.16 SOSA 3U Plug-IN Card Profile Specifications 102
 
 5.2.17 6U Plug-In Card Profile Specifications 114
 
-#### 5.2.18 SOSA 6U Legacy Switch Plug-In Card Profile 119
+5.2.18 SOSA 6U Legacy Switch Plug-In Card Profile 119
 
-#### 5.2.19 SOSA 6U External I/O Plug-In Card Profile 120
+5.2.19 SOSA 6U External I/O Plug-In Card Profile 120
 
 5.2.20 Power Supply Module 122
 
 5.2.21 Mezzanine Modules 123
 
-#### 5.2.22 Maintenance Console Port Requirements 124
+5.2.22 Maintenance Console Port Requirements 124
 
 5.3 SOSA System Management Requirements 126
 
-#### 5.3.1 SOSA Hardware Element System Management
+5.3.1 SOSA Hardware Element System Management
 
 Requirements 126
 
-#### 5.3.2 SOSA Module System Management Requirements 128
+5.3.2 SOSA Module System Management Requirements 128
 
 5.4 SOSA Software Operating Environment 128
 
@@ -226,11 +226,11 @@ Requirements 126
 
 #### 5.7.2 Application of MORA to SOSA Signal Layer Modules 146
 
-#### 5.7.3 RF Receiver Aperture/Transducer Module 146
+5.7.3 RF Receiver Aperture/Transducer Module 146
 
-#### 5.7.4 RF Transmit Aperture/Transducer Module 147
+5.7.4 RF Transmit Aperture/Transducer Module 147
 
-#### 5.7.5 RF Conditioner-Receiver-Exciter Module 148
+5.7.5 RF Conditioner-Receiver-Exciter Module 148
 
 5.7.6 RF Signal Layer Module Interactions 149
 
@@ -238,11 +238,11 @@ Requirements 126
 
 5.8 EO/IR Signal Layer Modules 159
 
-#### 5.8.1 EO/IR Receiver Camera Module Standard 159
+5.8.1 EO/IR Receiver Camera Module Standard 159
 
 5.8.2 EO/IR Transmit Laser Module Standard 159
 
-#### 5.8.3 EO/IR Conditioner-Receiver-Exciter Module Standard 159
+5.8.3 EO/IR Conditioner-Receiver-Exciter Module Standard 159
 
 5.9 RF Digital Processing Modules 159
 
@@ -254,7 +254,7 @@ Requirements 126
 
 5.10.3 Host Platform Interface 163
 
-### 5.11 OSA Architecture Development/Evolution Plan 172
+5.11 OSA Architecture Development/Evolution Plan 172
 
 A StdV-1 (Applicable Standards) 173 B AV-2 Integrated Dictionary 174 C Use-Case Details 179
 
