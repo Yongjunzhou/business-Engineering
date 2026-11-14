@@ -64,6 +64,16 @@ FILES = [
 
 CASE_TOKENS = ['M3-0417', '30 s', '≥72 h', '±0.5']
 OLD_PTR = re.compile(r'46\s*号[（(]?新?[）)]?[^。\n]{0,20}?§\s*(9\.\d|11\.[34]|12\.\d|13\.\d)')
+
+# 2026-11-13 修（36 号对齐轮）：v2.6 的 §9.x 是**现行号**（§9.1~§9.6），旧启发式把它一律当旧号，
+# 凡引「46 号 §9.5」即误判。按 19 号规程「按现行目录判，不用附录 E 左列」：先从 46 号现行标题
+# 取出全部节号集合，命中该集合者不算旧号残影。
+CUR_46 = None
+
+
+def cur46_nums():
+    t = read(os.path.join(LIB, '46-架构内容与架构描述研究报告-二者的目的、存在理由与关系.md'))
+    return set(re.findall(r'(?m)^#{2,4} (\d+(?:\.\d+)*)', t))
 HIST = ('修订记录', '修订行', '版本行', '历史', '旧号', '判留', '存史')
 HIST_DATE = re.compile(r'20(2[0-5])-(0[1-9]|1[0-2])')
 HIST_ROW = re.compile(r'^\|\s*\*{0,2}v[\d.]')
@@ -166,11 +176,16 @@ def main():
         changed = (old is None) or (cur != old)
         has_note = ('46 号 v2.6' in cur) or ('46 号（v2.6）' in cur)
 
-        # ③ 旧号残影（排除存史行）
+        # ③ 旧号残影（排除存史行；命中的节号若在 46 号现行标题集合内，则不算旧号）
+        global CUR_46
+        if CUR_46 is None:
+            CUR_46 = cur46_nums()
         ptr = []
         skipped = 0
         for ln_no, ln in enumerate(cur.split('\n'), 1):
             if not OLD_PTR.search(ln):
+                continue
+            if OLD_PTR.search(ln).group(1) in CUR_46:
                 continue
             if is_history(ln):
                 skipped += 1
