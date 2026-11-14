@@ -2,7 +2,7 @@
 
 > 原书 p.1–7 ｜ PDF p.21–27
 
-## Introduction
+Introduction
 
 Long lead times, cumbersome improvement processes, lack of reuse, platform-unique design, and extensive testing requirements characterize current Department of Defense (DoD) Command, Control, Communications, Computers, Intelligence, Surveillance, and Reconnaissance (C4ISR) capability. This results in higher costs and the inability to deliver capabilities to the war fighter in a timely manner. To counter these trends, the United States Air Force (USAF) Air Force Life Cycle Management Center (AFLCMC), Naval Air System Command (NAVAIR), Naval Sea Systems Command (NAVSEA), Communications-Electronics Research, Development, and Engineering Center (CERDEC), and Program Executive Office (PEO)-Aviation Program offices, enabled by the expertise and experience of the DoD's industrial base, are adopting a revolutionary approach. The Sensor Open Systems Architecture (SOSA) will enable rapid, affordable, cross-platform capability advancements based upon fundamentals of system, software, hardware, and electrical/mechanical engineering best practices and Modular Open Systems Approach (MOSA) principles with pragmatic, practical experience to develop a solution that addresses DoD needs for a cohesive unified set of C4ISR capabilities.
 
@@ -24,17 +24,7 @@ Business/acquisition practices and a technical environment for sensors and C4ISR
 
 The goals are:
 
-- Open: vendor and platform-agnostic open modular reference architecture and business model
-
-- Standardized: software component, hardware element, and electrical-mechanical interface standards
-
-- Harmonized: leverage existing and emerging open standards scope
-
-- Aligned: consistent with DoD acquisition policy guidance
-
-- Cost-effective: affordable C4ISR systems including lifecycle costs
-
-- Adaptable: rapidly responsive to changing user requirements
+- Open: vendor and platform-agnostic open modular reference architecture and business model Standardized: software component, hardware element, and electrical-mechanical interface standards Harmonized: leverage existing and emerging open standards scope Aligned: consistent with DoD acquisition policy guidance Cost-effective: affordable C4ISR systems including lifecycle costs Adaptable: rapidly responsive to changing user requirements
 
 ### 1.2 Overview
 
@@ -78,13 +68,7 @@ This is a Snapshot, not an approved standard. Do not specify or claim conformanc
 
 Defining conformance processes and creating an effective, affordable method for certifying software, hardware, and electrical/mechanical interfaces is vital to establishing an effective standard. Certification provides formal recognition of conformance to an industry standard, which allows the following:
 
-Suppliers and practitioners may make verified claims of conformance to an open standard
-
-Buyers may specify and successfully procure modular capability from vendors who
-
-provide solutions which conform to that open standard
-
-The SOSA Consortium is developing a SOSA Conformance Policy and will be developing an associated Conformance Program for the SOSA Technical Standard. The SOSA Conformance Program will provide the associated conformance criteria and processes necessary to assure that
+Suppliers and practitioners may make verified claims of conformance to an open standard Buyers may specify and successfully procure modular capability from vendors who provide solutions which conform to that open standard The SOSA Consortium is developing a SOSA Conformance Policy and will be developing an associated Conformance Program for the SOSA Technical Standard. The SOSA Conformance Program will provide the associated conformance criteria and processes necessary to assure that
 
 <!-- 原书 p.4 ｜ PDF p.24 -->
 
@@ -104,67 +88,41 @@ None.
 
 ### 1.5 Terminology
 
+#### 1.5.1 SOSA Architecture
+
 While the complete SOSA AV-2 Integrated Dictionary can be found in Appendix B, there are certain key terms that must be understood in order to correctly interpret this Technical Standard.
 
-- Hardware Element: an all-encompassing term for hardware that is incorporated into a
+- Hardware Element: an all-encompassing term for hardware that is incorporated into a SOSA sensor Plug-In Card: any hardware element that is a circuit card that plugs into a backplane SOSA Plug-In Card: a circuit card assembly that also conforms to a SOSA slot profile Software Component: a unit of software that is incorporated into a SOSA sensor SOSA Module: an architectural entity that aggregates and contains the functions the SOSA sensor performs (consistent with DoD MOSA language), may be instantiated using hardware elements and/or software components, and conforms to the complete definition of a SOSA module as defined in the SOSA Technical Standard
 
-- SOSA sensor
-
-- Plug-In Card: any hardware element that is a circuit card that plugs into a backplane
-
-- SOSA Plug-In Card: a circuit card assembly that also conforms to a SOSA slot profile
-
-- Software Component: a unit of software that is incorporated into a SOSA sensor
-
-- SOSA Module: an architectural entity that aggregates and contains the functions the
-
-- SOSA sensor performs (consistent with DoD MOSA language), may be instantiated using hardware elements and/or software components, and conforms to the complete definition
-
-## of a SOSA module as defined in the SOSA Technical Standard
+#### 1.5.2 System Requirements
 
 For the purposes of the SOSA Technical Standard, the following terminology definitions apply:
 
-May Describes a feature or behavior that is optional. The presence of this feature
-
-should not be relied upon.
+May Describes a feature or behavior that is optional. The presence of this feature should not be relied upon.
 
 <!-- 原书 p.5 ｜ PDF p.25 -->
 
-Shall Describes a feature or behavior that is mandatory for an implementation that
+Shall Describes a feature or behavior that is mandatory for an implementation that conforms to this document. A hardware element or software component relies on the existence of the feature or behavior.
 
-conforms to this document. A hardware element or software component relies on the existence of the feature or behavior.
-
-Should Describes a feature or behavior that is strongly recommended for an
-
-implementation that conforms to this document. A hardware element or software component cannot rely on the existence of the feature or behavior.
+Should Describes a feature or behavior that is strongly recommended for an implementation that conforms to this document. A hardware element or software component cannot rely on the existence of the feature or behavior.
 
 #### 1.5.3 Hardware Specification Keywords
 
 To avoid confusion and to make very clear what the requirements for conformance are, many of the paragraphs in this Technical Standard are labeled with keywords that indicate the type of information they contain. These keywords are listed below:
 
-Rule
-
-Recommendation
-
-Suggestion
-
-Permission
-
-Observation
-
-Any text not labeled with one of these keywords is to be interpreted as descriptive in nature. These will be written in either a descriptive or a narrative style.
+Rule Recommendation Suggestion Permission Observation Any text not labeled with one of these keywords is to be interpreted as descriptive in nature. These will be written in either a descriptive or a narrative style.
 
 Keywords are reserved for specific use as follows:
 
-## Rule <section>-<number>
+Rule <section>-<number>
 
 Conformance with Rules is mandatory. Rules always include the term "shall". Rules are expressed in some combination of text, figures, tables, or drawings. All Rules will be followed to ensure compatibility between board and backplane designs. All Rules use the "shall" or "shall not" words to emphasize the importance of the Rule. The "shall" or "shall not" words are reserved exclusively for stating Rules in this document and are not used for any other purpose.
 
-## Recommendation <section>-<number>
+Recommendation <section>-<number>
 
 Conformance with Recommendations is optional. Recommendations always include the term "should". Recommendations are used to convey implementation advice based on the community's collective knowledge base. Wherever a Recommendation appears, designers would be wise to take the advice given. Doing otherwise might result in poor performance Or awkward problems. Recommendations found in this document are based on experience and are provided to designers to speed their traversal of the learning curve. All Recommendations use the "should" or "should not" words to emphasize the importance of the Recommendation. The "should" or "should not" words are reserved exclusively for stating Recommendations in this document and are not used for any other purpose.
 
-## Suggestion <section>-<number>
+Suggestion <section>-<number>
 
 A Suggestion contains advice, which is helpful but not vital. The reader is encouraged to consider the advice before discarding it. Some design decisions that need to be made are difficult
 
@@ -172,11 +130,11 @@ A Suggestion contains advice, which is helpful but not vital. The reader is enco
 
 until experience has been gained. Suggestions are included to help a designer who has not yet gained this experience.
 
-## Permission <section>-<number>
+Permission <section>-<number>
 
 Conformance with Permissions is optional. Permissions always include the term "may". In some cases, a Rule does not specifically prohibit a certain design approach, but the reader might be left wondering whether that approach might violate the spirit of the Rule or whether it might lead to some subtle problem. Permissions reassure the reader that a certain approach is acceptable and will cause no problems. All Permissions use the "may" words to emphasize the importance of the Permission. The lower-case "may" words are reserved exclusively for stating Permissions in this document and are not used for any other purpose.
 
-## Observation <section>-<number>
+Observation <section>-<number>
 
 Observations do not offer any specific advice. They usually follow naturally from what has just been discussed. They spell out the implications of certain Rules and bring attention to things that might otherwise be overlooked. They also give the rationale behind certain Rules so that the reader understands why the Rule must be followed.
 

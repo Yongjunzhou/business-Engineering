@@ -7,13 +7,17 @@ This Technical Standard provides testable rules and conformance testing approach
 
 ### 5.1 Host Vehicle/SOSA Sensor Interface
 
+#### 5.1.1 Sensor Physical Packages
+
+##### 5.1.1.1 Pods
+
 Requirements, written as rules in Export Administration Regulations (EARS).
 
 #### 5.1.2 Mechanical Interfaces
 
 For this version, the only standardized interface defined is for turreted sensors as defined in AS6169. Future versions will expand on these standards to include other sensor mounting schemes.
 
-##### 5.1.2.1 Classes of Turreted Sensors
+5.1.2.1 Classes of Turreted Sensors
 
 Various turreted sensors are defined in Table 6 based on the diameter of a given sensor package. This document was developed to address the majority of sensor package sizes available on the market.
 
@@ -32,6 +36,8 @@ The SOSA electrical standard will describe sensor pin outs for Class I and Class
 
 ### 5.2 SOSA Sensor Physical Interfaces
 
+#### 5.2.1 Electrical Connector Characteristics
+
 There are ten signal types defined by this electrical standard. Table 7 describes the connector’s type and size as well as which sensor modalities can use which connector. J2 Signals are required for all modalities, but pin allocations may differ depending on mission. Connector genders are for each signal type are described below in Table 7. Detailed requirements for each connector type, defined separately for each modality of sensor, are defined in later sections. For Naval Aviation, only connectors which can withstand a minimum of 500 h salt spray per MIL-STD-1344 Method 1001: Test Method for Electrical Connectors shall be used.
 
 **Table 7: Sensor Connectors**
@@ -48,25 +54,9 @@ There are ten signal types defined by this electrical standard. Table 7 describe
 
 > 转写说明：表头竖向排版的多行单元格按原顺序拼为一行（如 `J8 High Density RF`）。格内因列宽折行的文字按原顺序合并为一行，未保留折行（如 `MIL-DTL-38999/Series III`、`Radar/SAR, EW, SIGINT, Comms`、`Receptacle with socket inserts for fiber optics`）。首列表头格在原表为空白格；J7 的 Insert 格在原表为空白（非短横）。
 
-## J8
+J8
 
-- J3 J4 J5 J6 J7 High J9
-
-J J2 Video Fiber GPS Aux DC Aux DC Density LOI Loss J10 DC Power Signal (Copper) Optic Antenna Power Power R RR AC Power
-
-Nodality All AIl EO- y AIl All AII AIl Radarl Radarl Radarl Support Comms SAR, ET SAR, EW SAR, EW_
-
-- SIGINI, SIGINT, SIGINT, Comms Comms Comms
-
-Type MI-DTL- MIL-DTL MILDTL MIL-DTL MIL-PRF MILDTL TBD MILDTL- MILDTL MILDTL
-
-389991 389991 389991 389991 39012 389991 389991 389991 389991 Series III Series III Series III Series II Series II Series III Series II Series III
-
-Shell Size 21 25 17 19 TNC 21 17 25 25 17
-
-Keying N N N A N N N
-
-Insert 21-11 25-7 17-8 19-11 21-11 25-19 25-8 17-6
+- J3 J4 J5 J6 J7 High J9 J J2 Video Fiber GPS Aux DC Aux DC Density LOI Loss J10 DC Power Signal (Copper) Optic Antenna Power Power R RR AC Power Nodality All AIl EO- y AIl All AII AIl Radarl Radarl Radarl Support Comms SAR, ET SAR, EW SAR, EW_ SIGINI, SIGINT, SIGINT, Comms Comms Comms Type MI-DTL- MIL-DTL MILDTL MIL-DTL MIL-PRF MILDTL TBD MILDTL- MILDTL MILDTL 389991 389991 389991 389991 39012 389991 389991 389991 389991 Series III Series III Series III Series II Series II Series III Series II Series III Shell Size 21 25 17 19 TNC 21 17 25 25 17 Sensor LRU Receptacle Receptacle Receptacle Receptacle Receptacle Receptacle Receptacle Receptacle Receptacle Receptacle Gender With Pin With socket With socket With socket With Pin with Pin with socket With socket With Pin iserts inserts inserts iserts for inserts inserts inserts inserts inserts fiber optics Platform PlugWith PlugWith PlugWith Plugwith Plug PlugVith PlugVith PlugWith PlugWith PlugWith Umbilical socket pin inserts pin inserts pin inserts socket socket Pin inserts pin inserts socket Gender inserts for fiber inserts iserts inserts optics Keying N N N A N N N Insert 21-11 25-7 17-8 19-11 21-11 25-19 25-8 17-6
 
 #### 5.2.2 J1-DC Power Connector
 
@@ -95,25 +85,15 @@ The J1 Power Connector shall have a 21-11 insert pattern as shown in Figure 15. 
 
 > 注：Contacts which are reserved, unused, or unallocated shall be populated by a dummy plug.
 
-5.2.2.1 Power
-
-- The platform shall provide to the sensor system four channels of 28 VDC power sources in accordance with MIL-STD-704F with the fourth channel reserved for laser power in EO/IR systems. Conformance Methodology: (TBD)
+5.2.2.1 Power The platform shall provide to the sensor system four channels of 28 VDC power sources in accordance with MIL-STD-704F with the fourth channel reserved for laser power in EO/IR systems. Conformance Methodology: (TBD)
 
 <!-- 原书 p.74 ｜ PDF p.94 -->
 
 Each of the four channels of 28 VDC shall be independently controlled. Conformance Methodology: (TBD) The platform shall be capable of supplying 15 amps steady state per each 28 VDC channel. Inrush current shall be limited to 25 amps for 2s with a 25% duty cycle. Conformance Methodology: (TBD) The sensor shall isolate power returns or neutral in accordance with MIL-STD-704F from the chassis. Conformance Methodology: (TBD)
 
-5.2.2.2 Safety Ground
+5.2.2.2 Safety Ground This contact shall be used to provide electrical continuity between the sensor system chassis and the host platform in accordance with MIL-STD-464. Conformance Methodology: (TBD)
 
-This contact shall be used to provide electrical continuity between the sensor system chassis and the host platform in accordance with MIL-STD-464. Conformance Methodology: (TBD)
-
-5.2.2.3 Laser Power
-
-The platform shall provide 28 VDC power for the laser in accordance with MIL-STD-704F. Conformance Methodology: (TBD) The laser power contacts shall be used to separately power a laser device. This is intended for use with a safety-relevant device such as a laser designator. Conformance Methodology: (TBD) The platform shall be capable of supplying 15 amps steady state for laser power. Inrush current shall be limited to 25 amps for 2s with a 25% duty cycle. Conformance Methodology: (TBD)
-
-5.2.3 J2-Signals Connector
-
-The J2 Signal Connector shall have a 25-7 insert pattern as shown in Figure 16. Conformance Methodology: (TBD) Signals for the J2 Signal Connector shall be assigned to pins in accordance with Table 9. Conformance Methodology: (TBD)
+5.2.2.3 Laser Power The platform shall provide 28 VDC power for the laser in accordance with MIL-STD-704F. Conformance Methodology: (TBD) The laser power contacts shall be used to separately power a laser device. This is intended for use with a safety-relevant device such as a laser designator. Conformance Methodology: (TBD) The platform shall be capable of supplying 15 amps steady state for laser power. Inrush current shall be limited to 25 amps for 2s with a 25% duty cycle. Conformance Methodology: (TBD)
 
 ![Figure 16: J2 Signal Connector Pin Arrangement](assets/fig-016.png)
 
@@ -169,57 +149,13 @@ The J2 Signal Connector shall have a 25-7 insert pattern as shown in Figure 16. 
 
 Power 46 STP 2419 PWR EN Platform Open/Closed Ckt
 
-## Enable
+Enable
 
-Ethernet 28 1000 STP DA+ Platforml 1000Baser
+Discrete
 
-2419 Sensor
+41 STP 2419 PWR EN RTN Platform Open/Closed Ckt
 
-35 1000 STP DA- Platforml 100OBaseT
-
-2419 Sensor
-
-36 Shield DA Shield Platforml
-
-- Sensor
-
-44 1008 STP DB+ Platform/ 1000Baser
-
-2419 Sensor
-
-53 1000 STP DB- Platform/ 100OBaseT
-
-2419 Sensor
-
-Shield DB Shield Platforml
-
-- Sensor
-
-45 1000 STP DC+ Platform/ 1000Baser
-
-2419 Sensor
-
-54 1000 STP- DC Platforml 10OOBaseT
-
-2419 Sensor
-
-63 Shield DC Shield Platforml
-
-- Sensor
-
-70 1000 STP. DD+ Platforml I000Baser
-
-2419 Sensor
-
-1000 STP DD Platform/ 1000Baser
-
-2419 Sensor
-
-78 Shield DD Shield Platformml
-
-- Sensor
-
-Serial 100 Ohm STP TX1+ Sensor RS422 Comms 2419
+Ethernet 28 1000 STP DA+ Platforml 1000Baser 2419 Sensor 35 1000 STP DA- Platforml 100OBaseT 2419 Sensor 36 Shield DA Shield Platforml Sensor 44 1008 STP DB+ Platform/ 1000Baser 2419 Sensor 53 1000 STP DB- Platform/ 100OBaseT 2419 Sensor Shield DB Shield Platforml Sensor 45 1000 STP DC+ Platform/ 1000Baser 2419 Sensor 54 1000 STP- DC Platforml 10OOBaseT 2419 Sensor 63 Shield DC Shield Platforml Sensor 70 1000 STP. DD+ Platforml I000Baser 2419 Sensor 1000 STP DD Platform/ 1000Baser 2419 Sensor 78 Shield DD Shield Platformml Sensor Serial 100 Ohm STP TX1+ Sensor RS422 Comms 2419
 
 100 Ohm STP TX1 Sensor R8422
 
@@ -227,51 +163,67 @@ Serial 100 Ohm STP TX1+ Sensor RS422 Comms 2419
 
 <!-- 原书 p.76 ｜ PDF p.96 -->
 
-## SOSA Electrical Interface Recommendations
+16 100 Ohm STP RXI+ Platform RS422
 
-## Arming
+23 100 Ohm STP RXI - Platform RS422
+
+Serial 22 100 Ohm STP TX2+ Sensor R8422 Comms 2419
+
+30 100 Ohm STP TX2- Sensor RS422
+
+29 SC-AWG24 422_2 RTN R8422 37 100 Ohm STP RX2t Platform R8422
+
+38 100 Ohm STP RX2- Platform R8422
+
+Serial 55 100 Ohm STP TX3+ Sensor RS422 Comms 2419
+
+56 100 Ohm STP TX3- Sensor RS422
+
+64 SC-AWG24 422_1_RTN RS422 65 100 Ohm STP RX3+ Platform R8422
+
+72 100 Ohm STP RX3 - Platform RS422
+
+Serial 73 100 Ohm STP TX4+ Sensor RS422 Comms 2419
+
+79 100 Ohm STP TX4- Sensor R8422
+
+80 SC-ATG24 422_1_ RTN RS422 85 100 Ohm STP RX4+ Platform RS422
+
+86 100 Ohm STP RX4- Platform R8422
+
+Emi- AWG22 MASTER AR Platform openlclosed ckt SSion M
+
+Arming
+
+95 AWG22 MASTER AR Platform openlclosed ckt
+
+## M REI
 
 <!-- 原书 p.77 ｜ PDF p.97 -->
 
-## SOSA Electrical Interface Recommendations
+SOSA Electrical Interface Recommendations
 
 Jz-Signal (25-7 insert, N-Keying)
 
-- E0-I_ Radar/SAR
-
-Sensor MIL-DTL-38999/439029/56-348 (receptacle with socket inserts) Turreted Turreted EW SIGINT Platform Umbilical MIL-DTL-38999/039029/58-360 (plug with pin inserts) Sensor Sensor Sensor Sensor Comms Desc:Connl Pin Wire Type Signal Name SignalSource Signal Type Used Used Used Used Used
-
-## Ient
+- E0-I_ Radar/SAR Sensor MIL-DTL-38999/439029/56-348 (receptacle with socket inserts) Turreted Turreted EW SIGINT Platform Umbilical MIL-DTL-38999/039029/58-360 (plug with pin inserts) Sensor Sensor Sensor Sensor Comms Desc:Connl Pin Wire Type Signal Name SignalSource Signal Type Used Used Used Used Used
 
 <!-- 原书 p.78 ｜ PDF p.98 -->
 
-## S0SA Electrical Interface Recommendations
+S0SA Electrical Interface Recommendations
 
 Jz-Signal (25-7 insert, N-Keying)
 
-- E0-I_ Radar/SAR
-
-Sensor MIL-DTL-38999/439029/56-348 (receptacle with socket inserts) Turreted Turreted EW SIGINT Platform Umbilical MIL-DTL-38999/039029/58-360 (plug with pin inserts) Sensor Sensor Sensor Sensor Comms
+- E0-I_ Radar/SAR Sensor MIL-DTL-38999/439029/56-348 (receptacle with socket inserts) Turreted Turreted EW SIGINT Platform Umbilical MIL-DTL-38999/039029/58-360 (plug with pin inserts) Sensor Sensor Sensor Sensor Comms
 
 Desc:Connl Pin Wire Type Signal Name SignalSource Signal Type Used Used Used Used Used
 
-## SID
-
-## HLD Sensor
-
-## POWCr STP 2419 V
-
-## STP 2419 N
-
 <!-- 原书 p.79 ｜ PDF p.99 -->
 
-## SOSA Electrical Interface Recommendations
+SOSA Electrical Interface Recommendations
 
 Jz-Signal (25-7 insert, N-Keying)
 
-- E0-I_ Radar/SAR
-
-Sensor MIL-DTL-38999/439029/56-348 (receptacle with socket inserts) Turreted Turreted EW SIGINT Platform Umbilical MIL-DTL-38999/039029/58-360 (plug with pin inserts) Sensor Sensor Sensor Sensor Comms
+- E0-I_ Radar/SAR Sensor MIL-DTL-38999/439029/56-348 (receptacle with socket inserts) Turreted Turreted EW SIGINT Platform Umbilical MIL-DTL-38999/039029/58-360 (plug with pin inserts) Sensor Sensor Sensor Sensor Comms
 
 Desc:Connl Pin Wire Type Signal Name SignalSource Signal Type Used Used Used Used Used
 
@@ -285,17 +237,13 @@ LVDS4 83 100 Ohm STP
 
 LVDSS 92 100 Ohm STP
 
-Sensor 24,31 ATG24 SENMAN to Sensor Manu- 32,39 SENMAN_IO facturer 40,57
-
-58,66 67,74
-
-Res- 1,3,9, For arming erved 10,87 isolation
+Sensor 24,31 ATG24 SENMAN to Sensor Manu- 32,39 SENMAN_IO facturer 40,57 58,66 67,74 Res- 1,3,9, For arming erved 10,87 isolation
 
 88,94
 
 Unused 81,91
 
-## NOTE 1
+NOTE 1
 
 - All reserved, unused, unallocated should be populated by a dummy plug. Digital data channels are to be tested for Return Loss and Near End Cross Talk (NEXT), including the connector interfaces to ensure conformance to protocol requirements. This should be applied to the Ethernet pairs, the Serial Comms 1-4 (RS422) pairs, as well as the LVDS (1-5) pairs.
 
@@ -305,11 +253,11 @@ Unused 81,91
 
 <!-- 原书 p.80 ｜ PDF p.100 -->
 
-## NOTE 2
+NOTE 2
 
 Some acquisition programs may allow higher voltage levels to also be interpreted as logic '0'. A typical impetus for this would be the result of a system safety analysis. In such a case, it is recommended that the logic '0' threshold not exceed 15.0 VDC.
 
-##### 5.2.3.1 Power Enable
+5.2.3.1 Power Enable
 
 The Power Enable signal is used for a controlled power up and shutdown of the sensor system. This control is necessary if the sensor system is required to execute a sequence of steps upon shutdown, steps that the sensor system would be precluded from executing if power were simply removed from the system. The Power Enable signal is controlled by the platform and when disabled, instructs the sensor to power down.
 
@@ -325,7 +273,7 @@ The J2 Ethernet databus shall be implemented as Gigabit Ethernet. Conformance Me
 
 Gigabit Ethernet shall comply with IEEE 802.3-2008 for a 1000BaseT channel. The maximum cable length is 100 meters. Conformance Methodology: (TBD)
 
-##### 5.2.3.3 Serial Communications
+5.2.3.3 Serial Communications
 
 Up to four application-configurable serial communication ports are defined. Each port shall be compliant to TIA-422/RS422. It is expected that the first port will be used for a hand controller. It is expected that the latency of communication on this interface is critical, thus a more complex multi-layer protocol interface would not be practical.
 
@@ -333,7 +281,7 @@ These interfaces can also be used for integration with other equipment, such as 
 
 Note that a separate return line is included with each serial communications port for ease of platform integration.
 
-##### 5.2.3.4 Arming and Cutouts
+5.2.3.4 Arming and Cutouts
 
 A set of ten pins is dedicated to control of energy emitting sensors such as the arming of laser devices, or RF transmission devices. This includes the selection of predefined laser suppression zone maps.
 
@@ -345,29 +293,23 @@ There are three No Emit Zone (NEZ) circuits. Each is a switch, relay, or SSR pro
 
 There are three mode select signals using 28 VDC logic which are independently controlled by the platform. The three signals have a common return: MODE_SELECT_RTN.
 
-SIMPLE ARMING – these pins form part of the power circuit for an emission device in
+SIMPLE ARMING – these pins form part of the power circuit for an emission device in the turret When the pins are open, power to the device is disabled; when close-circuited, power is enabled. The pins allow the integrator to connect a simple arming switch to these contacts. Pins 2 and 95 shall be used for Simple Arming.
 
-the turret When the pins are open, power to the device is disabled; when close-circuited, power is enabled. The pins allow the integrator to connect a simple arming switch to these contacts. Pins 2 and 95 shall be used for Simple Arming.
+ADVANCED ARMING CLUSTER 1 – sensor systems can have a NEZ, or Cutout Map The NEZ is a two-dimensional map, in azimuth and elevation, that defines where the device can and cannot emit. It is designed to inhibit emissions when the turret’s line-ofsight is over any part of the platform. This prevents energy from reflecting back, posing a hazard. The map is stored in the turret’s computer memory. Further, a turret may have several maps stored, enabling it to be mounted at several points on the platform, or on several platform models, without modification. In this case, a high-reliability mechanism is needed to select which map should be used. Pins 4, 5, 11, and 12 shall be used for Advanced Arming Cluster 1. Assuming that three of the four pins allocated to this function are used to select a map, up to four maps can be defined in the turret. The fourth pin would be used as a parity check for safety.
 
-ADVANCED ARMING CLUSTER 1 – sensor systems can have a NEZ, or Cutout Map
+LASER ADVANCED ARMING CLUSTER 2 – these pins can be used in a number of ways They determine under what conditions or states the device will be used. For example, if there are multiple non-eyesafe lasers in a turret, these pins could be used to select one or more devices (secondary arm control). Pins 89, 90, 97, and 98 shall be used for advanced arming Cluster 2.
 
-The NEZ is a two-dimensional map, in azimuth and elevation, that defines where the device can and cannot emit. It is designed to inhibit emissions when the turret’s line-ofsight is over any part of the platform. This prevents energy from reflecting back, posing a hazard. The map is stored in the turret’s computer memory. Further, a turret may have several maps stored, enabling it to be mounted at several points on the platform, or on several platform models, without modification. In this case, a high-reliability mechanism is needed to select which map should be used. Pins 4, 5, 11, and 12 shall be used for Advanced Arming Cluster 1. Assuming that three of the four pins allocated to this function are used to select a map, up to four maps can be defined in the turret. The fourth pin would be used as a parity check for safety.
-
-LASER ADVANCED ARMING CLUSTER 2 – these pins can be used in a number of
-
-ways They determine under what conditions or states the device will be used. For example, if there are multiple non-eyesafe lasers in a turret, these pins could be used to select one or more devices (secondary arm control). Pins 89, 90, 97, and 98 shall be used for advanced arming Cluster 2.
-
-##### 5.2.3.5 Emissions Annunciation
+5.2.3.5 Emissions Annunciation
 
 The Emission signal shall be used to annunciate the firing of an emission device. Conformance
 
-## Methodology: (TBD)
+Methodology: (TBD)
 
 This signal shall be a 28 VDC isolated signal. Conformance Methodology: (TBD)
 
 The maximum voltage shall be 30 VDC with a maximum current of 100mA. Conformance
 
-## Methodology: (TBD)
+Methodology: (TBD)
 
 <!-- 原书 p.82 ｜ PDF p.102 -->
 
@@ -375,7 +317,9 @@ The maximum voltage shall be 30 VDC with a maximum current of 100mA. Conformance
 
 A set of three signal pairs is available to indicate the status of safety-relevant functions in the sensor system. These shall be 28 VDC isolated signals. These signals are controlled by the sensor. Conformance Methodology: (TBD) The maximum voltage shall be 30 VDC with a maximum current of 100mA. Conformance
 
-## Methodology: (TBD)
+Methodology: (TBD)
+
+5.2.3.7 Enable Gimbal Movement
 
 The Enable Gimbal Movement signal shall be used to indicate that the sensor system’s outer gimbal motors are to be enabled. Conformance Methodology: (TBD) This control is necessary to ensure that the turret does not move in azimuth and/or elevation at high speeds endangering individuals that may be working in close proximity to the sensor. The Enable Gimbal Movement signal originates from the sensor with the platform opening and closing the circuit. An open circuit shall indicate that the motors shall not be powered. Conformance Methodology: (TBD)
 
@@ -387,13 +331,13 @@ Wiring for a 1 PPS signal for time synchronization shall be provided. Conformanc
 
 *Figure 17: Input Time Rollover Pulse (1 PPS) Signal Characteristics*
 
-##### 5.2.3.9 Hand Controller Power
+5.2.3.9 Hand Controller Power
 
 Power may be provided by the sensor to the hand controller. The maximum voltage shall be 30 VDC with a maximum current of 500mA. Conformance Methodology: (TBD)
 
 <!-- 原书 p.83 ｜ PDF p.103 -->
 
-##### 5.2.3.10 Memory Purge
+5.2.3.10 Memory Purge
 
 A switch closure between PURG_MEM_+ and PURG_MEM_- for 30 msec or more shall cause a memory to erase. Conformance Methodology: (TBD) The intention is for this to be routed to an encrypted drive for the clearing of mission data. Usage of this interface is implementation-specific and could be used to clear any memory that may be sensitive.
 
@@ -401,25 +345,15 @@ A switch closure between PURG_MEM_+ and PURG_MEM_- for 30 msec or more shall cau
 
 A set of two Size 8 Twinaxial contacts are available for MIL-STD-1553B. Pin 25 is intended for Bus A and pin 75 for Bus B.
 
-5.2.3.12 USB Data
+5.2.3.12 USB Data Planned for a later version of the SOSA Technical Standard. A USB 2.0 interface shall optionally be provided by the sensor. Conformance Methodology: (TBD)
 
-Planned for a later version of the SOSA Technical Standard. A USB 2.0 interface shall optionally be provided by the sensor. Conformance Methodology: (TBD)
+5.2.3.13 USB Power 5V +/- 5% up to 500mA shall be supplied by the sensor. Conformance Methodology: (TBD)
 
-5.2.3.13 USB Power
+5.2.3.14 LVDS These Low Voltage Differential Signal (LVDS) discrete signals are available to the sensor manufacturers for use between sensor elements.
 
-5V +/- 5% up to 500mA shall be supplied by the sensor. Conformance Methodology: (TBD)
+5.2.3.15 Sensor Manufacturer Pins A set of 10 pins are reserved for use by individual sensor system suppliers, primarily for maintenance purposes when the sensor is not connected to the platform. The platform shall not populate these pins. Conformance Methodology: (TBD)
 
-5.2.3.14 LVDS
-
-These Low Voltage Differential Signal (LVDS) discrete signals are available to the sensor manufacturers for use between sensor elements.
-
-5.2.3.15 Sensor Manufacturer Pins
-
-A set of 10 pins are reserved for use by individual sensor system suppliers, primarily for maintenance purposes when the sensor is not connected to the platform. The platform shall not populate these pins. Conformance Methodology: (TBD)
-
-5.2.4 J3-Video (Copper) Connector
-
-The J3 Video Connector shall have a 21-11 pin arrangement as shown in Figure 18. Conformance Methodology: (TBD) Signals for the J3 Video Connector shall be assigned to pins in accordance with Table 10. Conformance Methodology: (TBD)
+5.2.4 J3-Video (Copper) Connector The J3 Video Connector shall have a 21-11 pin arrangement as shown in Figure 18. Conformance Methodology: (TBD) Signals for the J3 Video Connector shall be assigned to pins in accordance with Table 10. Conformance Methodology: (TBD)
 
 <!-- 原书 p.84 ｜ PDF p.104 -->
 
@@ -448,75 +382,69 @@ The J3 Video Connector shall have a 21-11 pin arrangement as shown in Figure 18.
 
 Pin TypeWire Signal Name Signal Source Signal Type Used Used Used Used Used Notes
 
-Coax- Digital Video Sensor SMPTE 292/424 For input
+Coax- Digital Video Sensor SMPTE 292/424 For input 750 Chl from
 
-750 Chl from
+EOIIR
 
-## EOIIR
+SenSOr
 
-B Coax- Digital Video Sensor SMPTE 292/424 For input
+B Coax- Digital Video Sensor SMPTE 292/424 For input 750 Ch2 from
 
-750 Ch2 from
+EOIJ
 
-## EOIJ
+Sensor
 
-Coax- Digital Video Sensor SMPIE 292/424 For input
+Coax- Digital Video Sensor SMPIE 292/424 For input 750 Ch3 from
 
-750 Ch3 from
+EO/
 
-## EO/
+Sensor
 
-Coax- Digital Video Sensor SMPIE 292/424 For input
+Coax- Digital Video Sensor SMPIE 292/424 For input 750 Ch4 froln
 
-750 Ch4 froln
+EO/J
 
-## EO/J
+Sensor
 
-Coax- AnalogVideo Sensor RS-170a Video For input
+Coax- AnalogVideo Sensor RS-170a Video For input 750 Chl Y Luminance from
 
-750 Chl Y Luminance from
+EO/IR
 
-## EO/IR
+SensOr
 
-Coax- Analog video Sensor RS-170a Video For input
+Coax- Analog video Sensor RS-170a Video For input 750 Chl C Chrominance from
 
-750 Chl C Chrominance from
+EO/IR
 
-## EO/IR
+Sensor
 
-Coax- Composite Sensor RS-170a For input
+Coax- Composite Sensor RS-170a For input 750 Video Ch 1 Composite Video from
 
-750 Video Ch 1 Composite Video from
+EO/J
 
-## EO/J
+Sensor
 
 <!-- 原书 p.85 ｜ PDF p.105 -->
 
 J3-Video (21-11 insert, N-Keying) Sensor: MIL DTL-38999/039029/75-416 (receptacle with socket inserts)
 
-- R0-1 Radar/SAR
-
-- Platform Umbilical: MIL-DTL-38999/039029/28-211 (plug with pin Turreted Turreted EW SIGINT inserts) Sensor Sensor Sensor Sensor Comms
+- R0-1 Radar/SAR Platform Umbilical: MIL-DTL-38999/039029/28-211 (plug with pin Turreted Turreted EW SIGINT inserts) Sensor Sensor Sensor Sensor Comms
 
 Pin TypeWire Signal Name Signal Source Signal Type Used Used Used Used Used Notes
 
-H Coax- Composite Sensor RS-l70a For input
+H Coax- Composite Sensor RS-l70a For input 750 Video Ch 2 Composite Video from
 
-750 Video Ch 2 Composite Video from
+EO/JR
 
-## EO/JR
+Sensor
 
 Unused
 
 K Unused
 
-[ Unused
+[ Unused Each digital channel shall comply with SMPTE 292, driving into 75 Ω #12 coax contacts, per the standard. Video channels can also be SMPTE 424M over the same wiring. Conformance Methodology: (TBD) Each analog channel shall comply with RS170a, driving into 75 Ω #12 coax contacts, per the standard. Conformance Methodology: (TBD)
 
-Each digital channel shall comply with SMPTE 292, driving into 75 Ω #12 coax contacts, per the standard. Video channels can also be SMPTE 424M over the same wiring. Conformance Methodology: (TBD) Each analog channel shall comply with RS170a, driving into 75 Ω #12 coax contacts, per the standard. Conformance Methodology: (TBD)
-
-5.2.5 J4-Fiber Optics Connector
-
-Fiber optic shall be multi-mode fiber. The core diameter shall be 50µm ± 3µm and the cladding diameter shall be 125µm ± 2µm. Conformance Methodology: (TBD) The termini shall be butt end MIL-PRF-29504/4 (Pin) or MIL-PRF-29504/5 (Socket) which fit into size 16 entry holes. Conformance Methodology: (TBD) Ethernet Channels shall transmit and receive at 850nm per IEEE 802.3-2008 for 10GBASE-SR applications. Conformance Methodology: (TBD) SMPTE 297 Channels shall transmit low power SMPTE 292 or 424M signals at 1310nm specifically according to call out L-PC-CD-1310. Conformance Methodology: (TBD) Fiber used shall be OM2-compliant or better, as defined by ISO/IEC 11801. It is recommended that for longer path applications the cable be bend-insensitive OM4. Conformance Methodology: (TBD) The J4 Fiber Optic Connector shall have a 19-11 pin arrangement as shown in Figure 19. Conformance Methodology: (TBD) Signals for the J4 Fiber Optic Connector shall be assigned to pins in accordance with Table 11. Conformance Methodology: (TBD)
+5.2.5 J4-Fiber Optics Connector Fiber optic shall be multi-mode fiber. The core diameter shall be 50µm ± 3µm and the cladding diameter shall be 125µm ± 2µm. Conformance Methodology: (TBD) The termini shall be butt end MIL-PRF-29504/4 (Pin) or MIL-PRF-29504/5 (Socket) which fit into size 16 entry holes. Conformance Methodology: (TBD) Ethernet Channels shall transmit and receive at 850nm per IEEE 802.3-2008 for 10GBASE-SR applications. Conformance Methodology: (TBD) SMPTE 297 Channels shall transmit low power SMPTE 292 or 424M signals at 1310nm specifically according to call out L-PC-CD-1310. Conformance Methodology: (TBD) Fiber used shall be OM2-compliant or better, as defined by ISO/IEC 11801. It is recommended that for longer path applications the cable be bend-insensitive OM4. Conformance Methodology: (TBD) The J4 Fiber Optic Connector shall have a 19-11 pin arrangement as shown in Figure 19. Conformance Methodology: (TBD) Signals for the J4 Fiber Optic Connector shall be assigned to pins in accordance with Table 11. Conformance Methodology: (TBD)
 
 <!-- 原书 p.86 ｜ PDF p.106 -->
 
@@ -543,81 +471,49 @@ Fiber optic shall be multi-mode fiber. The core diameter shall be 50µm ± 3µm 
 
 > 转写说明：第 1 行横幅单元格在原表横跨 Pin～Signal Type 共 5 列，本表只在其首格填写，其余 4 格留空。第 10～11 行（K、L）位于续页，续页重复了横幅与表头。格内因列宽折行的文字按原顺序合并为一行（如 `MM Fiber`、`Sensor Receive 1`、`10GBase-SR/40GBase-SR4/100GBase-SR4`）。
 
-## Wire
+Wire
 
 Pin Type Signal Name Signal Source Signal Type Used Used Used Used Used
 
-MM Sensor Sensor I0GBase-SR/
+MM Sensor Sensor I0GBase-SR/ Fiber Transmit L 40GBase-SR4/
 
-- Fiber Transmit L 40GBase-SR4/
+I00GBase-SR4
 
-## I00GBase-SR4
+MM Sensor Receive Platform I0GBase-SR/ Fiber 1 40GBase-SR4/ 100GBase-SR4
 
-MM Sensor Receive Platform I0GBase-SR/
+MM Sensor Sensor IOGBase-SR/ Fiber Transmit 2 40GBase-SR4/ 100GBase-SR4
 
-- Fiber 1 40GBase-SR4/
+MM Sensor Receive Platform I0GBase-SR/ Fiber 2 40GBase-SR4/
 
-100GBase-SR4
+I0OGBase-SR4
 
-MM Sensor Sensor IOGBase-SR/
+MM Sensor Sensor IOGBase-SR/ Fiber Transmit 3 40GBase-SR4/
 
-- Fiber Transmit 2 40GBase-SR4/
+I0OGBase-SR4
 
-100GBase-SR4
+MM Sensor Receive Platform I0GBase-SR/ Fiber 3 40GBase-SR4/ 100GBase-SR4
 
-MM Sensor Receive Platform I0GBase-SR/
+MM Sensor Sensor I0GBase-SR/ Fiber Transmit 4 40GBase-SR4/
 
-- Fiber 2 40GBase-SR4/
+I0OGBase-SR4
 
-## I0OGBase-SR4
-
-MM Sensor Sensor IOGBase-SR/
-
-- Fiber Transmit 3 40GBase-SR4/
-
-## I0OGBase-SR4
-
-MM Sensor Receive Platform I0GBase-SR/
-
-- Fiber 3 40GBase-SR4/
-
-100GBase-SR4
-
-MM Sensor Sensor I0GBase-SR/
-
-- Fiber Transmit 4 40GBase-SR4/
-
-## I0OGBase-SR4
-
-MM Sensor Receive Platform I0GBase-SR/
-
-- Fiber 40GBase-SR4/
-
-100GBase-SR4
+MM Sensor Receive Platform I0GBase-SR/ Fiber 40GBase-SR4/ 100GBase-SR4
 
 MM Video Ch Sensor SMPTE 297
 
-## Fiber
+Fiber
 
 <!-- 原书 p.87 ｜ PDF p.107 -->
 
-## S0SA Electrical Interface Recommendations
+S0SA Electrical Interface Recommendations
 
 J4-Riber (19-11 insert N-Keying)
 
-- E0-I RadarlSAR
+- E0-I RadarlSAR Sensor MIL-DTL-38999/29504/5 (receptacle with socket inserts) Turreted Turreted EW SIGINT Platform Umbilical MIL-DTL-38999/29504/4 (plug with pin inserts) Sensor Sensor Sensor Sensor Comms Wire Pin Type Signal Name Signal Source SignalType Used Used Used Used Used k MM Video Ch 2 Sensor SMPIE 297 Fiber MM Video Ch 3 Sensor SMPTE 297
 
-Sensor MIL-DTL-38999/29504/5 (receptacle with socket inserts) Turreted Turreted EW SIGINT Platform Umbilical MIL-DTL-38999/29504/4 (plug with pin inserts) Sensor Sensor Sensor Sensor Comms
+Fiber
 
-- Wire
-
-Pin Type Signal Name Signal Source SignalType Used Used Used Used Used k MM Video Ch 2 Sensor SMPIE 297
-
-- Fiber
-
-MM Video Ch 3 Sensor SMPTE 297
-
-## Fiber
+#### 5.2.6 J5-GPS Antenna Connector
 
 - When a GPS receiver internal to the sensor is being used and requires an external antenna, the J5 connector shall be used. Conformance Methodology: (TBD) These signals shall have characteristics that comply with AS6129 Appendix A (Additional Interface Requirements for GPS RF Signals). Conformance Methodology: (TBD) The J5 GPS Connector shall use TNC connectors. Conformance Methodology: (TBD)
 
@@ -661,11 +557,11 @@ MM Video Ch 3 Sensor SMPTE 297
 
 SC-AWGI2 DC 5 Platform 28VDC@ISA [ SC-AWG12 DC-5 RTN Platform DC RTN - SC-AWGI2 DC-6 Platform 28VDC@ISA SC-AWG12 DC-6 RTN Platform DC RTN SC-AWGI2 DC 7 Platformm 28VDC@ISA SC-AWGI2 DC-7 RTN Platform DC RTN k SC-AWGI2 Chassis Platformm Ground SC-AWGI12 DC 8 Platform 28VDC@ISA SC-AWGI2 DC-8 RTN Platform DC RTN B SC-AWG12 DC-9 Platform 28VDC@ISA S SC-AWGI2 DC-9 RTN Platform DC RTN
 
-##### 5.2.7.1 Power
+5.2.7.1 Power
 
 - The platform shall provide to the sensor system up to five channels of 28 VDC power sources in accordance with MIL-STD-704F. Conformance Methodology: (TBD) Each of the five channels of 28 VDC shall be independently controlled. Conformance
 
-## Methodology: (TBD)
+Methodology: (TBD)
 
 <!-- 原书 p.89 ｜ PDF p.109 -->
 
@@ -692,7 +588,9 @@ The J7 High Speed Connector is currently being defined to support high-speed ele
 >
 > 占位符逐字计数：第 3 行为 “Sensor” ＋ 12 个大写 X ＋ 1 个小写 x（合计 13 个 X 字形，末位原书即作小写）；第 5 行为 “Platform Umbilical” ＋ 12 个大写 X（第 6 行 “(plug with sockets inserts)” 中的 “sockets” 原书为复数，照录）。
 
-## TBD
+TBD
+
+##### 5.2.8.1 Description
 
 Planned for a later version of the SOSA Technical Standard.
 
@@ -739,9 +637,7 @@ The J8 RF Connector shall have a 25-19 insert pattern as shown in Figure 21. Con
 >
 > 表体 19 行，Pin 依次为 A、B、C、D、E、F、G、H、J、K、L、M、N、P、R、S、T、U、V（原书无 I、O、Q 三个字母）；Signal Name 依次为 Ch1~Ch19，与 Pin 一一对应。Signal Type 全文均作 “RF up to 18Ghz”（“Ghz” 大小写照录，非 “GHz”）。
 
-RF A Coax-508 Chl Antenna RF up to 18Gh2
-
-B Coax-50Q Ch2 Antenna RF up to 18Gh2 Coax-50Q Ch3 Antenna RF up to 18Gh2
+RF A Coax-508 Chl Antenna RF up to 18Gh2 B Coax-50Q Ch2 Antenna RF up to 18Gh2 Coax-50Q Ch3 Antenna RF up to 18Gh2
 
 D Coax-50Q Ch4 Antenna RF UP to 186h2 Coax- 508 Chs Antenna RF up to 18Gh2 } Coax-508 Ch6 Antenna RF up to 18662 6 Coax-50Q Ch7 Antenna RF up to 18Gh2 I Coax-50Q Ch8 Antenna RF up to 18612 Coax- 508 Chg Antenna RF up to 18Ghz & Coax-508 Chl0 Antenna RF up to 18662 [ Coax-50Q Chll Antenna RF up to 186h2 M Coax-508 Chl2 Antenna RF up to 186h2 N Coax-50Q Chl3 Antenna RF up to 18Gh2 P Coax-508 Chl4 Antenna RF uP to 18Gh2 R Coax- 508 Chl5 Antenna RF up to 186h2
 
@@ -791,7 +687,7 @@ D Coax-50Q Ch4 Antenna RF UP to 186h2 Coax- 508 Chs Antenna RF up to 18Gh2 } Coa
 
 TNC RGI42508 Antenna RE up to 3 Ghz SMA RG174500 Antenna RF up to 27 Ghz
 
-### 2.4 mm Coax-508 Antenna RF up to 50 Ghz
+2.4 mm Coax-508 Antenna RF up to 50 Ghz
 
 <!-- 原书 p.93 ｜ PDF p.113 -->
 
@@ -823,29 +719,27 @@ Desc:Connl Pin Wire Type Signal Name SignalSource Signal Type Used Used Used Use
 
 30 12AWG 120/208VAC Platform AC Power 40OHZ Ph A AC Power B 12AWG 120/208VAC Platform AC Power
 
-## Ph B
+Ph B
 
-I2AWG 120/208VAC Platform AC Power
-
-- Ph C
+I2AWG 120/208VAC Platform AC Power Ph C
 
 <!-- 原书 p.94 ｜ PDF p.114 -->
 
-## S0SA Electrical Interface Recommendations
+S0SA Electrical Interface Recommendations
 
 JIO-AC Power (17-6 insert, N-Keying) Sensor MILDTL 38999/20F6PN contacts 139029/58-365 (receptacle with socket inserts) EO-I RadarlSAR Platform Umbilical MIL-DTL- 38999/26F6SN contacts M39029/56-353 Turreted Turreted EW SIGINT (plug with pin inserts) Sensor Sensor Sensor Sensor Comms DescConnl Pin Wire Type Signal Name SignalSource Signal Type Used Used Used Used Used
 
-12AWG 120/208VAC Platform AC Power
-
-- Neutral
-
-} Unused F 12AWG Chassis Platform Ground
+12AWG 120/208VAC Platform AC Power Neutral } Unused F 12AWG Chassis Platform Ground
 
 ##### 5.2.12.1 AC Power Description
 
 The platform shall provide to the connected system or sensor 115/200 Volts RMS, alternating current (AC), three phase, 4 wire grounded neutral, “Y” configuration, 400 cycle power at up to 10 amperes per phase in accordance with MIL-STD-704F. Conformance Methodology: (TBD) Each phase shall be protected by an overcurrent device to limit the maximum current to 10 amperes steady state and the overcurrent devices shall be interconnected such that an overcurrent condition on any phase shall cause all three phases to be interrupted. Conformance
 
-## Methodology: (TBD)
+Methodology: (TBD)
+
+#### 5.2.13 Hardware Platform 3U and 6U Slot Profile Specifications
+
+5.2.13.1 SOSA Hardware Basic Requirements
 
 **Rule 5.2.13.1-1**
 
@@ -871,7 +765,7 @@ Requirements of ANSI/VITA 48.8
 
 <!-- 原书 p.95 ｜ PDF p.115 -->
 
-## • Requirements of ANSI/VITA 47.3
+• Requirements of ANSI/VITA 47.3
 
 - Conformance Methodology: (I)
 
@@ -899,7 +793,9 @@ All user defined pins, as defined in the SOSA plug-in cards, shall not be used f
 
 All external panel I/O signals shall pass through the backplane connector(s) before going to any SOSA plug-in card except for: Conformance Methodology: (T)
 
-## • Key Fill
+• Key Fill
+
+• Crypto Ignition Key (CIK)
 
 **Rule 5.2.13.1-4**
 
@@ -913,9 +809,7 @@ SOSA PSMs shall conform to Section 3U External I/O Slot Profile if they are inst
 
 SOSA PSMs should conform to Section 3U External I/O Slot Profile even if they are part of a separate power supply backplane.
 
-5.2.13.2 SOSA Utility Plane Requirements
-
-Reference ANSI/VITA 65.0 §3 for Utility Plane Requirements. Utility plane requirements are extended for the SOSA standard as follows.
+5.2.13.2 SOSA Utility Plane Requirements Reference ANSI/VITA 65.0 §3 for Utility Plane Requirements. Utility plane requirements are extended for the SOSA standard as follows.
 
 <!-- 原书 p.96 ｜ PDF p.116 -->
 
@@ -955,7 +849,7 @@ SOSA plug-in cards receiving SYSRESET* as an input shall be able to register a v
 
 SYSRESET* shall conform to the high current open-drain signal specifications of ANSI/VITA
 
-### 65.0 §3.3.3 (High Current Open-Drain). Conformance Methodology: (T)
+65.0 §3.3.3 (High Current Open-Drain). Conformance Methodology: (T)
 
 <!-- 原书 p.97 ｜ PDF p.117 -->
 
@@ -967,7 +861,7 @@ SOSA plug-in cards shall make SYSRESET* available to any SOSA mezzanine module c
 
 SOSA plug-in cards shall receive a unique Site Number that is based upon the plug-in card’s ANSI/VITA 65.0 §3.4.6, Geographic Address as referenced in ANSI/VITA 46.11. Conformance
 
-## Methodology: (A)
+Methodology: (A)
 
 **Rule 5.2.13.2-12**
 
@@ -1005,7 +899,7 @@ VS1 and VS2 input pins limits 6U current to 32A (384W) per ANSI/VITA 46.0 Table 
 
 **Rule 5.2.13.2-18**
 
-## SOSA plug-in cards shall use 3.3V_AUX. Conformance Methodology: (T)
+SOSA plug-in cards shall use 3.3V_AUX. Conformance Methodology: (T)
 
 **Rule 5.2.13.2-19**
 
@@ -1015,9 +909,7 @@ SOSA plug-in cards shall not use 12V auxiliary supplies. Conformance Methodology
 
 SOSA plug-in cards shall draw no more than 1.0A of 3.3VAUX ANSI/VITA 46.0 Rule 3.11.
 
-5.2.13.3 SOSA Hardware Platform General Specification Requirements
-
-SOSA general specification requirements are delineated in the following sections.
+5.2.13.3 SOSA Hardware Platform General Specification Requirements SOSA general specification requirements are delineated in the following sections.
 
 5.2.13.3.1 General Specifications
 
@@ -1031,7 +923,11 @@ All unused pins shall not be connected on the plug-in module. Conformance Method
 
 **Rule 5.2.13.3-2**
 
-SOSA plug-in cards with XMC mezzanine sites shall conform to the carrier board requirements of ANSI/VITA 42.0, XMC. Conformance Methodology: (A) Reference ANSI/VITA 65.0 §4.1 for slot pitch requirements. Slot pitch requirements are extended for SOSA as follows.
+SOSA plug-in cards with XMC mezzanine sites shall conform to the carrier board requirements of ANSI/VITA 42.0, XMC. Conformance Methodology: (A)
+
+Slot Pitch
+
+Reference ANSI/VITA 65.0 §4.1 for slot pitch requirements. Slot pitch requirements are extended for SOSA as follows.
 
 **Rule 5.2.13.3-3**
 
@@ -1051,7 +947,7 @@ Conduction Cooled SOSA plug-in cards shall be conformant to ANSI/VITA 48.2 Plug-
 
 SOSA Conformant Card cage rails shall have a pitch of 1.5” for SOSA plug-in card ANSI/VITA
 
-### 48.8 Hardware Modules. Conformance Methodology: (A)
+48.8 Hardware Modules. Conformance Methodology: (A)
 
 **Rule 5.2.13.3-7**
 
@@ -1061,13 +957,13 @@ SOSA Backplane Assemblies for air flow through cooling shall have a 1.5” pitch
 
 Air flow through SOSA plug-in cards shall be conformant to ANSI/VITA 48.8 Plug-In Module requirements for 1.5” pitch. Conformance Methodology: (A)
 
-##### 5.2.13.3.2 Connector Family
+5.2.13.3.2 Connector Family
 
 **Rule 5.2.13.3-9**
 
 SOSA plug-in cards shall comply with ANSI/VITA 65.0 §4.2 for connector family requirements. Conformance Methodology: (A)
 
-## Rules 5.2.13.3-10
+Rules 5.2.13.3-10
 
 SOSA plug-in cards shall make use of ANSI/VITA Standard Connectors. Conformance Methodology: (A)
 
@@ -1075,11 +971,11 @@ SOSA plug-in cards shall make use of ANSI/VITA Standard Connectors. Conformance 
 
 The SOSA standard is considering the addition of ANSI/VITA 46.3 that will allow for intermateable connectors.
 
-## Keying
+Keying
 
 The SOSA standard references ANSI/VITA 46 §4.4 for Alignment and Keying. Specifically, reference ANSI/VITA 46 §4.4.3 for Keying Rules applying to 6U and 3U modules. Reference ANSI/VITA 65.0 §4.3 for keying requirements specific to ANSI/VITA 6U modules and backplanes.
 
-## RTM Modules
+RTM Modules
 
 Reference ANSI/VITA 65.0 §4.4 for Requirements Traceability Matrix (RTM) connector requirements.
 
@@ -1093,13 +989,13 @@ Rear transition modules shall be prohibited within a SOSA Chassis and Backplane 
 
 Reference ANSI/VITA 48.2 for conduction cooled module requirements. Reference ANSI/VITA
 
-### 48.8 for air flow through module requirements.
+48.8 for air flow through module requirements.
 
 **Rule 5.2.13.4-1**
 
 ANSI/VITA 48.2 or ANSI/VITA 48.8 Type 1 Hardware Modules shall be used. Conformance
 
-## Methodology: (A)
+Methodology: (A)
 
 **Recommendation 5.2.13.4-1**
 
@@ -1109,7 +1005,9 @@ SOSA plug-in cards should use extended covers in order to protect the 46.0 conne
 
 Adapter frames may be used to convert ANSI/VITA 48.2 Hardware Modules to ANSI/VITA
 
-### 48.8 form factor.
+48.8 form factor.
+
+Environmental
 
 Reference ANSI/VITA 47.3 for module requirements.
 
@@ -1135,37 +1033,33 @@ SOSA plug-in card Profiles define the connector type and how each pin, or pair o
 
 in cards are further divided into sub-categories such as, but not limited to, RF Payload, RF Switch, and I/O Single Board Computer (SBC).
 
-##### 5.2.14.1 Hardware Platform Protocol Profiles
+5.2.14.1 Hardware Platform Protocol Profiles
 
 The Protocol Profile defines what type communication protocol can be used on each pipe as defined in a corresponding plug-in card profile, connector type, and module height (6U/3U).
 
-##### 5.2.14.2 Hardware Platform Profile Names – Use and Construction
+5.2.14.2 Hardware Platform Profile Names – Use and Construction
 
-SOSA plug-in card profiles that align with OpenVPX Profiles can be classified into one of three main categories: • SLT: a physical space on an OpenVPX backplane with a defined mechanical and
+SOSA plug-in card profiles that align with OpenVPX Profiles can be classified into one of three main categories: • SLT: a physical space on an OpenVPX backplane with a defined mechanical and electrical specification intended to accept a Plug-In module Pre-existing examples of slots that are applicable to OpenVPX include 3U and 6U. There are different slot types such as payload slots and switch slots.
 
-electrical specification intended to accept a Plug-In module Pre-existing examples of slots that are applicable to OpenVPX include 3U and 6U. There are different slot types such as payload slots and switch slots.
+Backplane (BKP): a class of interconnect that consists of regularly aligned pattern of connectors that operate so that the corresponding pins on each connector have the same logical definition It is often used as a backbone to connect several modules together to allow for signal transmission and is usually housed in a chassis.
 
-Backplane (BKP): a class of interconnect that consists of regularly aligned pattern of
-
-connectors that operate so that the corresponding pins on each connector have the same logical definition It is often used as a backbone to connect several modules together to allow for signal transmission and is usually housed in a chassis.
-
-Module (MOD): an element of a system that has individually distinct boundaries that are
-
-well-defined interfaces
-
-Reference ANSI/VITA 65.0 §1.3.3.1 for Slot Profile use and construction. Reference ANSI/VITA 65.0 §1.3.3.2 for Backplane Profile use and construction. Reference ANSI/VITA 65.0 §1.3.3.3 for Module Profile use and construction.
+Module (MOD): an element of a system that has individually distinct boundaries that are well-defined interfaces Reference ANSI/VITA 65.0 §1.3.3.1 for Slot Profile use and construction. Reference ANSI/VITA 65.0 §1.3.3.2 for Backplane Profile use and construction. Reference ANSI/VITA 65.0 §1.3.3.3 for Module Profile use and construction.
 
 #### 5.2.15 Common 6U and 3U Plug-In Card Profile Specifications
 
 For the SOSA standard, within the context of OpenVPX, it is known that OpenVPX uses Slot Profiles to define interoperability and physical characteristics necessary to interface with compatible modules and backplanes. The following sections define common requirements for all OpenVPX Slot Profiles: • Reference ANSI/VITA 65.0 §6 Common to 6U and 3U – Slot Profiles • Reference ANSI/VITA 65.0 §7 Common to 6U and 3U – Backplane Profiles
 
-## • Reference ANSI/VITA 65.0 §8 Common to 6U and 3U – Module Profiles
+• Reference ANSI/VITA 65.0 §8 Common to 6U and 3U – Module Profiles
+
+#### 5.2.16 SOSA 3U Plug-In Card Profile Specifications
+
+##### 5.2.16.1 3U I/O Intensive SBC Plug-In Card Profile
 
 **Rule 5.2.16.1-1**
 
 SOSA 3U SBCs that are I/O intensive shall conform to ANSI/VITA 65.0 slot profile SLT3-
 
-## PAY-1F1F2U1TU1T1U1T-14.2.16. Conformance Methodology: (A)
+PAY-1F1F2U1TU1T1U1T-14.2.16. Conformance Methodology: (A)
 
 <!-- 原书 p.102 ｜ PDF p.122 -->
 
@@ -1187,21 +1081,17 @@ An XMC can be used to customize the I/O for a particular system or platform.
 
 - Key
 
-## SE
+SE
 
-- Utility Plane-Maint. PortUSB PWR 5E Diff Expansion PlaneP1w9-X12d XMC mapControl Plane - 2 UTPsFP
+POIJO Data Plane 1 FP
 
-- PI/J1
-
-- GPIO Video - TUTP
+- Utility Plane-Maint. PortUSB PWR 5E Diff Expansion PlaneP1w9-X12d XMC mapControl Plane - 2 UTPsFP PI/J1 GPIO Video - TUTP
 
 - Utility Plane 8 of USB 3 and 1ofUSB2- 1TP
 
 - Serial ports E Storage 1 UTP
 
-- De
-
-- USB PWR- P2lJ2 Control Plane C 1 TP
+- De USB PWR- P2lJ2 Control Plane C 1 TP
 
 ## 3 Of GPIO- XIGs XMC map
 
@@ -1238,17 +1128,19 @@ An XMC can be used to customize the I/O for a particular system or platform.
 
 - SOSA 3U Legacy Payload Plug-In Cards shall conform to ANSI/VITA 65.0 slot profile SLT3-
 
-## PAY-2F2U-14.2.3. Conformance Methodology: (A)
+PAY-2F2U-14.2.3. Conformance Methodology: (A)
 
 **Rule 5.2.16.2-2**
 
 - SOSA 3U Legacy Payload Plug-In Cards shall conform to one of the following ANSI/VITA
 
-### 65.1 module profiles: (Conformance Methodology: (A))
+65.1 module profiles: (Conformance Methodology: (A))
 
-## MOD3-PAY-2F2U-16.2.3-5
+MOD3-PAY-2F2U-16.2.3-3
 
-## MOD3-PAY-2F2U-16.2.3-11
+MOD3-PAY-2F2U-16.2.3-5
+
+MOD3-PAY-2F2U-16.2.3-11
 
 **Recommendation 5.2.16.2-1-1**
 
@@ -1260,7 +1152,7 @@ An XMC can be used to customize the I/O for a particular system or platform.
 
 *Figure 25: ANSI/VITA 65.0 Payload Slot Profile for SLT3-PAY-2F2U-14.2.3*
 
-##### 5.2.16.3 3U Payload Slot Profiles
+5.2.16.3 3U Payload Slot Profiles
 
 **Rule 5.2.16.3-1**
 
@@ -1382,7 +1274,7 @@ SOSA 3U Payload Plug-In Cards can include, but are not limited to, SBCs that are
 
 - SOSA 3U Switch Plug-In Cards shall conform to ANSI/VITA 65.0 slot profile SLT3-SWH-
 
-## 6F8U-14.4.15. Conformance Methodology: (A)
+6F8U-14.4.15. Conformance Methodology: (A)
 
 <!-- 原书 p.107 ｜ PDF p.127 -->
 
@@ -1419,7 +1311,7 @@ SOSA 3U Control/Data Plane Switch Plug-In Cards shall conform to ANSI/VITA 65.0 
 
 SOSA 3U Control/Data Plane Switch Plug-In Cards shall conform to one of the ANSI/VITA
 
-### 65.1 module profiles in Table 23 or Table 24. Conformance Methodology: (A)
+65.1 module profiles in Table 23 or Table 24. Conformance Methodology: (A)
 
 <!-- 原书 p.108 ｜ PDF p.128 -->
 
@@ -1483,6 +1375,8 @@ ANSI/VITA 65.1 slot profiles SLT3-SWH-6F1U7U-14.4.14 and SLT3-SWH-4F1U7U1J-14.8.
 > 转写说明：`Protocols for Optical` 列与 `Legacy` 列全表空白；末行除 `Last line` 外全为灰底空白。
 > 转写说明：本表为单页整表（原书 p.110／PDF 第 130 页），共 4 个数据行。下一页（PDF 第 131 页）顶端为 Figure 31，非本表续行，故未续写。
 
+##### 5.2.16.6 3U SOSA RF Switch Plug-In Card Profile
+
 **Rule 5.2.16.6-1**
 
 SOSA 3U RF Switch Plug-In Cards shall conform to ANSI/VITA 65.0 slot profile SLT3-SWH-1F1S1S1U1U1K-14.8.8-n per. Conformance Methodology: (A)
@@ -1513,11 +1407,13 @@ SOSA 3U RF Switch Plug-In Cards shall conform to one of the ANSI/VITA 65.1 modul
 > 转写说明：`Protocols for Optical` 列与 `Legacy` 列全表空白；末行除 `Last line` 外全为灰底空白。
 > 转写说明：本表为单页整表（原书 p.111／PDF 第 131 页），共 4 个数据行。下一页（PDF 第 132 页）顶端为 Observation 5.2.16.7-1 正文与 Figure 32，非本表续行，故未续写。
 
+##### 5.2.16.7 SOSA 3U Radial Clock Plug-In Card Profiles
+
 **Rule 5.2.16.7-1**
 
 SOSA 3U Radial Clock Plug-In Cards shall conform to ANSI/VITA 65.0 slot profile SLT3x-
 
-## TIM-2S1U22S1U2U1H-14.9.2-n. Conformance Methodology: (A)
+TIM-2S1U22S1U2U1H-14.9.2-n. Conformance Methodology: (A)
 
 **Rule 5.2.16.7-2**
 
@@ -1584,7 +1480,7 @@ SOSA 3U Radial Clock Plug-In Cards shall conform to one of the ANSI/VITA 65.1 mo
 
 - SOSA 3U External I/O Plug-In Cards shall conform to ANSI/VITA 65.0 slot profile SLT3-
 
-## PAY-2U2U-14.2.17. Conformance Methodology: (TBD)
+PAY-2U2U-14.2.17. Conformance Methodology: (TBD)
 
 <!-- 原书 p.112 ｜ PDF p.132 -->
 
@@ -1629,6 +1525,8 @@ The SOSA 3U I/O Intensive SBC plug-in card profile should be used instead of the
 
 #### 5.2.17 6U Plug-In Card Profile Specifications
 
+5.2.17.1 6U Payload Plug-In Card Profiles
+
 **Rule 5.2.17.1-1**
 
 SOSA 6U Payload Plug-In Cards shall conform to ANSI/VITA 65.0 slot profile SLT6-PAY-4F2Q1H4U1T1S1S1TU2U2T1H-10.6.4-n or SLT6-PAY-4F1Q1H4U1T1S1S1TU2U2T1H-
@@ -1668,32 +1566,6 @@ SOSA systems will likely only contain one or two plug-in cards that support ANSI
 <!-- 原书 p.114 ｜ PDF p.134 -->
 
 ANSI/VITA 65.1 slot profile SLT6-PAY-4F2Q1H4U1T1S1S1TU2U2T1H-10.6.4-n to support processing for the various sensor modalities.
-
-- Key
-
-## SE
-
-## GPIO 5
-
-## Utility Plane-
-
-2 AXresets
-
-- Diff
-
-2 EPclocks- 8 P2l Expansion Plane 32 pairs
-
-- J2
-
-- Key
-
-## P3/43 VITA 65 Aperture Pattern H for
-
-67.3C opticallcoax
-
-- Storage 4 UTPs
-
-Serial Portfs) Video lanes & clock TP Vid PWR,HPD [U Video Aux & GP LVDS- 1SP, 1SP
 
 ![Figure 34: ANSI/VITA 65.0 6U Payload Slot Profile SLT6-PAY-4F2Q1H4U1T1S1S1TU2U2T1H-](assets/fig-034.png)
 
@@ -1746,7 +1618,7 @@ Serial Portfs) Video lanes & clock TP Vid PWR,HPD [U Video Aux & GP LVDS- 1SP, 1
 
 *Figure 35: ANSI/VITA 65.0 6U Payload Slot Profile SLT6-PAY-4F1Q1H4U1T1S1S1TU2U2T1H-*
 
-## 10.6.3-n
+10.6.3-n
 
 <!-- 原书 p.116 ｜ PDF p.136 -->
 
@@ -1774,41 +1646,53 @@ Serial Portfs) Video lanes & clock TP Vid PWR,HPD [U Video Aux & GP LVDS- 1SP, 1
 > 7. 表头 `GPIvds01` 与同列数据 `GPLVDS -- 5.14.2` 拼写不一致，均照原表，未作统一。
 > 8. 窄列折行（`SLT6-PAY-`／`4F1Q1H4U1T1S1S1TU2U2T1H-`／`10.6.3-0`、`40GBASE-KR4 --`／`5.1.8`）系版式折行，已并回单行。
 
+##### 5.2.17.2 SOSA 6U Control/Data Switch Plug-In Card Profile
+
 **Rule 5.2.17.2-1**
 
 - SOSA 6U Control/Data Switch Plug-In Cards shall conform to ANSI/VITA 65.0 slot profile
 
-## SLT6-SWH-14F16U1U15U1J-10.8.1-n. Conformance Methodology: (A)
+SLT6-SWH-14F16U1U15U1J-10.8.1-n. Conformance Methodology: (A)
 
 **Rule 5.2.17.2-2**
 
-- SOSA 6U Control/Data Switch Plug-In Cards shall conform to one of the ANSI/VITA 65.1
-
-## module profiles in Table 35 or Table 36. Conformance Methodology: (A)
+- SOSA 6U Control/Data Switch Plug-In Cards shall conform to one of the ANSI/VITA 65.1 module profiles in Table 35 or Table 36. Conformance Methodology: (A)
 
 <!-- 原书 p.117 ｜ PDF p.137 -->
 
 - Key-
 
-## SE
+SE
 
-## Reserved 5E DI
+POIJO
 
-## Maint. Port P4fJ1
+Utility Plane-
 
-## Resered-
+Reserved 5E DI
 
-## Utility Plane
+Maint. Port P4fJ1
+
+Resered-
+
+Utility Plane
+
+Df
 
 - Resered- P2f
 
-## J2_ Data Plane 14 FPs
+J2_ Data Plane 14 FPs
 
-## Key-
+Key-
 
-## Df
+Df
 
-## P3f
+P3f
+
+E
+
+J_
+
+Data Plane
 
 ## 2 TPs
 
@@ -1816,7 +1700,7 @@ Serial Portfs) Video lanes & clock TP Vid PWR,HPD [U Video Aux & GP LVDS- 1SP, 1
 
 *Figure 36: ANSI/VITA 65.0 6U Control/Data Switch Slot Profile SLT6-SWH-14F16U1U15U1J-*
 
-## 10.8.1-n
+10.8.1-n
 
 **Table 35: ANSI/VITA 65.1 Slot Profiles for SLT6-SWH-14F16U1U15U1J-10.8.1-n**
 
@@ -1912,11 +1796,25 @@ Instead of routing platform-specific I/O to non-standard payloads, integrators c
 
 The SOSA 6U Payload Plug-In Cards profile should be used instead of the SOSA 6U External I/O Plug-In Card profile if platform-specific I/O can be accommodated by a single XMC.
 
-## Key
+Key
 
-## SE
+SE
 
-## 5 Expansion Plane 4 Ultra-Thin Pipes
+POIJO
+
+Utility Plane-
+
+5 Expansion Plane 4 Ultra-Thin Pipes
+
+User Defined E Diff
+
+- Maint. Port PIIJ1
+
+User Defined-
+
+Utility Plane User Defined
+
+## 5 Diff
 
 ![Figure 38: ANSI/VITA 65.0 6U External I/O Slot Profile SLT6-PAY-4U2U-10.2.8](assets/fig-038.png)
 
@@ -1947,7 +1845,7 @@ The SOSA 6U Payload Plug-In Cards profile should be used instead of the SOSA 6U 
 
 PSM requirements shall be applied using the following order of precedence: Requirements of this SOSA standard (including additions or exclusions to ANSI/VITA
 
-## 65.0)
+65.0)
 
 - Conformance Methodology: (A)
 
@@ -1963,7 +1861,7 @@ The SOSA HWG is considering a move to 12V as the primary input in a future versi
 
 PSMs shall assert the FAIL* signal when PO1, PO2, PO3, or AUX voltages are not within their voltage specifications per ANSI/VITA 62.0, Recommendation 3.3-2. Conformance
 
-## Methodology: (T)
+Methodology: (T)
 
 **Rule 5.2.20-3**
 
@@ -1983,7 +1881,7 @@ PSMs shall have the chassis pin isolated from power returns, such as the POWER_R
 
 PSMs shall have the chassis pin isolated from the -DC_IN/ACN pin. Conformance
 
-## Methodology: (T)
+Methodology: (T)
 
 **Rule 5.2.20-7**
 
@@ -1997,13 +1895,13 @@ PSMs having intermediate power as an input shall explicitly define the nominal v
 
 Energy Storage Modules shall accept an input of the intermediate voltage in accordance with
 
-## ANSI/VITA 62.0 §4.5. Conformance Methodology: (A)
+ANSI/VITA 62.0 §4.5. Conformance Methodology: (A)
 
 **Rule 5.2.20-10**
 
 Energy Storage Modules shall output the intermediate voltage in accordance with ANSI/VITA
 
-### 62.0 §4.5. Conformance Methodology: (A)
+62.0 §4.5. Conformance Methodology: (A)
 
 **Rule 5.2.20-11**
 
@@ -2043,7 +1941,15 @@ XMC Mezzanine Cards that do not require utilization of all available user I/O si
 
 The higher priority I/O signals of the XMC Mezzanine Card should populate pins in the following order of ANSI/VITA 46.9 patterns:
 
-## X12d
+X12d
+
+X8d
+
+X16s
+
+X24s
+
+X38s
 
 **Observation 5.2.21-1**
 
@@ -2053,7 +1959,9 @@ Any XMC module (SOSA Mezzanine Cards or otherwise) will be expected to be subjec
 
 If a Payload Plug-In Card has an XMC Mezzanine Card Site, the Payload Plug-In Card shall route the ANSI/VITA 42.0-defined I²C connections from the XMC Mezzanine Card Site to the
 
-## IPMC of the Payload Plug-In Card. Conformance Methodology: (A)
+IPMC of the Payload Plug-In Card. Conformance Methodology: (A)
+
+#### 5.2.22 Maintenance Console Port Requirements
 
 The Maintenance Console Port is intended to be a consistently-implemented port providing a console for low-level access to the attached processor. It is not intended to be an “operational” port; that is, not intended to communicate to some device as part of the normal operation of the system. It is intended strictly as part of the board maintenance functions.
 
@@ -2061,7 +1969,7 @@ The basic use-cases for the maintenance console port can be classed as described
 
 <!-- 原书 p.124 ｜ PDF p.144 -->
 
-##### 5.2.22.1 Vendor Board Bring Up, Board Support Package (BSP) Development, etc.
+5.2.22.1 Vendor Board Bring Up, Board Support Package (BSP) Development, etc.
 
 This implies access to low-level firmware, BIOS, Extensible Firmware Interface (EFI) shell, etc. The typical case is for an operator to attach to the maintenance console port of a single plug-in card using a terminal or PC. There is also a case where the operator may attach to a relatively limited set of boards at one time.
 
@@ -2073,7 +1981,7 @@ This also implies access to low-level firmware, BIOS, EFI shell, etc. This will 
 
 In this case the target plug-in card is installed in a deployed system. Whether or not the maintenance console ports on the individual boards are accessible in a deployed system is up to the system integrator, but assuming the ports are accessible, it can be assumed that most, if not all, of the individual plug-in card maintenance console ports can be attached. It is also assumed that some sort of port aggregation mechanism is implemented within the system to provide this access.
 
-##### 5.2.22.4 Maintenance Depot
+5.2.22.4 Maintenance Depot
 
 The maintenance depot use-case can be characterized by the need to access the maintenance console ports of an individual fieldable plug-in card in a lab test fixture. The port will facilitate debug and perhaps upgrade/updates of the plug-in card.
 
@@ -2121,7 +2029,7 @@ Maintenance Console Ports are permitted to support additional speeds and protoco
 
 The network-based system management concepts were described in Section 3.11.2. This section defines rules that define specific requirements for system management interfaces to be implemented by SOSA hardware elements, sensors, and modules.
 
-#### 5.3.1 SOSA Hardware Element System Management Requirements
+5.3.1 SOSA Hardware Element System Management Requirements
 
 **Rule 5.3.1-1**
 
@@ -2221,6 +2129,8 @@ Work in defining rules and requirements to be applied to SOSA logical components
 
 ### 5.4 SOSA Software Operating Environment
 
+#### 5.4.1 Description
+
 SOSA modules may contain a wide range of functions and many of these are accomplished through computer processing. In order to promote the open and standardized goals of the SOSA Technical Architecture, the Run-Time Environment (RTE) interface for SOSA modules will be
 
 <!-- 原书 p.128 ｜ PDF p.148 -->
@@ -2233,37 +2143,25 @@ The SOSA standardized architectural modules can be realized in a variety of SOSA
 
 This section describes the high-level scope of the SOSA REI. It includes:
 
-SOSA application software interface to SOSA module hardware processing and operating
+SOSA application software interface to SOSA module hardware processing and operating system for language run time and calls to operating system services as defined by the
 
-system for language run time and calls to operating system services as defined by the
-
-## FACE Operating System Segment (OSS) interface
+FACE Operating System Segment (OSS) interface
 
 SOSA platform-specific software and low-level I/O as defined by the FACE Platform-
 
-## Specific Services Segment (PSSS) and I/O Services Segment (IOSS)
+Specific Services Segment (PSSS) and I/O Services Segment (IOSS)
 
 SOSA operating system as defined by the FACE operating system requirements
 
-## — POSIX®
+— POSIX®
 
-For FACE conformant software, programming language and version as defined by the
+— ARINC 653
 
-referenced FACE Technical Standard
-
-Guidance and limitations on use of VMs and containers
-
-General-Purpose, Safety, and Security features of application software as per the profile
-
-guidance in the referenced FACE Technical Standard
-
-The SOSA REI excludes:
+For FACE conformant software, programming language and version as defined by the referenced FACE Technical Standard Guidance and limitations on use of VMs and containers General-Purpose, Safety, and Security features of application software as per the profile guidance in the referenced FACE Technical Standard The SOSA REI excludes:
 
 Transport layer middleware for application (component) to application (component)
 
-communications, unless defined by this standard for SOSA module communications
-
-Specific source code-level requirements, such as:
+communications, unless defined by this standard for SOSA module communications Specific source code-level requirements, such as:
 
 - Coding standards
 
@@ -2273,11 +2171,9 @@ Specific source code-level requirements, such as:
 
 - Configuration management or quality assurance processes except those defined for airworthiness — Language selection beyond those defined in the FACE Technical Standard plus
 
-## Python™
+Python™
 
-FPGA softcore processor software or programmable logic Excludes GPU programming languages The SOSA REI has questionable scope for: Airworthiness
-
-SOSA software that affects safety needs to be considered but it is not clear how much it actually affects this REI definition. Software safety is already subject to FACE Safety Profile certification by airworthiness authorities under DO-178/MIL-HDBK-516C, which is mostly driven by process substantiation not the product itself, although there are exceptions – for example, Federal Aviation Administration (FAA) certification is not available using Java® in high-criticality systems.
+FPGA softcore processor software or programmable logic Excludes GPU programming languages The SOSA REI has questionable scope for: Airworthiness SOSA software that affects safety needs to be considered but it is not clear how much it actually affects this REI definition. Software safety is already subject to FACE Safety Profile certification by airworthiness authorities under DO-178/MIL-HDBK-516C, which is mostly driven by process substantiation not the product itself, although there are exceptions – for example, Federal Aviation Administration (FAA) certification is not available using Java® in high-criticality systems.
 
 Figure 39 is derived from Figure 2 (Architectural Segments) from the FACE Technical Standard, Edition 3.0. The red dashed line has been added to represent the SOSA REI scope in relation to the FACE segments. This graphic is not an exhaustive representation of FACE elements.
 
@@ -2287,89 +2183,43 @@ Figure 39 is derived from Figure 2 (Architectural Segments) from the FACE Techni
 
 *Figure 39: FACE Software Operating Environment and Subset Proposed for the SOSA REI (red*
 
-## dashed line)
+dashed line)
 
-The RTE should conform to FACE Technical Standard, Edition 3.0 (call out specific
+#### 5.4.3 Recommendations
 
-sections)
+##### 5.4.3.1 Basis
 
-When other profiles are not applicable, the RTE should conform to the General-Purpose
+The RTE should conform to FACE Technical Standard, Edition 3.0 (call out specific sections)
 
-Profile
+When other profiles are not applicable, the RTE should conform to the General-Purpose Profile The SOSA modules should be developed for operating system interfaces including one of:
 
-The SOSA modules should be developed for operating system interfaces including one of:
+— POSIX
 
-## — POSIX
+— ARINC 653
 
-SOSA modules should be implemented by software components based on existing
-
-interface standards or software frameworks (e.g., the MORA specification, FROST Architecture Specification, REDHAWK/TOA, COARPS, etc.) The specifics for how these software components will interface to the SOSA REI are planned for a later version of the SOSA Technical Standard.
+SOSA modules should be implemented by software components based on existing interface standards or software frameworks (e.g., the MORA specification, FROST Architecture Specification, REDHAWK/TOA, COARPS, etc.) The specifics for how these software components will interface to the SOSA REI are planned for a later version of the SOSA Technical Standard.
 
 <!-- 原书 p.131 ｜ PDF p.151 -->
 
 ##### 5.4.3.2 Interoperability Levels
 
-SOSA REI is not mandating how to write or manage application source code except for
+SOSA REI is not mandating how to write or manage application source code except for what open standard operating system/run-time API to use SOSA REI is not mandating any particular middleware 5.4.3.3 General-Purpose SOSA software components which have general performance should conform to the FACE Technical Standard General-Purpose Profile The SOSA modules which have low latency and/or hard real-time requirements should conform to the FACE Determinism Profile 5.4.4 Safety SOSA software components which have low latency and/or hard real-time requirements should conform to the FACE Technical Standard Safety Profile These software components shall follow DO-178 guidance for civilian applications and MIL-HDBK-516C for military applications to achieve airworthiness for SOSA modules affecting safety of flight These software components should conform to the FACE Safety Profile SOSA software components affecting safety of flight which use object-oriented technology shall follow FAA guidance including DO-332 and others Planned for a later version of the SOSA Technical Standard.
 
-what open standard operating system/run-time API to use
+5.4.4.1 Security SOSA modules should conform to the FACE Security Profile for those modules affecting system security 5.4.4.2 Programming Language SOSA modules should use one of the programming languages defined in the FACE
 
-SOSA REI is not mandating any particular middleware
+Technical Standard
 
-5.4.3.3 General-Purpose
+##### 5.4.4.3 Virtual Machines
 
-SOSA software components which have general performance should conform to the
+SOSA modules may use VMs with limitations Planned for a later version of the SOSA Technical Standard.
 
-- FACE Technical Standard General-Purpose Profile
-
-The SOSA modules which have low latency and/or hard real-time requirements should
-
-conform to the FACE Determinism Profile
-
-5.4.4 Safety
-
-SOSA software components which have low latency and/or hard real-time requirements
-
-should conform to the FACE Technical Standard Safety Profile
-
-These software components shall follow DO-178 guidance for civilian applications and
-
-- MIL-HDBK-516C for military applications to achieve airworthiness for SOSA modules affecting safety of flight
-
-These software components should conform to the FACE Safety Profile SOSA software components affecting safety of flight which use object-oriented
-
-technology shall follow FAA guidance including DO-332 and others Planned for a later version of the SOSA Technical Standard.
-
-5.4.4.1 Security
-
-SOSA modules should conform to the FACE Security Profile for those modules affecting
-
-system security
-
-5.4.4.2 Programming Language
-
-SOSA modules should use one of the programming languages defined in the FACE
-
-## Technical Standard
-
-SOSA modules may use VMs with limitations
-
-- Planned for a later version of the SOSA Technical Standard.
-
-5.4.4.4 Hypervisors
-
-If a VM(s) is used then a Hypervisor should be used to manage the VMs. Security-related aspects of the hypervisor
-
-- Planned for a later version of the SOSA Technical Standard.
+5.4.4.4 Hypervisors If a VM(s) is used then a Hypervisor should be used to manage the VMs. Security-related aspects of the hypervisor Planned for a later version of the SOSA Technical Standard.
 
 <!-- 原书 p.132 ｜ PDF p.152 -->
 
-##### 5.4.4.5 Containers
+5.4.4.5 Containers
 
-SOSA modules may use containers after a security analysis that substantiates the use of
-
-containers does not defeat security requirements
-
-SOSA modules should substantiate why a container should be used instead of a VM
+SOSA modules may use containers after a security analysis that substantiates the use of containers does not defeat security requirements SOSA modules should substantiate why a container should be used instead of a VM
 
 ### 5.5 SOSA Module Interactions
 
@@ -2391,13 +2241,15 @@ The SOSA standard defines two modules that together perform sensor management, w
 
 #### 5.6.1 System Manager Module
 
+##### 5.6.1.1 Module Definition
+
 The functionality of the system manager module is defined in Table 2.
 
 In summary, the system manager provides the ability to discover, configure, control, manage health (status and faults), and configure the security aspects of the SOSA sensor as a whole, its infrastructure, its modules, and its interface to the sensor host.
 
 The relationship between the system manager module and the other modules was shown in Figure 8 and explained in Section 3.11.2.
 
-##### 5.6.1.2 System Manager Interactions
+5.6.1.2 System Manager Interactions
 
 The system manager is responsible for handling discovery, configuration, control, and health functions for the sensor as a whole. It acts as a representative of the logical modules (those that are not part of the hardware infrastructure), and the hardware platform modules to the “outside” world.
 
@@ -2415,7 +2267,7 @@ Figure 41 illustrates the system manager module. It includes the service side (p
 
 Note that the interaction endpoints related to modules (Discovery, Configuration, Control, and Health) clients are repeated for hardware elements, but are not shown in detail for brevity.
 
-##### 5.6.1.3 Common System Management Interactions
+5.6.1.3 Common System Management Interactions
 
 The SOSA system management concept defines a pattern that is applied to each type of module, and then tailored for the needs of the individual modules by varying the specific interaction names and parameters. The pattern includes sets of interactions that are common for all modules, whether they are implemented in software or hardware, or whether they are mission or infrastructure-oriented.
 
@@ -2516,6 +2368,8 @@ Note that this material is still being developed, so is likely to change as it i
 
 #### 5.6.2 Task Manager Module
 
+##### 5.6.2.1 Module Definition
+
 See Table 2 for the definition of this module.
 
 The concept of task management is still being developed. Below is a DRAFT set of task management interactions that are consistent with the system management interactions and the combined SOSA management architecture. So far, a detailed concept has been defined for five Task Management interactions: SetCreateTask, SetModifyTask, SetDeleteTask, SetModuleAssignment, and PubAssignmentHealth. (Details for these interactions are provided in Section 5.9.1.3 for an Air Moving Target Indicator (AMTI) Multi-sensor Fusion Tracker Radar mission example. Note that the interactions are common across all modules, but the enumerations and data for each interaction will be sensor and mission-specific and will require an extensive effort to define all of the task management configuration data, control actions, and module assignments for each of these (Sensor Type/Mission Type combinations).
@@ -2586,21 +2440,13 @@ between the host platform and the sensor that relate to commanding an RF sensor,
 
 The SOSA signal layer modules include:
 
-Module 2.1: Receive Aperture/Transducer/Camera
-
-Module 2.2: Transmit Aperture/Transducer/Laser
-
-Module 2.3: Conditioner-Receiver-Exciter
+Module 2.1: Receive Aperture/Transducer/Camera Module 2.2: Transmit Aperture/Transducer/Laser Module 2.3: Conditioner-Receiver-Exciter
 
 Each of these modules supports each of the SOSA sensor types; Communications, EO/IR, EW, Radar, and SIGINT. The current specification supports the RF sensor types; Communications, EW, Radar, and SIGINT, but not the EO/IR sensor type.
 
 Support for EO/IR sensor types in these modules will be added in a later version. The current version specifies the requirements for the signal layer modules when operating on RF signals, including the following:
 
-RF Receiver Aperture/Transducer Module Standard
-
-RF Transmit Aperture/Transducer Module Standard
-
-RF Conditioner-Receiver-Exciter Module Standard
+RF Receiver Aperture/Transducer Module Standard RF Transmit Aperture/Transducer Module Standard RF Conditioner-Receiver-Exciter Module Standard
 
 #### 5.7.1 Modular Open RF Architecture
 
@@ -2721,6 +2567,8 @@ Note that conformance with an individual interface standard (set of interactions
 
 <!-- 原书 p.155 ｜ PDF p.175 -->
 
+Additional context for the Interaction Endpoints listed in the table can be gained by referring to Figure 42.
+
 **Table 42: RF Signal Layer Module Interaction Endpoints**
 
 | **Module ID** | **Module Name** | **Applicability** | **Interaction Endpoint** | **MORA 2.1 Specification** |
@@ -2754,11 +2602,11 @@ The MORA specification, Version 2.1 references in the table uniquely identify a 
 
 The following documents provide the complete, detailed specifications referenced in the table. MORA Specification, Version 2.1 (see Referenced Documents)
 
-- Distribution A: main body and appendices A-D Distribution C: appendices E-G
+- Distribution A: main body and appendices A-D Distribution C: appendices E-G VICTORY Standard Specifications, Version 1.7 (see Referenced Documents)
 
-VICTORY Standard Specifications, Version 1.7 (see Referenced Documents)
+Distribution C: main body
 
-## Distribution C: main body
+Distribution D and/or ITAR: appendices
 
 ANSI/VITA 49.2 (see Referenced Documents) Each bullet item in the rules below uniquely specifies a section of the MORA specification adopted by the SOSA Consortium for the SOSA Technical Architecture. Note that the rules only refer to implementation of the service-side interaction endpoints, as MORA does not provide conformance tests for implementation of the client-side interaction endpoints.
 
@@ -2766,7 +2614,15 @@ ANSI/VITA 49.2 (see Referenced Documents) Each bullet item in the rules below un
 
 A component implementing the RF modalities of the SOSA 2.1 Receive/Aperture Transducer module shall be compliant with the following MORA specifications: Conformance
 
-## Methodology: (TBD)
+Methodology: (TBD)
+
+MT92010: MORA Device
+
+MT92013: MORA Signal Resource Manager
+
+MT92016: MORA Signal Port Manager
+
+MT90011: RF Layer Analog Data Interface
 
 **Rule 5.7.7-[5-7]**
 
@@ -2782,7 +2638,13 @@ A component implementing the RF modalities of the SOSA 2.1 Receive/Aperture Tran
 
 A component implementing the RF modalities of the SOSA 2.2 Transmit/Aperture Transducer module shall be compliant with the following MORA specifications: Conformance
 
-## Methodology: (TBD)
+Methodology: (TBD)
+
+MT92010: MORA Device
+
+MT92013: MORA Signal Resource Manager
+
+MT92016: MORA Signal Port Manager
 
 MT90011: RF Layer Analog Data Interface
 
@@ -2798,11 +2660,13 @@ A component implementing the RF modalities of the SOSA 2.1 Receive/Aperture Tran
 
 A component implementing the RF modalities of the SOSA 2.3 RF Conditioner-Receiver-Exciter module shall be compliant with the following MORA specifications: Conformance Methodology: (TBD) MT92011: MORA Device Management Interface
 
-## MT92013: MORA Signal Resource Manager
+MT92013: MORA Signal Resource Manager
+
+MT92016: MORA Signal Port Manager
 
 MT90011: RF Layer Analog Data Interface MT90011: RF Layer Analog Data Interface
 
-## MT92013: MORA Signal Resource Manager
+MT92013: MORA Signal Resource Manager
 
 <!-- 原书 p.158 ｜ PDF p.178 -->
 
@@ -2810,15 +2674,11 @@ MT90011: RF Layer Analog Data Interface MT90011: RF Layer Analog Data Interface
 
 A component implementing the RF modalities of the SOSA 2.3 RF Conditioner-Receiver-Exciter module shall provide the following signal resources as defined by the MORA specification, Version 2.1: Conformance Methodology: (TBD)
 
-RF Conditioning Signal Resource
-
-RF Distribution Signal Resource
-
-RF Translation Signal Resource
-
-Signal Domain Conversion Signal Resource
+RF Conditioning Signal Resource RF Distribution Signal Resource RF Translation Signal Resource Signal Domain Conversion Signal Resource
 
 ### 5.8 EO/IR Signal Layer Modules
+
+#### 5.8.1 EO/IR Receiver Camera Module Standard
 
 Planned for a later version of the SOSA Technical Standard.
 
@@ -2832,9 +2692,13 @@ Planned for a later version of the SOSA Technical Standard.
 
 ### 5.9 RF Digital Processing Modules
 
+#### 5.9.1 Tracker
+
+##### 5.9.1.1 Definition
+
 See Table 2 for the definition of this module.
 
-##### 5.9.1.2 Interactions
+5.9.1.2 Interactions
 
 The tracker interactions are still being developed, and the SOSA Consortium has not yet voted on them. An initial capability – AMTI Multi-Sensor Fusion Sense and Avoid (SAA) – was used to create a notional set of interactions and data elements for a tracker. A detailed concept has been defined for several task manager interactions related to the tracker: SetCreateTask, SetModifyTask, SetDeleteTask, SetModuleAssignment, PubAssignmentHealth, and SubAssignmentHealth. Four interactions related to the tracker performing its functions have also been defined: SubDetection, PubTrack, SubOwnershipReport, and SubTrackReport. Some interactions will be common across all tracker modes/types, such as SetDeleteTask. Others will be sensor and mission-specific. Defining the configuration data, control action, and module assignmen’ fields in the tracker task management interactions for each Sensor and Mission will require an extensive effort.
 
@@ -2890,7 +2754,7 @@ Table 44 shows additional interactions associated with the tracker.
 
 <!-- 原书 p.161 ｜ PDF p.181 -->
 
-## AMTI SAA Example for Task Configuration
+AMTI SAA Example for Task Configuration
 
 An example of task configuration data for an AMTI SAA mission is given in Table 45. In the interaction SetCreateTask(sensorType, missionType, taskConfigData), sensorType would be set to Radar, missionType would be set to AMTI SAA, and taskConfigData would be represented by saaTaskConfigData, which is defined below.
 
@@ -2915,6 +2779,8 @@ An example of task configuration data for an AMTI SAA mission is given in Table 
 
 ### 5.10 Infrastructure Modules
 
+##### 5.10.1.1 Definition
+
 See Table 2 for the definition of this module.
 
 ##### 5.10.1.2 Interactions
@@ -2925,19 +2791,23 @@ Planned for a later version of the SOSA Technical Standard.
 
 #### 5.10.2 External Data Ingestor
 
+##### 5.10.2.1 Definition
+
 See Table 2 for the definition of this module.
 
-##### 5.10.2.2 Interactions
+5.10.2.2 Interactions
 
 Planned for a later version of the SOSA Technical Standard.
 
 #### 5.10.3 Host Platform Interface
 
+##### 5.10.3.1 Definition
+
 See Table 2 for the definition of this module.
 
 The host platform interface provides a bridge between the SOSA sensor and the host platform. It converts the SOSA interactions to/from the host platform interface protocol. For example, a SOSA sensor plugging into an OMS-based platform would have a host platform interface module that supports OMS on the outward-facing interface and SOSA on the inward-facing SOSA sensor.
 
-##### 5.10.3.2 Interactions
+5.10.3.2 Interactions
 
 The SOSA Consortium has accepted a set of interactions and associated DIV-2 data entities for external sensor tasking, primarily tasking of RF sensors. These interactions represent a basic set of functionalities distilled from Unmanned Ariel System (UAS) Command & Control Initiative (UCI), VICTORY, and STANAG 4586. The 6.9 Host Platform Interface module receives UCI, VICTORY, or STANAG 4586 command and control messages, translates them into the SOSA message format, and initiates interactions with modules 1.1 System Manager and 1.2 Task Manager. The host platform interface also receives messages from within the SOSA sensor about the commanded tasks and translates them from the SOSA message format into messages that adhere to the UCI, VICTORY, or STANAG 4586 message standards.
 

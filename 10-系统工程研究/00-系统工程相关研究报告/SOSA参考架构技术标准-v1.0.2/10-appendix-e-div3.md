@@ -4,6 +4,8 @@
 
 ## E DIV-3 (Physical Data Model)
 
+### E.1 SOSA Sensor RF Control (Distribution A)
+
 The DIV-3 for RF control has not yet been approved by the SOSA Consortium and is included only for information purposes. See the sheet named “DIV-3” in the following Microsoft Excel document: SOSA_Sensor_RF_Control_DIV2_DIV3_20180806_Distro_A.xlsx located here (available to members only): https://www.opengroup.us/sosa/documents.php?action=show&dcat=&gdid=19642
 
 ### E.2 RF Signal Layer

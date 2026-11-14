@@ -3,9 +3,11 @@
 > 原书 p.43–71 ｜ PDF p.63–91
 
 
-The Service View 4 (SvcV-4: Services Functionality Description) documents the functions performed by each of the SOSA modules, and documents the data ingested and produced by each. This information, when coupled with the SOSA Data Models (DIV-1, -2, and -3) provides a complete picture of the content of the informational Needlines linking the SOSA modules. The SvcV-4 takes the form of a table, incorporating the following pieces of information: ID Number: numerical designator (major-point-minor) of the SOSA module Name: succinct label for the SOSA module Function List: list of functions contained within the SOSA module Inputs: list of data items and controls that are ingested by the SOSA module (in certain
+### 4.1 Service Views
 
-cases, their sources)
+#### 4.1.1 SvcV-4: Services Functionality Description
+
+The Service View 4 (SvcV-4: Services Functionality Description) documents the functions performed by each of the SOSA modules, and documents the data ingested and produced by each. This information, when coupled with the SOSA Data Models (DIV-1, -2, and -3) provides a complete picture of the content of the informational Needlines linking the SOSA modules. The SvcV-4 takes the form of a table, incorporating the following pieces of information: ID Number: numerical designator (major-point-minor) of the SOSA module Name: succinct label for the SOSA module Function List: list of functions contained within the SOSA module Inputs: list of data items and controls that are ingested by the SOSA module (in certain cases, their sources)
 
 - Outputs: list of data items that are produced by the SOSA module (in certain cases, their destinations)
 
@@ -455,235 +457,65 @@ cases, their sources)
 
 <!-- 原书 p.43 ｜ PDF p.63 -->
 
-## InputlOutput
-
-##### 1.1.2.2 Configure Module
-
-#### 1.1.5 Manage Security
-
 <!-- 原书 p.44 ｜ PDF p.64 -->
-
-## InputlOutput
-
-##### 1.1.5.1 Secure Management
-
-##### 1.1.5.2.1 Manage Security Keys
-
-## 1.2.1.1.b Sensor Capabilities Request Input
 
 <!-- 原书 p.45 ｜ PDF p.65 -->
 
-## InputlOutput
-
-##### 1.2.2.2 Manage Internal Sensor
-
-##### 1.2.2.2.2 Manage Sensor
-
 <!-- 原书 p.46 ｜ PDF p.66 -->
-
-## InputlOutput
-
-##### 1.2.3.3 Manage Module Control
-
-##### 2.1.1.1 Configure Aperture
-
-##### 2.1.5.1.3 Manage Module
 
 <!-- 原书 p.47 ｜ PDF p.67 -->
 
-## InputlOutput
-
-##### 2.1.5.1.4 Manage Module
-
-##### 2.1.5.2.2 Manage Module
-
-##### 2.2.1.2 Control Aperture
-
 <!-- 原书 p.48 ｜ PDF p.68 -->
-
-## InputlOutput
-
-##### 2.2.7.1.3 Manage Module
-
-## 2.3.1.b RX Electromagnetic Signal Output RX digital
 
 <!-- 原书 p.49 ｜ PDF p.69 -->
 
-## InputlOutput
-
-##### 2.3.1.4 Convert Signal:Analog
-
-##### 2.3.2.2 Amplify Signal
-
-##### 2.3.3.1.3 Manage Module
-
 <!-- 原书 p.50 ｜ PDF p.70 -->
-
-## InputlOutput
-
-##### 2.3.3.2.2 Manage Module
-
-##### 3.1.2.1 Extract RF Signal firom
-
-#### 3.1.4 Performn Module
 
 <!-- 原书 p.51 ｜ PDF p.71 -->
 
-## InputlOutput
-
-##### 3.1.4.1.3 Manage Module
-
-##### 3.1.4.2.2 Manage Module
-
-## 3.2.1.d Spectral Product Output
-
 <!-- 原书 p.52 ｜ PDF p.72 -->
-
-## InputlOutput
-
-##### 3.2.1.1 Estimate Signal
-
-#### 3.2.2 Classify or Identify 3.2.2.a Characterizer Data Input
-
-## ReferencelBasis
-
-#### 3.2.3 Filter False Detections
-
-##### 3.2.5.1 Perform Module System 3.2.5.1.a System SerVices Data Input (PNT, etc.)
 
 <!-- 原书 p.53 ｜ PDF p.73 -->
 
-## InputlOutput
-
-##### 3.2.5.1.3 Manage Module
-
-##### 3.2.5.2.2 Manage Module
-
-### 3.3 Image Pre-processor 3.3.1 Form Image from RE 3.3.1.a Received Electromagnetic Input
-
 <!-- 原书 p.54 ｜ PDF p.74 -->
-
-## InputlOutput
-
-##### 3.3.4.1.3 Manage Module
-
-##### 3.3.4.2.2 Manage Module
 
 <!-- 原书 p.55 ｜ PDF p.75 -->
 
-## InputlOutput
-
-## Module 3.1
-
-## be RF detection
-
-##### 3.4.1.4 Characterization Input, Data from
-
-#### 3.4.2 Associate Tracks
-
-## at the time of the
-
-## 3.4.5.b Predicted Track State Output, Provides
-
-##### 3.4.5.1 Track Update
-
-##### 3.4.6.1 Perform Module System 3.4.6.1.a System Services Data (PNT, Input
-
 <!-- 原书 p.56 ｜ PDF p.76 -->
-
-## InputlOutput
-
-##### 3.4.6.1.3 Manage Module
-
-##### 3.4.6.2.2 Manage Module
-
-## AnalyzelRxploit
 
 <!-- 原书 p.57 ｜ PDF p.77 -->
 
-## InputlOutput
-
-## Stream
-
 <!-- 原书 p.58 ｜ PDF p.78 -->
-
-## InputlOutput
-
-## Association
-
-## Electromagnetic Signal Stream (digital only)
 
 <!-- 原书 p.59 ｜ PDF p.79 -->
 
-## InputlOutput
-
-## 5 Convey
-
-## Status, Mode, and
-
-## Support System Operation
-
-## module integrity
-
 <!-- 原书 p.60 ｜ PDF p.80 -->
-
-## InputlOutput
-
-## Filtered Data or Stream
 
 <!-- 原书 p.61 ｜ PDF p.81 -->
 
-## InputlOutput
-
-## Calibration Assignment Safety
-
 <!-- 原书 p.62 ｜ PDF p.82 -->
-
-## InputlOutput
-
-## Compressed Data
-
-## Configuration
-
-## 6.9.1.f Task Event Notification Input from 1.2
-
-## Task,KeyFill)
-
-## Task,KeyFill)
-
-## Data, Sensor
 
 <!-- 原书 p.63 ｜ PDF p.83 -->
 
-## InputlOutput
-
-## Event Notification
-
-## Logging Data)
-
 <!-- 原书 p.64 ｜ PDF p.84 -->
-
-## InputlOutput
-
-## 6.9.4.b Power Output to 6.10
-
-##### 6.9.5.1.3 Manage Module
 
 <!-- 原书 p.65 ｜ PDF p.85 -->
 
-## InputlOutput
-
-##### 6.9.5.2.2 Manage Module
-
-### 6.10 Power Convert between different Host PowCr From host Platform
-
 #### 4.1.2 SvcV-2: Services Resource Flow Description
+
+Planned for a later version of the SOSA Technical Standard.
 
 #### 4.1.3 SvcV-3b: Services-Services Matrix
 
-##### 4.1.3.1 SvcV-3a: System-Services Matrix
+Planned for a later version of the SOSA Technical Standard.
+
+4.1.3.1 SvcV-3a: System-Services Matrix
+
+Planned for a later version of the SOSA Technical Standard.
 
 ### 4.2 Data Architecture
+
+The SOSA Data Model follows a top-down architectural approach, based on DoDAF best practices; a Conceptual Data Model (DIV-1) documents at a high level the type and nature of the data to be exchanged, and their relationship, a Logical Data Model (DIV-2) captures – in detail – the data content, and the Physical Data Model (DIV-3) documents the physical manifestation of the data (exact format; bits per field, formats, schemas, structures). The protocols used to carry the data are defined separately from the Model itself, a decoupling that ensures that the same data (in the same format) can be carried between source and destination by different means (and as necessary).
 
 <!-- 原书 p.66 ｜ PDF p.86 -->
 
@@ -715,9 +547,15 @@ The SOSA DIV-2 (Logical Data Model) further decomposes the abstract entities in 
 
 #### 4.2.3 DIV-3: Physical Data Model
 
+### 4.3 Service Architecture
+
+4.3.1 SvcV-6: Services Resources Flow Matrix
+
 Planned for a later version of the SOSA Technical Standard.
 
 ### 4.4 System Architecture
+
+#### 4.4.1 SV-2: Systems Resource Flow Description
 
 Planned for a later version of the SOSA Technical Standard.
 

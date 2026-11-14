@@ -4,6 +4,8 @@
 
 ## D DIV-2 and Data Dictionary
 
+### D.1 SOSA Sensor RF Control (Distribution A)
+
 See the sheet named “DIV-2” in the following Microsoft® Excel® document: SOSA_Sensor_RF_Control_DIV2_DIV3_20180806_Distro_A.xlsx located here (available to members only): https://www.opengroup.us/sosa/documents.php?action=show&dcat=&gdid=19642
 
 ### D.2 MORA Signal Layer
@@ -24,12 +26,8 @@ located here (available to members only):
 
 https://www.opengroup.us/SOSA/distro/d/protected/documents.php?action=show&dcat=&gdid=
 
-- Note: Although this section is titled “Common System Management Data Elements”, these
+- Note: Although this section is titled “Common System Management Data Elements”, these data elements have only been formally accepted in relation to the interactions of modules 2.1, 2.2, and 2.3. No decision has been made as of this document to accept these data entities as the common solution for system management interactions for all modules or hardware elements.
 
-data elements have only been formally accepted in relation to the interactions of modules 2.1, 2.2, and 2.3. No decision has been made as of this document to accept these data entities as the common solution for system management interactions for all modules or hardware elements.
-
-- Note: This is marked distribution C because it contains references to common system
-
-management parameters from VICTORY. Much of the file is actually distribution A, and it may be possible that it can be generalized and made distribution A.
+- Note: This is marked distribution C because it contains references to common system management parameters from VICTORY. Much of the file is actually distribution A, and it may be possible that it can be generalized and made distribution A.
 
 <!-- 原书 p.181 ｜ PDF p.201 -->
