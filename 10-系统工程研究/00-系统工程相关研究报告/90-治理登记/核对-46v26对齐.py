@@ -63,6 +63,15 @@ FILES = [
 ]
 
 CASE_TOKENS = ['M3-0417', '30 s', '≥72 h', '±0.5']
+
+# 2026-11-14 37 号重构轮：用户裁「冷链断链口径按 48 号 §14.1 末分两量」——断链门槛改 ≥N 分钟、
+# 告警时延改「≤三十秒」，故该件正文的 "30 s" 由 9 处降为 0，属**已授权的口径变更**，不是漂移。
+# 记在：37 号 v2.0 修订记录、`claude-memory/pending-37冷链断链口径.md`。
+CASE_EXPECT_DELTA = {
+    # 30 s：冷链口径分两量（见上）；±0.5：《摘要》由十七条并为九条后，原第 15 条对案例的重述并入
+    # 要点，正文四套示例（现 §11.2~§11.5）的案例数字一处未动（`pending-37冷链断链口径.md` 同记）。
+    '37': {'30 s': 0, '±0.5': 8},
+}
 OLD_PTR = re.compile(r'46\s*号[（(]?新?[）)]?[^。\n]{0,20}?§\s*(9\.\d|11\.[34]|12\.\d|13\.\d)')
 
 # 2026-11-13 修（36 号对齐轮）：v2.6 的 §9.x 是**现行号**（§9.1~§9.6），旧启发式把它一律当旧号，
@@ -198,7 +207,9 @@ def main():
 
         c_now = case_counts(cur)
         c_old = case_counts(old) if old else c_now
-        case_bad = [k for k in CASE_TOKENS if c_now[k] != c_old[k]]
+        expect = CASE_EXPECT_DELTA.get(name[:2], {})
+        case_bad = [k for k in CASE_TOKENS
+                    if c_now[k] != expect.get(k, c_old[k])]
 
         tbad = table_problems(cur.split('\n'))
         abad = anchor_problems(cur)
