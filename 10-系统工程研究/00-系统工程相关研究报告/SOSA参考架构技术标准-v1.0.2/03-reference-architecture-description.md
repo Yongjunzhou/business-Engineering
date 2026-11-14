@@ -2,9 +2,8 @@
 
 > 原书 p.9–42 ｜ PDF p.29–62
 
-3 Reference Architecture Description
 
-3.1 CV-1/CV-2 Objectives
+### 3.1 CV-1/CV-2 Objectives
 
 The foundations of the SOSA Reference Architecture are:
 
@@ -18,7 +17,7 @@ The fundamental building blocks of the SOSA Architecture are the SOSA modules ("
 
 The SOSA Architecture will be captured using the DoDAF Version 2.02 Viewpoint Models, chosen because the primary target audience is the US DoD, and DoDAF is (as of this writing) the prescribed framework.
 
-3.1.1 SOSA Capability View – 1 (CV-1)
+#### 3.1.1 SOSA Capability View – 1 (CV-1)
 
 As mentioned earlier the CV-1 presents the SOSA overall vision, goals, and outlines strategy to support stated goals throughout the effort. To this end, the vision and goals as presented in Section 1.1 earlier are further refined below through addition of capabilities to define goals.
 
@@ -34,13 +33,13 @@ The SOSA capabilities are illustrated in Figure 3.
 
 *Figure 3: SOSA CV-I*
 
-3.2 SOSA Architecture Principles
+### 3.2 SOSA Architecture Principles
 
 The following architecture principles were developed to guide the SOSA technical and business architectures being matured. The list of principles below is not in any particular order and the numerical value does not indicate precedence.
 
 <!-- 原书 p.10 ｜ PDF p.30 -->
 
-3.2.1 Business-Oriented Architecture Principles
+#### 3.2.1 Business-Oriented Architecture Principles
 
 #1 The SOSA business and technical architecture is vendor-agnostic.
 
@@ -72,7 +71,7 @@ Ralionale financially healthy ISR ecosystem is in the best interest of the natio
 
 **Implications** The SOSA Architecture takes a CCgray box' approach: modules are defined with properties Of functions and behaviors, and interfaces are defined with properties that iclude their physical characteristics, protocols for exchange of signals and data, and the signal and data content. How the functions and behaviors of the modules (einside the box') are realized is completely Up to the vendor to determine. It is inside the box where the I resides. In addition, the SOSA Architecture does not include companyspecific IP unless that IP has been consensually released to the SOSA Consortium for Open usCthrough the SOSA Technical Standard per the membership agreement.
 
-3.2.2 Technically-Oriented Architecture Principles
+#### 3.2.2 Technically-Oriented Architecture Principles
 
 #4 The SOSA Technical Standard is extensible an evolvable.
 
@@ -192,7 +191,7 @@ and rapid response. The quality attributes include modularity and upgradability.
 
 **Implications** Modules should be reusable across the range of host platforms, consistent with SWaP limitations (embodied in their specific design/instantiation). It is imperative that SOSA standard interfaces are well-defined, to include physical, logical/protocol, and data content and format. A standardization of electro-mechanical busses along with available sensor geometries is required. Multi-platform integration architectures are used to allow modules to communicate with an embedded computer or the host platform, and/or both. The intent is to minimize (or eliminate) the cost and schedule impact of adding or replacing a new SOSA module, not to eliminate the need for integration and test.
 
-3.3 SOSA Quality Attributes
+### 3.3 SOSA Quality Attributes
 
 The quality attributes outlined in Table 1 inform the SOSA business and technical architectural design decisions.
 
@@ -217,7 +216,7 @@ The quality attributes outlined in Table 1 inform the SOSA business and technica
 
 <!-- 原书 p.18 ｜ PDF p.38 -->
 
-3.4 SV-1 (System Interface Description/Context)
+### 3.4 SV-1 (System Interface Description/Context)
 
 The System View 1 (SV-1) system interface description presented below identifies and describes the physical/hardware systems (herein "entities") and the nature of the interconnections for the SOSA sensor system. The SOSA SV-1 depicts all system resource flows between systems that are of interest to the SOSA Consortium (see Figure 4 and Figure 5).
 
@@ -243,13 +242,13 @@ A SOSA sensor is mounted on a SOSA host, which can be a pod or a platform, or bo
 
 *Figure 5: SV-1 for Sensor Pod Special Case*
 
-3.5 SOSA Physical Context Entities
+### 3.5 SOSA Physical Context Entities
 
-3.5.1 SOSA Sensor
+#### 3.5.1 SOSA Sensor
 
 The main subject of the SOSA standard is the SOSA sensor, which consists of a set of one or more SOSA sensor hardware elements (some of which host software components). Each SOSA sensor is either one of the five "sensor" types (Communications, EO/IR, EW, Radar, and SIGINT), or any combination of the five sensor types (e.g., they may be multi-INT). Any interface crossing the SOSA sensor's boundary is a SOSA external interface.
 
-3.5.2 SOSA Hardware Element
+#### 3.5.2 SOSA Hardware Element
 
 A SOSA sensor consists of a set of one of more SOSA hardware elements mounted within or on the same host platform. In the context of the SV-1, it is a physical component of a SOSA sensor which may contain software and firmware, and my support more than one sensor type (it has other "non-physical" interpretations in other Viewpoint Models). It consists of but is not limited to:
 
@@ -261,7 +260,7 @@ A SOSA hardware element may optionally have inside it SOSA plug-in cards that pl
 
 <!-- 原书 p.21 ｜ PDF p.41 -->
 
-3.5.3 SOSA Host Platform
+#### 3.5.3 SOSA Host Platform
 
 A SOSA host platform is the physical entity to which the SOSA sensor is mounted. Normally, it is one of: a vehicle or structure (such as an aircraft, surface craft, a building, or a pod), a combination of one or more pods, and/or a vehicle/structure. It nominally provides to the sensor: Power Cooling Platform navigation information (position, velocity, etc.) Reference signals (e.g., 1 PPS, 10MHz, etc.) Network connections Connections for any other needed analog or digital interfaces The SOSA host platform may contain external (to the SOSA sensor) processing capability that could use the data products of the SOSA sensor, and external communications. It will provide the SOSA sensor with its tasking. It is assumed that the host platform provides any User Interface (UI) that may be required; while the SOSA system may provide data and information to be used by a UI, the UI is outside the scope of the SOSA system.
 
@@ -285,7 +284,7 @@ The approach to security began with a review of existing DoD and commercial secu
 
 The security aspects of the SOSA Technical Architecture are implemented in the functions (and behaviors) of the SOSA modules and their interfaces. Security best practices for how SOSA products are developed are intentionally not included in this standard. The primary functions and behaviors are implemented in SOSA modules 1.1 (System Manager), 6.1 (Security Services), 6.2 (Encryptor/Decryptor), and 6.3 (Guard/Cross-Domain Service). All SOSA modules are shown in Figure 6 and defined in Table 2 in Section 3.9. The system manager will manage the start-up of the system (including the secure loading of software), maintain a secure configuration, manage keys used in the system, and authorize/authenticate requests to publish/subscribe messages or access privileged resources. Security services will implement the security functions needed by the system manager, including verification of software integrity, key management, access control, audit, and other security controls. The encryptor/decryptor provides cryptographic services to the system manager and other applications to ensure that data-at-rest and data-intransit are protected to the level required by the classification of the data. The guard/crossdomain service provides applications the ability to send/receive data across security domains.
 
-3.7.1 SOSA Hardware Security Framework
+#### 3.7.1 SOSA Hardware Security Framework
 
 The SOSA hardware security is a framework for security services. This is specifically motivated by the desire to avoid monolithic static security solutions, which are costly to adapt to new security requirements or threat environments.
 
@@ -299,7 +298,7 @@ Usage of standard security components, where possible Scalable configuration and
 
 Planned for a later version of the SOSA Technical Standard.
 
-3.9 SvcV-1: Services Context Description
+### 3.9 SvcV-1: Services Context Description
 
 The Service View 1 (SvcV-1) documents the SOSA modules and their top-level relationship to one another. The SOSA Technical Standard will define (in later versions) a core set of required modules and functionality; not all modules need to be instantiated in a design to be conformant. Future versions of the standard will define the core functionality for each type of sensor. In the case of multiple integrated sensors, the sensor integrator would need to determine how to instantiate the modules necessary to incorporate the SOSA core functionality. The details of their relationships are documented in the SvcV-4: Services Functionality Description (see Section 4.1.1).
 
@@ -367,7 +366,7 @@ Support System Operation
 
 <!-- 原书 p.28 ｜ PDF p.48 -->
 
-3.10 SOSA Inter-Module Interactions
+### 3.10 SOSA Inter-Module Interactions
 
 The SOSA Architecture is based on a set of loosely-coupled modular entities (known as SOSA modules) that interact with the underlying operating environment and with each other via welldefined logical interfaces. The operating environment will provide the mechanisms through which interoperation will occur and will provide the modules’ interfaces to these mechanisms (I/O, processing, storage, communication, etc.). Interoperability between SOSA modules is described in terms of interactions.
 
@@ -375,7 +374,7 @@ The SOSA Architecture is based on a set of loosely-coupled modular entities (kno
 
 Interactions include exchanges of data, control actions, and various types of management functions. Most of the interactions considered will be implemented as message exchanges on a network.
 
-3.10.1 SOSA Sensor Interconnections
+#### 3.10.1 SOSA Sensor Interconnections
 
 Figure 7 illustrates the SOSA Technical Architecture interconnections that support the interactions. SOSA modules interoperate through an Ethernet-based network message transport (SOSA Message Interconnect), as well as a high-performance bus (SOSA Wideband Low Latency Interconnect). SOSA modules will interact through well-defined non-proprietary interfaces that may be implemented within a processor, across distributed processors on a network, or across a chassis backplane. The system designer will choose the appropriate combinations of the interconnects shown in Figure 7 to meet the performance requirements of the system. The SOSA modules will send and receive network messages that do not require determinism, high bandwidth, or very low latency, on the SOSA Message Interconnect. The SOSA modules will receive and send large volume or low-latency data, such as digital RF signal (sample streams, etc.) from and to underlying RF electronics on the SOSA Wideband Low Latency Interconnect.
 
@@ -383,7 +382,7 @@ Figure 7 illustrates the SOSA Technical Architecture interconnections that suppo
 
 *Figure 7: SOSA Sensor Interconnections*
 
-3.10.2 SOSA Module Interaction Types
+#### 3.10.2 SOSA Module Interaction Types
 
 Interactions are related to an action or operation to be accomplished. Interactions have parameters, which are instances of DIV-2 data entities. Parameters are the inputs and outputs of the operation being accomplished by the interaction. In the SOSA Technical Architecture, most interactions will be network-based, so interactions are implemented by one or more messages, in which parameters are encoded. The messages are exchanged between two or more entities in a pattern, forming a messaging protocol. An interaction occurs between two or more modular entities, each playing a role in the interaction. The types of roles vary based upon the interaction type, but generally one SOSA module plays the role of the provider, or service, and one or more others play the role of user, or client.
 
@@ -519,7 +518,7 @@ The concept of system management is related to “taking care of” the system i
 
 The SOSA Architecture takes a system-level, holistic approach toward managing the sensor system. The resulting concept encompasses the needs for managing the system as a whole, its hardware platform, software operating environment and the SOSA modules, and also its functional operation. By putting the management-related concerns under a single umbrella, the SOSA Architecture unlocks the potential for efficiencies and common tools for configuring, controlling, monitoring health, capturing and handling faults, executing self-test, and performing basic diagnostics.
 
-3.11.1 System Management Concepts
+#### 3.11.1 System Management Concepts
 
 SOSA system management functionality includes the concepts of discovery, configuration, control, health management, and security management.
 
@@ -541,7 +540,7 @@ well a sensor system or module is performing), faults, warnings, and built-in-te
 
 There are two classes of system management in the SOSA Architecture. First is network-based system management, which allows a SOSA sensor, its modules, and its hardware elements to be discovered, configured, controlled, and health managed at a relatively high level from a network. The second class is out-of-band hardware system management, which is intended for use in integrating, debugging, and managing faults in the hardware platform at low level.
 
-3.11.2 Network-Based System Management
+#### 3.11.2 Network-Based System Management
 
 SOSA network-based system management assumes that the system infrastructure (processors, software services, and network transport) and the software operating environment (operating system and middleware) are up and running, and that the SOSA network interconnection is available. That allows this class of system management to leverage network-based protocols that will allow common high-level tools developed against network protocols.
 
@@ -565,7 +564,7 @@ Similarly, the SOSA modules implement the client side of the interactions betwee
 
 <!-- 原书 p.38 ｜ PDF p.58 -->
 
-3.11.3 SOSA Hardware Management Overview
+#### 3.11.3 SOSA Hardware Management Overview
 
 SOSA hardware management provides the capability to diagnose and debug hardware assemblies while the system infrastructure (processing and transports) may not be operational. This is accomplished via a set of existing lower-level hardware management interface standards. More detail on the out-of-band hardware platform system management functionality is described below.
 

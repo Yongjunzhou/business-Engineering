@@ -2,11 +2,10 @@
 
 > 原书 p.43–71 ｜ PDF p.63–91
 
-4 Architecture Definition
 
-4.1 Service Views
+### 4.1 Service Views
 
-4.1.1 SvcV-4: Services Functionality Description
+#### 4.1.1 SvcV-4: Services Functionality Description
 
 The Service View 4 (SvcV-4: Services Functionality Description) documents the functions performed by each of the SOSA modules, and documents the data ingested and produced by each. This information, when coupled with the SOSA Data Models (DIV-1, -2, and -3) provides a complete picture of the content of the informational Needlines linking the SOSA modules. The SvcV-4 takes the form of a table, incorporating the following pieces of information: ID Number: numerical designator (major-point-minor) of the SOSA module Name: succinct label for the SOSA module Function List: list of functions contained within the SOSA module Inputs: list of data items and controls that are ingested by the SOSA module (in certain cases, their sources)
 
@@ -484,11 +483,17 @@ The Service View 4 (SvcV-4: Services Functionality Description) documents the fu
 
 <!-- 原书 p.56 ｜ PDF p.76 -->
 
+### 4.1 External Data Ingest data from other SOSA SOSA Mission Data (Data products
+
 <!-- 原书 p.57 ｜ PDF p.77 -->
 
 <!-- 原书 p.58 ｜ PDF p.78 -->
 
 <!-- 原书 p.59 ｜ PDF p.79 -->
+
+### 5.1 Reporting Services Aggregate data ElectromagneticSignal Stream (digital only)
+
+Support System Operation
 
 <!-- 原书 p.60 ｜ PDF p.80 -->
 
@@ -502,11 +507,11 @@ The Service View 4 (SvcV-4: Services Functionality Description) documents the fu
 
 <!-- 原书 p.65 ｜ PDF p.85 -->
 
-4.1.2 SvcV-2: Services Resource Flow Description
+#### 4.1.2 SvcV-2: Services Resource Flow Description
 
 Planned for a later version of the SOSA Technical Standard.
 
-4.1.3 SvcV-3b: Services-Services Matrix
+#### 4.1.3 SvcV-3b: Services-Services Matrix
 
 Planned for a later version of the SOSA Technical Standard.
 
@@ -514,13 +519,13 @@ Planned for a later version of the SOSA Technical Standard.
 
 Planned for a later version of the SOSA Technical Standard.
 
-4.2 Data Architecture
+### 4.2 Data Architecture
 
 The SOSA Data Model follows a top-down architectural approach, based on DoDAF best practices; a Conceptual Data Model (DIV-1) documents at a high level the type and nature of the data to be exchanged, and their relationship, a Logical Data Model (DIV-2) captures – in detail – the data content, and the Physical Data Model (DIV-3) documents the physical manifestation of the data (exact format; bits per field, formats, schemas, structures). The protocols used to carry the data are defined separately from the Model itself, a decoupling that ensures that the same data (in the same format) can be carried between source and destination by different means (and as necessary).
 
 <!-- 原书 p.66 ｜ PDF p.86 -->
 
-4.2.1 DIV-1: Conceptual Data Model
+#### 4.2.1 DIV-1: Conceptual Data Model
 
 The SOSA Conceptual Data Model (DIV-1) documents the nature of, and relationships (hierarchy) between, the many “pieces” of information required for the operation and upkeep of a SOSA sensor. The DIV-1 is a top-level representation, and is divided into two parts: One part addresses the Mission Data elements (data related to the purposes for which the system exists), such as observed phenomena and interpretation of the physical and electromagnetic environment (Figure 12, Figure 13). The other part addresses system management elements (data related to the control/operation of the sensor), such as state and tasking.
 
@@ -540,31 +545,31 @@ The two parts of the DIV-1 are documented and depicted using Unified Modeling La
 
 *Figure 13: DIV-1 for Management Entities*
 
-4.2.2 DIV-2: Logical Data Model
+#### 4.2.2 DIV-2: Logical Data Model
 
 The SOSA DIV-2 (Logical Data Model) further decomposes the abstract entities in the DIV-1 into specific pieces of information (e.g., a track is broken down into its constituent parts, such as three dimensions of position, three dimensions of velocity, etc.). It is documented in a tabular form. It should be noted that the DIV-2 does not define the physical representation (e.g., number of digits, precision, etc.) so that the same data item can be represented differently depending on the need. The physical representation will be documented in the DIV-3 (still to be done for most of the SOSA data entities). To view DIV-2 and DIV-3 Distribution A spreadsheets, refer to files listed in Appendix D and Appendix E.
 
 <!-- 原书 p.69 ｜ PDF p.89 -->
 
-4.2.3 DIV-3: Physical Data Model
+#### 4.2.3 DIV-3: Physical Data Model
 
-4.3 Service Architecture
+### 4.3 Service Architecture
 
 4.3.1 SvcV-6: Services Resources Flow Matrix
 
 Planned for a later version of the SOSA Technical Standard.
 
-4.4 System Architecture
+### 4.4 System Architecture
 
-4.4.1 SV-2: Systems Resource Flow Description
-
-Planned for a later version of the SOSA Technical Standard.
-
-4.4.2 SV-3: Systems-Systems Matrix
+#### 4.4.1 SV-2: Systems Resource Flow Description
 
 Planned for a later version of the SOSA Technical Standard.
 
-4.5 Box-Level Hardware
+#### 4.4.2 SV-3: Systems-Systems Matrix
+
+Planned for a later version of the SOSA Technical Standard.
+
+### 4.5 Box-Level Hardware
 
 The hardware aspects of the SOSA Architecture are defined as a “box-level” specification applicable to a variety of sensor/avionics platforms that are modular all the way down to the plug-in card level (where a plug-in card as defined here is an individual card that fits into the box). The system is inherently interoperable, compatible with non-conformant SOSA hardware via a set of standard bridge interfaces, capable of plug-and-play, upgradable (evolvable), scalable, and scalable through adaptation of technology and target platform evolution (see Figure 14).
 

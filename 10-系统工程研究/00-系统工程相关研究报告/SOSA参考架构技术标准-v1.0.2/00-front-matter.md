@@ -170,11 +170,11 @@ Authored by The Open Group SOSA™ Consortium. Published by The Open Group, Janu
 
 5.2.12 J10-AC Power Connector 94
 
-#### 5.2.13 Hardware Platform 3U and 6U Slot Profile
+5.2.13 Hardware Platform 3U and 6U Slot Profile
 
 Specifications 95 5.2.14 Hardware Platform SOSA Plug-In Card Profiles 101
 
-#### 5.2.15 Common 6U and 3U Plug-In Card Profile
+5.2.15 Common 6U and 3U Plug-In Card Profile
 
 Specifications 102
 
@@ -224,7 +224,7 @@ Requirements 126
 
 5.7.1 Modular Open RF Architecture 145
 
-#### 5.7.2 Application of MORA to SOSA Signal Layer Modules 146
+5.7.2 Application of MORA to SOSA Signal Layer Modules 146
 
 5.7.3 RF Receiver Aperture/Transducer Module 146
 

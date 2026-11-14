@@ -4,7 +4,7 @@
 
 ## C Use-Case Details
 
-C.1 OV-1 (High Level Operational Concept)
+### C.1 OV-1 (High Level Operational Concept)
 
 SOSA Hardware Use-Cases
 
@@ -14,11 +14,11 @@ The SOSA Hardware concepts are predicated on a set of architectural decisions th
 
 *Figure 47: High-Level SOSA Use-Case*
 
-C.2 OV-2 (Operational Resource Flow)
+### C.2 OV-2 (Operational Resource Flow)
 
 Planned for a later version of the SOSA Technical Standard.
 
-C.3 OV-5b (Operational Activity Model)
+### C.3 OV-5b (Operational Activity Model)
 
 Planned for a later version of the SOSA Technical Standard.
 
