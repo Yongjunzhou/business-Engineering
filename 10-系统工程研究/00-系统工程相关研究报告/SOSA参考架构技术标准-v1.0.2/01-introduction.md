@@ -68,7 +68,9 @@ This is a Snapshot, not an approved standard. Do not specify or claim conformanc
 
 Defining conformance processes and creating an effective, affordable method for certifying software, hardware, and electrical/mechanical interfaces is vital to establishing an effective standard. Certification provides formal recognition of conformance to an industry standard, which allows the following:
 
-Suppliers and practitioners may make verified claims of conformance to an open standard Buyers may specify and successfully procure modular capability from vendors who provide solutions which conform to that open standard The SOSA Consortium is developing a SOSA Conformance Policy and will be developing an associated Conformance Program for the SOSA Technical Standard. The SOSA Conformance Program will provide the associated conformance criteria and processes necessary to assure that
+- Suppliers and practitioners may make verified claims of conformance to an open standard
+
+- Buyers may specify and successfully procure modular capability from vendors who provide solutions which conform to that open standard The SOSA Consortium is developing a SOSA Conformance Policy and will be developing an associated Conformance Program for the SOSA Technical Standard. The SOSA Conformance Program will provide the associated conformance criteria and processes necessary to assure that
 
 <!-- 原书 p.4 ｜ PDF p.24 -->
 
