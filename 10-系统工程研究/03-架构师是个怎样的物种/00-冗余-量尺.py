@@ -1,11 +1,11 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """《架构师是个怎样的物种？》冗余量尺（口径 **v5**，段级；v1 立尺 → v2 修正八 → v3 窗到前两段 → v4 小结同章不算账 → v5 ⑦ 摘掉认知反转与小结）
 
 用途：表达优化轮**第二病（段落冗余·对本章目的目标的支撑度）**的单一量尺。
      与既有两把尺的分工：
        · `00-风格参考-量尺.py`  管章级配比与指代三查（①~⑥）
-       · `00-表达-量尺.py`      管句级与段长红线（段>150）
+       · `00-表达-量尺.py`      管句级与段长红线（段>200）
        · **本尺**管段级冗余——一段该不该在，以及它重复了谁。
 
 口径 v1（2026-10-28 立；判据在 `00-风格参考.md` §6.17 断点②"重读"与
@@ -13,8 +13,8 @@
 - **段**＝散文段，与 `00-表达-量尺.py` **同一套切段法**（空行切段；豁免标题行／表格行／
   代码围栏／引用块／清单行／`**…：**` 章前件标签行）。段数因此可与那把尺逐章对齐。
 - **量什么**（全部**只报不判**——判读仍靠人做"删段检验"，见 `claude-memory/pending-第二病-段落冗余.md` §四）：
-  ① **段长分布**：段数｜段中位｜最长段｜**段>200（新红线，2026-10-28 用户裁）**｜段>150（旧线，留痕比较）
-     ｜分语体段中位（叙事＝章首＋案例；论证＝其余正文块）——用户裁定的目标值＝叙事 ≥40、论证 ≥55
+  ① **段长分布**：段数｜最长段｜**段>200（硬线，须 0）**。段的长度只此一条——段中位、语体中位
+     目标值（叙事 ≥40、论证 ≥55）、段>150 均于 2026-11-25 用户令废弃，不再报、不判
   ② **空段**：段内**无人名、无专名、无阿拉伯数字、无引号引语**——"无人物无例"的窄定义
   ③ **重复段**：本段 6-gram 有 ≥45% 在本章**别的段**也出现过——"这一段说的都是本章别处说过的"
   ④ **同义重说**：
@@ -35,7 +35,7 @@
 - **量不了的**（口径已勘明，见台账 §二）：**"对本章目的·目标的支撑度"做不成读数**——它是判法
   （删段检验：整段拿掉，本章目的那句还立不立得住／下一段接不接得上／`00-主线与各章支撑.md` 里
   本章目标那几条它撑着哪一条）。本尺只把四条可复算的读数当筛子。
-- **红线（本步口径）**：`段>200` = **0**（用户 2026-10-28 裁，替代旧 150）；其余读数只报不判。
+- **红线（本步口径）**：`段>200` = **0**；段的长度只此一条，其余段长读数不再报（2026-11-25）。
 
 用法（在本目录下）：
     python 00-冗余-量尺.py                # 全书底账（19 章＋后记）
@@ -61,7 +61,6 @@ HAN = re.compile(r'[\u4e00-\u9fff]')
 
 
 LIMIT_LONG = 200          # 新红线（用户 2026-10-28 裁）
-OLD_LONG = 150            # 旧红线，只作留痕比较
 REP_TH = 0.45             # ③a 整段重复：本章他处已说过的 6-gram 占比达到此值即候选
 
 # ── ② 空段判据用的人与物（名单取 `00-案例设定.md` §二 团队表与配角行） ──────────
@@ -364,13 +363,8 @@ def declared(tag, pi, other):
 
 def stat_long(d):
     lens = [han(p[0]) for p in d['paras']]
-    narr = [han(p[0]) for p in d['paras'] if p[1] in ('open', 'case')]
-    argue = [han(p[0]) for p in d['paras'] if p[1] == 'argue']
-    med = lambda a: statistics.median(a) if a else 0
-    return dict(n=len(lens), med=med(lens), mx=max(lens) if lens else 0,
-                over200=sum(1 for v in lens if v > LIMIT_LONG),
-                over150=sum(1 for v in lens if v > OLD_LONG),
-                narr=len(narr), narr_med=med(narr), argue=len(argue), argue_med=med(argue))
+    return dict(n=len(lens), mx=max(lens) if lens else 0,
+                over200=sum(1 for v in lens if v > LIMIT_LONG))
 
 
 def blank(p):
@@ -838,19 +832,15 @@ if '--show' in sys.argv:
         print('     B: {}'.format(sj[:70]))
     sys.exit(0)
 
-print('=== ① 段长与语体（红线 v2：段>{} = 0；用户 2026-10-28 裁） ==='.format(LIMIT_LONG))
-print('件   散文汉字  段数  段中位  最长段  >{}  >{}   叙事段(段数/中位)  论证段(段数/中位)'.format(
-    LIMIT_LONG, OLD_LONG))
+print('=== ① 段长（段落长度只守 200；2026-11-25 用户令，其余段长读数不报） ===')
+print('件   散文汉字  段数  最长段  >{}'.format(LIMIT_LONG))
 for r in rows:
-    print('{}  {:>8}  {:>4}  {:>6}  {:>6}  {:>4}  {:>3}   {:>8} / {:<3}   {:>8} / {:<3}'.format(
-        r['tag'], r['tot'], r['n'], int(r['med']), r['mx'], r['over200'], r['over150'],
-        r['narr'], int(r['narr_med']), r['argue'], int(r['argue_med'])))
+    print('{}  {:>8}  {:>4}  {:>6}  {:>4}'.format(
+        r['tag'], r['tot'], r['n'], r['mx'], r['over200']))
 tot = sum(r['tot'] for r in rows)
 print('—' * 100)
-print('合计散文 {} 汉字｜段 {}｜段>{} 共 {} 段｜段>{} 共 {} 段｜段中位全书 {}'.format(
-    tot, sum(r['n'] for r in rows), LIMIT_LONG,
-    sum(r['over200'] for r in rows), OLD_LONG, sum(r['over150'] for r in rows),
-    int(statistics.median([r['med'] for r in rows]))))
+print('合计散文 {} 汉字｜段 {}｜段>{} 共 {} 段'.format(
+    tot, sum(r['n'] for r in rows), LIMIT_LONG, sum(r['over200'] for r in rows)))
 
 print()
 print('=== ② ③ ⑥ ④ ⑦ 只报不判：空段／重复段／无增量段／同义重说／判断族 ===')
@@ -894,9 +884,9 @@ rank = sorted(rows, key=lambda r: (-((r['inv_a'] + r['inv_b']) / r['n'] if r['n'
 for i, r in enumerate(rank, 1):
     p = lambda v: 100.0 * v / r['n'] if r['n'] else 0.0
     print('{:>2}. ch{:<3} ④a {:>3} 段 ④b {:>3} 段｜③重复段 {:>3} 段｜⑥无增量 {:>5.1f}%'
-          '｜②空段 {:>5.1f}%｜段中位 {:>3}｜>{} {}'.format(
+          '｜②空段 {:>5.1f}%｜>{} {}'.format(
               i, r['tag'], r['inv_a'], r['inv_b'], r['rep'],
-              p(r['gain']), p(r['blank']), int(r['med']), LIMIT_LONG, r['over200']))
+              p(r['gain']), p(r['blank']), LIMIT_LONG, r['over200']))
 print()
 print('注：三条读数都是**筛子**，不是判决——')
 print('    ②"没有具体的人、物、号、话"：论证段本来就密，空段多不等于废话多；')

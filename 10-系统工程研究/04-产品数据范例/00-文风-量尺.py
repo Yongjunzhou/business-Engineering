@@ -19,7 +19,7 @@
   段分不分只看一件事是不是被拆成了两段（《风格参考》§6.20 的一段一意）。
 - 其余三数：句中位 ≤24（《风格参考》§6.12）、破折号密度 ≤10‰、加粗 ≤6 块/千字。
 - 两条可扫的忌：元话语词表命中；括号里带句读（括号装内容）。
-- 段 >150 只记数，不设限；拆段的唯一理由是段装了两件事，不是段长越线。
+- 段的长度只守 200 一条；段中位、短段占比、段 >150、成串自 2026-11-25 起一律废弃，不设不报不判（《风格参考》§6.20）。
 
 用法：`python 00-文风-量尺.py <文件> [<文件> …]`；有红线被破则退出码 1。
 """
@@ -37,7 +37,7 @@ META = ["一句：", "本轮", "★", "必须点破", "这就", "只说一点", 
 # 不需要设定段中位」「也不需要报」）；句中位 ≤24、加粗 ≤6 取《风格参考》§6.12；
 # 段 >150 只记数、破折号 ≤10‰ 取教材侧 00-阈值.py；段的一意判据见 §6.20。
 L_SENT_MED, L_BOLD = 24, 6.0
-L_PARA_HARD, L_PARA_NOTE, L_DASH = 200, 150, 10.0
+L_PARA_HARD, L_DASH = 200, 10.0
 
 
 def han(s):
@@ -145,7 +145,6 @@ def measure(path):
         "dash_permille": round(dash * 1000 / total, 1),
         "bold": bold,
         "bold_per_k": round(bold * 1000 / total, 1),
-        "p_over150": sum(1 for _, h in paras if h > L_PARA_NOTE),
         "p_over200": sum(1 for _, h in paras if h > L_PARA_HARD),
         "pair": pair,
         "nest": nest,
@@ -173,7 +172,6 @@ def main(argv):
             ("最长句", r["s_max"], "-", True),
             ("破折号‰", r["dash_permille"], L_DASH, r["dash_permille"] <= L_DASH),
             ("加粗块/千字", r["bold_per_k"], L_BOLD, r["bold_per_k"] <= L_BOLD),
-            ("段 >150（记数）", r["p_over150"], "-", True),
             ("段 >200", r["p_over200"], 0, r["p_over200"] == 0),
             ("括号对", r["pair"], "-", True),
             ("嵌套括号", r["nest"], 0, r["nest"] == 0),
@@ -190,7 +188,7 @@ def main(argv):
             head = s if len(s) <= 42 else s[:42] + "…"
             print("    L%-5d %4d 字  %s" % (ln, h, head))
     print("=" * 78)
-    print("红线：段长 200 硬线（150 只记数）・句中位 24・加粗 6・破折号 10‰；段中位不设线、不报。")
+    print("红线：段长 200 硬线・句中位 24・加粗 6・破折号 10‰。段落长度只此一条，其余段长读数不报不判（《风格参考》§6.20）。")
     return 0 if bad == 0 else 1
 
 

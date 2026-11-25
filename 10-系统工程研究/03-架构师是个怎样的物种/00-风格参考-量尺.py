@@ -253,7 +253,7 @@ def sentences(p):
 
 print()
 print('=== ⑤ 酣畅三查（断点代理；只报不判，判据见 00-风格参考.md §6.17） ===')
-print('章  跨块重复句  最长长段连排(>100汉字)  短段%(≤20汉字)')
+print('章  跨块重复句  最长长段连排(>100汉字)')
 dup_detail = []
 for ch, path in chapters(BOOK):
     blks = [(h, prose_paras(b)) for h, b in blocks(path)]
@@ -277,8 +277,7 @@ for ch, path in chapters(BOOK):
     for v in lens:
         run = run + 1 if v > 100 else 0
         best = max(best, run)
-    short = pc(sum(1 for v in lens if v <= 20), len(lens))
-    print('{}  {:>10}  {:>18}  {:>14.1f}'.format(ch, len(dups), best, short))
+    print('{}  {:>10}  {:>18}'.format(ch, len(dups), best))
     dup_detail.append((ch, dups))
 
 print()
@@ -296,8 +295,8 @@ for ch, dups in dup_detail:
 if not found:
     print('  无')
 print()
-print('注：长段连排与短段占比只报不判（各章语体不同）；断点五型的诊断与处方见 §6.17，')
-print('    本脚本只覆盖其中两型（重读的跨块重复、断线的节奏）。')
+print('注：长段连排只报不判（各章语体不同）；短段占比自 2026-11-25 起废弃，不再报（段落长度只守 200，见 §6.20.2）。')
+print('    断点五型的诊断与处方见 §6.17，本脚本只覆盖其中两型（重读的跨块重复、断线的节奏）。')
 
 # ─────────────────────────────────────────────────────────────────────
 # ⑥ 指代三查（只报不判；2026-10-28 立，判据见 00-风格参考.md §6.19）
