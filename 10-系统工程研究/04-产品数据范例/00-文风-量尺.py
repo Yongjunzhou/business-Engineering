@@ -10,6 +10,9 @@
   清单行、章前件（**…**： 型标签行）、版本记录段（行首作 **版本**：／版本：／v数字.数字（ 三种，
   与「更早的版本段移出」那一行）。版本记录是查着看的，不属顺着读的正文。
   判据：读者是顺着读还是查着看，只算顺着读的那部分。
+- 节级豁免（口径 v4，2026-11-25 自定）：「## 修订记录／# 修订记录」一整节（含其下各小节）不进段池。
+  理由同前一条——那一节是查着看的；且行首式的认法认不全（**判留 14 条**、**未编版·…**、**一、…**
+  这类记录条目屡被报超长）。行首式仍留着，管那些把记录写在别处的件。
 - 读数单位：汉字 [\\u4e00-\\u9fff]；编号、标点、拉丁字母与数字不计。
 - 句界：。！？ 三样；分号与冒号不算句界。
 - 段的判据只有一条硬线：段 >200 汉字须 0，超出才拆。段中位与短段占比不设线、不报数；
@@ -43,7 +46,7 @@ def han(s):
 
 def prose_lines(text):
     """返回 [(行号, 段落文本)]，只含散文段。"""
-    out, fence = [], False
+    out, fence, in_record, record_level = [], False, False, 0
     for i, raw in enumerate(text.split("\n"), 1):
         s = raw.strip()
         if s.startswith("```"):
@@ -51,7 +54,20 @@ def prose_lines(text):
             continue
         if fence or not s:
             continue
-        if s.startswith("#") or s.startswith("|") or s.startswith(">"):
+        if s.startswith("#"):
+            # 节级豁免：「修订记录」一节整节不量（含它下面各小节），到下一个同级或更高级标题为止。
+            m = re.match(r"^(#{1,6})\s+(.*)$", s)
+            if m:
+                level, title = len(m.group(1)), m.group(2)
+                if "修订记录" in title:
+                    record_level = level
+                    in_record = True
+                elif in_record and level <= record_level:
+                    in_record, record_level = False, 0
+            continue
+        if in_record:
+            continue
+        if s.startswith("|") or s.startswith(">"):
             continue
         if re.match(r"^([-*+]|\d+[.)])\s", s):
             continue
