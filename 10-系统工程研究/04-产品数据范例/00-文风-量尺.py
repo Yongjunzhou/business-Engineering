@@ -5,18 +5,18 @@
 用途：规程 4.2 四道机械关之关一的那一半——题面与列名有两只形式关脚本，散文层没有量具。
      本脚本补这一半：量出来的四个数进同号过程记录件的「题面与表达清单」与覆盖表。
 
-口径（与《风格参考》§6.12 五把尺同源；2026-11-23 立）
+口径（2026-11-25 用户裁：段长只守 200，段中位与短段占比不设、不报）
 - 量什么：只量散文段——按空行切段，一行一段。豁免七类：标题行、表格行、围栏内、引用块、
   清单行、章前件（**…**： 型标签行）、版本记录段（行首作 **版本**：／版本：／v数字.数字（ 三种，
   与「更早的版本段移出」那一行）。版本记录是查着看的，不属顺着读的正文。
   判据：读者是顺着读还是查着看，只算顺着读的那部分。
 - 读数单位：汉字 [\\u4e00-\\u9fff]；编号、标点、拉丁字母与数字不计。
 - 句界：。！？ 三样；分号与冒号不算句界。
-- 四数：段中位、句中位、破折号密度（‰，每千散文汉字）、加粗（块/千字）。
+- 段的判据只有一条硬线：段 >200 汉字须 0，超出才拆。段中位与短段占比不设线、不报数；
+  段分不分只看一件事是不是被拆成了两段（《风格参考》§6.20 的一段一意）。
+- 其余三数：句中位 ≤24（《风格参考》§6.12）、破折号密度 ≤10‰、加粗 ≤6 块/千字。
 - 两条可扫的忌：元话语词表命中；括号里带句读（括号装内容）。
-- 红线：段中位 ≤45、句中位 ≤24、加粗 ≤6 块/千字（三样取《风格参考》§6.12）；
-  段 >200 汉字 0 段（硬线）、段 >150 只记数、破折号 ≤10‰（三样取教材侧 `00-阈值.py`）。
-  §6.12 的这两行是 2026-10-28 改判前的旧数，不据它退稿；冲突登记在 24 号台账第 119 行。
+- 段 >150 只记数，不设限；拆段的唯一理由是段装了两件事，不是段长越线。
 
 用法：`python 00-文风-量尺.py <文件> [<文件> …]`；有红线被破则退出码 1。
 """
@@ -30,9 +30,10 @@ HAN = re.compile(r"[\u4e00-\u9fff]")
 SENT = re.compile(r"[。！？]")
 META = ["一句：", "本轮", "★", "必须点破", "这就", "只说一点", "先立一句", "一句话说透"]
 
-# 红线：段中位・句中位・加粗取《风格参考》§6.12；段长硬线与破折号取教材侧 00-阈值.py
-# （2026-10-28 用户裁：段长红线由 150 改判 200、150 只记数；§6.12 两行是旧数，见 24 号台账第 119 行）
-L_PARA_MED, L_SENT_MED, L_BOLD = 45, 24, 6.0
+# 判据：段只守 200 硬线，段中位与短段占比不设线（2026-11-25 用户裁：「每段不超过 200 就 ok 了，
+# 不需要设定段中位」「也不需要报」）；句中位 ≤24、加粗 ≤6 取《风格参考》§6.12；
+# 段 >150 只记数、破折号 ≤10‰ 取教材侧 00-阈值.py；段的一意判据见 §6.20。
+L_SENT_MED, L_BOLD = 24, 6.0
 L_PARA_HARD, L_PARA_NOTE, L_DASH = 200, 150, 10.0
 
 
@@ -57,7 +58,8 @@ def prose_lines(text):
         if re.match(r"^\*\*[^*]{1,12}\*\*：", s):      # 章前件：**…**：标签行
             continue
         if (s.startswith("**版本**：") or s.startswith("版本：")
-                or re.match(r"^v\d+\.\d+（", s) or s.startswith("更早的版本段移出")):
+                or re.match(r"^v\d+\.\d+（", s) or s.startswith("更早的版本段移出")
+                or re.match(r"^\*\*v\d+\.\d+", s)):
             continue
         out.append((i, s))
     return out
@@ -114,14 +116,12 @@ def measure(path):
         for w in META:
             meta += s.count(w)
         long_paras.append((ln, han(s), s))
-    paras_sorted = sorted(h for _, h in paras)
     sents_sorted = sorted(h for _, h in sents)
     med = lambda a: a[len(a) // 2] if len(a) % 2 else (a[len(a) // 2 - 1] + a[len(a) // 2]) / 2
     return {
         "path": path,
         "paras": len(paras),
         "total": total,
-        "p_med": med(paras_sorted),
         "s_med": med(sents_sorted) if sents_sorted else 0,
         "sents": len(sents),
         "s_max": max(sents_sorted) if sents_sorted else 0,
@@ -131,7 +131,6 @@ def measure(path):
         "bold_per_k": round(bold * 1000 / total, 1),
         "p_over150": sum(1 for _, h in paras if h > L_PARA_NOTE),
         "p_over200": sum(1 for _, h in paras if h > L_PARA_HARD),
-        "p_over45": sum(1 for _, h in paras if h > L_PARA_MED),
         "pair": pair,
         "nest": nest,
         "inner_punct": inp,
@@ -154,12 +153,10 @@ def main(argv):
         print("=" * 78)
         print("%s　散文 %d 段・汉字 %d・句 %d" % (name, r["paras"], r["total"], r["sents"]))
         rows = [
-            ("段中位", r["p_med"], L_PARA_MED, r["p_med"] <= L_PARA_MED),
             ("句中位", r["s_med"], L_SENT_MED, r["s_med"] <= L_SENT_MED),
             ("最长句", r["s_max"], "-", True),
             ("破折号‰", r["dash_permille"], L_DASH, r["dash_permille"] <= L_DASH),
             ("加粗块/千字", r["bold_per_k"], L_BOLD, r["bold_per_k"] <= L_BOLD),
-            ("段 >45", r["p_over45"], "-", True),
             ("段 >150（记数）", r["p_over150"], "-", True),
             ("段 >200", r["p_over200"], 0, r["p_over200"] == 0),
             ("括号对", r["pair"], "-", True),
@@ -177,7 +174,7 @@ def main(argv):
             head = s if len(s) <= 42 else s[:42] + "…"
             print("    L%-5d %4d 字  %s" % (ln, h, head))
     print("=" * 78)
-    print("红线：段中位・句中位・加粗取 §6.12；段长 200 硬线・150 记数・破折号 10‰ 取 00-阈值.py。")
+    print("红线：段长 200 硬线（150 只记数）・句中位 24・加粗 6・破折号 10‰；段中位不设线、不报。")
     return 0 if bad == 0 else 1
 
 
