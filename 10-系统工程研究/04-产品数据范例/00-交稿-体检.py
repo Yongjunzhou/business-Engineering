@@ -222,7 +222,7 @@ def check_file(path):
         found = [f for f in os.listdir(dd) if f.startswith(nn) and "判读单" in f]
         add("13", "四道判读单落账", "过" if found else "不过",
             found[0] if found else "同目录无 %s-*-判读单-*" % nn,
-            "四道（号・格・句・段）的判读单是交稿要件，补一份" if not found else None)
+            "四道（表号、数据项、逐句、并段）的判读单是交稿要件，补一份" if not found else None)
 
     # 按件分：本体
     if k == "本体":
