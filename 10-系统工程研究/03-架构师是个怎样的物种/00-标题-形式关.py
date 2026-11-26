@@ -18,6 +18,9 @@
 """
 import sys, re, json
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
 # ---- 代词族（与手册 §2.6 ⑤ 同源；多字词优先匹配）----
 PRONOUNS = [
     # 人称
