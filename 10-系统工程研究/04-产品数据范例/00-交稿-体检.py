@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 """00-交稿-体检.py —— 一份数据（册・本体・过程记录）交稿前的机械转诊
 
-为什么有这一只：规程 5.2 列了二十条机械核对，散在各节，靠人一条一条记得住的不多。
-这一只把它们里能跑的十三条并成一条命令，跑完出一张表，有一条不过就不许交。
+为什么有这一只：规程 5.2 列了二十二条机械核对，散在各节，靠人一条一条记得住的不多。
+这一只把它们里能跑的十五条并成一条命令，跑完出一张表，有一条不过就不许交。
 判据不改，只转诊：能跑的出读数，跑不出的标「人工」，不假装跑过。
 
 用法：
@@ -226,7 +226,8 @@ def check_file(path):
 
     # 按件分：本体
     if k == "本体":
-        first = next((ln for ln in text.split("\n")[1:] if ln.strip()), "")
+        # 题名之后先跳过标题行（## 1 概述 一类），取第一行正文：户头写在章题之下，不以表格起头即算过。
+        first = next((ln for ln in text.split("\n")[1:] if ln.strip() and not ln.strip().startswith("#")), "")
         add("10", "户头作开头一段", "过" if not first.startswith("|") and not first.startswith("#") else "不过",
             "开头是%s" % ("一张表，仍是四行户头" if first.startswith("|") else "一段散文"),
             "规程 4.5：户头写作开头一段，四样都在" if first.startswith("|") else None)
@@ -244,6 +245,20 @@ def check_file(path):
         add("12", "示例值三处对账", "过" if n_body == n_reg else "报备",
             "正文 %d 处，示例值登记 %d 行" % (n_body, max(n_reg, 0)),
             "三处不等：正文、登记、取值的来路" if n_body != n_reg else None)
+
+        # 14 自称与件名零命中（只判本体；过程记录与判读单是工作件，不扫）
+        self_words = ["本份", "本表", "本册", "本登记册", "账外件", "户头", "资产三问", "节末一行"]
+        hits = [w for w in self_words if w in body_text or w in text]
+        add("14", "自称与件名零命中", "过" if not hits else "不过",
+            "零命中" if not hits else "命中：" + "、".join(hits),
+            "数据本体不写自称：写表号或「这里」（规程 4.5、元规范 8.1）" if hits else None)
+
+        # 15 阶段数一处（只判本体）
+        has7 = "七个阶段" in text
+        has8 = "八个阶段" in text
+        add("15", "阶段数一处", "过" if not (has7 and has8) else "不过",
+            "七个阶段与八个阶段并现" if (has7 and has8) else "只一处",
+            "阶段数只在一处写，别处引用（规程 5.2 第二十二条）" if (has7 and has8) else None)
 
     # 按件分：过程记录
     if k == "过程记录":
