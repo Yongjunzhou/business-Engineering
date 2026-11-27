@@ -194,7 +194,7 @@ def check_file(path):
 
     # 按件分：册
     if k == "册":
-        want = ["1 概述", "2 术语", "3 表的张数与字段写法", "4 字段的来源与转换",
+        want = ["1 概述", "2 术语", "3 数据表的张数与字段写法", "4 字段的来源与转换",
                 "5 验收准则与判定结论", "6 下游用法与错法"]
         got = [x for x in sections(text, 2) if re.match(r"^[0-9]", x)]
         miss = [w for w in want if w not in got]
