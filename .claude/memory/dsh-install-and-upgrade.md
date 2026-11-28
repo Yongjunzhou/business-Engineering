@@ -1,6 +1,6 @@
 ---
 name: dsh-install-and-upgrade
-description: DSH（DeepSeek Harness）本机安装位置、版本与升级要点；含 npm allow-scripts 坑、双形态共用 ~/.dsh、VS Code 扩展取 PATH 上的 dsh
+description: DSH（DeepSeek Harness）在 Windows 与 macOS 的安装位置、版本与升级要点；含 npm allow-scripts 坑、双形态共用 ~/.dsh、VS Code 扩展取 PATH 上的 dsh、macOS 的 v3→v4 会话行为
 metadata:
   type: project
 ---
@@ -33,5 +33,13 @@ metadata:
 - `dsh --profile web --dump-config` 退出 0（1303 行，四个配套插件在组合树中）。
 - `dsh web --no-open --port 3081` 正常监听并返回 401（0.2.x 的浏览器认证围墙，属预期）。
 - 最近会话 `session.v3.jsonl.zstd` 用 Node 的 zstd 解压后 51 行全部可解析；`storages/workspace.json` 仍是 unit version 2。
+
+**macOS 侧（2026-11-28）**
+
+- 只有 CLI 一处安装：`/opt/homebrew/lib/node_modules/@deepseek-ai/dsh`（Homebrew 的 Node 全局），命令在 `/opt/homebrew/bin/dsh`；Node v25.9.0、npm 11.12.1。npm 低于 11.19，不受 `--allow-scripts` 拦截；已确认 `koffi`、`node-pty` 在包内。
+- 由 0.1.6-alpha.2 升到 0.2.2-rc.5，`dsh --version` 与 `npm ls -g` 一致；备份在 `~/dsh-backup-20261128/`（`settings.yaml`、`profiles/` 去 `node_modules`、`storages/`，16MB；372MB 会话未整份备份，因 v3 原文不改写）。
+- 使用形态是终端 `dsh web` ＋ Edge 直连，不走 VS Code 面板；面板要用时需在提示里「粘贴认证链接」，因终端托管的实例扩展无法静默取 token。
+- 旧 v3 会话在 `session/list` 里带 `formatStatus: "migration-required"`；`session/page` 可直接读历史且不落新文件，继续会话、产生首次写入时才生成 `session.v4.jsonl.zstd`。回滚到 0.1.6 后，0.2 期间新建的 v4 会话不可见，数据仍在磁盘。
+- 回滚：`npm install -g @deepseek-ai/dsh@0.1.6-alpha.2`。
 
 **关联**：[[env-dsh-pwsh-sandbox-acl]]
