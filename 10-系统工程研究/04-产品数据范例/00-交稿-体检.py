@@ -25,9 +25,9 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-HYGIENE = os.path.join(BASE, "00-文风-量尺.py")
-COLNAME = os.path.join(BASE, "00-列名-形式关.py")
-DUIJOU = os.path.join(BASE, "00-对偶-形式关.py")
+HYGIENE = os.path.join(BASE, "..", "00-文风优化工具", "00-文风-量尺.py")
+COLNAME = os.path.join(BASE, "..", "00-文风优化工具", "00-列名-形式关.py")
+DUIJOU = os.path.join(BASE, "..", "00-文风优化工具", "00-对偶-形式关.py")
 TITLE = os.path.join(os.path.dirname(BASE), "03-架构师是个怎样的物种", "00-标题-形式关.py")
 
 HAN = re.compile(r"[\u4e00-\u9fff]")
